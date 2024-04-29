@@ -1,8 +1,13 @@
 "use client";
 import Image from "next/image";
 
+const urlsWithoutNavBar = ["authentication"];
+
 function NavBar() {
-  const showNavBar = window.location.href !== "http://localhost:3000/signin";
+  console.log(window?.location?.pathname.split("/")[1] ?? "");
+  const showNavBar = !urlsWithoutNavBar.includes(
+    window?.location?.pathname.split("/")[1] ?? "",
+  );
   return (
     showNavBar && (
       <div className="absolute z-30 flex w-full flex-col items-center justify-start bg-transparent px-6 py-0">
