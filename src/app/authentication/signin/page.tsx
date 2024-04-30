@@ -6,16 +6,15 @@ import PasswordInput from "../../components/common/PasswordInput/PasswordInput";
 import {
   Formik,
   Form,
-  FormikHelpers,
-  FormikTouched,
-  FormikErrors,
+  type FormikHelpers,
+  type FormikTouched,
+  type FormikErrors,
 } from "formik";
 import TextField from "@mui/material/TextField";
 import Loader from "../../components/common/Loader/loader";
 import * as Yup from "yup";
 import { Button } from "@mui/base";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 export type LoginValue = {
   email: string;

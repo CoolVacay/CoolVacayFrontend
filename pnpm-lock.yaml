@@ -1,11 +1,13 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@emotion/cache': ^11.11.0
   '@emotion/react': ^11.11.4
   '@emotion/styled': ^11.11.5
   '@mui/base': ^5.0.0-beta.40
   '@mui/icons-material': ^5.15.15
   '@mui/material': ^5.15.15
+  '@mui/material-nextjs': ^5.15.11
   '@mui/x-date-pickers': ^7.2.0
   '@t3-oss/env-nextjs': ^0.9.2
   '@types/eslint': ^8.56.2
@@ -32,11 +34,13 @@ specifiers:
   zod: ^3.22.4
 
 dependencies:
+  '@emotion/cache': 11.11.0
   '@emotion/react': 11.11.4_332exdt4eernuwtnyroj5m63py
   '@emotion/styled': 11.11.5_rii37ynf7pis3k3nlzjibm6ebq
   '@mui/base': 5.0.0-beta.40_ckivqqo7ufwu2ua5a43uu5bovu
   '@mui/icons-material': 5.15.15_zcceyoai4xebmpaiakbvnb2q2y
   '@mui/material': 5.15.15_yu5izibycxgl7yep2ea5mgfoje
+  '@mui/material-nextjs': 5.15.11_y2ac4fmu2w4ryfcl3cwyaphtoy
   '@mui/x-date-pickers': 7.2.0_hj5legbum345x5hwovfjez5qje
   '@t3-oss/env-nextjs': 0.9.2_emlehvdemuvnto44dgo26yuudm
   dayjs: 1.11.10
@@ -410,6 +414,32 @@ packages:
       '@babel/runtime': 7.24.4
       '@mui/material': 5.15.15_yu5izibycxgl7yep2ea5mgfoje
       '@types/react': 18.2.77
+      react: 18.2.0
+    dev: false
+
+  /@mui/material-nextjs/5.15.11_y2ac4fmu2w4ryfcl3cwyaphtoy:
+    resolution: {integrity: sha512-cp5RWYbBngyi7NKP91R9QITllfxumCVPFjqe4AKzNROVuCot0VpgkafxXqfbv0uFsyUU0ROs0O2M3r17q604Aw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@emotion/cache': ^11.11.0
+      '@emotion/server': ^11.11.0
+      '@mui/material': ^5.0.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      next: ^13.0.0 || ^14.0.0
+      react: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/cache':
+        optional: true
+      '@emotion/server':
+        optional: true
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.24.4
+      '@emotion/cache': 11.11.0
+      '@mui/material': 5.15.15_yu5izibycxgl7yep2ea5mgfoje
+      '@types/react': 18.2.77
+      next: 14.2.0_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
     dev: false
 

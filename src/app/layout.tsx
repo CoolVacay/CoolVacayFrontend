@@ -1,5 +1,5 @@
 import "~/styles/globals.css";
-
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Inter } from "next/font/google";
 import NavBar from "./components/NavBar";
 
@@ -19,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        {<NavBar />}
-        {children}
+        <AppRouterCacheProvider options={{ key: "css" }}>
+          {<NavBar />}
+          {children}
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

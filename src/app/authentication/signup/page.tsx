@@ -65,9 +65,15 @@ function SignUp() {
     setLoading(true);
     setSubmitting(true);
     try {
-      const resp = await fetch("http://localhost:5076/api/auth/access-token", {
+      const resp = await fetch("http://localhost:5076/api/users/register", {
         method: "POST",
         body: JSON.stringify({
+          firstName:
+            values.firstName.charAt(0).toUpperCase() +
+            values.firstName.slice(1).toLowerCase(),
+          lastName:
+            values.lastName.charAt(0).toUpperCase() +
+            values.lastName.slice(1).toLowerCase(),
           email: values.email,
           password: values.password,
         }),
@@ -98,9 +104,9 @@ function SignUp() {
         height={22}
       />
 
-      <div>
-        <h1 className="text-3xl">Create an account</h1>
-        <p className="text-[#9FA4AA]">
+      <div className="mt-8">
+        <h1 className="mb-2 text-3xl">Create an account</h1>
+        <p className="mb-4 text-[#9FA4AA]">
           {"Don't miss out on the benefits, sign up now!"}
         </p>
       </div>

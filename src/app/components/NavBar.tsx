@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const urlsWithoutNavBar = ["authentication"];
 
 function NavBar() {
-  console.log(window?.location?.pathname.split("/")[1] ?? "");
-  const showNavBar = !urlsWithoutNavBar.includes(
-    window?.location?.pathname.split("/")[1] ?? "",
-  );
+  const pathname = usePathname();
+
+  const showNavBar = !urlsWithoutNavBar.includes(pathname.split("/")[1] ?? "");
+
   return (
     showNavBar && (
       <div className="absolute z-30 flex w-full flex-col items-center justify-start bg-transparent px-6 py-0">
