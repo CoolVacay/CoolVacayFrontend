@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import PasswordInput from "../../components/common/PasswordInput/PasswordInput";
+import PasswordInput from "../../ui/components/PasswordInput/PasswordInput";
 import { Formik, Form, type FormikHelpers } from "formik";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
-import Loader from "../../components/common/Loader/loader";
+import Loader from "../../ui/components/common/Loader/loader";
 import * as Yup from "yup";
 import { Button } from "@mui/base";
 import Link from "next/link";

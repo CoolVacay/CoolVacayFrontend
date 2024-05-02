@@ -1,19 +1,17 @@
-import AllistingsSection from "./components/AllistingsSection";
-import DealsSection from "./components/DealsSection";
-import FeaturedListingsSection from "./components/FeaturedListingsSection";
-import FooterSection from "./components/FooterSection";
-import HeroSection from "./components/HeroSection";
-import NewListingsSection from "./components/NewListingsSection";
+import AllistingsSection from "./ui/AllistingsSection";
+import DealsSection from "./ui/DealsSection";
+import FeaturedListingsSection from "./ui/FeaturedListingsSection";
+import HeroSection from "./ui/HeroSection";
+import NewListingsSection from "./ui/NewListingsSection";
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
-    <div>
+    <main>
       <HeroSection />
       <FeaturedListingsSection />
       <DealsSection />
       <NewListingsSection />
       <AllistingsSection />
-      <FooterSection />
-    </div>
+    </main>
   );
 }
