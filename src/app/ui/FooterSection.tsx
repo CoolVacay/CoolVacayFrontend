@@ -1,7 +1,7 @@
 import React from "react";
 
 function FooterSection() {
-  return <div>FooterSection</div>;
+  return <div>Footer Section</div>;
 }
 
 export default FooterSection;
