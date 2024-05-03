@@ -1,17 +1,19 @@
 import AllistingsSection from "./ui/AllistingsSection";
-import DealsSection from "./ui/DealsSection";
+import BlogSection from "./ui/BlogSection";
+import DiscoverSection from "./ui/DiscoverSection";
 import FeaturedListingsSection from "./ui/FeaturedListingsSection";
 import HeroSection from "./ui/HeroSection";
-import NewListingsSection from "./ui/NewListingsSection";
 
 export default async function HomePage() {
   return (
-    <main>
+    <main className="flex flex-col">
       <HeroSection />
-      <FeaturedListingsSection />
-      <DealsSection />
-      <NewListingsSection />
-      <AllistingsSection />
+      <div className="px-16">
+        <FeaturedListingsSection />
+        <DiscoverSection />
+        <AllistingsSection />
+        <BlogSection />
+      </div>
     </main>
   );
 }

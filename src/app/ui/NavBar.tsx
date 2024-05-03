@@ -12,7 +12,7 @@ function NavBar() {
 
   return (
     showNavBar && (
-      <nav className="absolute z-10 flex w-full items-center justify-center gap-44 px-12 py-6">
+      <nav className="absolute z-10 flex w-full items-center justify-center gap-44 px-16 py-6">
         <div className="flex flex-grow justify-between">
           <Link href="/">
             <IconGenerator

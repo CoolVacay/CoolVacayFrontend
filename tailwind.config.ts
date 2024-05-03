@@ -20,6 +20,15 @@ export default {
         button: "0 4px 10px rgba(0, 0, 0, 0.25)",
         dropdown: "0px 0px 12px rgba(0, 0, 0, 0.16)",
         faded: "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
+        cardShadow: "0px 0px 6px 2px rgba(24, 26, 32, 0.05)",
+      },
+      screens: {
+        tablet: "640px",
+        // => @media (min-width: 640px) { ... }
+        laptop: "1024px",
+        // => @media (min-width: 1024px) { ... }
+        desktop: "1280px",
+        // => @media (min-width: 1280px) { ... }
       },
       colors: {
         primary: {
@@ -36,6 +45,7 @@ export default {
           primary700: "#0D4882",
           primary800: "#052C65",
           primary900: "#06336C",
+          grey200: "F7F7F7",
           grey300: "#858C93",
         },
       },
