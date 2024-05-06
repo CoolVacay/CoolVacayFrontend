@@ -47,9 +47,14 @@ export default {
           primary900: "#06336C",
           grey200: "F7F7F7",
           grey300: "#858C93",
+          grey400: "#676D73",
         },
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy: "class",
+    }),
+  ],
 } satisfies Config;

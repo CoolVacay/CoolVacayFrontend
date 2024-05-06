@@ -2,14 +2,14 @@ import MainCard from "./components/MainCard/MainCard";
 
 const BlogSection = () => {
     return (
-        <div className="flex flex-col items-center justify-center">
+        <section className="flex flex-col items-center justify-center">
             <div className="flex h-[33px] w-[62px] shrink-0 items-center justify-center rounded-[64px] bg-[#29ABE2]/[.10] p-3 text-sm text-primary">
                 Blog
             </div>
             <h1 className="py-4 text-center text-[56px] leading-[67px]">
                 Latest blog from us
             </h1>
-            <div className="desktop:grid-cols-4 grid grid-cols-2 gap-5 py-10">
+            <div className="desktop:grid-cols-4 grid grid-cols-2 gap-5 pt-10 pb-12">
                 {Array.from({ length: 4 }, (_, i) => i + 1).map((card) => {
                     return (
                         <MainCard
@@ -23,7 +23,7 @@ const BlogSection = () => {
                     );
                 })}
             </div>
-        </div>
+        </section>
     );
 };
 

@@ -6,7 +6,7 @@ import Newsletter from "./components/common/Newsletter/Newsletter";
 
 function AllistingsSection() {
   return (
-    <div>
+    <section>
       <div className="flex items-center justify-between">
         <h4 className="text-[28px]">All listings</h4>
         <Link href="/listings" className="flex items-center text-primary">
@@ -29,7 +29,7 @@ function AllistingsSection() {
           return <MainCard src="/cardImage.png" title="Swiss Mountain Village" subtitle="Blowing Rock, North Carolina" key={card} imgHeight={240} />
         })}
       </div>
-    </div>
+    </section>
   );
 }
 

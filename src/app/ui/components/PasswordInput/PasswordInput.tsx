@@ -37,6 +37,7 @@ const PasswordInput = ({
 
   return (
     <TextField
+      fullWidth
       name={name}
       label={label}
       error={error}

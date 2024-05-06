@@ -1,8 +1,8 @@
 import "~/styles/globals.css";
 // import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Inter } from "next/font/google";
-import NavBar from "./ui/NavBar";
-import FooterSection from "./ui/FooterSection";
+import NavBar from "../ui/NavBar";
+import FooterSection from "../ui/FooterSection";
 // import MuiXLicense from "./MuiXLicense";
 const inter = Inter({ subsets: ["latin"] });
 

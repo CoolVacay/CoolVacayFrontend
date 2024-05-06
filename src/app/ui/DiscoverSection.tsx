@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function DiscoverSection() {
   return (
-    <div className="flex gap-12 py-14 grow-0 shrink-0 max-h-[680px]">
+    <section className="flex gap-12 py-14 grow-0 shrink-0 max-h-[680px]">
       <Image
         src="/discover_photo.png"
         alt="Discover more destinations"
@@ -36,7 +36,7 @@ function DiscoverSection() {
         </h4>
         <button className="rounded-[48px] w-40 px-6 py-4 bg-primary text-white">More details</button>
       </div>
-    </div>
+    </section>
   );
 }
 

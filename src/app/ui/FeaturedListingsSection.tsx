@@ -56,7 +56,7 @@ const categories = [
 
 export default async function FeaturedListingsSection() {
   return (
-    <div className="flex-col pb-10">
+    <section className="flex-col pb-10">
       <h1 className="py-7 text-[28px]">Popular Categories</h1>
       <div className="flex flex-wrap md:justify-between">
         {categories.map(
@@ -85,6 +85,6 @@ export default async function FeaturedListingsSection() {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

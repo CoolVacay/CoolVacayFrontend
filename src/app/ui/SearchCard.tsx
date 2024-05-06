@@ -13,13 +13,13 @@ const guests = Array.from({ length: 8 }, (v, i) => i + 1);
 
 export default function SearchCard() {
     return (
-        <>
+        <search>
             <form>
                 <div className="flex h-[410px] w-[420px] shrink-0 flex-col divide-y rounded-xl border-[#EAEAEF] bg-white">
                     <div className="border-b-4-grey h-[104px] p-4">
                         <label
                             htmlFor="location"
-                            className="text-primary-grey300 block text-lg font-medium"
+                            className="block text-lg font-medium text-primary-grey300"
                         >
                             Location
                         </label>
@@ -109,7 +109,7 @@ export default function SearchCard() {
                     <div className="h-[104px] p-4">
                         <label
                             htmlFor="guests"
-                            className="text-primary-grey300 block text-lg font-medium"
+                            className="block text-lg font-medium text-primary-grey300"
                         >
                             Guests
                         </label>
@@ -144,6 +144,6 @@ export default function SearchCard() {
                     </button>
                 </div>
             </form>
-        </>
+        </search>
     );
 }

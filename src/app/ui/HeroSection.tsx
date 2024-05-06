@@ -3,7 +3,7 @@ import SearchCard from "./SearchCard";
 
 export default async function HeroSection() {
   return (
-    <div className="flex relative h-[714px] w-full flex-shrink-0 items-center text-white">
+    <main className="flex relative h-[714px] w-full flex-shrink-0 items-center text-white">
       <Image
         alt="Coolvacay background image"
         src="/landing_background.png"
@@ -36,6 +36,6 @@ export default async function HeroSection() {
         </div>
         <SearchCard />
       </div>
-    </div>
+    </main>
   );
 }
