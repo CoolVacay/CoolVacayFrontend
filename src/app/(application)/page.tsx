@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import AllistingsSection from "../ui/AllistingsSection";
 import BlogSection from "../ui/BlogSection";
 import DiscoverSection from "../ui/DiscoverSection";
@@ -9,7 +10,9 @@ export default async function HomePage() {
     <main className="flex flex-col">
       <HeroSection />
       <div className="px-16">
-        <FeaturedListingsSection />
+        <Suspense fallback="loading...">
+          <FeaturedListingsSection />
+        </Suspense>
         <DiscoverSection />
         <AllistingsSection />
         <BlogSection />
