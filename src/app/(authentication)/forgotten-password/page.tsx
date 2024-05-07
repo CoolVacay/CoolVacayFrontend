@@ -16,10 +16,7 @@ const initialValues: ForgottenPasswordValue = {
 };
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Enter a valid email")
-    .required("Enter email first")
-    .trim("required"),
+  email: Yup.string().email("Invalid email").required("Required"),
 });
 
 function ForgottenPassword() {
@@ -48,67 +45,81 @@ function ForgottenPassword() {
   };
 
   return (
-    <div className="flex w-full flex-col gap-5">
+    <div className="flex flex-col gap-20">
       <Image
-        src="/coolVacayLogo.svg"
+        src="/cool_vacay_logo_blue.svg"
         alt="CoolVacay Logo"
         width={200}
         height={22}
+        className="gap-10"
       />
-
-      <div>
-        <h1 className="text-3xl">Forgot password?</h1>
-        <p className="text-[#9FA4AA]">
-          {
-            "Enter your email address and we'll send you a code to set your password."
-          }
-        </p>
-      </div>
-      <div>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          validateOnMount={true}
-          onSubmit={handleSubmit}
-        >
-          {({
-            errors,
-            touched,
-            values,
-            handleChange,
-            handleBlur,
-            isValid,
-            isSubmitting,
-          }) => {
-            return (
-              <Form className="flex flex-col gap-5">
-                <TextField
-                  label="Email"
-                  name="email"
-                  error={touched.email && !!errors.email}
-                  value={values.email}
-                  InputProps={{
-                    style: {
-                      borderRadius: "50px",
-                    },
-                  }}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    handleChange(e);
-                  }}
-                  id="outlined-start-adornment"
-                  onBlur={handleBlur}
-                />
-                <Button
-                  className={`h-15 flex w-full items-center justify-center rounded-[100px] bg-primary p-4 text-white disabled:opacity-50`}
-                  type="submit"
-                  disabled={isSubmitting || !isValid}
-                >
-                  Sign Up
-                </Button>
-              </Form>
-            );
-          }}
-        </Formik>
+      <div className="flex flex-col gap-8">
+        <div>
+          <h1 className="mb-4 text-3xl">Forgot password?</h1>
+          <p className="text-[#9FA4AA]">
+            {
+              "Enter your email address and we'll send you a code to set your password."
+            }
+          </p>
+        </div>
+        <div>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            validateOnMount={true}
+            onSubmit={handleSubmit}
+          >
+            {({
+              errors,
+              touched,
+              values,
+              handleChange,
+              handleBlur,
+              isValid,
+              isSubmitting,
+            }) => {
+              return (
+                <Form className="flex flex-col gap-8">
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="mb-1 block text-lg font-medium"
+                    >
+                      Email Address
+                    </label>
+                    <TextField
+                      fullWidth
+                      placeholder="Email"
+                      name="email"
+                      error={touched.email && !!errors.email}
+                      value={values.email}
+                      InputProps={{
+                        style: {
+                          borderRadius: "50px",
+                        },
+                      }}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        handleChange(e);
+                      }}
+                      id="outlined-start-adornment"
+                      onBlur={handleBlur}
+                    />
+                    {errors.email && touched.email ? (
+                      <div className="text-red-600">{errors.email}</div>
+                    ) : null}
+                  </div>
+                  <Button
+                    className={`h-15 flex w-full items-center justify-center rounded-[100px] bg-primary p-4 text-white disabled:opacity-50`}
+                    type="submit"
+                    disabled={isSubmitting || !isValid}
+                  >
+                    Sign Up
+                  </Button>
+                </Form>
+              );
+            }}
+          </Formik>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,5 @@
 "use client";
-import React, { Dispatch, FocusEvent, SetStateAction, useState } from "react";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
+import React, { type FocusEvent, useState } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
@@ -10,14 +8,14 @@ import { TextField } from "@mui/material";
 
 const PasswordInput = ({
   name,
-  label,
+  placeholder,
   error,
   value,
   onChange,
   onBlur,
 }: {
   name: string;
-  label: string;
+  placeholder: string;
   error: boolean;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -39,17 +37,13 @@ const PasswordInput = ({
     <TextField
       fullWidth
       name={name}
-      label={label}
+      placeholder={placeholder}
       error={error}
       value={value}
       onChange={onChange}
       sx={{
         borderRadius: "50px",
       }}
-      FormHelperTextProps={{
-        color: "red",
-      }}
-      helperText={error ? "Password is required" : ""}
       type={showPassword ? "text" : "password"}
       InputProps={{
         endAdornment: (
