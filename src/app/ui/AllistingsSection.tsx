@@ -3,8 +3,28 @@ import React from "react";
 import IconGenerator from "./components/common/IconGenerator";
 import MainCard from "./components/MainCard/MainCard";
 import Newsletter from "./components/common/Newsletter/Newsletter";
+import { getFetch } from "../utils/api-helpers";
+import type { ListingData } from "../(application)/definitions";
+import { truncateText } from "../utils/helpers";
 
-function AllistingsSection() {
+// TODO: replace the endpoint with the actual featured listings endpoint
+async function getAllListings() {
+  try {
+    // await new Promise((resolve) => setTimeout(resolve, 10000));
+
+    const res = await getFetch(
+      "/Listings?Limit=8&Offset=0&FromDate=2024-04-30&ToDate=2024-05-30",
+    );
+    return res.json();
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error(`Failed to fetch all listings`);
+  }
+}
+
+export default async function AllistingsSection() {
+  const allListings = (await getAllListings()) as ListingData[];
+
   return (
     <section>
       <div className="flex items-center justify-between">
@@ -16,21 +36,37 @@ function AllistingsSection() {
           </span>
         </Link>
       </div>
-      <div className="grid desktop:grid-cols-4 grid-cols-3 gap-5 py-10">
-        {Array.from({ length: 8 }, (_, i) => i + 1).map(card => {
-          return <MainCard src="/cardImage.png" title="Swiss Mountain Village" subtitle="Blowing Rock, North Carolina" key={card} imgHeight={240} />
+      <div className="grid grid-cols-3 gap-5 py-10 desktop:grid-cols-4">
+        {allListings.map((listing) => {
+          return (
+            <MainCard
+              name={truncateText(listing.name, 50)}
+              subtitle={`${listing.city}, ${listing.state}`}
+              key={listing.id}
+              imageUrl={listing.imageUrl}
+              propertyType={listing.propertyType}
+              squareFeets={listing.squareFeets}
+            />
+          );
         })}
       </div>
       <div>
         <Newsletter />
       </div>
-      <div className="grid desktop:grid-cols-4 grid-cols-3 gap-5 py-10">
-        {Array.from({ length: 8 }, (_, i) => i + 1).map(card => {
-          return <MainCard src="/cardImage.png" title="Swiss Mountain Village" subtitle="Blowing Rock, North Carolina" key={card} imgHeight={240} />
+      <div className="grid grid-cols-3 gap-5 py-10 desktop:grid-cols-4">
+        {allListings.map((listing) => {
+          return (
+            <MainCard
+              name={truncateText(listing.name, 50)}
+              subtitle={`${listing.city}, ${listing.state}`}
+              key={listing.id}
+              imageUrl={listing.imageUrl}
+              propertyType={listing.propertyType}
+              squareFeets={listing.squareFeets}
+            />
+          );
         })}
       </div>
     </section>
   );
 }
-
-export default AllistingsSection;

@@ -3,7 +3,8 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 import NavBar from "../ui/NavBar";
 import FooterSection from "../ui/FooterSection";
-// import MuiXLicense from "./MuiXLicense";
+import MuiXLicense from "../MuiXLicense";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -24,7 +25,7 @@ export default function RootLayout({
         <NavBar />
         {children}
         <FooterSection />
-        {/* <MuiXLicense /> */}
+        <MuiXLicense />
         {/* </AppRouterCacheProvider> */}
       </body>
     </html>

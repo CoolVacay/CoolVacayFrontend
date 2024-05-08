@@ -7,20 +7,20 @@ function DiscoverSection() {
       <Image
         src="/discover_photo.png"
         alt="Discover more destinations"
-        width={592}
-        height={580}
+        width={492}
+        height={480}
         quality={90}
-        style={{ height: '560px' }}
+        style={{ height: '460px' }}
         className="rounded-[30px]"
       />
       <div className="flex flex-col gap-3 grow-0 justify-center">
         <div className="flex h-[44px] w-[90px] shrink-0 justify-center rounded-[64px] bg-[#29ABE2]/[.10] p-3 text-sm text-primary">
           Discover
         </div>
-        <h1 className="font-500 desktop:text-[56px] desktop:leading-[67px] leading-10 text-[42px]">
+        <h1 className="font-500 desktop:text-[46px] desktop:leading-[47px] leading-80 text-[32px]">
           Explore vacation rentals with beach access
         </h1>
-        <h4 className="font-500 desktop:text-lg text-md leading-7">
+        <h4 className="font-500 desktop:text-base text-md leading-7">
           Add to your vacation with amenities like direct beach access,
           oceanfront homes, pools, hot tubs, and pet-friendly stays.
         </h4>

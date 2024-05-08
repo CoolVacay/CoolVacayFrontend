@@ -1,13 +1,14 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DemoItem } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { Select, MenuItem } from "@mui/material";
 import CustomInput from "./components/common/CustomInput";
 import IconGenerator from "./components/common/IconGenerator";
+import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import dayjs from "dayjs";
 
 const guests = Array.from({ length: 8 }, (v, i) => i + 1);
 
@@ -43,67 +44,26 @@ export default function SearchCard() {
                     </div>
                     <Box sx={{ display: "flex", padding: "16px", height: "104px" }}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <Box
-                                sx={{
-                                    width: "100%",
-                                    height: "100%",
-                                    justifyContent: "center",
-                                    position: "relative",
-                                }}
-                            >
-                                <DemoItem
-                                    label="Check-In"
-                                    sx={{ color: "#858C93", fontSize: "18px" }}
-                                >
-                                    <DatePicker
-                                        sx={{ width: "90%" }}
-                                        slotProps={{
-                                            textField: {
-                                                InputProps: {
-                                                    startAdornment: (
-                                                        <IconGenerator
-                                                            alt="Calendar icon"
-                                                            src={`/calendar_icon.svg`}
-                                                            width="32px"
-                                                            className="mr-3"
-                                                        />
-                                                    ),
-                                                    endAdornment: null,
-                                                },
+                            <DemoContainer components={["DateRangePicker"]}>
+                                <DateRangePicker
+                                    slotProps={{
+                                        textField: {
+                                            InputProps: {
+                                                startAdornment: (
+                                                    <IconGenerator
+                                                        alt="Calendar icon"
+                                                        src={`/calendar_icon.svg`}
+                                                        width="32px"
+                                                        className="mr-3"
+                                                    />
+                                                ),
                                             },
-                                        }}
-                                    />
-                                </DemoItem>
-                            </Box>
-                            <Box
-                                sx={{
-                                    width: "100%",
-                                    height: "100%",
-                                    justifyContent: "center",
-                                    position: "relative",
-                                }}
-                            >
-                                <DemoItem label="Check-out" sx={{ color: "#858C93" }}>
-                                    <DatePicker
-                                        slotProps={{
-                                            textField: {
-                                                InputProps: {
-                                                    startAdornment: (
-                                                        <IconGenerator
-                                                            alt="Calendar icon"
-                                                            src={`/calendar_icon.svg`}
-                                                            width="32px"
-                                                            className="mr-3"
-                                                        />
-                                                    ),
-                                                    endAdornment: null,
-                                                },
-                                            },
-                                        }}
-                                        sx={{ width: "90%" }}
-                                    />
-                                </DemoItem>
-                            </Box>
+                                        },
+                                    }}
+                                    defaultValue={[dayjs(), dayjs().add(3, "day")]}
+                                    localeText={{ start: "Check-in", end: "Check-out" }}
+                                />
+                            </DemoContainer>
                         </LocalizationProvider>
                     </Box>
                     <div className="h-[104px] p-4">

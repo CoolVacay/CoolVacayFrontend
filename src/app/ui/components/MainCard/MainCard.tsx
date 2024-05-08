@@ -1,24 +1,23 @@
 import Image from "next/image";
 import IconGenerator from "../common/IconGenerator";
 import type { ListingData } from "~/app/(application)/definitions";
+
 interface MainCardPorps extends ListingData {
     isBlogCard?: boolean;
-    imgHeight: number;
-    location: string;
+    subtitle: string;
 }
 
 const MainCard = ({
     isBlogCard,
-    imgHeight,
     name,
-    location,
+    subtitle,
     imageUrl,
     propertyType,
     squareFeets,
 }: MainCardPorps) => {
     return (
         <div
-            className={`${!isBlogCard && "shadow-cardShadow"} flex max-h-96 max-w-lg grow-0 flex-col overflow-hidden rounded-xl`}
+            className={`${!isBlogCard && "shadow-cardShadow"} flex h-82 w-64 grow-0 flex-col overflow-hidden rounded-xl`}
             style={{
                 border: !isBlogCard ? "1px solid rgba(173, 181, 189, 0.70)" : "",
             }}
@@ -26,22 +25,20 @@ const MainCard = ({
             <div className="flex">
                 <Image
                     src={imageUrl ?? '/cardImage.png'}
-                    width={512}
-                    height={250}
+                    width={263}
+                    height={210}
                     alt="CoolVacay listing image"
                     style={{
-                        maxWidth: 520,
-                        maxHeight: imgHeight,
-                        objectFit: "cover",
+                        height: 210,
+                        objectFit: "fill",
                         borderRadius: isBlogCard ? 10 : 0,
                     }}
                 />
             </div>
-            <div className={`${!isBlogCard && "px-5"}`}>
-                <div className="pb-3 pt-4">
-                    {/* TODO:Apply truncate */}
-                    <div className="mb-1 text-xl font-medium">{name}</div>
-                    <p className="text-md text-[#676D73]">{location}</p>
+            <div className={`${!isBlogCard && "px-2"} flex flex-col justify-between grow`}>
+                <div className="pb-3 pt-2">
+                    <div className="mb-1 text-base font-medium">{name}</div>
+                    <p className="text-sm text-[#676D73]">{subtitle}</p>
                 </div>
                 {!isBlogCard && (
                     <div className="flex gap-4 pb-4">
@@ -59,7 +56,7 @@ const MainCard = ({
                                 alt="Square foot"
                                 width="16px"
                             />
-                            <h6 className="text-sm">{`${Math.floor(squareFeets)} sqft`}</h6>
+                            <h6 className="text-sm">{`${Math.floor(squareFeets ?? 0)} sqft`}</h6>
                         </div>
                     </div>
                 )}

@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
 import { Formik, Form, type FormikHelpers } from "formik";
 import TextField from "@mui/material/TextField";
 import * as Yup from "yup";
 import { Button } from "@mui/base";
+import Image from "next/image";
 
 export type ForgottenPasswordValue = {
   email: string;

@@ -3,12 +3,13 @@ import { getFetch } from "../utils/api-helpers";
 import { truncateText } from "../utils/helpers";
 import MainCard from "./components/MainCard/MainCard";
 
-//TODO: replace the endpoint with the actual featured listings endpoint
+// TODO: replace the endpoint with the actual featured listings endpoint
 async function getFeaturedListings() {
   try {
+    // await new Promise((resolve) => setTimeout(resolve, 10000));
+
     const res = await getFetch(
       "/Listings?Limit=5&Offset=0&FromDate=2024-04-30&ToDate=2024-05-30",
-      true,
     );
     return res.json();
   } catch (error) {
@@ -21,18 +22,16 @@ export default async function FeaturedListingsSection() {
   const featuredListings = (await getFeaturedListings()) as ListingData[];
 
   return (
-    <section className="flex-col pb-10">
-      <h1 className="py-9 text-[28px]">Featured Listings</h1>
-      <div className="flex justify-evenly gap-5	">
+    <section className="pb-10 block">
+      <div className="flex justify-center gap-4">
         {featuredListings.map((listing, index: number) => {
           return (
             // TODO: till we get the correct endpoint
-            index < 3 && (
+            index < 4 && (
               <MainCard
-                name={truncateText(listing.name, 30)}
-                location={`${listing.city}, ${listing.state}`}
+                name={truncateText(listing.name, 50)}
+                subtitle={`${listing.city}, ${listing.state}`}
                 key={listing.id}
-                imgHeight={240}
                 imageUrl={listing.imageUrl}
                 propertyType={listing.propertyType}
                 squareFeets={listing.squareFeets}

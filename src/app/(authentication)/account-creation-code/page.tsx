@@ -3,8 +3,8 @@ import Image from "next/image";
 import React from "react";
 import VerificationInput from "react-verification-input";
 import "./styles.css";
-import { Button } from "@mui/base";
 import Link from "next/link";
+
 function AccountCreationCode() {
   const handleComplete = (e: string) => {
     console.log(e);

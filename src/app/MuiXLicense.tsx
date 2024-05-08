@@ -1,11 +1,9 @@
 //TODO: set licence key for mui date range picker
 
-// "use client";
-// import { LicenseInfo } from "@mui/x-license";
+"use client";
+import { LicenseInfo } from "@mui/x-license";
 
-// LicenseInfo.setLicenseKey(
-//     "f3a22427964faf07e664792437faea60Tz02MjEyMixFPTE3MTA1NDMwNDQzMTUsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI=",
-// );
-// export default function MuiXLicense() {
-//     return null;
-// }
+LicenseInfo.setLicenseKey("e2dcc1bbe11bf54f19c1567e01b7c088Tz04OTk4MCxFPTE3NDY4MDAzNDcwMDAsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI=");
+export default function MuiXLicense() {
+    return null;
+}

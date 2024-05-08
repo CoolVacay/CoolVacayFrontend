@@ -12,7 +12,7 @@ export interface ListingData {
   bedrooms?: number;
   propertyType?: string;
   startRating?: number | null;
-  squareFeets: number;
+  squareFeets?: number | undefined;
   price?: number;
   imageUrl: string;
 }

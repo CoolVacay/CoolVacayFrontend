@@ -13,12 +13,11 @@ const BlogSection = () => {
                 {Array.from({ length: 4 }, (_, i) => i + 1).map((card) => {
                     return (
                         <MainCard
-                            src="/blog_photo.jpeg"
-                            title="How to get more bookings with Coolvacay in 2024"
+                            imageUrl="/blog_photo.jpeg"
+                            name="How to get more bookings with Coolvacay in 2024"
                             subtitle="August 1, 2024  •  2 min read "
                             key={card}
                             isBlogCard
-                            imgHeight={280}
                         />
                     );
                 })}

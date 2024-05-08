@@ -74,7 +74,7 @@ export default async function PopularCategories() {
             <h1 className="py-7 text-[28px]">Popular Categories</h1>
             <div className="flex flex-wrap md:justify-between">
                 {popularCategories.map(
-                    (categorie: popularCategoriesData, index: number) => (
+                    (categorie, index) => (
                         <button
                             key={categorie.id}
                             className={`${index > 0 && "ml-10"} flex shrink-0 grow-0 rounded-full bg-[#F7F7F7] p-5`}
