@@ -1,4 +1,4 @@
-import MainCard from "./components/MainCard/MainCard";
+import { MainCard } from "./components/Cards/Cards";
 
 const BlogSection = () => {
     return (
@@ -9,7 +9,7 @@ const BlogSection = () => {
             <h1 className="py-4 text-center text-[56px] leading-[67px]">
                 Latest blog from us
             </h1>
-            <div className="desktop:grid-cols-4 grid grid-cols-2 gap-5 pt-10 pb-12">
+            <div className="grid grid-cols-2 gap-5 pb-12 pt-10 desktop:grid-cols-4">
                 {Array.from({ length: 4 }, (_, i) => i + 1).map((card) => {
                     return (
                         <MainCard

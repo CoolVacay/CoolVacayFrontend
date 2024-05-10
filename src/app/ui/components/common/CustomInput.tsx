@@ -2,19 +2,15 @@ import { styled } from "@mui/material/styles";
 import { InputBase } from "@mui/material";
 import type { InputBaseProps } from "@mui/material";
 
+
+//TODO: remove if it's not needed
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
     "& .MuiInputBase-input": {
         position: "relative",
         border: "1px solid #fff",
         padding: "10px 26px 10px 0px",
         transition: theme.transitions.create(["border-color", "box-shadow"]),
-        fontFamily: [
-            "Inter",
-            "Roboto",
-            '"Helvetica Neue"',
-            "Arial",
-            "sans-serif",
-        ].join(","),
+
         fontSize: "20px",
         fontWeight: 500,
         "&:focus": {
@@ -23,17 +19,11 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
             borderRadius: 10,
         },
         "&::placeholder": {
-            color: "#0A2252",
+            color: "black",
             opacity: 1,
             position: "absolute",
+            top: 5,
             left: 0,
-            fontFamily: [
-                "Inter",
-                "Roboto",
-                '"Helvetica Neue"',
-                "Arial",
-                "sans-serif",
-            ].join(","),
             fontSize: "20px",
             fontWeight: 500,
             ml: 10,

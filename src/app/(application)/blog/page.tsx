@@ -1,10 +1,10 @@
-
 import React from "react";
 import Image from "next/image";
 
-import CustomButton from "../../ui/components/common/CustomButton"
-import CustomChip from "../../ui/components/common/CustomChip"
-import MainCard from "../../ui/components/MainCard/MainCard"
+import CustomButton from "../../ui/components/common/CustomButton";
+import CustomChip from "../../ui/components/common/CustomChip";
+import { MainCard } from "../../ui/components/Cards/Cards";
+
 function page() {
     return (
         <div className="mx-24">

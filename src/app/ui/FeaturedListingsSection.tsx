@@ -1,7 +1,7 @@
 import type { ListingData } from "../(application)/definitions";
 import { getFetch } from "../utils/api-helpers";
 import { truncateText } from "../utils/helpers";
-import MainCard from "./components/MainCard/MainCard";
+import { MainCard } from "./components/Cards/Cards";
 
 // TODO: replace the endpoint with the actual featured listings endpoint
 async function getFeaturedListings() {
@@ -22,24 +22,24 @@ export default async function FeaturedListingsSection() {
   const featuredListings = (await getFeaturedListings()) as ListingData[];
 
   return (
-    <section className="pb-10 block">
-      <div className="flex justify-center gap-4">
-        {featuredListings.map((listing, index: number) => {
-          return (
-            // TODO: till we get the correct endpoint
-            index < 4 && (
-              <MainCard
-                name={truncateText(listing.name, 50)}
-                subtitle={`${listing.city}, ${listing.state}`}
-                key={listing.id}
-                imageUrl={listing.imageUrl}
-                propertyType={listing.propertyType}
-                squareFeets={listing.squareFeets}
-              />
-            )
-          );
-        })}
-      </div>
+    <section className="flex w-full justify-between pb-10">
+      {/* <div className=""> */}
+      {featuredListings.map((listing, index: number) => {
+        return (
+          // TODO: till we get the correct endpoint
+          index < 4 && (
+            <MainCard
+              name={truncateText(listing.name, 50)}
+              subtitle={`${listing.city}, ${listing.state}`}
+              key={listing.id}
+              imageUrl={listing.imageUrl}
+              propertyType={listing.propertyType}
+              squareFeets={listing.squareFeets}
+            />
+          )
+        );
+      })}
+      {/* </div> */}
     </section>
   );
 }

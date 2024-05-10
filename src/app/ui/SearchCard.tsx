@@ -1,35 +1,41 @@
-"use client";
-
-import { Box } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { Select, MenuItem } from "@mui/material";
-import CustomInput from "./components/common/CustomInput";
+import {
+    Select,
+    MenuItem,
+    InputLabel,
+    Input,
+    FormControl,
+} from "@mui/material";
 import IconGenerator from "./components/common/IconGenerator";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import dayjs from "dayjs";
+import RangeDatePicker from "./components/common/RangeDatePicker";
 
 const guests = Array.from({ length: 8 }, (v, i) => i + 1);
 
+//TODO: re-style/refactor when you add functionality
 export default function SearchCard() {
     return (
         <search>
             <form>
-                <div className="flex h-[410px] w-[420px] shrink-0 flex-col divide-y rounded-xl border-[#EAEAEF] bg-white">
-                    <div className="border-b-4-grey h-[104px] p-4">
-                        <label
-                            htmlFor="location"
-                            className="block text-lg font-medium text-primary-grey300"
-                        >
-                            Location
-                        </label>
-                        <div>
-                            <div className="relative">
-                                <CustomInput
-                                    name="location"
-                                    placeholder="Select Location"
+                <div className="grid h-[410px] w-[420px] shrink-0 grid-rows-4 divide-y rounded-xl border-[#EAEAEF] bg-white">
+                    <div className="border-b-4-grey flex w-full items-center px-4 pb-4 pt-5">
+                        <div className="flex h-full grow flex-col">
+                            <FormControl fullWidth variant="standard" sx={{ height: "100%" }}>
+                                <InputLabel
+                                    shrink={true}
+                                    htmlFor="component-simple"
+                                    className="block text-2xl font-medium"
+                                >
+                                    Location
+                                </InputLabel>
+                                <Input
+                                    id="component-simple"
                                     defaultValue=""
+                                    placeholder="Select Location"
+                                    sx={{
+                                        padding: "14px 26px 10px 0px",
+                                        fontSize: "20px",
+                                        fontWeight: 500,
+                                    }}
+                                    fullWidth
                                     endAdornment={
                                         <IconGenerator
                                             alt="Location Icon"
@@ -39,58 +45,48 @@ export default function SearchCard() {
                                         />
                                     }
                                 />
-                            </div>
+                            </FormControl>
                         </div>
                     </div>
-                    <Box sx={{ display: "flex", padding: "16px", height: "104px" }}>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DemoContainer components={["DateRangePicker"]}>
-                                <DateRangePicker
-                                    slotProps={{
-                                        textField: {
-                                            InputProps: {
-                                                startAdornment: (
-                                                    <IconGenerator
-                                                        alt="Calendar icon"
-                                                        src={`/calendar_icon.svg`}
-                                                        width="32px"
-                                                        className="mr-3"
-                                                    />
-                                                ),
+                    <div className="relative px-4 pb-4 pt-5">
+                        <RangeDatePicker />
+                    </div>
+                    <div className="flex h-full grow flex-col px-4 pb-4 pt-5">
+                        <FormControl fullWidth variant="standard" sx={{ height: "100%" }}>
+                            <InputLabel
+                                shrink={true}
+                                htmlFor="component-simple"
+                                className="block text-2xl font-medium"
+                            >
+                                Guests
+                            </InputLabel>
+                            <div>
+                                <div className="relative">
+                                    <Select
+                                        fullWidth
+                                        sx={{
+                                            padding: "24px 26px 10px 0px",
+                                            fontSize: "20px",
+                                            fontWeight: 500,
+                                            "& .MuiSvgIcon-root": {
+                                                position: "absolute",
+                                                top: 20,
+                                                marginTop: "10px",
                                             },
-                                        },
-                                    }}
-                                    defaultValue={[dayjs(), dayjs().add(3, "day")]}
-                                    localeText={{ start: "Check-in", end: "Check-out" }}
-                                />
-                            </DemoContainer>
-                        </LocalizationProvider>
-                    </Box>
-                    <div className="h-[104px] p-4">
-                        <label
-                            htmlFor="guests"
-                            className="block text-lg font-medium text-primary-grey300"
-                        >
-                            Guests
-                        </label>
-                        <div>
-                            <div className="relative">
-                                <Select
-                                    sx={{ width: "100%" }}
-                                    labelId="demo-customized-select-label"
-                                    id="demo-customized-select"
-                                    defaultValue={guests[0]}
-                                    //   onChange={handleChange}
-                                    input={<CustomInput />}
-                                >
-                                    {guests.map((guest) => (
-                                        <MenuItem key={guest} value={guest}>
-                                            {`${guest} ${guest === 1 ? "guest" : "guests"}`}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
+                                        }}
+                                        labelId="demo-customized-select-label"
+                                        id="demo-customized-select"
+                                        defaultValue={guests[0]}
+                                    >
+                                        {guests.map((guest) => (
+                                            <MenuItem key={guest} value={guest}>
+                                                {`${guest} ${guest === 1 ? "guest" : "guests"}`}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </div>
                             </div>
-                        </div>
+                        </FormControl>
                     </div>
                     <button className="flex grow items-center rounded-b-xl bg-primary p-5 text-2xl">
                         Search
