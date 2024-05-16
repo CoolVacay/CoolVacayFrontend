@@ -1,11 +1,11 @@
 import Link from "next/link";
 import React from "react";
-import IconGenerator from "./components/common/IconGenerator";
-import { MainCard } from "./components/Cards/Cards";
-import Newsletter from "./components/common/Newsletter/Newsletter";
-import { getFetch } from "../utils/api-helpers";
-import type { ListingData } from "../(application)/definitions";
-import { truncateText } from "../utils/helpers";
+import IconGenerator from "../common/IconGenerator";
+import { MainCard } from "../Cards/Cards";
+import Newsletter from "../common/Newsletter/Newsletter";
+import { getFetch } from "../../../utils/api-helpers";
+import type { ListingData } from "../../../(application)/definitions";
+import { truncateText } from "../../../utils/helpers";
 
 // TODO: replace the endpoint with the actual featured listings endpoint
 async function getAllListings() {

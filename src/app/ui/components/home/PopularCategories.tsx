@@ -1,5 +1,7 @@
-import { revalidateFetch } from "../utils/api-helpers";
-import type { popularCategoriesData } from "../(application)/definitions";
+import { revalidateFetch } from "../../../utils/api-helpers";
+import type { popularCategoriesData } from "../../../(application)/definitions";
+import IconGenerator from "../common/IconGenerator";
+import Link from "next/link";
 
 //TODO: remove when we get the endpoint working
 
@@ -67,24 +69,31 @@ async function getCategories() {
 }
 
 export default async function PopularCategories() {
-    const popularCategories = await getCategories() as popularCategoriesData[];
+    const popularCategories = (await getCategories()) as popularCategoriesData[];
 
     return (
-        <div className="flex flex-col">
-            <h1 className="py-7 text-[28px]">Popular Categories</h1>
-            <div className="flex flex-wrap md:justify-between">
-                {popularCategories.map(
-                    (categorie, index) => (
-                        <button
-                            key={categorie.id}
-                            className={`${index > 0 && "ml-10"} flex shrink-0 grow-0 rounded-full bg-[#F7F7F7] p-5`}
-                        >
-                            {<span className="mr-4 shrink-0">{categorie.iconUrl}</span>}
-                            {categorie.name}
-                        </button>
-                    ),
-                )}
-            </div>
+        <div className="flex flex-wrap md:justify-between">
+            {popularCategories.map((categorie, index) => (
+                <Link key={categorie.id} href={categorie.page}>
+                    <button
+                        key={categorie.id}
+                        className={`${index > 0 && "ml-10"} flex shrink-0 grow-0 rounded-full bg-[#F7F7F7] p-4`}
+                    >
+                        {
+                            <span className="mr-4 flex">
+                                {
+                                    <IconGenerator
+                                        src={categorie.iconUrl}
+                                        width={categorie.width}
+                                        alt="1"
+                                    />
+                                }
+                            </span>
+                        }
+                        {categorie.name}
+                    </button>
+                </Link>
+            ))}
         </div>
     );
 }

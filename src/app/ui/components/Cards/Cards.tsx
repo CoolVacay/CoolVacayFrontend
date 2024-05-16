@@ -71,12 +71,13 @@ export const ListingCard = ({
     name,
     subtitle,
     imageUrl,
+    price,
 }: MainCardPorps) => {
     return (
-        <div className="flex h-[405px] w-[360px] grow-0 flex-col gap-4 overflow-hidden rounded-md">
-            <div className="flex">
+        <div className="flex h-[405px] w-[360px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1">
+            <div className="relative">
                 <Image
-                    src={imageUrl ?? "/cardImage.png"}
+                    src={imageUrl ?? "/listing_card.png"}
                     width={360}
                     height={240}
                     alt="CoolVacay listing image"
@@ -86,12 +87,13 @@ export const ListingCard = ({
                         borderRadius: 6,
                     }}
                 />
+                <IconGenerator src="/ri_heart-line.svg" alt="like button" width="24px" className="absolute right-2 top-2" />
             </div>
             <div className="flex grow flex-col justify-between">
                 <div className="flex flex-col gap-1">
                     <div className="flex items-center justify-between font-medium">
                         <h6 className="text-lg">
-                            $500<span className="text-sm text-primary-grey400"> night</span>
+                            ${price}<span className="text-sm text-primary-grey400"> night</span>
                         </h6>
                         <h6 className="text-sm text-primary-grey400">Feb 19 - 26</h6>
                     </div>
@@ -99,18 +101,19 @@ export const ListingCard = ({
                         <div className="mb-1 text-base font-medium">{name}</div>
                         <p className="text-sm text-[#676D73]">{subtitle}</p>
                     </div>
-                    <div className="flex gap-1">
+                    <div className="flex gap-1 items-center">
                         <IconGenerator
-                            src="/rating_start.svg"
+                            src="/rating_star.svg"
                             alt="Rating start"
                             width="16px"
+                            height={16}
                         />
                         <h6 className="text-sm">
                             4.5<span className="text-sm text-primary-grey400 font-medium"> (293 review)</span>
                         </h6>
                     </div>
                 </div>
-                <button className=" rounded-full border border-primary py-3 font-bold text-primary">
+                <button className="rounded-full border border-primary py-3 font-bold text-primary">
                     Book
                 </button>
             </div>

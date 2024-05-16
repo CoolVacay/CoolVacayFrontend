@@ -1,4 +1,4 @@
-import { MainCard } from "./components/Cards/Cards";
+import { MainCard } from "../Cards/Cards";
 
 const BlogSection = () => {
     return (

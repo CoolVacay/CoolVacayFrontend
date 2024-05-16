@@ -5,8 +5,8 @@ import {
     Input,
     FormControl,
 } from "@mui/material";
-import IconGenerator from "./components/common/IconGenerator";
-import RangeDatePicker from "./components/common/RangeDatePicker";
+import IconGenerator from "../common/IconGenerator";
+import RangeDatePicker from "../common/RangeDatePicker";
 
 const guests = Array.from({ length: 8 }, (v, i) => i + 1);
 

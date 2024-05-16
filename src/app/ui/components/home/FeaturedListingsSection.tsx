@@ -1,7 +1,7 @@
-import type { ListingData } from "../(application)/definitions";
-import { getFetch } from "../utils/api-helpers";
-import { truncateText } from "../utils/helpers";
-import { MainCard } from "./components/Cards/Cards";
+import type { ListingData } from "../../../(application)/definitions";
+import { getFetch } from "../../../utils/api-helpers";
+import { truncateText } from "../../../utils/helpers";
+import { MainCard } from "../Cards/Cards";
 
 // TODO: replace the endpoint with the actual featured listings endpoint
 async function getFeaturedListings() {

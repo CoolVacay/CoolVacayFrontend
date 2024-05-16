@@ -4,6 +4,7 @@ import type { ImageProps } from "next/image";
 interface IconGeneratorProps extends Omit<ImageProps, 'height' | 'width'> {
   src: string;
   width: string;
+  height?: number;
   alt: string;
   className?: string;
 };
@@ -11,6 +12,7 @@ interface IconGeneratorProps extends Omit<ImageProps, 'height' | 'width'> {
 const IconGenerator = ({
   src,
   width,
+  height,
   alt,
   className,
   ...rest
@@ -22,7 +24,7 @@ const IconGenerator = ({
       width={0}
       height={0}
       className={className}
-      style={{ width: width, height: "auto" }}
+      style={{ width: width, height: height ?? "auto" }}
       {...rest}
     />
   );

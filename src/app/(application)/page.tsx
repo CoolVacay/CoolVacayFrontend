@@ -1,14 +1,15 @@
 import { Suspense } from "react";
-import AllistingsSection from "../ui/AllistingsSection";
-import BlogSection from "../ui/BlogSection";
-import DiscoverSection from "../ui/DiscoverSection";
-import FeaturedListingsSection from "../ui/FeaturedListingsSection";
-import HeroSection from "../ui/HeroSection";
+import AllistingsSection from "../ui/components/home/AllistingsSection";
+import BlogSection from "../ui/components/home/BlogSection";
+import DiscoverSection from "../ui/components/home/DiscoverSection";
+import FeaturedListingsSection from "../ui/components/home/FeaturedListingsSection";
+import HeroSection from "../ui/components/home/HeroSection";
 import {
   AllListingsSkeleton,
   FeaturedListingsSkeleton,
+  PopularCategoriesSkeleton
 } from "../ui/components/common/Skeletons/Skeletons";
-// import PopularCategories from "../ui/PopularCategories";
+import PopularCategories from "../ui/components/home/PopularCategories";
 import Image from "next/image";
 
 export default async function HomePage() {
@@ -33,9 +34,10 @@ export default async function HomePage() {
         <div className="flex max-w-[1220px] flex-col items-center justify-center">
           <HeroSection />
           <div className="w-full">
-            {/* <Suspense fallback={<FeaturedListingsSkeleton />}>
+            <h1 className="py-7 text-[28px]">Popular Categories</h1>
+            <Suspense fallback={<PopularCategoriesSkeleton />}>
               <PopularCategories />
-            </Suspense> */}
+            </Suspense>
             <h1 className="py-9 text-left text-[28px]">Featured Listings</h1>
             <Suspense fallback={<FeaturedListingsSkeleton />}>
               <FeaturedListingsSection />

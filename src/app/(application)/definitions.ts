@@ -22,4 +22,7 @@ export interface popularCategoriesData {
   name: string;
   iconName: string;
   iconUrl: string;
+  alt: string;
+  width: string;
+  page: string;
 }
