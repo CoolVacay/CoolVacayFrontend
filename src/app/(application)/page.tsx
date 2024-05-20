@@ -1,16 +1,17 @@
 import { Suspense } from "react";
+import Image from "next/image";
+
 import AllistingsSection from "../ui/components/home/AllistingsSection";
 import BlogSection from "../ui/components/home/BlogSection";
 import DiscoverSection from "../ui/components/home/DiscoverSection";
 import FeaturedListingsSection from "../ui/components/home/FeaturedListingsSection";
 import HeroSection from "../ui/components/home/HeroSection";
+import PopularCategories from "../ui/components/home/PopularCategories";
 import {
   AllListingsSkeleton,
   FeaturedListingsSkeleton,
-  PopularCategoriesSkeleton
+  PopularCategoriesSkeleton,
 } from "../ui/components/common/Skeletons/Skeletons";
-import PopularCategories from "../ui/components/home/PopularCategories";
-import Image from "next/image";
 
 export default async function HomePage() {
   return (

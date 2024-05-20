@@ -7,15 +7,13 @@ import { getFetch } from "../../../utils/api-helpers";
 import type { ListingData } from "../../../(application)/definitions";
 import { truncateText } from "../../../utils/helpers";
 
-// TODO: replace the endpoint with the actual featured listings endpoint
 async function getAllListings() {
   try {
-    // await new Promise((resolve) => setTimeout(resolve, 10000));
-
-    const res = await getFetch(
-      "/Listings?Limit=8&Offset=0&FromDate=2024-04-30&ToDate=2024-05-30",
-    );
-    return res.json();
+    const [firstListings, lastListings] = await Promise.all([
+      getFetch<ListingData[]>("/Listings?Limit=8&Offset=0"),
+      getFetch<ListingData[]>("/Listings?Limit=8&Offset=8"),
+    ]);
+    return [firstListings, lastListings];
   } catch (error) {
     console.error("Error:", error);
     throw new Error(`Failed to fetch all listings`);
@@ -23,7 +21,7 @@ async function getAllListings() {
 }
 
 export default async function AllistingsSection() {
-  const allListings = (await getAllListings()) as ListingData[];
+  const [firstListings, lastListings] = await getAllListings();
 
   return (
     <section>
@@ -37,7 +35,7 @@ export default async function AllistingsSection() {
         </Link>
       </div>
       <div className="grid grid-cols-3 gap-5 py-10 desktop:grid-cols-4">
-        {allListings.map((listing) => {
+        {firstListings?.map((listing) => {
           return (
             <MainCard
               name={truncateText(listing.name, 50)}
@@ -54,7 +52,7 @@ export default async function AllistingsSection() {
         <Newsletter />
       </div>
       <div className="grid grid-cols-3 gap-5 py-10 desktop:grid-cols-4">
-        {allListings.map((listing) => {
+        {lastListings?.map((listing) => {
           return (
             <MainCard
               name={truncateText(listing.name, 50)}

@@ -1,11 +1,9 @@
 import Image from "next/image";
 import IconGenerator from "../common/IconGenerator";
-import type { ListingData } from "~/app/(application)/definitions";
-
-interface MainCardPorps extends ListingData {
-    isBlogCard?: boolean;
-    subtitle: string;
-}
+import type {
+    ListingCardProps,
+    MainCardProps,
+} from "~/app/(application)/definitions";
 
 export const MainCard = ({
     isBlogCard,
@@ -14,7 +12,7 @@ export const MainCard = ({
     imageUrl,
     propertyType,
     squareFeets,
-}: MainCardPorps) => {
+}: MainCardProps) => {
     return (
         <div
             className={`${!isBlogCard && "shadow-cardShadow"} h-82 flex w-[280px] grow-0 flex-col overflow-hidden rounded-xl`}
@@ -72,7 +70,7 @@ export const ListingCard = ({
     subtitle,
     imageUrl,
     price,
-}: MainCardPorps) => {
+}: ListingCardProps) => {
     return (
         <div className="flex h-[405px] w-[360px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1">
             <div className="relative">
@@ -87,13 +85,19 @@ export const ListingCard = ({
                         borderRadius: 6,
                     }}
                 />
-                <IconGenerator src="/ri_heart-line.svg" alt="like button" width="24px" className="absolute right-2 top-2" />
+                <IconGenerator
+                    src="/ri_heart-line.svg"
+                    alt="like button"
+                    width="24px"
+                    className="absolute right-2 top-2"
+                />
             </div>
             <div className="flex grow flex-col justify-between">
                 <div className="flex flex-col gap-1">
                     <div className="flex items-center justify-between font-medium">
                         <h6 className="text-lg">
-                            ${price}<span className="text-sm text-primary-grey400"> night</span>
+                            ${price}
+                            <span className="text-sm text-primary-grey400"> night</span>
                         </h6>
                         <h6 className="text-sm text-primary-grey400">Feb 19 - 26</h6>
                     </div>
@@ -101,7 +105,7 @@ export const ListingCard = ({
                         <div className="mb-1 text-base font-medium">{name}</div>
                         <p className="text-sm text-[#676D73]">{subtitle}</p>
                     </div>
-                    <div className="flex gap-1 items-center">
+                    <div className="flex items-center gap-1">
                         <IconGenerator
                             src="/rating_star.svg"
                             alt="Rating start"
@@ -109,7 +113,11 @@ export const ListingCard = ({
                             height={16}
                         />
                         <h6 className="text-sm">
-                            4.5<span className="text-sm text-primary-grey400 font-medium"> (293 review)</span>
+                            4.5
+                            <span className="text-sm font-medium text-primary-grey400">
+                                {" "}
+                                (293 review)
+                            </span>
                         </h6>
                     </div>
                 </div>

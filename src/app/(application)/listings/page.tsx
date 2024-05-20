@@ -1,6 +1,19 @@
 import { Suspense } from "react";
 import { FilteredListingsSkeleton } from "~/app/ui/components/common/Skeletons/Skeletons";
 import { ListingSection } from "~/app/ui/components/listings/ListingsSection";
+import { MapContainer } from "~/app/ui/components/listings/Map";
+import { getFetch } from "~/app/utils/api-helpers";
+import type { ListingData } from "~/app/(application)/definitions";
+
+async function getFilteredListings(query: string) {
+    try {
+        const res = await getFetch<ListingData[]>(`/listings?${query}`, true);
+        return res;
+    } catch (error) {
+        console.error("Error:", error);
+        throw new Error(`Failed to fetch all listings`);
+    }
+}
 
 export default async function Page({
     searchParams,
@@ -11,15 +24,24 @@ export default async function Page({
     };
 }) {
     const query = searchParams?.query ?? "";
+    const listings = await getFilteredListings(query);
+    //TODO: handle suspense to a deeper level or add a loading.tsx page
     return (
-        <main className="w-7/12 pl-[70px]">
+        <main className="static w-full pl-[70px]">
             <div className="flex place-items-baseline gap-8 pb-6">
                 <h1 className="text-3xl">North Carolina available properties</h1>
                 <h6 className="text-sm text-primary-grey300">4 properties</h6>
             </div>
-            <Suspense fallback={<FilteredListingsSkeleton />}>
-                <ListingSection query={query} />
-            </Suspense>
+            <div className="flex">
+                <div className="flex w-5/12 desktop:w-7/12 flex-col">
+                    <Suspense fallback={<FilteredListingsSkeleton />}>
+                        <ListingSection listings={listings} />
+                    </Suspense>
+                </div>
+                <div className="sticky right-0 top-0 h-full w-7/12 desktop:w-5/12 flex-none">
+                    <MapContainer listings={listings} />
+                </div>
+            </div>
         </main>
     );
 }
