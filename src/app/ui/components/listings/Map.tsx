@@ -38,33 +38,56 @@ export const MapContainer = ({ listings }: { listings: ListingData[] }) => {
     const mapRef = useRef<MapRef>(null);
     const geojson = useMemo(() => listingsToGeoJSON(listings), [listings]);
 
-    const handleClick = useCallback((event: mapboxgl.MapLayerMouseEvent) => {
-        if (!mapRef.current) return;
+    const handleClick = useCallback(
+        (event: mapboxgl.MapLayerMouseEvent) => {
+            if (!mapRef.current) return;
 
-        const features = mapRef.current.queryRenderedFeatures(event.point, {
-            layers: ["unclustered-point"],
-        });
-        // If we click on a cluster, do nothing
-        if (!features.length) return;
-
-        const feature = features[0];
-
-        //If we click on property,populate the selected marker
-        //we are also ensuring that coordinates exist
-        if (feature?.properties && feature.geometry.type === "Point") {
-            const property = feature.properties as ListingData;
-            const coordinates = feature.geometry.coordinates as [number, number];
-            setSelectedMarker({
-                id: property.id,
-                name: property.name,
-                city: property.city,
-                state: property.state,
-                price: property.price,
-                latitude: coordinates[1],
-                longitude: coordinates[0],
+            const features = mapRef.current.queryRenderedFeatures(event.point, {
+                layers: ["clusters", "unclustered-point"],
             });
-        }
-    }, []);
+            //if we click nowhere,do nothing
+            if (!features.length) return;
+
+            const feature = features[0];
+
+            // If we click on a cluster, zoom on it and return
+            if (feature?.properties?.cluster) {
+                const clusterId = feature.properties.cluster_id as number;
+                const map = mapRef.current;
+
+                const source = map.getSource("listings") as mapboxgl.GeoJSONSource;
+                source.getClusterExpansionZoom(clusterId, (err, zoom) => {
+                    if (err) return;
+                    if (feature.geometry.type === "Point") {
+                        map.flyTo({
+                            center: feature.geometry.coordinates as [number, number],
+                            zoom: zoom,
+                        });
+                    }
+                });
+            }
+            //If we click on property, unmount the popup then populate the
+            //selected marker (we are also ensuring that coordinates exist)
+            if (feature?.properties && feature.geometry.type === "Point") {
+                if (selectedMarker !== undefined) {
+                    setSelectedMarker(undefined);
+                    return;
+                }
+                const property = feature.properties as ListingData;
+                const coordinates = feature.geometry.coordinates as [number, number];
+                setSelectedMarker({
+                    id: property.id,
+                    name: property.name,
+                    city: property.city,
+                    state: property.state,
+                    price: property.price,
+                    latitude: coordinates[1],
+                    longitude: coordinates[0],
+                });
+            }
+        },
+        [selectedMarker],
+    );
 
     return (
         <main>
@@ -112,7 +135,7 @@ export const MapContainer = ({ listings }: { listings: ListingData[] }) => {
                     <Layer {...clusterCountLayer} />
                     <Layer {...unclusteredPointLayer} />
                 </Source>
-                {selectedMarker ? (
+                {selectedMarker !== undefined ? (
                     <Popup
                         closeOnMove
                         offset={25}
