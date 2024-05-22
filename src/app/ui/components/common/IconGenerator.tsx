@@ -1,13 +1,13 @@
 import Image from "next/image";
 import type { ImageProps } from "next/image";
 
-interface IconGeneratorProps extends Omit<ImageProps, 'height' | 'width'> {
+interface IconGeneratorProps extends Omit<ImageProps, "height" | "width"> {
   src: string;
   width: string;
   height?: number;
   alt: string;
   className?: string;
-};
+}
 
 const IconGenerator = ({
   src,

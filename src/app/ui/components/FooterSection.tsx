@@ -1,5 +1,5 @@
 import React from "react";
-import IconGenerator from "./components/common/IconGenerator";
+import IconGenerator from "./common/IconGenerator";
 
 const popularSearchLinks = [
   "Cabins for Rent",

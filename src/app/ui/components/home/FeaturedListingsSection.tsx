@@ -1,7 +1,7 @@
 import type { ListingData } from "../../../(application)/definitions";
 import { getFetch } from "../../../utils/api-helpers";
 import { truncateText } from "../../../utils/helpers";
-import { MainCard } from "../Cards/Cards";
+import { MainCard } from "../common/Cards/Cards";
 
 async function getFeaturedListings() {
   try {

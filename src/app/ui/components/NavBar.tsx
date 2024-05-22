@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import IconGenerator from "./components/common/IconGenerator";
+import IconGenerator from "./common/IconGenerator";
 
 function NavBar() {
   const pathname = usePathname();
@@ -37,11 +37,15 @@ function NavBar() {
         </div>
         <div className="flex items-center gap-5 ">
           <Link href="/rental-income-estimator">
-            <p className={`text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}>Vacation Rental Management</p>
+            <p
+              className={`text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
+            >
+              Vacation Rental Management
+            </p>
           </Link>
           <Link href="/signin">
             <button
-              className={`flex items-center rounded-full px-4 py-2 text-sm font-normal  ${isWhiteVariant ? "text-black bg-white" : "text-white bg-primary"}`}
+              className={`flex items-center rounded-full px-4 py-2 text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
             >
               Log In or Sign Up
               <span className="ml-2">
