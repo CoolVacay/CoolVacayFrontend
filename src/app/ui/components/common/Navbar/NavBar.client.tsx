@@ -1,16 +1,19 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Link from "next/link";
-import IconGenerator from "./common/IconGenerator";
+import { usePathname } from "next/navigation";
+import type { Session } from "next-auth";
 
-function NavBar() {
+import IconGenerator from "../IconGenerator";
+import NavBarLoginButton from "./NavBarLoginButton";
+
+export default function NavBar({ session }: { session: Session | null }) {
   const pathname = usePathname();
   const isWhiteVariant = pathname === "/";
 
   return (
     <nav
-      className={`${isWhiteVariant ? "absolute" : "z-10 block"} flex w-full items-center justify-center px-16 py-6`}
+      className={`${isWhiteVariant ? "absolute" : "block"} z-10 flex w-full items-center justify-center px-16 py-6`}
     >
       <div className="flex h-12 w-full items-center gap-44">
         <div className="flex flex-grow justify-between">
@@ -43,24 +46,29 @@ function NavBar() {
               Vacation Rental Management
             </p>
           </Link>
-          <Link href="/signin">
-            <button
-              className={`flex items-center rounded-full px-4 py-2 text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
-            >
-              Log In or Sign Up
-              <span className="ml-2">
-                <IconGenerator
-                  alt="avatar icon"
-                  src={`/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}
-                  width="32px"
-                />
-              </span>
-            </button>
-          </Link>
+          {!session ? (
+            <Link href="/signin">
+              <button
+                className={`flex items-center rounded-full px-4 py-2 text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
+              >
+                Log In or Sign Up
+                <span className="ml-2">
+                  <IconGenerator
+                    alt="avatar icon"
+                    src={`/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}
+                    width="32px"
+                  />
+                </span>
+              </button>
+            </Link>
+          ) : (
+            <NavBarLoginButton
+              session={session}
+              isWhiteVariant={isWhiteVariant}
+            />
+          )}
         </div>
       </div>
     </nav>
   );
 }
-
-export default NavBar;

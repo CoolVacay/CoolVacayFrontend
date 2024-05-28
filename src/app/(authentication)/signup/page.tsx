@@ -105,7 +105,7 @@ function SignUp() {
     );
 
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex w-full flex-col gap-20">
       <Image
         src="/cool_vacay_logo_blue.svg"
         alt="CoolVacay Logo"

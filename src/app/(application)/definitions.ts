@@ -43,3 +43,18 @@ export type MapboxMarkerData = Pick<
   ListingData,
   "id" | "name" | "city" | "state" | "price" | "latitude" | "longitude"
 >;
+
+export type UserData = {
+  accessToken: string;
+  accessTokenExpiresAt: string;
+  profile: {
+    id: number | string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    nationality: string;
+    dateOfBirth: string;
+    gender: string;
+  };
+};

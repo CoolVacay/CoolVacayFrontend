@@ -49,7 +49,6 @@ export const MapContainer = ({ listings }: { listings: ListingData[] }) => {
       if (!features.length) return;
 
       const feature = features[0];
-
       // If we click on a cluster, zoom on it and return
       if (feature?.properties?.cluster) {
         const clusterId = feature.properties.cluster_id as number;
@@ -65,10 +64,10 @@ export const MapContainer = ({ listings }: { listings: ListingData[] }) => {
             });
           }
         });
-      }
-      //If we click on property, unmount the popup then populate the
-      //selected marker (we are also ensuring that coordinates exist)
-      if (feature?.properties && feature.geometry.type === "Point") {
+      } else if (feature?.properties && feature.geometry.type === "Point") {
+        //If we click on property, unmount the popup then populate the
+        //selected marker (we are also ensuring that coordinates exist)
+
         if (selectedMarker !== undefined) {
           setSelectedMarker(undefined);
           return;
@@ -129,13 +128,13 @@ export const MapContainer = ({ listings }: { listings: ListingData[] }) => {
           type="geojson"
           data={geojson}
           cluster={true}
-          clusterMaxZoom={14}
+          clusterMaxZoom={12}
         >
           <Layer {...clusterLayer} />
           <Layer {...clusterCountLayer} />
           <Layer {...unclusteredPointLayer} />
         </Source>
-        {selectedMarker !== undefined ? (
+        {selectedMarker ? (
           <Popup
             closeOnMove
             offset={25}

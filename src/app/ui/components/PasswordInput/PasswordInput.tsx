@@ -1,4 +1,5 @@
 "use client";
+
 import React, { type FocusEvent, useState } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -10,14 +11,14 @@ const PasswordInput = ({
   name,
   placeholder,
   error,
-  value,
   onChange,
   onBlur,
+  helperText,
 }: {
   name: string;
   placeholder: string;
-  error: boolean;
-  value: string;
+  error: boolean | undefined;
+  helperText: React.ReactNode;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (
     event: FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
@@ -39,7 +40,7 @@ const PasswordInput = ({
       name={name}
       placeholder={placeholder}
       error={error}
-      value={value}
+      helperText={helperText}
       onChange={onChange}
       sx={{
         borderRadius: "50px",
@@ -52,7 +53,6 @@ const PasswordInput = ({
               aria-label="toggle password visibility"
               onClick={handleClickShowPassword}
               onMouseDown={handleMouseDownPassword}
-              value={value}
               edge="end"
             >
               {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -61,6 +61,11 @@ const PasswordInput = ({
         ),
         style: {
           borderRadius: "50px",
+        },
+      }}
+      FormHelperTextProps={{
+        style: {
+          fontSize: "14px",
         },
       }}
       onBlur={onBlur}
