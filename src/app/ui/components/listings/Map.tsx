@@ -97,8 +97,8 @@ export const MapContainer = ({ listings }: { listings: ListingData[] }) => {
         mapStyle="mapbox://styles/mapbox/streets-v12"
         style={{ height: "100vh" }}
         initialViewState={{
-          latitude: listings[0]?.latitude,
-          longitude: listings[0]?.longitude,
+          latitude: listings[0]?.latitude ?? 35.78216,
+          longitude: listings[0]?.longitude ?? -80.79345,
           zoom: 10,
         }}
         maxZoom={20}

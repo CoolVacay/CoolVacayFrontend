@@ -4,10 +4,10 @@ import type { Session } from "next-auth";
 import { useState } from "react";
 import { Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
-import IconGenerator from "../IconGenerator";
-// import { HotelOutlined } from "@mui/icons-material";
-import { logOut } from "~/app/(authentication)/signin/actions";
+
+import { logOut } from "~/app/(authentication)/actions";
 import Link from "next/link";
+import Image from "next/image";
 
 const NavBarLoginButton = ({
   session,
@@ -34,12 +34,14 @@ const NavBarLoginButton = ({
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
       >
-        {`${session.user?.name}` + " " + `${session.user?.lastName}`}
+        {`${session.user?.name}` + " " + `${session.user?.lastName ?? ""}`}
         <span className="ml-2">
-          <IconGenerator
+          <Image
             alt="avatar icon"
-            src={`/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}
-            width="32px"
+            src={`${session.user?.image ?? `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}`}
+            width={32}
+            height={32}
+            className="rounded-full"
           />
         </span>
       </button>
@@ -66,7 +68,7 @@ const NavBarLoginButton = ({
               display: "block",
               position: "absolute",
               top: 0,
-              right: 14,
+              right: 28,
               width: 10,
               height: 10,
               bgcolor: "background.paper",
@@ -81,31 +83,24 @@ const NavBarLoginButton = ({
         <Link href="/profile">
           <MenuItem>
             <ListItemIcon>
-              <IconGenerator
+              <Image
                 alt="avatar icon"
-                src={`/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}
-                width="24px"
+                src={`${session.user?.image ?? `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}`}
+                width={24}
+                height={24}
+                className="rounded-full"
               />
             </ListItemIcon>
             Profile
           </MenuItem>
         </Link>
-        {/* TODO: check if we will add other items */}
-        {/* <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <HotelOutlined sx={{ color: "#ADB5BD", width: "24px" }} />
-          </ListItemIcon>
-          My reservation
-        </MenuItem> */}
         <Divider />
-        {/* <form action={logOut}> */}
         <MenuItem onClick={async () => await logOut()}>
           <ListItemIcon>
             <Logout fontSize="medium" sx={{ color: "#ADB5BD" }} />
           </ListItemIcon>
           Logout
         </MenuItem>
-        {/* </form> */}
       </Menu>
     </>
   );

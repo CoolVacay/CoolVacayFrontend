@@ -11,6 +11,8 @@ export async function ListingSection({
       {listings.map((listing) => {
         return (
           <ListingCard
+            id={listing.id}
+            source={listing.source}
             key={listing.id}
             name={listing.name}
             subtitle={`${listing.city}, ${listing.state}`}

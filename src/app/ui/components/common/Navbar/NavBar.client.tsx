@@ -13,10 +13,12 @@ export default function NavBar({ session }: { session: Session | null }) {
 
   return (
     <nav
-      className={`${isWhiteVariant ? "absolute" : "block"} z-10 flex w-full items-center justify-center px-16 py-6`}
+      className={`z-10 block flex w-full scroll-px-4	justify-center	 overflow-hidden py-6`}
     >
-      <div className="flex h-12 w-full items-center gap-44">
-        <div className="flex flex-grow justify-between">
+      <div
+        className={`flex h-12 w-full ${isWhiteVariant ? "max-w-[1220px]" : "px-[70px]"} scroll-px-4 items-center justify-between gap-44`}
+      >
+        <div className="flex flex-grow items-center justify-between">
           <Link href="/">
             <IconGenerator
               src={`/cool_vacay_logo_${isWhiteVariant ? "white" : "blue"}.svg`}

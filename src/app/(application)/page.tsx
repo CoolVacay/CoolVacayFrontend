@@ -16,20 +16,24 @@ import {
 export default async function HomePage() {
   return (
     <main className="flex flex-col">
-      <div className="relative flex h-[714px] w-full">
-        <Image
-          alt="Coolvacay background image"
-          src="/landing_background.png"
-          quality={100}
-          fill
-          priority={true}
-          sizes="100vw"
-          style={{
-            objectFit: "cover",
-            filter: "brightness(60%)",
-            zIndex: -1,
-          }}
-        />
+      <div className="relative flex h-[614px]">
+        <div className="absolute flex h-[714px] w-full">
+          <Image
+            alt="Coolvacay background image"
+            src="/landing_background.png"
+            quality={100}
+            fill
+            priority={true}
+            sizes="100vw"
+            style={{
+              position: "absolute",
+              top: -100,
+              objectFit: "cover",
+              filter: "brightness(60%)",
+              zIndex: -1,
+            }}
+          />
+        </div>
       </div>
       <div className="flex justify-center">
         <div className="flex max-w-[1220px] flex-col items-center justify-center">

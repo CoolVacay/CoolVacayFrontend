@@ -17,16 +17,20 @@ export interface ListingData {
   imageUrl: string;
   latitude: number;
   longitude: number;
+  images: {
+    url: string;
+    name: string;
+  }[];
 }
 
 export type ListingCardProps = Pick<
   ListingData,
-  "name" | "imageUrl" | "price"
+  "name" | "imageUrl" | "price" | "id" | "source"
 > & { subtitle: string };
 
 export type MainCardProps = Pick<
   ListingData,
-  "name" | "imageUrl" | "propertyType" | "squareFeets"
+  "name" | "imageUrl" | "propertyType" | "squareFeets" | "id" | "source"
 > & { isBlogCard?: boolean; subtitle: string };
 
 export interface PopularCategoriesData {

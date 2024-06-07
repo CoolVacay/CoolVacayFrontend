@@ -2,26 +2,31 @@ import type { ListingData } from "../../../(application)/definitions";
 import { getFetch } from "../../../utils/api-helpers";
 import { truncateText } from "../../../utils/helpers";
 import { MainCard } from "../common/Cards/Cards";
+import { FetchError } from "~/app/utils/definitions";
 
 async function getFeaturedListings() {
   try {
     const res = await getFetch<ListingData[]>("/listings/featured");
+    if (res instanceof FetchError) {
+      throw new Error("Failed to fetch all listings");
+    }
     return res;
   } catch (error) {
     console.error("Error:", error);
-    throw new Error(`Failed to fetch featured listings`);
   }
 }
 
 export default async function FeaturedListingsSection() {
-  const featuredListings = await getFeaturedListings();
+  const featuredListings = (await getFeaturedListings())!;
 
   return (
     <section className="flex w-full justify-between pb-10">
-      {featuredListings.length > 0 ? (
+      {featuredListings?.length > 0 ? (
         featuredListings.map((listing) => {
           return (
             <MainCard
+              id={listing.id}
+              source={listing.source}
               name={truncateText(listing.name, 50)}
               subtitle={`${listing.city}, ${listing.state}`}
               key={listing.id}

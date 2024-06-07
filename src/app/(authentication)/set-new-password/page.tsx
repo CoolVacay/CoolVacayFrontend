@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import PasswordInput from "../../ui/components/PasswordInput/PasswordInput";
 import { Formik, Form, type FormikHelpers } from "formik";
 import Loader from "../../ui/components/common/Loader/loader";
 import * as Yup from "yup";
 import { Button } from "@mui/base";
+import { FormikTextField } from "~/app/ui/components/authentication/FormikTextField";
 
 export type LoginValue = {
   confirmPassword: string;
@@ -102,11 +102,12 @@ function SetNewPassword() {
                     >
                       New Password
                     </label>
-                    <PasswordInput
+                    {/* TODO: refactor here */}
+                    <FormikTextField
                       placeholder="Password"
                       name="password"
                       error={!!touched.password && !!errors.password}
-                      value={values.password}
+                      // value={values.password}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         handleChange(e);
                         setError("");
