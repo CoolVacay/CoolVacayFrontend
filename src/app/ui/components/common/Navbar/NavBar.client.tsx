@@ -10,13 +10,14 @@ import NavBarLoginButton from "./NavBarLoginButton";
 export default function NavBar({ session }: { session: Session | null }) {
   const pathname = usePathname();
   const isWhiteVariant = pathname === "/";
+  const isListingPage = pathname.startsWith("/listing/");
 
   return (
     <nav
       className={`z-10 block flex w-full scroll-px-4	justify-center	 overflow-hidden py-6`}
     >
       <div
-        className={`flex h-12 w-full ${isWhiteVariant ? "max-w-[1220px]" : "px-[70px]"} scroll-px-4 items-center justify-between gap-44`}
+        className={`flex h-12 w-full ${isWhiteVariant || isListingPage ? "max-w-[1220px]" : "px-[70px]"} scroll-px-4 items-center justify-between gap-44`}
       >
         <div className="flex flex-grow items-center justify-between">
           <Link href="/">

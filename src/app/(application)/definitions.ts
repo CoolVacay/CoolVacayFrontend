@@ -21,6 +21,7 @@ export interface ListingData {
     url: string;
     name: string;
   }[];
+  amenities: string[];
 }
 
 export type ListingCardProps = Pick<

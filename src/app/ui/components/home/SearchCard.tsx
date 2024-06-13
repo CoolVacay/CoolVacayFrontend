@@ -1,14 +1,7 @@
-import {
-  Select,
-  MenuItem,
-  InputLabel,
-  Input,
-  FormControl,
-} from "@mui/material";
+import { InputLabel, Input, FormControl } from "@mui/material";
 import IconGenerator from "../common/IconGenerator";
 import RangeDatePicker from "../common/RangeDatePicker";
-
-const guests = Array.from({ length: 8 }, (v, i) => i + 1);
+import SelectInput from "../common/SelectInput";
 
 //TODO: re-style/refactor when you add functionality
 export default function SearchCard() {
@@ -49,44 +42,10 @@ export default function SearchCard() {
             </div>
           </div>
           <div className="relative px-4 pb-4 pt-5">
-            <RangeDatePicker />
+            <RangeDatePicker size="big" />
           </div>
           <div className="flex h-full grow flex-col px-4 pb-4 pt-5">
-            <FormControl fullWidth variant="standard" sx={{ height: "100%" }}>
-              <InputLabel
-                shrink={true}
-                htmlFor="component-simple"
-                className="block text-2xl font-medium"
-              >
-                Guests
-              </InputLabel>
-              <div>
-                <div className="relative">
-                  <Select
-                    fullWidth
-                    sx={{
-                      padding: "24px 26px 10px 0px",
-                      fontSize: "20px",
-                      fontWeight: 500,
-                      "& .MuiSvgIcon-root": {
-                        position: "absolute",
-                        top: 20,
-                        marginTop: "10px",
-                      },
-                    }}
-                    labelId="demo-customized-select-label"
-                    id="demo-customized-select"
-                    defaultValue={guests[0]}
-                  >
-                    {guests.map((guest) => (
-                      <MenuItem key={guest} value={guest}>
-                        {`${guest} ${guest === 1 ? "guest" : "guests"}`}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </div>
-              </div>
-            </FormControl>
+            <SelectInput size="big" />
           </div>
           <button className="flex grow items-center rounded-b-xl bg-primary p-5 text-2xl">
             Search

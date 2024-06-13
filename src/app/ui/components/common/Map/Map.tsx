@@ -1,15 +1,22 @@
 "use client";
 
 import { useMemo, useRef, useState, useCallback } from "react";
-import Map, { Popup, Source, Layer } from "react-map-gl";
+import Map, {
+  NavigationControl,
+  FullscreenControl,
+  Popup,
+  Source,
+  Layer,
+} from "react-map-gl";
 import type { MapRef } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import "./map.css";
 
 import type {
   ListingData,
   MapboxMarkerData,
 } from "~/app/(application)/definitions";
-import IconGenerator from "../common/IconGenerator";
+import IconGenerator from "../IconGenerator";
 import {
   clusterLayer,
   clusterCountLayer,
@@ -30,7 +37,13 @@ const listingsToGeoJSON = (
   })),
 });
 
-export const MapContainer = ({ listings }: { listings: ListingData[] }) => {
+export const MapContainer = ({
+  listings,
+  singleListing = false,
+}: {
+  listings: ListingData[];
+  singleListing?: boolean;
+}) => {
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
   const [selectedMarker, setSelectedMarker] = useState<
     MapboxMarkerData | undefined
@@ -95,7 +108,10 @@ export const MapContainer = ({ listings }: { listings: ListingData[] }) => {
         ref={mapRef}
         mapboxAccessToken={mapboxToken}
         mapStyle="mapbox://styles/mapbox/streets-v12"
-        style={{ height: "100vh" }}
+        style={{
+          height: singleListing ? "240px" : "100vh",
+          borderRadius: singleListing ? "8px" : "0px",
+        }}
         initialViewState={{
           latitude: listings[0]?.latitude ?? 35.78216,
           longitude: listings[0]?.longitude ?? -80.79345,
@@ -134,7 +150,17 @@ export const MapContainer = ({ listings }: { listings: ListingData[] }) => {
           <Layer {...clusterCountLayer} />
           <Layer {...unclusteredPointLayer} />
         </Source>
-        {selectedMarker ? (
+        <FullscreenControl
+          style={{
+            width: "40px",
+            height: "40px",
+            borderRadius: "100px",
+            alignItems: "center",
+            backgroundColor: "white",
+          }}
+        />
+        <NavigationControl showZoom={true} showCompass={false} />
+        {!singleListing && selectedMarker ? (
           <Popup
             closeOnMove
             offset={25}

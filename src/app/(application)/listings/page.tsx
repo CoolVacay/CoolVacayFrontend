@@ -1,6 +1,6 @@
 import { getFetch } from "~/app/utils/api-helpers";
 import { ListingSection } from "~/app/ui/components/listings/ListingsSection";
-import { MapContainer } from "~/app/ui/components/listings/Map";
+import { MapContainer } from "~/app/ui/components/common/Map/Map";
 import type { ListingData } from "~/app/(application)/definitions";
 import { FetchError } from "~/app/utils/definitions";
 

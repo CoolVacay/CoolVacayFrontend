@@ -7,7 +7,8 @@ import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import IconGenerator from "./IconGenerator";
 
-const RangeDatePicker = () => {
+const RangeDatePicker = ({ size }: { size: "small" | "big" }) => {
+  const bigFont = size === "big";
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer
@@ -33,23 +34,23 @@ const RangeDatePicker = () => {
                 width: "1px",
                 height: "62px",
                 position: "absolute",
-                left: "190px",
-                top: "20px",
+                left: bigFont ? "190px" : "155px",
+                top: bigFont ? "20px" : "12px",
               },
             },
             textField: {
               variant: "standard",
               InputLabelProps: {
-                className: "text-2xl font-medium absolute -top-3",
+                className: `${bigFont ? "text-2xl -top-3" : "text-xl -top-2"} font-medium absolute`,
               },
               InputProps: {
-                sx: { fontSize: "20px", fontWeight: 500 },
+                sx: { fontSize: bigFont ? "20px" : "16px", fontWeight: 500 },
                 startAdornment: (
                   <IconGenerator
                     alt="Calendar icon"
                     src={`/calendar_icon.svg`}
-                    width="32px"
-                    className="mr-3"
+                    width={bigFont ? "32px" : "21px"}
+                    className={bigFont ? "mr-3" : "mr-2"}
                   />
                 ),
               },

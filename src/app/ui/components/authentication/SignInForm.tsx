@@ -77,9 +77,7 @@ export default function SignInForm() {
             </Link>
           </div>
           {errorMessage && (
-            <>
-              <p className="text-sm text-red-500">{errorMessage}</p>
-            </>
+            <p className="text-sm text-red-500">{errorMessage}</p>
           )}
         </div>
         <ActionButton

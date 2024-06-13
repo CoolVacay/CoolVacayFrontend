@@ -1,7 +1,9 @@
 import { getFetch } from "~/app/utils/api-helpers";
 import type { ListingData } from "~/app/(application)/definitions";
 import { FetchError } from "~/app/utils/definitions";
-import Gallery from "./Gallery";
+import Gallery from "~/app/ui/components/listing/Gallery";
+import Overview from "~/app/ui/components/listing/OverviewSection";
+import BookNow from "~/app/ui/components/listing/BookNowSection";
 
 async function getListingData({ source, id }: { source: string; id: string }) {
   try {
@@ -17,30 +19,41 @@ async function getListingData({ source, id }: { source: string; id: string }) {
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: {
     source: string;
     id: string;
   };
+  searchParams?: {
+    query?: string;
+  };
 }) {
-  const searchParams = params ?? "";
-  const listing = (await getListingData(searchParams))!;
+  const pageParams = params ?? "";
+  const listing = (await getListingData(pageParams))!;
+  const query = searchParams?.query ?? "";
 
   return (
-    <main className="static w-full px-[70px]">
-      <div className="flex items-center justify-between pb-6">
-        <h1 className="pt-3 text-3xl">
-          {listing.name}, {listing.city}, {listing.state}
-        </h1>
-        <div className="flex w-[300px] items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2">
-          Call us for more info:
-          <span className="ml-1 font-medium">315 434 324</span>
+    <main className="flex flex-col">
+      <div className="flex justify-center">
+        <div className="flex max-w-[1220px] flex-col items-center">
+          <div className="w-full">
+            <div className="flex w-full justify-between pb-6">
+              <h1 className="pt-3 text-3xl">
+                {listing.name}, {listing.city}, {listing.state}
+              </h1>
+              <div className="flex w-[300px] items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2">
+                Call us for more info:
+                <span className="ml-1 font-medium">315 434 324</span>
+              </div>
+            </div>
+            <Gallery listing={listing} query={query} />
+            <div className="flex gap-6 py-10">
+              <Overview listing={listing} />
+              <BookNow listing={listing} />
+            </div>
+          </div>
         </div>
-      </div>
-      <Gallery listing={listing} />
-      <div className="flex">
-        <div className="flex w-5/12 flex-col pb-6 desktop:w-7/12"></div>
-        <div className="sticky right-0 top-0 h-full w-7/12 flex-none desktop:w-5/12"></div>
       </div>
     </main>
   );
