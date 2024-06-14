@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import CustomButton from "../../ui/components/common/CustomButton";
 import CustomChip from "../../ui/components/common/CustomChip";
-import { MainCard } from "../../ui/components/common/Cards/Cards";
+import { MainCard } from "~/app/ui/components/common";
 
 function page() {
   return (

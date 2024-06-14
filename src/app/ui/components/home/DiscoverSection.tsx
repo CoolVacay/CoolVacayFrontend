@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-export default function DiscoverSection() {
+export function DiscoverSection() {
   return (
     <section className="flex max-h-[680px] shrink-0 grow-0 gap-12 py-14">
       <div className="flex h-[460px] w-[492px] shrink-0">

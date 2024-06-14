@@ -22,12 +22,22 @@ export default function FormDialog({
     <>
       <span onClick={() => setOpen(true)}>{children}</span>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <div className="flex justify-end">
-          <button onClick={() => setOpen(false)} className="hover:text-primary">
-            <CloseIcon fontSize="large" />
-          </button>
-        </div>
-        <DialogContent sx={{ padding: "60px", backgroundColor: "#F7F7F7" }}>
+        <DialogContent
+          sx={{
+            padding: "60px",
+            backgroundColor: "#F7F7F7",
+            position: "relative",
+          }}
+        >
+          <div className="absolute right-3 top-3">
+            <button
+              onClick={() => setOpen(false)}
+              className="hover:text-primary"
+              aria-label="close button"
+            >
+              <CloseIcon fontSize="large" />
+            </button>
+          </div>
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-4">
               <h2 className="text-2xl text-primary ">{title}</h2>

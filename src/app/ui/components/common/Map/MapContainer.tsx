@@ -16,7 +16,7 @@ import type {
   ListingData,
   MapboxMarkerData,
 } from "~/app/(application)/definitions";
-import IconGenerator from "../IconGenerator";
+import { IconGenerator } from "../IconGenerator";
 import {
   clusterLayer,
   clusterCountLayer,
@@ -37,13 +37,13 @@ const listingsToGeoJSON = (
   })),
 });
 
-export const MapContainer = ({
+export default function MapContainer({
   listings,
   singleListing = false,
 }: {
   listings: ListingData[];
   singleListing?: boolean;
-}) => {
+}) {
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
   const [selectedMarker, setSelectedMarker] = useState<
     MapboxMarkerData | undefined
@@ -207,4 +207,4 @@ export const MapContainer = ({
       </Map>
     </main>
   );
-};
+}

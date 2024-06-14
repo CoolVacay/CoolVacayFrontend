@@ -4,12 +4,33 @@ import { FetchError } from "~/app/utils/definitions";
 import Gallery from "~/app/ui/components/listing/Gallery";
 import Overview from "~/app/ui/components/listing/OverviewSection";
 import BookNow from "~/app/ui/components/listing/BookNowSection";
+import { SimilarCard, Breadcrumbs } from "~/app/ui/components/common";
 
 async function getListingData({ source, id }: { source: string; id: string }) {
   try {
-    const res = await getFetch<ListingData>(`/Listings/${source}/${id}`, true);
+    const res = await getFetch<ListingData>(`/Listings/${source}/${id}`);
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch listing data");
+    }
+    return res;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+async function getSimilarListings({
+  source,
+  id,
+}: {
+  source: string;
+  id: string;
+}) {
+  try {
+    const res = await getFetch<ListingData[]>(
+      `/Listings/${source}/${id}/similar`,
+      true,
+    );
+    if (res instanceof FetchError) {
+      throw new Error("Failed to fetch similar listing");
     }
     return res;
   } catch (error) {
@@ -31,13 +52,26 @@ export default async function Page({
 }) {
   const pageParams = params ?? "";
   const listing = (await getListingData(pageParams))!;
-  const query = searchParams?.query ?? "";
+  const similarListings = (await getSimilarListings(pageParams))!;
 
+  const query = searchParams?.query ?? "";
+  console.log(query, "query");
   return (
     <main className="flex flex-col">
       <div className="flex justify-center">
         <div className="flex max-w-[1220px] flex-col items-center">
           <div className="w-full">
+            <Breadcrumbs
+              breadcrumbs={[
+                //TODO: replace with the correct url
+                { label: "Listings", href: "/listings" },
+                {
+                  label: `${listing.name}`,
+                  href: `/listing/${params.source}/${params.id}`,
+                  active: true,
+                },
+              ]}
+            />
             <div className="flex w-full justify-between pb-6">
               <h1 className="pt-3 text-3xl">
                 {listing.name}, {listing.city}, {listing.state}
@@ -51,6 +85,28 @@ export default async function Page({
             <div className="flex gap-6 py-10">
               <Overview listing={listing} />
               <BookNow listing={listing} />
+            </div>
+            <h5 className="mb-10 text-2xl font-bold">
+              View similar homes in this area
+            </h5>
+            <div className="no-scrollbar mb-10 flex snap-x gap-5 overflow-auto will-change-scroll">
+              {similarListings.map((listing, index) => {
+                return (
+                  <SimilarCard
+                    key={index}
+                    id={listing.id}
+                    source={listing.source}
+                    name={listing.name}
+                    subtitle={`${listing.city}, ${listing.state}`}
+                    imageUrl={listing.imageUrl}
+                    numberOfGuests={listing.numberOfGuests}
+                    bedrooms={listing.bedrooms}
+                    bathrooms={listing.bathrooms}
+                    price={listing.price}
+                    className="snap-start"
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

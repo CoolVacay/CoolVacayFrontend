@@ -1,13 +1,11 @@
 import Link from "next/link";
 import React from "react";
-import IconGenerator from "../common/IconGenerator";
-import { MainCard } from "../common/Cards/Cards";
-import Newsletter from "../common/Newsletter/Newsletter";
+import { IconGenerator, Newsletter, MainCard } from "../common";
 import { getFetch } from "../../../utils/api-helpers";
 import type { ListingData } from "../../../(application)/definitions";
 import { truncateText } from "../../../utils/helpers";
 
-async function getAllListings() {
+export async function getAllListings() {
   try {
     const results = await Promise.allSettled([
       getFetch<ListingData[]>("/Listings?Limit=8&Offset=0"),
@@ -25,7 +23,7 @@ async function getAllListings() {
   }
 }
 
-export default async function AllistingsSection() {
+export async function AllistingsSection() {
   const [firstListings, lastListings] = (await getAllListings()) as [
     ListingData[],
     ListingData[],

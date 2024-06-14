@@ -22,6 +22,7 @@ export interface ListingData {
     name: string;
   }[];
   amenities: string[];
+  numberOfGuests: number;
 }
 
 export type ListingCardProps = Pick<
@@ -33,6 +34,9 @@ export type MainCardProps = Pick<
   ListingData,
   "name" | "imageUrl" | "propertyType" | "squareFeets" | "id" | "source"
 > & { isBlogCard?: boolean; subtitle: string };
+
+export type SimilarCardProps = MainCardProps &
+  Pick<ListingData, "bedrooms" | "bathrooms" | "numberOfGuests" | "price">;
 
 export interface PopularCategoriesData {
   id: number;

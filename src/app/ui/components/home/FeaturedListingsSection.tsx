@@ -1,8 +1,8 @@
 import type { ListingData } from "../../../(application)/definitions";
 import { getFetch } from "../../../utils/api-helpers";
 import { truncateText } from "../../../utils/helpers";
-import { MainCard } from "../common/Cards/Cards";
 import { FetchError } from "~/app/utils/definitions";
+import { MainCard } from "../common";
 
 async function getFeaturedListings() {
   try {
@@ -16,7 +16,7 @@ async function getFeaturedListings() {
   }
 }
 
-export default async function FeaturedListingsSection() {
+export async function FeaturedListingsSection() {
   const featuredListings = (await getFeaturedListings())!;
 
   return (

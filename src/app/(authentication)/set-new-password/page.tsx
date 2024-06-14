@@ -6,7 +6,7 @@ import { Formik, Form, type FormikHelpers } from "formik";
 import Loader from "../../ui/components/common/Loader/loader";
 import * as Yup from "yup";
 import { Button } from "@mui/base";
-import { FormikTextField } from "~/app/ui/components/authentication/FormikTextField";
+import { FormikTextField } from "~/app/ui/components/authentication";
 
 export type LoginValue = {
   confirmPassword: string;

@@ -1,10 +1,8 @@
 import { InputLabel, Input, FormControl } from "@mui/material";
-import IconGenerator from "../common/IconGenerator";
-import RangeDatePicker from "../common/RangeDatePicker";
-import SelectInput from "../common/SelectInput";
+import { IconGenerator, RangeDatePicker, SelectInput } from "../common";
 
 //TODO: re-style/refactor when you add functionality
-export default function SearchCard() {
+export function SearchCard() {
   return (
     <search>
       <form>

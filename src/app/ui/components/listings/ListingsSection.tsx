@@ -1,4 +1,4 @@
-import { ListingCard } from "../common/Cards/Cards";
+import { ListingCard } from "../common";
 import type { ListingData } from "~/app/(application)/definitions";
 
 export async function ListingSection({

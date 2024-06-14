@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 
 import { ActionButton } from "../authentication/common";
 import type { ListingData } from "~/app/(application)/definitions";
-import SimpleInput from "../common/SimpleInput";
+import { SimpleInput } from "../common";
 import { enquire } from "~/app/(application)/actions";
 
 const ValidationSchema = Yup.object().shape({

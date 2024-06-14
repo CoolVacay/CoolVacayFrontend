@@ -16,11 +16,13 @@ export default function FullScreenDialog({
   listing,
   isModalOpen,
   setIsModalOpen,
+  handleClick,
 }: {
   query: string;
   isModalOpen: boolean;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   listing: ListingData;
+  handleClick: (url?: number | string) => void;
 }) {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
@@ -30,6 +32,7 @@ export default function FullScreenDialog({
   const SLIDES = Array.from(Array(listing.images).keys());
 
   useEffect(() => {
+    console.log(query, "query");
     setIsModalOpen(query?.startsWith("photoGallery"));
   }, [query, setIsModalOpen]);
 
@@ -61,6 +64,7 @@ export default function FullScreenDialog({
         <DialogContent className="align-center flex justify-center pt-0">
           <EmblaCarousel
             slides={SLIDES}
+            handleClick={handleClick}
             options={OPTIONS}
             images={listing.images}
             slideNr={Number.parseInt(params.get("query")?.at(-1) ?? "0")}

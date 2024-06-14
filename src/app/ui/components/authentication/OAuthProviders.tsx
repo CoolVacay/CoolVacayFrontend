@@ -1,5 +1,5 @@
 import { signIn, providerMap } from "~/auth";
-import IconGenerator from "~/app/ui/components/common/IconGenerator";
+import { IconGenerator } from "../common";
 
 export default function OAuthProviders({
   page,

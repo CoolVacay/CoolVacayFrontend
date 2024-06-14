@@ -1,9 +1,7 @@
 import { Divider } from "@mui/material";
 
-import RangeDatePicker from "../common/RangeDatePicker";
-import SelectInput from "../common/SelectInput";
+import { RangeDatePicker, FormDialog, SelectInput } from "../common";
 import type { ListingData } from "~/app/(application)/definitions";
-import FormDialog from "../common/Dialogs/FormDialog";
 
 export default function BookNow({ listing }: { listing: ListingData }) {
   return (

@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import type { ListingData } from "~/app/(application)/definitions";
-import IconGenerator from "../common/IconGenerator";
-import { MapContainer } from "../common/Map/Map";
+import { IconGenerator, MapContainer } from "../common";
 
 export default function Overview({ listing }: { listing: ListingData }) {
   const [readMore, setReadMore] = useState(false);

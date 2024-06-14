@@ -9,14 +9,14 @@ interface IconGeneratorProps extends Omit<ImageProps, "height" | "width"> {
   className?: string;
 }
 
-const IconGenerator = ({
+export default function IconGenerator({
   src,
   width,
   height,
   alt,
   className,
   ...rest
-}: IconGeneratorProps) => {
+}: IconGeneratorProps) {
   return (
     <Image
       alt={alt}
@@ -28,6 +28,4 @@ const IconGenerator = ({
       {...rest}
     />
   );
-};
-
-export default IconGenerator;
+}

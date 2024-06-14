@@ -1,6 +1,7 @@
-import { MainCard } from "../common/Cards/Cards";
+import { MainCard } from "../common";
+
 //TODO:make blogSection dynamic
-const BlogSection = () => {
+export function BlogSection() {
   return (
     <section className="flex w-full flex-col">
       <div className="flex flex-col items-center">
@@ -28,6 +29,4 @@ const BlogSection = () => {
       </div>
     </section>
   );
-};
-
-export default BlogSection;
+}

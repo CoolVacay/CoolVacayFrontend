@@ -18,6 +18,16 @@ export default function Gallery({
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const preloadRoute = (url: number | string = "") => {
+    const params = new URLSearchParams(photoParams.toString());
+    if (url) {
+      params.set("query", `photoGallery=${url}`);
+    }
+    const newUrl = `${pathname}?${params.toString()}`;
+    router.prefetch(newUrl); // Prefetch the route
+  };
+  // window.history.pushState(null, "", `${pathname}?${params.toString()}`);
+  //previously set a param to load faster
   const handleClick = (url: number | string = "") => {
     const params = new URLSearchParams(photoParams);
     if (url) {
@@ -42,6 +52,7 @@ export default function Gallery({
                   alt={image.name}
                   onClick={() => {
                     setIsModalOpen(true);
+                    preloadRoute(index + 1); // Prefetch the route before navigating
                     handleClick(index + 1);
                   }}
                   sizes="100vw"
@@ -74,6 +85,7 @@ export default function Gallery({
       </div>
       <FullScreenDialog
         query={query}
+        handleClick={handleClick}
         listing={listing}
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}

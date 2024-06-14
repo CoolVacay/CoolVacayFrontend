@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Session } from "next-auth";
 
-import IconGenerator from "../IconGenerator";
+import { IconGenerator } from "../IconGenerator";
 import NavBarLoginButton from "./NavBarLoginButton";
 
 export default function NavBar({ session }: { session: Session | null }) {

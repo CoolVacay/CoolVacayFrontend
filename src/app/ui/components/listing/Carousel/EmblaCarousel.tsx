@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import type { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
+import Image from "next/image";
+
 import { Thumb } from "./EmblaCarouselThumbsButton";
 import type { ListingData } from "~/app/(application)/definitions";
-import Image from "next/image";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
@@ -12,9 +13,15 @@ type PropType = {
   options?: EmblaOptionsType;
   images: ListingData["images"];
   slideNr: number;
+  handleClick: (url?: number | string) => void;
 };
 
-const EmblaCarousel: React.FC<PropType> = ({ options, images, slideNr }) => {
+const EmblaCarousel: React.FC<PropType> = ({
+  options,
+  images,
+  slideNr,
+  handleClick,
+}) => {
   const [selectedIndex, setSelectedIndex] = useState(2);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
@@ -105,7 +112,10 @@ const EmblaCarousel: React.FC<PropType> = ({ options, images, slideNr }) => {
               {images.map((image, index) => (
                 <Thumb
                   key={index}
-                  onClick={() => onThumbClick(index)}
+                  onClick={() => {
+                    handleClick(index + 1);
+                    onThumbClick(index);
+                  }}
                   selected={index === selectedIndex}
                   image={image}
                 />

@@ -1,7 +1,8 @@
+import Link from "next/link";
+
 import { revalidateFetch } from "../../../utils/api-helpers";
 import type { PopularCategoriesData } from "../../../(application)/definitions";
-import IconGenerator from "../common/IconGenerator";
-import Link from "next/link";
+import { IconGenerator } from "../common";
 
 async function getCategories() {
   try {
@@ -13,7 +14,7 @@ async function getCategories() {
   }
 }
 
-export default async function PopularCategories() {
+export async function PopularCategories() {
   const popularCategories = (await getCategories()) as PopularCategoriesData[];
 
   return (

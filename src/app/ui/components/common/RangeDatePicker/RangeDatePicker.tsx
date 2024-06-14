@@ -5,7 +5,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import IconGenerator from "./IconGenerator";
+import { IconGenerator } from "../IconGenerator";
 
 const RangeDatePicker = ({ size }: { size: "small" | "big" }) => {
   const bigFont = size === "big";

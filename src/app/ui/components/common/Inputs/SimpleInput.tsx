@@ -1,11 +1,12 @@
-import React, { type FocusEvent } from "react";
+"use client";
+
 import { Input } from "@mui/base";
 
-interface FormikTextFieldProps {
+interface SimpleInputProps {
   name: string;
   placeholder?: string;
   onBlur?: (
-    event: FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
+    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
   ) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: boolean | undefined;
@@ -22,7 +23,7 @@ export default function SimpleInput({
   disabled = false,
   defaultValue,
   type = "text",
-}: FormikTextFieldProps) {
+}: SimpleInputProps) {
   return (
     <Input
       color="primary"
