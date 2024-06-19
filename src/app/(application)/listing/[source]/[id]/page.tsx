@@ -53,7 +53,6 @@ export default async function Page({
   const pageParams = params ?? "";
   const listing = (await getListingData(pageParams))!;
   const similarListings = (await getSimilarListings(pageParams))!;
-  console.log(listing, "ll");
   const query = searchParams?.query ?? "";
 
   return (

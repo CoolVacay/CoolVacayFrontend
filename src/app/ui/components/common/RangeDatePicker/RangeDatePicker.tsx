@@ -1,13 +1,24 @@
 "use client";
 
-import dayjs from "dayjs";
+import type { Dayjs } from "dayjs";
+import type { DateRange } from "@mui/x-date-pickers-pro/models";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { IconGenerator } from "../IconGenerator";
 
-const RangeDatePicker = ({ size }: { size: "small" | "big" }) => {
+const RangeDatePicker = ({
+  size,
+  dates,
+  setDates,
+}: {
+  size: "small" | "big";
+  //@ts-expect-error noDayjsAdapter
+  dates: DateRange<Dayjs>;
+  //@ts-expect-error noDayjsAdapter
+  setDates: React.Dispatch<React.SetStateAction<DateRange<dayjs>>>;
+}) => {
   const bigFont = size === "big";
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -56,7 +67,8 @@ const RangeDatePicker = ({ size }: { size: "small" | "big" }) => {
               },
             },
           }}
-          defaultValue={[dayjs(), dayjs().add(6, "day")]}
+          value={dates}
+          onChange={(newValue) => setDates(newValue)}
           localeText={{ start: "Check-in", end: "Check-out" }}
         />
       </DemoContainer>

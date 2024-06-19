@@ -31,8 +31,8 @@ export default function FullScreenDialog({
   const OPTIONS: EmblaOptionsType = {};
   const SLIDES = Array.from(Array(listing.images).keys());
 
+  //TODO: replace params with Link, check Link options
   useEffect(() => {
-    console.log(query, "query");
     setIsModalOpen(query?.startsWith("photoGallery"));
   }, [query, setIsModalOpen]);
 
