@@ -9,7 +9,7 @@ export async function getFetch<T>(
   noCache = false,
 ): Promise<T | FetchError> {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/${url}`, {
+    const res = await fetch(`${API_BASE_URL}/api${url}`, {
       cache: noCache ? "no-store" : "force-cache",
     });
     if (!res.ok) {

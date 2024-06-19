@@ -5,7 +5,8 @@ import * as Yup from "yup";
 import Link from "next/link";
 import { useFormik } from "formik";
 import { authenticateCR } from "~/app/(authentication)/actions";
-import { FormikTextField, FormikCheckBox, ActionButton } from "./common";
+import { FormikCheckBox, ActionButton } from "./common";
+import { FormikTextField } from "../common";
 
 const ValidationSchema = Yup.object({
   email: Yup.string()

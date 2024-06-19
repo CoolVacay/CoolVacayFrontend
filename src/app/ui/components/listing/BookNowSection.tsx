@@ -1,9 +1,19 @@
+import Link from "next/link";
 import { Divider } from "@mui/material";
 
 import { RangeDatePicker, FormDialog, SelectInput } from "../common";
 import type { ListingData } from "~/app/(application)/definitions";
 
-export default function BookNow({ listing }: { listing: ListingData }) {
+export default function BookNow({
+  listing,
+  params,
+}: {
+  listing?: ListingData;
+  params: {
+    source: string;
+    id: string;
+  };
+}) {
   return (
     <div className="flex w-full max-w-[420px] shrink-0 flex-col">
       <h1 className="mb-4 text-2xl font-bold">Book it now</h1>
@@ -23,20 +33,26 @@ export default function BookNow({ listing }: { listing: ListingData }) {
             <SelectInput size="small" />
           </div>
         </div>
-        <button className=" h-[58px] w-full rounded-full bg-primary py-4 text-white hover:border hover:border-primary hover:bg-white hover:text-primary">
-          Book now
-        </button>
-        <Divider />
-        <FormDialog
-          title="Enquire now"
-          subtitle="Have a question or feedback? Fill out the form
-below, and we'll get back to you as soon as possible."
-          listing={listing}
+        <Link
+          href={`/book/${params.source}/${params.id}/billing-address`}
+          className="flex h-[58px] w-full justify-center rounded-full bg-primary py-4 text-white hover:border hover:border-primary hover:bg-white hover:text-primary"
         >
-          <button className="w-full rounded-full border border-primary bg-white py-4 text-primary hover:bg-primary hover:text-white">
-            Enquire now
-          </button>
-        </FormDialog>
+          Book now
+        </Link>
+        <Divider />
+
+        {listing && (
+          <FormDialog
+            title="Enquire now"
+            subtitle="Have a question or feedback? Fill out the form
+            below, and we'll get back to you as soon as possible."
+            listing={listing}
+          >
+            <button className="w-full rounded-full border border-primary bg-white py-4 text-primary hover:bg-primary hover:text-white">
+              Enquire now
+            </button>
+          </FormDialog>
+        )}
         <h6 className="text-justify font-normal	text-[#858C93]">
           By proceeding, you consent to receive calls and texts at the number
           you provided, including marketing by autodialer and prerecorded and

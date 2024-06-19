@@ -22,6 +22,12 @@ const config = {
         pathname: "/api/categories/**",
       },
       {
+        protocol: "http",
+        hostname: "backendy.eastus.cloudapp.azure.com",
+        port: "",
+        pathname: "/api/categories/**",
+      },
+      {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
         port: "",

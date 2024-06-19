@@ -10,7 +10,8 @@ import NavBarLoginButton from "./NavBarLoginButton";
 export default function NavBar({ session }: { session: Session | null }) {
   const pathname = usePathname();
   const isWhiteVariant = pathname === "/";
-  const isListingPage = pathname.startsWith("/listing/");
+  const isListingPage =
+    pathname.startsWith("/listing/") || pathname.startsWith("/book/");
 
   return (
     <nav

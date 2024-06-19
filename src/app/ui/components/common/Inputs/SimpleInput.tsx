@@ -13,6 +13,8 @@ interface SimpleInputProps {
   type?: string;
   disabled?: boolean;
   defaultValue?: string;
+  styles?: string;
+  variant?: "rectangle" | "rounded";
 }
 export default function SimpleInput({
   name,
@@ -23,7 +25,10 @@ export default function SimpleInput({
   disabled = false,
   defaultValue,
   type = "text",
+  styles,
+  variant = "rectangle",
 }: SimpleInputProps) {
+  const isRectangleVariant = variant === "rectangle";
   return (
     <Input
       color="primary"
@@ -38,8 +43,7 @@ export default function SimpleInput({
       defaultValue={defaultValue}
       slotProps={{
         input: {
-          className:
-            "block w-full rounded-lg bg-white p-2.5 text-sm text-[#676D73] focus:outline-[#29ABE2] disabled:bg-[#E7E7E7] disabled:text-[#676D73]",
+          className: `block w-full rounded-${isRectangleVariant ? "lg" : "full"} bg-white p-${isRectangleVariant ? "2.5" : "4"} text-[#676D73] focus:outline-[#29ABE2] disabled:bg-[#E7E7E7] disabled:text-[#676D73] ${styles} ${isRectangleVariant ? "" : "border border-[#EAEAEF]"}`,
         },
       }}
     />

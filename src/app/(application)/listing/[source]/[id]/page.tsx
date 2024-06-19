@@ -53,9 +53,9 @@ export default async function Page({
   const pageParams = params ?? "";
   const listing = (await getListingData(pageParams))!;
   const similarListings = (await getSimilarListings(pageParams))!;
-
+  console.log(listing, "ll");
   const query = searchParams?.query ?? "";
-  console.log(query, "query");
+
   return (
     <main className="flex flex-col">
       <div className="flex justify-center">
@@ -84,29 +84,31 @@ export default async function Page({
             <Gallery listing={listing} query={query} />
             <div className="flex gap-6 py-10">
               <Overview listing={listing} />
-              <BookNow listing={listing} />
+              <BookNow listing={listing} params={params} />
             </div>
             <h5 className="mb-10 text-2xl font-bold">
               View similar homes in this area
             </h5>
             <div className="no-scrollbar mb-10 flex snap-x gap-5 overflow-auto will-change-scroll">
-              {similarListings.map((listing, index) => {
-                return (
-                  <SimilarCard
-                    key={index}
-                    id={listing.id}
-                    source={listing.source}
-                    name={listing.name}
-                    subtitle={`${listing.city}, ${listing.state}`}
-                    imageUrl={listing.imageUrl}
-                    numberOfGuests={listing.numberOfGuests}
-                    bedrooms={listing.bedrooms}
-                    bathrooms={listing.bathrooms}
-                    price={listing.price}
-                    className="snap-start"
-                  />
-                );
-              })}
+              {similarListings
+                ? similarListings.map((listing, index) => {
+                    return (
+                      <SimilarCard
+                        key={index}
+                        id={listing.id}
+                        source={listing.source}
+                        name={listing.name}
+                        subtitle={`${listing.city}, ${listing.state}`}
+                        imageUrl={listing.imageUrl}
+                        numberOfGuests={listing.numberOfGuests}
+                        bedrooms={listing.bedrooms}
+                        bathrooms={listing.bathrooms}
+                        price={listing.price}
+                        className="snap-start"
+                      />
+                    );
+                  })
+                : "Cannot find similar homes at this moment"}
             </div>
           </div>
         </div>

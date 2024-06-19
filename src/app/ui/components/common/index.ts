@@ -1,6 +1,6 @@
 export { SimilarCard, MainCard, ListingCard } from "./Cards/index";
 export { FormDialog, FullScreenDialog } from "./Dialogs/index";
-export { SelectInput, SimpleInput } from "./Inputs/index";
+export { SelectInput, SimpleInput, FormikTextField } from "./Inputs/index";
 export { MapContainer } from "./Map/index";
 export { NavBar } from "./Navbar/index";
 export { Newsletter } from "./Newsletter/index";
