@@ -26,6 +26,7 @@ export default function Gallery({
     const newUrl = `${pathname}?${params.toString()}`;
     router.prefetch(newUrl); // Prefetch the route
   };
+  //TODO: refactor code
   // window.history.pushState(null, "", `${pathname}?${params.toString()}`);
   //previously set a param to load faster
   const handleClick = (url: number | string = "") => {

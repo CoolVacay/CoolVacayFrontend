@@ -1,23 +1,19 @@
 "use client";
 
-import type { Dayjs } from "dayjs";
-import type { DateRange } from "@mui/x-date-pickers-pro/models";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { IconGenerator } from "../IconGenerator";
-
+import type { DateRangeType } from "../../home/SearchCard";
 const RangeDatePicker = ({
   size,
   dates,
   setDates,
 }: {
   size: "small" | "big";
-  //@ts-expect-error noDayjsAdapter
-  dates: DateRange<Dayjs>;
-  //@ts-expect-error noDayjsAdapter
-  setDates: React.Dispatch<React.SetStateAction<DateRange<dayjs>>>;
+  dates: DateRangeType;
+  setDates: React.Dispatch<React.SetStateAction<DateRangeType>>;
 }) => {
   const bigFont = size === "big";
   return (
@@ -45,7 +41,7 @@ const RangeDatePicker = ({
                 width: "1px",
                 height: "62px",
                 position: "absolute",
-                left: bigFont ? "190px" : "155px",
+                left: bigFont ? "190px" : "175px",
                 top: bigFont ? "20px" : "12px",
               },
             },

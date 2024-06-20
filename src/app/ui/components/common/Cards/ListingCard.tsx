@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { IconGenerator } from "../IconGenerator";
 import type { ListingCardProps } from "~/app/(application)/definitions";
+import { useSearchParams } from "next/navigation";
 
 export default function ListingCard({
   id,
@@ -11,6 +14,10 @@ export default function ListingCard({
   imageUrl,
   price,
 }: ListingCardProps) {
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams.toString());
+  params.delete("Offset");
+  params.delete("Limit");
   return (
     <div className="flex h-[405px] w-[360px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1">
       <div className="relative">
@@ -63,7 +70,7 @@ export default function ListingCard({
             </h6>
           </div>
         </div>
-        <Link href={`listing/${source}/${id}`}>
+        <Link href={`listing/${source}/${id}?${params.toString()}`}>
           <button className="w-full rounded-full border border-primary py-3 font-bold text-primary hover:bg-primary hover:text-white">
             Book
           </button>

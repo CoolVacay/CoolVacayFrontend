@@ -5,15 +5,16 @@ import { IconGenerator, RangeDatePicker, SelectInput } from "../common";
 import Link from "next/link";
 import type { SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
-import dayjs, { type Dayjs } from "dayjs";
-import type { DateRange } from "@mui/x-date-pickers-pro/models";
+import dayjs from "dayjs";
+import type { Dayjs } from "dayjs";
+
+export type DateRangeType = [Dayjs | null, Dayjs | null];
 
 //TODO: re-style/refactor when you add functionality
 export function SearchCard() {
   const [location, setLocation] = useState("");
 
-  //@ts-expect-error noDayjsAdapter
-  const [dates, setDates] = useState<DateRange<Dayjs>>([
+  const [dates, setDates] = useState<DateRangeType>([
     dayjs(),
     dayjs().add(6, "day"),
   ]);

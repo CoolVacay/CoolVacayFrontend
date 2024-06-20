@@ -1,6 +1,7 @@
 import BookedListingCard from "~/app/ui/components/common/Cards/BookedListingCard";
 import { Breadcrumbs } from "~/app/ui/components/common";
 import BookNow from "~/app/ui/components/listing/BookNowSection";
+
 export default function Layout({
   children,
   params,

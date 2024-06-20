@@ -15,6 +15,8 @@ interface SimpleInputProps {
   defaultValue?: string;
   styles?: string;
   variant?: "rectangle" | "rounded";
+  required?: boolean;
+  value?: string;
 }
 export default function SimpleInput({
   name,
@@ -24,6 +26,8 @@ export default function SimpleInput({
   error,
   disabled = false,
   defaultValue,
+  required,
+  value,
   type = "text",
   styles,
   variant = "rectangle",
@@ -39,6 +43,8 @@ export default function SimpleInput({
       onChange={onChange}
       error={error}
       type={type}
+      value={value}
+      required={required}
       disabled={disabled}
       defaultValue={defaultValue}
       slotProps={{
