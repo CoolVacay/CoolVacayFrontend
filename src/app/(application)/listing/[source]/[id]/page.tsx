@@ -40,20 +40,15 @@ async function getSimilarListings({
 
 export default async function Page({
   params,
-  searchParams,
 }: {
   params: {
     source: string;
     id: string;
   };
-  searchParams?: {
-    query?: string;
-  };
 }) {
   const pageParams = params ?? "";
   const listing = (await getListingData(pageParams))!;
   const similarListings = (await getSimilarListings(pageParams))!;
-  const query = searchParams?.query ?? "";
 
   return (
     <main className="flex flex-col">
@@ -80,7 +75,7 @@ export default async function Page({
                 <span className="ml-1 font-medium">315 434 324</span>
               </div>
             </div>
-            <Gallery listing={listing} query={query} />
+            <Gallery listing={listing} />
             <div className="flex gap-6 py-10">
               <Overview listing={listing} />
               <BookNow listing={listing} params={params} />

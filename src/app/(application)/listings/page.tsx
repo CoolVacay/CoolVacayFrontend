@@ -19,12 +19,10 @@ async function getFilteredListings(query: string) {
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: {
-    query?: string;
-  };
+  searchParams: Record<string, string>;
 }) {
-  const query = searchParams?.query ?? "";
-  const listings = (await getFilteredListings(query))!;
+  const query = new URLSearchParams(searchParams);
+  const listings = (await getFilteredListings(query.toString()))!;
 
   return (
     <main className="static w-full pl-[70px]">

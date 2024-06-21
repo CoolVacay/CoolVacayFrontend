@@ -1,8 +1,24 @@
 import BookedListingCard from "~/app/ui/components/common/Cards/BookedListingCard";
 import { Breadcrumbs } from "~/app/ui/components/common";
 import BookNow from "~/app/ui/components/listing/BookNowSection";
+import { FormProvider } from "./FormContext";
+import { getFetch } from "~/app/utils/api-helpers";
+import { FetchError } from "~/app/utils/definitions";
+import type { ListingData } from "~/app/(application)/definitions";
 
-export default function Layout({
+async function getListingData({ source, id }: { source: string; id: string }) {
+  try {
+    const res = await getFetch<ListingData>(`/Listings/${source}/${id}`);
+    if (res instanceof FetchError) {
+      throw new Error("Failed to fetch listing data");
+    }
+    return res;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+export default async function Layout({
   children,
   params,
 }: {
@@ -12,11 +28,13 @@ export default function Layout({
     id: string;
   };
 }) {
+  const listing = (await getListingData(params))!;
+
   return (
     <main className="flex flex-col">
       <div className="flex justify-center">
         <div className="flex max-w-[1220px] grow flex-col items-center">
-          <div className="flex w-full flex-col gap-3">
+          <div className="mb-12 flex w-full flex-col gap-3">
             <Breadcrumbs
               breadcrumbs={[
                 {
@@ -34,17 +52,12 @@ export default function Layout({
               <div className="flex w-full flex-col gap-5">
                 <div className="flex flex-col gap-4">
                   <h3 className="text-2xl font-bold">Reserve Information</h3>
-                  <BookedListingCard
-                    name="2BR Cabin"
-                    subtitle="Hello"
-                    // imageUrl="noImage"
-                  />
+                  <BookedListingCard listing={listing} />
                 </div>
-
-                {children}
+                <FormProvider>{children}</FormProvider>
               </div>
               <div className="flex shrink-0 flex-col gap-4">
-                <BookNow params={params} />
+                <BookNow params={params} listing={listing} />
               </div>
             </div>
           </div>

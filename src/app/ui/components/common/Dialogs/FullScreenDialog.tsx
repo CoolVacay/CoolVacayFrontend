@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import type { EmblaOptionsType } from "embla-carousel";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
@@ -12,20 +12,21 @@ import CloseIcon from "@mui/icons-material/Close";
 import "../../listing/Carousel/embla.css";
 
 export default function FullScreenDialog({
-  query,
   listing,
   isModalOpen,
   setIsModalOpen,
   handleClick,
 }: {
-  query: string;
   isModalOpen: boolean;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   listing: ListingData;
   handleClick: (url?: number | string) => void;
 }) {
   const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
+  const params = useMemo(() => {
+    return new URLSearchParams(searchParams);
+  }, [searchParams]);
+
   const router = useRouter();
   const pathname = usePathname();
   const OPTIONS: EmblaOptionsType = {};
@@ -33,13 +34,13 @@ export default function FullScreenDialog({
 
   //TODO: replace params with Link, check Link options
   useEffect(() => {
-    setIsModalOpen(query?.startsWith("photoGallery"));
-  }, [query, setIsModalOpen]);
+    setIsModalOpen(params?.get("query")?.includes("photoGallery") ?? false);
+  }, [params, setIsModalOpen]);
 
   const handleClose = () => {
     setIsModalOpen(false);
     params.delete("query");
-    router.replace(`${pathname}`);
+    router.replace(`${pathname}?${params.toString()}`);
   };
 
   return (

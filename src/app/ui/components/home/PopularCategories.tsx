@@ -19,7 +19,6 @@ async function getCategories() {
 
 export async function PopularCategories() {
   const popularCategories = (await getCategories()) as PopularCategoriesData[];
-
   return (
     <div className="flex flex-wrap md:justify-between">
       {popularCategories
