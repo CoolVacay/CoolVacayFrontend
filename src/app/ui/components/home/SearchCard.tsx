@@ -8,7 +8,7 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
 
-export type DateRangeType = [Dayjs | null, Dayjs | null];
+export type DateRangeType = [Dayjs, Dayjs];
 
 //TODO: re-style/refactor when you add functionality
 export function SearchCard() {

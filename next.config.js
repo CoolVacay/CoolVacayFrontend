@@ -33,6 +33,13 @@ const config = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "image-cdn.timesharesoft.com",
+        port: "",
+        pathname: "/**",
+      },
+      
     ],
   },
 };

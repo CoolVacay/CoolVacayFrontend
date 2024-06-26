@@ -9,6 +9,15 @@ import type { ListingData } from "~/app/(application)/definitions";
 import dayjs from "dayjs";
 import type { DateRangeType } from "../home/SearchCard";
 import type { SelectChangeEvent } from "@mui/material";
+import { getPricingDetails } from "~/app/(application)/actions";
+
+export interface IPricingDetails {
+  totalPrice: number;
+  components: {
+    name: string;
+    total: number;
+  }[];
+}
 
 export default function BookNow({
   listing,
@@ -23,6 +32,9 @@ export default function BookNow({
   const listingQuery = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const [pricingDetails, setPricingDetails] = useState<
+    IPricingDetails | undefined
+  >();
 
   const isPriceCalculated =
     pathname.endsWith("billing-address") || pathname.endsWith("payment");
@@ -43,7 +55,6 @@ export default function BookNow({
   const searchParams = useMemo(() => {
     return new URLSearchParams(listingQuery);
   }, [listingQuery]);
-  const totalFair = listing.price * toDate!.diff(fromDate, "day");
 
   const updateSearchParams = useCallback(
     (param: string, value: string) => {
@@ -67,6 +78,26 @@ export default function BookNow({
   useEffect(() => {
     updateSearchParams("NumberOfGuests", numberOfGuests);
   }, [updateSearchParams, numberOfGuests]);
+
+  useEffect(() => {
+    if (fromDate && toDate) {
+      async function fetchPricingDetails() {
+        try {
+          const details = await getPricingDetails(
+            params.source,
+            params.id,
+            fromDate.format("YYYY-MM-DD"),
+            toDate.format("YYYY-MM-DD"),
+            numberOfGuests,
+          );
+          setPricingDetails(details);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      void fetchPricingDetails();
+    }
+  }, [fromDate, toDate, numberOfGuests, params.source, params.id]);
 
   return (
     <div className="flex w-full max-w-[420px] shrink-0 flex-col">
@@ -123,35 +154,31 @@ export default function BookNow({
           <>
             <div className="flex flex-col gap-4 font-medium">
               <h6 className="flex justify-between text-lg text-[#858C93]">
-                ${listing.price} x {toDate!.diff(fromDate, "day")} nights
+                ${listing.price} x {toDate.diff(fromDate, "day")} nights
                 <span className="text-black">
-                  $
-                  {totalFair.toLocaleString("en-US", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
+                  ${pricingDetails?.components[0]?.total}
                 </span>
               </h6>
-              <h6 className="flex justify-between text-lg text-[#858C93]">
-                {/* TODO:replace with actual fee */}
-                Cleaning Fee
-                <span className="text-black">
-                  $
-                  {(60).toLocaleString("en-US", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
-                </span>
-              </h6>
+
+              {pricingDetails?.components.map((fee, index) => {
+                if (index > 0) {
+                  return (
+                    <h6
+                      key={index}
+                      className="flex justify-between text-lg text-[#858C93]"
+                    >
+                      {/* TODO:replace with actual fee */}
+                      {fee.name}
+                      <span className="text-black">${fee.total}</span>
+                    </h6>
+                  );
+                } else {
+                  return null;
+                }
+              })}
               <h5 className="flex justify-between text-2xl">
                 Total
-                <span>
-                  $
-                  {(totalFair + 60.0).toLocaleString("en-US", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
-                </span>
+                <span>${pricingDetails?.totalPrice}</span>
               </h5>
             </div>
           </>

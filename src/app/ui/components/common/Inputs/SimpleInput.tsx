@@ -17,6 +17,7 @@ interface SimpleInputProps {
   variant?: "rectangle" | "rounded";
   required?: boolean;
   value?: string;
+  maxLength?: number;
 }
 export default function SimpleInput({
   name,
@@ -31,6 +32,7 @@ export default function SimpleInput({
   type = "text",
   styles,
   variant = "rectangle",
+  maxLength = undefined,
 }: SimpleInputProps) {
   const isRectangleVariant = variant === "rectangle";
   return (
@@ -49,6 +51,7 @@ export default function SimpleInput({
       defaultValue={defaultValue}
       slotProps={{
         input: {
+          maxLength: maxLength,
           className: `block w-full rounded-${isRectangleVariant ? "lg" : "full"} bg-white p-${isRectangleVariant ? "2.5" : "4"} text-[#676D73] focus:outline-[#29ABE2] disabled:bg-[#E7E7E7] disabled:text-[#676D73] ${styles} ${isRectangleVariant ? "" : "border border-[#EAEAEF]"}`,
         },
       }}

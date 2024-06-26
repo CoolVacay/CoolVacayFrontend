@@ -6,6 +6,8 @@ import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { IconGenerator } from "../IconGenerator";
 import type { DateRangeType } from "../../home/SearchCard";
+import type { Dayjs } from "dayjs";
+
 const RangeDatePicker = ({
   size,
   dates,
@@ -64,7 +66,7 @@ const RangeDatePicker = ({
             },
           }}
           value={dates}
-          onChange={(newValue) => setDates(newValue)}
+          onChange={(newValue) => setDates(newValue as [Dayjs, Dayjs])}
           localeText={{ start: "Check-in", end: "Check-out" }}
         />
       </DemoContainer>

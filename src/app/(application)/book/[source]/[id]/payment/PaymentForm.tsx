@@ -7,10 +7,29 @@ import { SimpleInput } from "~/app/ui/components/common";
 import Link from "next/link";
 import { useState } from "react";
 import BookingCompleted from "./BookingCompleted";
+import { IconGenerator } from "~/app/ui/components/common";
 
 const ValidationSchema = Yup.object({
   cardNumber: Yup.string().required("This field is required"),
-  expiryDate: Yup.string().required("This field is required"),
+  expiryDate: Yup.string()
+    .required("This field is required")
+    .test(
+      "is-valid-month",
+      "The month must be between 01 and 12",
+      function (value) {
+        if (!value) return false;
+        const month = value.substring(0, 2);
+        const monthInt = parseInt(month, 10);
+        return monthInt >= 1 && monthInt <= 12;
+      },
+    )
+    .test("is-valid-year", "Enter a correct expiration date", function (value) {
+      if (!value) return false;
+      const currentYear = new Date().getFullYear() % 100;
+      const year = value.substring(3, 5);
+      const yearInt = parseInt(year, 10);
+      return yearInt >= currentYear;
+    }),
   cvv: Yup.string().required("This field is required"),
 });
 
@@ -43,15 +62,33 @@ export default function PaymentForm({
             Card Number<span className="absolute">*</span>
           </label>
           <SimpleInput
-            placeholder="Card Number"
+            placeholder="1234-1234-1234-1234"
             name="cardNumber"
             required={true}
             onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
+            maxLength={19}
+            onChange={(e) => {
+              const input = e.target.value.replace(/\D/g, "");
+              let formattedInput = "";
+              for (let i = 0; i < input.length; i++) {
+                if (i % 4 === 0 && i > 0) {
+                  formattedInput += "-";
+                }
+                formattedInput += input[i];
+              }
+              return formik.setFieldValue("cardNumber", formattedInput);
+            }}
+            value={formik.values.cardNumber}
             error={
               formik.touched.cardNumber && Boolean(formik.errors.cardNumber)
             }
             variant="rounded"
+          />
+          <IconGenerator
+            src="/credit-card.svg"
+            width="24px"
+            alt="Credit card icon"
+            className="absolute right-8 top-[50px]"
           />
           {formik.touched.cardNumber && Boolean(formik.errors.cardNumber) && (
             <p className="mt-1 text-sm text-red-500">
@@ -65,10 +102,29 @@ export default function PaymentForm({
               Expiration Date<span className="absolute">*</span>
             </label>
             <SimpleInput
-              placeholder="Expiration Date"
+              placeholder="MM/YY"
               name="expiryDate"
               onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
+              value={formik.values.expiryDate}
+              maxLength={5}
+              onChange={(e) => {
+                const input = e.target.value.replace(/\D/g, "");
+                let formattedInput = "";
+                // if (input.length >= 2) {
+                //   const month = input.substring(0, 2);
+                //   if (parseInt(month) < 1 || parseInt(month) > 12) {
+                //     // If not a valid month, return early or set an error state
+                //     return;
+                //   }
+                // }
+                for (let i = 0; i < input.length; i++) {
+                  if (i % 2 === 0 && i > 0) {
+                    formattedInput += "/";
+                  }
+                  formattedInput += input[i];
+                }
+                return formik.setFieldValue("expiryDate", formattedInput);
+              }}
               error={
                 formik.touched.expiryDate && Boolean(formik.errors.expiryDate)
               }
@@ -87,8 +143,13 @@ export default function PaymentForm({
             <SimpleInput
               placeholder="CVV"
               name="cvv"
+              value={formik.values.cvv}
               onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
+              maxLength={3}
+              onChange={(e) => {
+                const input = e.target.value.replace(/\D/g, "");
+                return formik.setFieldValue("cvv", input);
+              }}
               error={formik.touched.cvv && Boolean(formik.errors.cvv)}
               variant="rounded"
             />
