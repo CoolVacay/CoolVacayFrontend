@@ -40,25 +40,35 @@ async function getSimilarListings({
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: {
     source: string;
     id: string;
   };
+  searchParams: {
+    category: string;
+    Match: string;
+  };
 }) {
   const pageParams = params ?? "";
   const listing = (await getListingData(pageParams))!;
   const similarListings = (await getSimilarListings(pageParams))!;
-
+  const query = new URLSearchParams(searchParams);
+  const navigateHome = !(query.get("Match") ?? query.get("category"));
   return (
     <main className="flex flex-col">
       <div className="flex justify-center">
         <div className="flex max-w-[1220px] flex-col items-center">
           <div className="w-full">
             <Breadcrumbs
+              navigateHome={navigateHome}
               breadcrumbs={[
                 //TODO: replace with the correct url
-                { label: "Listings", href: "/listings" },
+                {
+                  label: navigateHome ? "Home" : "Listings",
+                  href: "/listings",
+                },
                 {
                   label: `${listing.name}`,
                   href: `/listing/${params.source}/${params.id}`,

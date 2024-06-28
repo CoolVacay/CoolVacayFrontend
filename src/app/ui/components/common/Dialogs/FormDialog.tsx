@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Dialog, DialogContent } from "@mui/material";
 import type { ListingData } from "~/app/(application)/definitions";
-import EnquireForm from "../../listing/EnquireForm";
+import InquireForm from "../../listing/InquireForm";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function FormDialog({
@@ -24,7 +24,7 @@ export default function FormDialog({
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogContent
           sx={{
-            padding: "60px",
+            padding: "40px 60px",
             backgroundColor: "#F7F7F7",
             position: "relative",
           }}
@@ -43,7 +43,7 @@ export default function FormDialog({
               <h2 className="text-2xl text-primary ">{title}</h2>
               <h6 className="text-lg text-[#676D73]">{subtitle}</h6>
             </div>
-            <EnquireForm listing={listing} />
+            <InquireForm listing={listing} />
           </div>
         </DialogContent>
       </Dialog>

@@ -12,7 +12,7 @@ interface SimpleInputProps {
   error?: boolean | undefined;
   type?: string;
   disabled?: boolean;
-  defaultValue?: string;
+  defaultValue?: string | null;
   styles?: string;
   variant?: "rectangle" | "rounded";
   required?: boolean;

@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import dayjs from "dayjs";
+
 import { IconGenerator } from "../IconGenerator";
 import type { ListingCardProps } from "~/app/(application)/definitions";
-import { useSearchParams } from "next/navigation";
 
 export default function ListingCard({
   id,
@@ -16,12 +18,18 @@ export default function ListingCard({
 }: ListingCardProps) {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());
+  const startDate = dayjs(params.get("FromDate")).format("MMM DD, YYYY");
+  const endDate = dayjs(params.get("ToDate")).format("MMM DD, YYYY");
   params.delete("Offset");
   params.delete("Limit");
+
   return (
     <div className="flex h-[405px] w-[360px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1">
       <div className="relative">
-        <Link href={`listing/${source}/${id}`} className="w-min">
+        <Link
+          href={`listing/${source}/${id}?${params.toString()}`}
+          className="w-min"
+        >
           <Image
             src={imageUrl ?? "/listing_card.png"}
             width={360}
@@ -33,12 +41,6 @@ export default function ListingCard({
               borderRadius: 6,
             }}
           />
-          <IconGenerator
-            src="/ri_heart-line.svg"
-            alt="like button"
-            width="24px"
-            className="absolute right-2 top-2"
-          />
         </Link>
       </div>
       <div className="flex grow flex-col justify-between">
@@ -48,7 +50,9 @@ export default function ListingCard({
               ${price}
               <span className="text-sm text-primary-grey400"> night</span>
             </h6>
-            <h6 className="text-sm text-primary-grey400">Feb 19 - 26</h6>
+            <h6 className="text-sm text-primary-grey400">
+              {startDate} - {endDate}
+            </h6>
           </div>
           <div>
             <div className="mb-1 text-base font-medium">{name}</div>

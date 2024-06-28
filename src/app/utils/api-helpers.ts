@@ -56,7 +56,6 @@ export async function postFetch<T>(
     //if successful response,return the data
     const text = await res.text();
     const data = text ? (JSON.parse(text) as T) : null;
-    // const data = (await res?.json()) as T;
     return data;
   } catch (err) {
     if (err instanceof FetchError) {

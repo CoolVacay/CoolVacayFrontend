@@ -183,18 +183,6 @@ export default function BookNow({
             </div>
           </>
         ) : null}
-        {!isPriceCalculated ? (
-          <h6 className="text-justify font-normal	text-[#858C93]">
-            By proceeding, you consent to receive calls and texts at the number
-            you provided, including marketing by autodialer and prerecorded and
-            artificial voice, and email, from realtor.com and about your inquiry
-            and other home-related matters, but not as a condition of any
-            purchase. You also agree to our Terms of Use, and to our Privacy
-            Policy regarding the information relating to you. Msg/data rates may
-            apply. This consent applies even if you are on a corporate, state or
-            national Do Not Call list.
-          </h6>
-        ) : null}
       </div>
     </div>
   );

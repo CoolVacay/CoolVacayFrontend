@@ -97,7 +97,8 @@ export const providerMap = providers.map((provider) => {
 });
 
 const authOptions: NextAuthConfig = {
-  debug: process.env.NODE_ENV !== "production" ? true : false,
+  //TODO: add when needed
+  // debug: process.env.NODE_ENV !== "production" ? true : false,
   providers,
   pages: {
     signIn: "/signin",

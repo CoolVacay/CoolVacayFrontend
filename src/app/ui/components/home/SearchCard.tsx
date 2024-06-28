@@ -2,7 +2,7 @@
 
 import { InputLabel, Input, FormControl } from "@mui/material";
 import { IconGenerator, RangeDatePicker, SelectInput } from "../common";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 import dayjs from "dayjs";
@@ -20,6 +20,8 @@ export function SearchCard() {
   ]);
   const [numberOfGuests, setNumberOfGuests] = useState("1");
   const [fromDate, toDate] = dates;
+  const router = useRouter();
+
   const handleSearch = () => {
     const params = new URLSearchParams();
     if (location) params.append("Match", location);
@@ -29,9 +31,14 @@ export function SearchCard() {
     return `/listings?Limit=10&Offset=0&${params.toString()}`;
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    router.push(handleSearch());
+  };
+
   return (
     <search>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="grid h-[410px] w-[420px] shrink-0 grid-rows-4 divide-y rounded-xl border-[#EAEAEF] bg-white">
           <div className="border-b-4-grey flex w-full items-center px-4 pb-4 pt-5">
             <div className="flex h-full grow flex-col">
@@ -45,8 +52,6 @@ export function SearchCard() {
                 </InputLabel>
                 <Input
                   id="component-simple"
-                  // defaultValue=""
-                  // name="match"
                   placeholder="Select Location"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
@@ -69,12 +74,7 @@ export function SearchCard() {
             </div>
           </div>
           <div className="relative px-4 pb-4 pt-5">
-            <RangeDatePicker
-              size="big"
-              dates={dates}
-              setDates={setDates}
-              // onChange={(newValue) => setDates(newValue)}
-            />
+            <RangeDatePicker size="big" dates={dates} setDates={setDates} />
           </div>
           <div className="flex h-full grow flex-col px-4 pb-4 pt-5">
             <SelectInput
@@ -85,9 +85,8 @@ export function SearchCard() {
               }
             />
           </div>
-          <Link
-            href={handleSearch()}
-            passHref
+          <button
+            type="submit"
             className="flex grow items-center rounded-b-xl bg-primary p-5 text-2xl"
           >
             Search
@@ -98,7 +97,7 @@ export function SearchCard() {
                 width="33px"
               />
             </span>
-          </Link>
+          </button>
         </div>
       </form>
     </search>
