@@ -52,7 +52,7 @@ export default function SimpleInput({
       slotProps={{
         input: {
           maxLength: maxLength,
-          className: `block w-full rounded-${isRectangleVariant ? "lg" : "full"} bg-white p-${isRectangleVariant ? "2.5" : "4"} text-[#676D73] focus:outline-[#29ABE2] disabled:bg-[#E7E7E7] disabled:text-[#676D73] ${styles} ${isRectangleVariant ? "" : "border border-[#EAEAEF]"}`,
+          className: `block w-full rounded-${isRectangleVariant ? "lg" : "full"} p-${isRectangleVariant ? "2.5" : "4"} focus:outline-[#29ABE2] disabled:bg-[#E7E7E7] disabled:text-[#676D73] ${styles} ${isRectangleVariant ? "" : "border border-[#EAEAEF]"}`,
         },
       }}
     />

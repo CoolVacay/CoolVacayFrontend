@@ -38,7 +38,7 @@ export default async function Page({
           <div className="flex place-items-baseline gap-8 pb-6">
             <h1 className="text-3xl">{`${title ? `${title} available properties` : "Available properties"}`}</h1>
             <h6 className="text-sm text-primary-grey300">
-              {listings.length} properties
+              {listings?.length} properties
             </h6>
           </div>
           {listings?.length > 0 ? (

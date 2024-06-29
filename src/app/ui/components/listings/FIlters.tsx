@@ -85,7 +85,7 @@ export default function Filters() {
           value={location ?? ""}
           placeholder="Enter location"
           variant="rounded"
-          styles={"bg-[#EAF7FD] text-[#0A2252] h-9 text-sm"}
+          styles={"bg-[#EAF7FD] text-[#212529] h-9 text-sm"}
           onChange={(e) => {
             handleSearch(e.target.value);
             setLocation(e.target.value);
@@ -143,7 +143,6 @@ export default function Filters() {
       </div>
       <div>
         <SimpleSelectInput
-          size="small"
           value={numberOfGuests ?? "1"}
           onChange={(e: SelectChangeEvent<string>) =>
             setNumberOfGuests(e.target.value)

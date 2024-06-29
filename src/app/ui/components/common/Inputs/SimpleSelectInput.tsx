@@ -11,7 +11,6 @@ export default function SimpleSelectInput({
   value,
   onChange,
 }: {
-  size: "small" | "big";
   value: string;
   onChange: (event: SelectChangeEvent<string>, child: React.ReactNode) => void;
 }) {

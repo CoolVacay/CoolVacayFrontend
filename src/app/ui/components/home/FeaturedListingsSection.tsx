@@ -2,7 +2,7 @@ import type { ListingData } from "../../../(application)/definitions";
 import { getFetch } from "../../../utils/api-helpers";
 import { truncateText } from "../../../utils/helpers";
 import { FetchError } from "~/app/utils/definitions";
-import { MainCard } from "../common";
+import { IconGenerator, MainCard } from "../common";
 
 async function getFeaturedListings() {
   try {
@@ -24,16 +24,26 @@ export async function FeaturedListingsSection() {
       {featuredListings?.length > 0 ? (
         featuredListings.map((listing) => {
           return (
-            <MainCard
-              id={listing.id}
-              source={listing.source}
-              name={truncateText(listing.name, 50)}
-              subtitle={`${listing.city}, ${listing.state}`}
-              key={listing.id}
-              imageUrl={listing.imageUrl}
-              propertyType={listing.propertyType}
-              squareFeets={listing.squareFeets}
-            />
+            <div key={listing.id} className="relative">
+              <MainCard
+                id={listing.id}
+                source={listing.source}
+                name={truncateText(listing.name, 50)}
+                subtitle={`${listing.city}, ${listing.state}`}
+                key={listing.id}
+                imageUrl={listing.imageUrl}
+                propertyType={listing.propertyType}
+                squareFeets={listing.squareFeets}
+              />
+              <div className="absolute left-4 top-4 flex h-7 w-[95px] items-center justify-center gap-1 rounded-md bg-primary text-xs font-semibold text-white">
+                <IconGenerator
+                  src="/lightining.svg"
+                  alt="featured icon"
+                  width="16px"
+                />
+                FEATURED
+              </div>
+            </div>
           );
         })
       ) : (
