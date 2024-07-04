@@ -5,6 +5,7 @@ import Gallery from "~/app/ui/components/listing/Gallery";
 import Overview from "~/app/ui/components/listing/OverviewSection";
 import BookNow from "~/app/ui/components/listing/BookNowSection";
 import { SimilarCard, Breadcrumbs } from "~/app/ui/components/common";
+import { capitalize } from "~/app/utils/helpers";
 
 async function getListingData({ source, id }: { source: string; id: string }) {
   try {
@@ -64,9 +65,12 @@ export default async function Page({
             <Breadcrumbs
               navigateHome={navigateHome}
               breadcrumbs={[
-                //TODO: replace with the correct url
                 {
-                  label: navigateHome ? "Home" : "Listings",
+                  label: navigateHome
+                    ? "Home"
+                    : query.get("category")
+                      ? `${capitalize(query.get("category")!)} listings`
+                      : "Listings",
                   href: "/listings",
                 },
                 {
@@ -80,7 +84,7 @@ export default async function Page({
               <h1 className="pt-3 text-3xl">
                 {listing.name}, {listing.city}, {listing.state}
               </h1>
-              <div className="flex w-[300px] items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2">
+              <div className="flex max-h-[50px] w-[300px] items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2">
                 Call us for more info:
                 <span className="ml-1 font-medium">315 434 324</span>
               </div>

@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 
 import { IconGenerator } from "../IconGenerator";
 import type { ListingCardProps } from "~/app/(application)/definitions";
+import { truncateText } from "../../../../utils/helpers";
 
 export default function ListingCard({
   id,
@@ -55,7 +56,9 @@ export default function ListingCard({
             </h6>
           </div>
           <div>
-            <div className="mb-1 text-base font-medium">{name}</div>
+            <div className="mb-1 text-base font-medium">
+              {truncateText(name, 40)}
+            </div>
             <p className="text-sm text-[#676D73]">{subtitle}</p>
           </div>
           <div className="flex items-center gap-1">

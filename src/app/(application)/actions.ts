@@ -28,6 +28,7 @@ export interface PricingDetailsArgs {
   endDate: string;
   numberOfGuests: string;
 }
+
 export async function getPricingDetails(
   source: string,
   id: string,
@@ -39,6 +40,27 @@ export async function getPricingDetails(
     const res = await getFetch<IPricingDetails>(
       `/Listings/${source}/${id}/priceDetails?startDate=${startDate}&endDate=${endDate}&numberOfGuests=${numberOfGuests}`,
     );
+    if (res instanceof FetchError) {
+      throw new Error("Failed to fetch listing data");
+    }
+    return res;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+export interface ICountries {
+  id: string;
+  name: string;
+  states: {
+    id: string;
+    name: string;
+  }[];
+}
+
+export async function getCountries() {
+  try {
+    const res = await getFetch<ICountries[]>(`/countries`);
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch listing data");
     }

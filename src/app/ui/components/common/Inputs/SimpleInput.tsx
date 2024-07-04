@@ -19,6 +19,7 @@ interface SimpleInputProps {
   value?: string;
   maxLength?: number;
 }
+
 export default function SimpleInput({
   name,
   placeholder,

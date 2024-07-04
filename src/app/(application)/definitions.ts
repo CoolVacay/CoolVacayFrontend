@@ -50,7 +50,14 @@ export interface PopularCategoriesData {
 
 export type MapboxMarkerData = Pick<
   ListingData,
-  "id" | "name" | "city" | "state" | "price" | "latitude" | "longitude"
+  | "id"
+  | "name"
+  | "city"
+  | "state"
+  | "price"
+  | "latitude"
+  | "longitude"
+  | "source"
 >;
 
 export type UserData = {

@@ -3,9 +3,12 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { ActionButton } from "~/app/ui/components/authentication";
-import { SimpleInput } from "~/app/ui/components/common";
+import { SimpleInput, SimpleSelectInput } from "~/app/ui/components/common";
 import { useFormContext } from "../FormContext";
 import { useRouter } from "next/navigation";
+import { getCountries } from "~/app/(application)/actions";
+import { useEffect, useState } from "react";
+import { MenuItem } from "@mui/material";
 
 const ValidationSchema = Yup.object({
   street: Yup.string().required("Street field is required"),
@@ -24,7 +27,26 @@ export default function BillingAddressForm({
   };
 }) {
   const { formData, setFormData } = useFormContext();
+  const [countries, setCountries] = useState<JSX.Element[]>([]);
   const router = useRouter();
+
+  useEffect(() => {
+    async function fetchCountries() {
+      try {
+        const allCountries = (await getCountries())!;
+        const countriesList = allCountries.map((country) => (
+          <MenuItem key={country.name} value={country.name} dense>
+            {country.name}
+          </MenuItem>
+        ));
+
+        setCountries(countriesList);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    void fetchCountries();
+  }, []);
 
   const formik = useFormik({
     initialValues: formData,
@@ -135,13 +157,13 @@ export default function BillingAddressForm({
           <label htmlFor="country" className="mb-1 block text-lg font-medium">
             Country<span className="absolute">*</span>
           </label>
-          <SimpleInput
-            placeholder="Country"
+          <SimpleSelectInput
+            listOptions={countries}
             name="country"
-            variant="rounded"
-            onBlur={formik.handleBlur}
             value={formik.values.country}
-            onChange={formik.handleChange}
+            onChange={(e) => formik.setFieldValue("country", e.target.value)}
+            size="medium"
+            onBlur={formik.handleBlur}
             error={formik.touched.country && Boolean(formik.errors.country)}
           />
           {formik.touched.country && Boolean(formik.errors.country) && (

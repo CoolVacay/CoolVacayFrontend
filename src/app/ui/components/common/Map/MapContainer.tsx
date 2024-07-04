@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState, useCallback } from "react";
+import Link from "next/link";
 import Map, {
   NavigationControl,
   FullscreenControl,
@@ -11,6 +12,8 @@ import Map, {
 import type { MapRef } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
+import dayjs from "dayjs";
+import { useSearchParams } from "next/navigation";
 
 import type {
   ListingData,
@@ -50,6 +53,17 @@ export default function MapContainer({
   >();
   const mapRef = useRef<MapRef>(null);
   const geojson = useMemo(() => listingsToGeoJSON(listings), [listings]);
+  const searchParams = useSearchParams();
+  const params = useMemo(() => {
+    return new URLSearchParams(searchParams);
+  }, [searchParams]);
+  const newParams = () => {
+    params.delete("offset");
+    params.delete("limit");
+    return params;
+  };
+  const startDate = dayjs(params.get("FromDate")).format("MMM DD");
+  const endDate = dayjs(params.get("ToDate")).format("MMM DD");
 
   const handleClick = useCallback(
     (event: mapboxgl.MapLayerMouseEvent) => {
@@ -95,6 +109,7 @@ export default function MapContainer({
           price: property.price,
           latitude: coordinates[1],
           longitude: coordinates[0],
+          source: property.source,
         });
       }
     },
@@ -164,7 +179,6 @@ export default function MapContainer({
           <Popup
             closeOnMove
             offset={25}
-            className="map-popup"
             latitude={selectedMarker.latitude}
             longitude={selectedMarker.longitude}
             onClose={() => setSelectedMarker(undefined)}
@@ -181,7 +195,7 @@ export default function MapContainer({
                   <span className="text-primary-grey400"> night</span>
                 </p>
                 <p className="text-sm font-medium text-primary-grey400">
-                  Feb 19-26
+                  {startDate} - {endDate}
                 </p>
               </div>
               <div className="flex items-center gap-1">
@@ -198,9 +212,14 @@ export default function MapContainer({
                   </span>
                 </h6>
               </div>
-              <button className="rounded-full border border-primary py-3 text-base font-bold text-primary">
-                Book
-              </button>
+              <Link
+                href={`listing/${selectedMarker.source}/${selectedMarker.id}?${newParams()?.toString()}`}
+                className="max-content"
+              >
+                <button className="w-full rounded-full border border-primary py-3 text-base font-bold text-primary hover:bg-primary hover:text-white">
+                  Book
+                </button>
+              </Link>
             </div>
           </Popup>
         ) : null}

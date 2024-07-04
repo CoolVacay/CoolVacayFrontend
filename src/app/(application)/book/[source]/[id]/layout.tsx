@@ -17,7 +17,7 @@ async function getListingData({ source, id }: { source: string; id: string }) {
     console.error("Error:", error);
   }
 }
-
+//TODO: add a loading page
 export default async function Layout({
   children,
   params,

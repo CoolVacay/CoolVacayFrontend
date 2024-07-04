@@ -33,7 +33,7 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
     city: "",
     state: "",
     zip: "",
-    country: "",
+    country: "USA",
   });
 
   const setFormData = (data: Partial<FormData>) => {

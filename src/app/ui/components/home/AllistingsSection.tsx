@@ -1,16 +1,25 @@
 import Link from "next/link";
 import React from "react";
+import dayjs from "dayjs";
 import { IconGenerator, Newsletter, MainCard } from "../common";
 import { getFetch } from "../../../utils/api-helpers";
 import type { ListingData } from "../../../(application)/definitions";
 import { truncateText } from "../../../utils/helpers";
 
+const startDate = dayjs().format("YYYY-MM-DD");
+const endDate = dayjs().add(6, "day").format("YYYY-MM-DD");
+
 export async function getAllListings() {
   try {
     const results = await Promise.allSettled([
-      getFetch<ListingData[]>("/Listings?Limit=8&Offset=0"),
-      getFetch<ListingData[]>("/Listings?Limit=8&Offset=8"),
+      getFetch<ListingData[]>(
+        `/Listings?Limit=8&Offset=0&FromDate=${startDate}&ToDate=${endDate}`,
+      ),
+      getFetch<ListingData[]>(
+        `/Listings?Limit=8&Offset=8&FromDate=${startDate}&ToDate=${endDate}`,
+      ),
     ]);
+
     const firstListings =
       results[0].status === "fulfilled" ? results[0].value : [];
     const lastListings =
@@ -67,7 +76,7 @@ export async function AllistingsSection() {
       </div>
       {lastListings && lastListings.length > 0 ? (
         <div className="grid grid-cols-3 gap-5 py-10 desktop:grid-cols-4">
-          {firstListings?.map((listing) => {
+          {lastListings?.map((listing) => {
             return (
               <MainCard
                 id={listing.id}

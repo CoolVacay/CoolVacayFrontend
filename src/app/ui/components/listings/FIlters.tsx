@@ -10,10 +10,19 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
+import { MenuItem } from "@mui/material";
 
 import { capitalize } from "~/app/utils/helpers";
 import { IconGenerator, SimpleInput, SimpleSelectInput } from "../common";
 import type { DateRangeType } from "../home/SearchCard";
+
+const guests = Array.from({ length: 8 }, (v, i) => i + 1)
+  .map((item) => item.toString())
+  .map((guest) => (
+    <MenuItem key={guest} value={guest} dense>
+      {`${guest} ${guest === "1" ? "guest" : "guests"}`}
+    </MenuItem>
+  ));
 
 export default function Filters() {
   const router = useRouter();
@@ -147,6 +156,7 @@ export default function Filters() {
           onChange={(e: SelectChangeEvent<string>) =>
             setNumberOfGuests(e.target.value)
           }
+          listOptions={guests}
         />
       </div>
     </div>
