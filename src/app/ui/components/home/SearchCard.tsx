@@ -66,7 +66,7 @@ export function SearchCard() {
                       alt="Location Icon"
                       src="/location-pin.svg"
                       width="28px"
-                      className="pointer-events-none"
+                      className="pointer-events-none absolute right-2 top-2"
                     />
                   }
                 />

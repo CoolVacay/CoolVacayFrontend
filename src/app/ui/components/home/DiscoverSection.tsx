@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { CustomChip } from "../common";
 
 export function DiscoverSection() {
   return (
@@ -17,9 +18,7 @@ export function DiscoverSection() {
         />
       </div>
       <div className="flex grow-0 flex-col justify-center gap-3">
-        <div className="flex h-[44px] w-[90px] shrink-0 justify-center rounded-[64px] bg-[#29ABE2]/[.10] p-3 text-sm text-primary">
-          Discover
-        </div>
+        <CustomChip label="Discover" width={90} />
         <h1 className="font-500 leading-80 text-[32px] desktop:text-[46px] desktop:leading-[47px]">
           Explore vacation rentals with beach access
         </h1>

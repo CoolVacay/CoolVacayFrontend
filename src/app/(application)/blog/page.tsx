@@ -2,8 +2,8 @@ import React from "react";
 import Image from "next/image";
 
 import CustomButton from "../../ui/components/common/CustomButton";
-import CustomChip from "../../ui/components/common/CustomChip";
 // import { MainCard } from "~/app/ui/components/common";
+import { CustomChip } from "~/app/ui/components/common";
 
 function page() {
   return (

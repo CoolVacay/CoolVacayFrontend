@@ -2,7 +2,7 @@
 
 import { Select, MenuItem } from "@mui/material";
 import type { SelectChangeEvent } from "@mui/material";
-
+import { IconGenerator } from "../IconGenerator";
 const guests = Array.from({ length: 8 }, (v, i) => i + 1).map((item) =>
   item.toString(),
 );
@@ -20,6 +20,14 @@ export default function SimpleSelectInput({
         fullWidth
         value={value}
         onChange={onChange}
+        IconComponent={() => (
+          <IconGenerator
+            alt="avatar icon"
+            src={`/down-arrow.svg`}
+            width="15px"
+            className="pointer-events-none absolute right-2 top-[11px]	"
+          />
+        )}
         sx={{
           padding: "0px !important",
           fontSize: "14px",
@@ -27,10 +35,10 @@ export default function SimpleSelectInput({
           fontWeight: 400,
           height: "36px",
           borderRadius: "300px",
-          "& .MuiSvgIcon-root": {
+          "& .MuiSelect-icon": {
             position: "absolute",
-            display: "none",
             top: 6,
+            right: 3,
           },
           "& .MuiInputBase-input": {
             "&:focus": {

@@ -1,4 +1,4 @@
-import React from "react";
+import Link from "next/link";
 import { IconGenerator } from "./common";
 
 const popularSearchLinks = [
@@ -7,7 +7,12 @@ const popularSearchLinks = [
   "Lodge for Rent",
   "Rooms for Rent",
 ];
-const quickLinks = ["About Company", "Blog", "Policies", "Contact Us"];
+const quickLinks = [
+  { name: "About Company", href: "/about-us" },
+  { name: "Blog", href: "/blog" },
+  { name: "Policies", href: "/policies" },
+  { name: "Contact Us", href: "/contact-us" },
+];
 const discoverLinks = ["Miami", "Los Angeles", "Chicago", "New York"];
 
 function FooterSection() {
@@ -74,9 +79,13 @@ function FooterSection() {
           <div className="flex flex-col gap-5">
             <h6 className="text-[15px] font-semibold">Quick Links</h6>
             {quickLinks.map((link) => (
-              <h6 key={link} className="text-sm text-primary-grey400">
-                {link}
-              </h6>
+              <Link
+                href={link.href}
+                key={link.name}
+                className="text-sm text-primary-grey400"
+              >
+                {link.name}
+              </Link>
             ))}
           </div>
           <div className="flex flex-col gap-5">

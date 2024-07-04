@@ -9,9 +9,11 @@ import NavBarLoginButton from "./NavBarLoginButton";
 
 export default function NavBar({ session }: { session: Session | null }) {
   const pathname = usePathname();
-  const isWhiteVariant = pathname === "/";
+  const isWhiteVariant = pathname === "/" || pathname.endsWith("about-us");
   const isListingPage =
-    pathname.startsWith("/listing/") || pathname.startsWith("/book/");
+    pathname.startsWith("/listing/") ||
+    pathname.startsWith("/book/") ||
+    pathname.endsWith("contact-us");
 
   return (
     <nav

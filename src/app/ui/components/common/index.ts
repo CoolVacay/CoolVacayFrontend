@@ -1,4 +1,10 @@
-export { SimilarCard, MainCard, ListingCard } from "./Cards/index";
+export {
+  SimilarCard,
+  MainCard,
+  ListingCard,
+  InfoCard,
+  ReviewCard,
+} from "./Cards/index";
 export { FormDialog, FullScreenDialog } from "./Dialogs/index";
 export {
   SelectInput,
@@ -13,3 +19,4 @@ export * from "./Skeletons/Skeletons";
 export { Breadcrumbs } from "./Breadcrumbs/index";
 export { IconGenerator } from "./IconGenerator/index";
 export { RangeDatePicker } from "./RangeDatePicker/index";
+export { CustomChip } from "./CustomChip";
