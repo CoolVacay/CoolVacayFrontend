@@ -42,7 +42,7 @@ export async function postFetch<T>(
   });
 
   try {
-    const res = await fetch(`${API_BASE_URL}/api/${url}`, {
+    const res = await fetch(`${API_BASE_URL}/api${url}`, {
       method: "POST",
       headers,
       body: JSON.stringify(body),

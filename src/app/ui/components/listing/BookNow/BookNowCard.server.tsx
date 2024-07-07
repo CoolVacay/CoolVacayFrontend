@@ -4,12 +4,13 @@ import Link from "next/link";
 import { Divider } from "@mui/material";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { RangeDatePicker, FormDialog, SelectInput } from "../common";
+import { RangeDatePicker, FormDialog, SelectInput } from "../../common";
 import type { ListingData } from "~/app/(application)/definitions";
 import dayjs from "dayjs";
-import type { DateRangeType } from "../home/SearchCard";
+import type { DateRangeType } from "../../home/SearchCard";
 import type { SelectChangeEvent } from "@mui/material";
-import { getPricingDetails } from "~/app/(application)/actions";
+import { getPricingDetails, getListingData } from "~/app/(application)/actions";
+import { PricingDetails } from "./PricingDetails";
 
 export interface IPricingDetails {
   totalPrice: number;
@@ -20,10 +21,8 @@ export interface IPricingDetails {
 }
 
 export default function BookNow({
-  listing,
   params,
 }: {
-  listing: ListingData;
   params: {
     source: string;
     id: string;
@@ -35,6 +34,19 @@ export default function BookNow({
   const [pricingDetails, setPricingDetails] = useState<
     IPricingDetails | undefined
   >();
+  const [listing, setListing] = useState<ListingData>();
+
+  useEffect(() => {
+    async function fetchListingData() {
+      try {
+        const listingData = (await getListingData(params))!;
+        setListing(listingData);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    void fetchListingData();
+  }, [params]);
 
   const isPriceCalculated =
     pathname.endsWith("billing-address") || pathname.endsWith("payment");
@@ -136,14 +148,13 @@ export default function BookNow({
             Book now
           </Link>
         ) : null}
-
         <Divider />
         {!isPriceCalculated && (
           <FormDialog
             title="Inquire now"
             subtitle="Have a question or feedback? Fill out the form
             below, and we'll get back to you as soon as possible."
-            listing={listing}
+            listing={listing!}
           >
             <button className="w-full rounded-full border border-primary bg-white py-4 text-primary hover:bg-primary hover:text-white">
               Inquire now
@@ -151,37 +162,11 @@ export default function BookNow({
           </FormDialog>
         )}
         {isPriceCalculated ? (
-          <>
-            <div className="flex flex-col gap-4 font-medium">
-              <h6 className="flex justify-between text-lg text-[#858C93]">
-                ${listing.price} x {toDate.diff(fromDate, "day")} nights
-                <span className="text-black">
-                  ${pricingDetails?.components[0]?.total}
-                </span>
-              </h6>
-
-              {pricingDetails?.components.map((fee, index) => {
-                if (index > 0) {
-                  return (
-                    <h6
-                      key={index}
-                      className="flex justify-between text-lg text-[#858C93]"
-                    >
-                      {/* TODO:replace with actual fee */}
-                      {fee.name}
-                      <span className="text-black">${fee.total}</span>
-                    </h6>
-                  );
-                } else {
-                  return null;
-                }
-              })}
-              <h5 className="flex justify-between text-2xl">
-                Total
-                <span>${pricingDetails?.totalPrice}</span>
-              </h5>
-            </div>
-          </>
+          <PricingDetails
+            listing={listing}
+            pricingDetails={pricingDetails}
+            nights={toDate.diff(fromDate, "day")}
+          />
         ) : null}
       </div>
     </div>

@@ -2,22 +2,43 @@
 
 import { postFetch, getFetch } from "../utils/api-helpers";
 import { FetchError } from "../utils/definitions";
-import type { IPricingDetails } from "../ui/components/listing/BookNowSection";
-export async function enquire(
+import type { IPricingDetails } from "../ui/components/listing/BookNow/BookNowCard.server";
+import type { ListingData } from "./definitions";
+export interface IInquireArgs {
+  name?: string;
+  message?: string;
+  phone?: string;
+  email?: string;
+  source?: string;
+  id?: string;
+}
+
+export async function inquire(
   prevState: string | undefined,
-  formData: FormData,
+  { name, message, phone, email, source, id }: IInquireArgs,
 ) {
   try {
-    await postFetch(`/listings`, {
-      name: formData.get("name") as string,
-      message: formData.get("message") as string,
-      phone: formData.get("number") as string,
-      email: formData.get("email") as string,
-      id: formData.get("id") as string,
-    });
+    const values = {
+      name: name,
+      message: message,
+      phone: phone,
+      email: email,
+      propertyId: id,
+      peopropertySource: source,
+    };
+    const modValues = Object.fromEntries(
+      Object.entries(values).filter(([_, v]) => v != ""),
+    );
+    const res = await postFetch(`/inquire`, modValues);
+    if (res instanceof FetchError) {
+      throw res;
+    }
   } catch (error) {
-    console.error("Error:", error);
-    return "Failed to send message";
+    if (error instanceof FetchError) {
+      return `${error.message}`;
+    } else {
+      return "Failed to send the inquiry";
+    }
   }
 }
 
@@ -61,6 +82,26 @@ export interface ICountries {
 export async function getCountries() {
   try {
     const res = await getFetch<ICountries[]>(`/countries`);
+    if (res instanceof FetchError) {
+      throw new Error("Failed to fetch listing data");
+    }
+    return res;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+export async function getListingData({
+  source,
+  id,
+}: {
+  source: string;
+  id: string;
+}) {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+
+    const res = await getFetch<ListingData>(`/Listings/${source}/${id}`);
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch listing data");
     }

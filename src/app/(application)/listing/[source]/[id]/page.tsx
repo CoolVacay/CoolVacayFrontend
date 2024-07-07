@@ -3,7 +3,7 @@ import type { ListingData } from "~/app/(application)/definitions";
 import { FetchError } from "~/app/utils/definitions";
 import Gallery from "~/app/ui/components/listing/Gallery";
 import Overview from "~/app/ui/components/listing/OverviewSection";
-import BookNow from "~/app/ui/components/listing/BookNowSection";
+import BookNow from "~/app/ui/components/listing/BookNow/BookNowCard.server";
 import { SimilarCard, Breadcrumbs } from "~/app/ui/components/common";
 import { capitalize } from "~/app/utils/helpers";
 

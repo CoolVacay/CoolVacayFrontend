@@ -43,7 +43,7 @@ export default function FormDialog({
               <h2 className="text-2xl text-primary ">{title}</h2>
               <h6 className="text-lg text-[#676D73]">{subtitle}</h6>
             </div>
-            <InquireForm listing={listing} />
+            <InquireForm listing={listing} setOpen={setOpen} />
           </div>
         </DialogContent>
       </Dialog>

@@ -7,7 +7,8 @@ import { useFormik } from "formik";
 import { ActionButton } from "../authentication/common";
 import type { ListingData } from "~/app/(application)/definitions";
 import { SimpleInput } from "../common";
-import { enquire } from "~/app/(application)/actions";
+import { inquire } from "~/app/(application)/actions";
+import type { IInquireArgs } from "~/app/(application)/actions";
 
 const ValidationSchema = Yup.object().shape({
   name: Yup.string().required("This field is required"),
@@ -22,17 +23,24 @@ const ValidationSchema = Yup.object().shape({
     .required("This field is required"),
 });
 
-export default function InquireForm({ listing }: { listing?: ListingData }) {
-  const [errorMessage, dispatch] = useFormState(enquire, undefined);
+export default function InquireForm({
+  listing,
+  setOpen,
+}: {
+  listing?: ListingData;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const [errorMessage, dispatch] = useFormState(inquire, undefined);
 
   const formik = useFormik({
     initialValues: listing
       ? {
-          id: `Property ID: ${listing.id}`,
+          id: listing.id,
           name: "",
           email: "",
           phone: "",
           message: "",
+          source: listing.source,
         }
       : {
           name: "",
@@ -44,7 +52,14 @@ export default function InquireForm({ listing }: { listing?: ListingData }) {
     onSubmit: () => console.log("Submitting Message"),
   });
   return (
-    <form action={dispatch}>
+    <form
+      action={() => {
+        dispatch(formik.values as IInquireArgs);
+        if (setOpen) {
+          setOpen(false);
+        }
+      }}
+    >
       <div className="flex flex-col gap-5">
         {listing ? (
           <div>

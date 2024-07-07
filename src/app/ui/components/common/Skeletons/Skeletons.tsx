@@ -81,3 +81,30 @@ export function PopularCategoriesSkeleton() {
     </div>
   );
 }
+
+export function BookedListingCardSkeleton() {
+  return (
+    <div
+      className={`flex h-[136px] w-full animate-pulse gap-6 rounded-xl border border-[#EAEAEF] p-3`}
+    >
+      <div className="flex h-[112px] w-[138px] rounded-lg bg-gray-100" />
+      <div className="flex gap-16">
+        <div className={`flex flex-col justify-center gap-3`}>
+          <div className="mb-1 text-base font-medium">Dates</div>
+          <div className="flex items-center gap-2">
+            <div className="h-4 w-[74px] rounded bg-gray-100" /> -
+            <div className="h-4 w-[74px] rounded bg-gray-100" />
+          </div>
+        </div>
+        <div className={`flex flex-col justify-center gap-3`}>
+          <div className="mb-1 text-base font-medium">Guests</div>
+          <div className="h-4 w-20 rounded bg-gray-100" />
+        </div>
+        <div className={`flex flex-col justify-center gap-3`}>
+          <div className="mb-1 text-base font-medium">Room type</div>
+          <div className="h-4 w-20 rounded bg-gray-100" />
+        </div>
+      </div>
+    </div>
+  );
+}
