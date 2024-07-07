@@ -1,5 +1,5 @@
 import type { ListingData } from "~/app/(application)/definitions";
-import type { IPricingDetails } from "./BookNowCard.server";
+import type { IPricingDetails } from "./BookNowCard.client";
 
 export function PricingDetails({
   listing,

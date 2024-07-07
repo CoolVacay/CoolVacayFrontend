@@ -38,7 +38,12 @@ const config = {
         port: "",
         pathname: "/**",
       },
-      
+      {
+        protocol: "https",
+        hostname: "a0.muscache.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

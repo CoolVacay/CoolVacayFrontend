@@ -7,7 +7,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { IconGenerator } from "../IconGenerator";
 import type { DateRangeType } from "../../home/SearchCard";
 import type { Dayjs } from "dayjs";
-
+import { useAppSearchParams } from "~/context/SearchParamsContext";
 const RangeDatePicker = ({
   size,
   dates,
@@ -15,9 +15,11 @@ const RangeDatePicker = ({
 }: {
   size: "small" | "big";
   dates: DateRangeType;
-  setDates: React.Dispatch<React.SetStateAction<DateRangeType>>;
+  setDates?: React.Dispatch<React.SetStateAction<DateRangeType>>;
 }) => {
   const bigFont = size === "big";
+  const { updateSearchParams } = useAppSearchParams();
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer
@@ -66,7 +68,16 @@ const RangeDatePicker = ({
             },
           }}
           value={dates}
-          onChange={(newValue) => setDates(newValue as [Dayjs, Dayjs])}
+          onChange={(newValue) => {
+            if (bigFont && setDates) {
+              setDates(newValue as [Dayjs, Dayjs]);
+            } else {
+              updateSearchParams(
+                ["FromDate", "ToDate"],
+                [newValue[0]!, newValue[1]!],
+              );
+            }
+          }}
           localeText={{ start: "Check-in", end: "Check-out" }}
         />
       </DemoContainer>

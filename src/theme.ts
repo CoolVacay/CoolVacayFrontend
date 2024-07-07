@@ -5,7 +5,6 @@ import { createTheme } from "@mui/material/styles";
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
 });
 
 const theme = createTheme({

@@ -2,8 +2,8 @@
 
 import { postFetch, getFetch } from "../utils/api-helpers";
 import { FetchError } from "../utils/definitions";
-import type { IPricingDetails } from "../ui/components/listing/BookNow/BookNowCard.server";
 import type { ListingData } from "./definitions";
+import type { IPricingDetails } from "../ui/components/listing/BookNow/BookNowCard.client";
 export interface IInquireArgs {
   name?: string;
   message?: string;
@@ -99,8 +99,7 @@ export async function getListingData({
   id: string;
 }) {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 5000));
-
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
     const res = await getFetch<ListingData>(`/Listings/${source}/${id}`);
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch listing data");
