@@ -1,14 +1,8 @@
 import { getListingData } from "~/app/(application)/actions";
 import BookNowContent from "./BookNowCard.client";
+import type { IParams } from "~/app/(application)/definitions";
 
-export default async function BookNow({
-  params,
-}: {
-  params: {
-    source: string;
-    id: string;
-  };
-}) {
+export default async function BookNow({ params }: { params: IParams }) {
   const listingInfo = (await getListingData(params))!;
 
   return (

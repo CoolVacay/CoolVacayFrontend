@@ -7,7 +7,7 @@ export default async function Layout({
 }) {
   return (
     <div>
-      <SearchParamsProvider>{children}</SearchParamsProvider>;
+      <SearchParamsProvider>{children}</SearchParamsProvider>
     </div>
   );
 }

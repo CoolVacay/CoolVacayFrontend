@@ -4,6 +4,7 @@ import { postFetch, getFetch } from "../utils/api-helpers";
 import { FetchError } from "../utils/definitions";
 import type { ListingData } from "./definitions";
 import type { IPricingDetails } from "../ui/components/listing/BookNow/BookNowCard.client";
+import type { IParams } from "./definitions";
 export interface IInquireArgs {
   name?: string;
   message?: string;
@@ -24,7 +25,7 @@ export async function inquire(
       phone: phone,
       email: email,
       propertyId: id,
-      peopropertySource: source,
+      propertySource: source,
     };
     const modValues = Object.fromEntries(
       Object.entries(values).filter(([_, v]) => v != ""),
@@ -91,15 +92,9 @@ export async function getCountries() {
   }
 }
 
-export async function getListingData({
-  source,
-  id,
-}: {
-  source: string;
-  id: string;
-}) {
+export async function getListingData({ source, id }: IParams) {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
     const res = await getFetch<ListingData>(`/Listings/${source}/${id}`);
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch listing data");
@@ -115,6 +110,21 @@ export async function getFilteredListings(query: string) {
     const res = await getFetch<ListingData[]>(`/listings?${query}`, true);
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch listings");
+    }
+    return res;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+export async function getSimilarListings({ source, id }: IParams) {
+  try {
+    const res = await getFetch<ListingData[]>(
+      `/Listings/${source}/${id}/similar`,
+      true,
+    );
+    if (res instanceof FetchError) {
+      throw new Error("Failed to fetch similar listing");
     }
     return res;
   } catch (error) {

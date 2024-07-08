@@ -1,44 +1,11 @@
-import { getFetch } from "~/app/utils/api-helpers";
-import type { ListingData } from "~/app/(application)/definitions";
-import { FetchError } from "~/app/utils/definitions";
+import { getListingData } from "~/app/(application)/actions";
+import { capitalize } from "~/app/utils/helpers";
+
 import Gallery from "~/app/ui/components/listing/Gallery";
 import Overview from "~/app/ui/components/listing/OverviewSection";
 import BookNow from "~/app/ui/components/listing/BookNow/BookNowCard.server";
-import { SimilarCard, Breadcrumbs } from "~/app/ui/components/common";
-import { capitalize } from "~/app/utils/helpers";
-import { MapContainer } from "~/app/ui/components/common";
-
-async function getListingData({ source, id }: { source: string; id: string }) {
-  try {
-    const res = await getFetch<ListingData>(`/Listings/${source}/${id}`);
-    if (res instanceof FetchError) {
-      throw new Error("Failed to fetch listing data");
-    }
-    return res;
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
-async function getSimilarListings({
-  source,
-  id,
-}: {
-  source: string;
-  id: string;
-}) {
-  try {
-    const res = await getFetch<ListingData[]>(
-      `/Listings/${source}/${id}/similar`,
-      true,
-    );
-    if (res instanceof FetchError) {
-      throw new Error("Failed to fetch similar listing");
-    }
-    return res;
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
+import { Breadcrumbs, MapContainer } from "~/app/ui/components/common";
+import SimilarCards from "~/app/ui/components/listing/SimilarCards/SimilarCards";
 
 export default async function Page({
   params,
@@ -55,9 +22,9 @@ export default async function Page({
 }) {
   const pageParams = params ?? "";
   const listing = (await getListingData(pageParams))!;
-  const similarListings = (await getSimilarListings(pageParams))!;
   const query = new URLSearchParams(searchParams);
   const navigateHome = !(query.get("Match") ?? query.get("category"));
+
   return (
     <main className="flex flex-col">
       <div className="flex justify-center">
@@ -87,7 +54,7 @@ export default async function Page({
               </h1>
               <div className="flex max-h-[50px] w-[300px] items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2">
                 Call us for more info:
-                <span className="ml-1 font-medium">315 434 324</span>
+                <span className="ml-1 font-medium">(315) 434-2324</span>
               </div>
             </div>
             <Gallery listing={listing} />
@@ -108,32 +75,13 @@ export default async function Page({
                   </h1>
                 </div>
               </div>
-
               <BookNow params={params} />
             </div>
             <h5 className="mb-10 text-2xl font-bold">
               View similar homes in this area
             </h5>
             <div className="no-scrollbar mb-10 flex snap-x gap-5 overflow-auto will-change-scroll">
-              {similarListings
-                ? similarListings.map((listing, index) => {
-                    return (
-                      <SimilarCard
-                        key={index}
-                        id={listing.id}
-                        source={listing.source}
-                        name={listing.name}
-                        subtitle={`${listing.city}, ${listing.state}`}
-                        imageUrl={listing.imageUrl}
-                        numberOfGuests={listing.numberOfGuests}
-                        bedrooms={listing.bedrooms}
-                        bathrooms={listing.bathrooms}
-                        price={listing.price}
-                        className="snap-start"
-                      />
-                    );
-                  })
-                : "Cannot find similar homes at this moment"}
+              <SimilarCards pageParams={pageParams} />
             </div>
           </div>
         </div>

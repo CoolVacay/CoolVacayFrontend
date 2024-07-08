@@ -36,11 +36,11 @@ export default function InquireForm({
     initialValues: listing
       ? {
           id: listing.id,
+          source: listing.source,
           name: "",
           email: "",
           phone: "",
           message: "",
-          source: listing.source,
         }
       : {
           name: "",
@@ -55,6 +55,7 @@ export default function InquireForm({
     <form
       action={() => {
         dispatch(formik.values as IInquireArgs);
+        formik.resetForm();
         if (setOpen) {
           setOpen(false);
         }
@@ -77,6 +78,7 @@ export default function InquireForm({
             error={formik.touched.name && Boolean(formik.errors.name)}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
+            value={formik.values.name}
           />
           {formik.touched.name && Boolean(formik.errors.name) && (
             <p className="mt-1 text-sm text-red-500">{formik.errors.name}</p>
@@ -90,6 +92,7 @@ export default function InquireForm({
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             type="email"
+            value={formik.values.email}
           />
           {formik.touched.email && Boolean(formik.errors.email) && (
             <p className="mt-1 text-sm text-red-500">{formik.errors.email}</p>
@@ -102,6 +105,7 @@ export default function InquireForm({
             error={formik.touched.phone && Boolean(formik.errors.phone)}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
+            value={formik.values.phone}
           />
           {formik.touched.phone && Boolean(formik.errors.phone) && (
             <p className="mt-1 text-sm text-red-500">{formik.errors.phone}</p>
@@ -113,6 +117,7 @@ export default function InquireForm({
             name="message"
             placeholder="Message"
             onBlur={formik.handleBlur}
+            value={formik.values.message}
             onChange={formik.handleChange}
             className="text block w-full rounded-lg bg-white p-2.5 text-[#676D73] focus:outline-[#29ABE2] disabled:bg-[#E7E7E7] disabled:text-[#676D73]"
           />

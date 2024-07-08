@@ -72,7 +72,27 @@ export function BookItNowSkeleton() {
         <div className="border-primary-gray-200 rounded-full border bg-gray-100 py-6 font-bold text-primary" />
         <hr />
         <div className="border-primary-gray-200 rounded-full border bg-gray-100 py-6 font-bold text-primary" />
-        <div className="h-[264px] w-full rounded-md bg-gray-100"></div>
+      </div>
+    </div>
+  );
+}
+
+export function PricingDetailsCardSkeleton() {
+  return (
+    <div className="flex w-full max-w-[420px] shrink-0 flex-col">
+      <h1 className="mb-4 text-2xl font-bold">Book it now</h1>
+      <div className="flex w-[420px] animate-pulse flex-col gap-6 rounded-[11px] border border-[#EAEAEF] px-6 py-5">
+        <div className="flex-col rounded-[11px] border border-[#EAEAEF]">
+          <div
+            className="relative px-6 py-5"
+            style={{ borderBottom: "1px solid #EAEAEF" }}
+          >
+            <div className="h-[180px] w-full bg-gray-100" />
+          </div>
+        </div>
+        <div className="border-primary-gray-200 rounded-full border bg-gray-100 py-6 font-bold text-primary" />
+        <hr />
+        <div className="border-primary-gray-200 rounded-full border bg-gray-100 py-6 font-bold text-primary" />
       </div>
     </div>
   );

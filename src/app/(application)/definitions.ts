@@ -74,3 +74,7 @@ export type UserData = {
     gender: string;
   };
 };
+export interface IParams {
+  source: string;
+  id: string;
+}

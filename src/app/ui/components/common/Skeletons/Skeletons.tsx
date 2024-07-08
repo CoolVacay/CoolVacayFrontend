@@ -114,3 +114,19 @@ export function BookedListingCardSkeleton() {
     </div>
   );
 }
+
+export function PricingDetailsSkeleton() {
+  const rows = 5;
+  const cols = 2;
+  return (
+    <div className="flex h-[210px] w-full animate-pulse flex-col gap-3 p-3">
+      {Array.from({ length: rows }).map((_, rowIndex) => (
+        <div key={rowIndex} className="flex gap-5">
+          {Array.from({ length: cols }).map((_, colIndex) => (
+            <div key={colIndex} className="h-7 w-full rounded-lg bg-gray-100" />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}

@@ -24,7 +24,7 @@ export default function Overview({ listing }: { listing: ListingData }) {
       <article className="grid grid-cols-3 pt-10">
         {listing.amenities.map((amenitie, index) => {
           return (
-            (viewMore ? index < 9 : index >= 0) && (
+            (!viewMore ? index < 9 : index >= 0) && (
               <div key={index} className="flex items-center gap-2">
                 <IconGenerator
                   key={index}
@@ -42,7 +42,7 @@ export default function Overview({ listing }: { listing: ListingData }) {
         onClick={() => setViewMore(!viewMore)}
         className="mb-10 mt-1 flex select-none text-sm font-bold text-primary transition-all hover:text-sky-700"
       >
-        {viewMore ? "View more" : "View less"}
+        {viewMore ? "View less" : "View more"}
       </button>
     </div>
   );

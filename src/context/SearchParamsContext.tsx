@@ -11,7 +11,7 @@ import {
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import dayjs from "dayjs";
 
-interface SearchParams {
+export interface ISearchParams {
   FromDate: dayjs.Dayjs;
   ToDate: dayjs.Dayjs;
   NumberOfGuests: string;
@@ -20,7 +20,7 @@ interface SearchParams {
 }
 
 interface SearchParamsContextType {
-  searchParamsValues: SearchParams;
+  searchParamsValues: ISearchParams;
   updateSearchParams: (
     params: string[],
     values: string[] | dayjs.Dayjs[],
@@ -50,7 +50,7 @@ export const SearchParamsProvider = ({
       ? dayjs(searchParams.get("ToDate"))
       : dayjs().add(6, "day");
 
-  const [searchParamsValues, setSearchParams] = useState<SearchParams>({
+  const [searchParamsValues, setSearchParams] = useState<ISearchParams>({
     FromDate: dayjs(searchParams.get("FromDate") ?? undefined),
     ToDate: toDate,
     NumberOfGuests: searchParams.get("NumberOfGuests") ?? "1",
@@ -68,7 +68,7 @@ export const SearchParamsProvider = ({
           );
         } else {
           if (values[0] !== "") {
-            searchParams.set(param, values[index]!);
+            searchParams.set(param, values[index] as string);
           } else {
             searchParams.delete(param);
           }

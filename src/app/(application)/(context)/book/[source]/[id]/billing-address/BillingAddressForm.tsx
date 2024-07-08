@@ -6,9 +6,10 @@ import { ActionButton } from "~/app/ui/components/authentication";
 import { SimpleInput, SimpleSelectInput } from "~/app/ui/components/common";
 import { useFormContext } from "../FormContext";
 import { useRouter } from "next/navigation";
-import { getCountries } from "~/app/(application)/actions";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { MenuItem } from "@mui/material";
+import type { ICountries } from "~/app/(application)/actions";
+import { useAppSearchParams } from "~/context/SearchParamsContext";
 
 const ValidationSchema = Yup.object({
   street: Yup.string().required("Street field is required"),
@@ -20,40 +21,34 @@ const ValidationSchema = Yup.object({
 
 export default function BillingAddressForm({
   params,
+  allCountries,
 }: {
   params: {
     source: string;
     id: string;
   };
+  allCountries: ICountries[];
 }) {
   const { formData, setFormData } = useFormContext();
-  const [countries, setCountries] = useState<JSX.Element[]>([]);
+  const { searchParams } = useAppSearchParams();
   const router = useRouter();
 
-  useEffect(() => {
-    async function fetchCountries() {
-      try {
-        const allCountries = (await getCountries())!;
-        const countriesList = allCountries.map((country) => (
-          <MenuItem key={country.name} value={country.name} dense>
-            {country.name}
-          </MenuItem>
-        ));
-
-        setCountries(countriesList);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    void fetchCountries();
-  }, []);
+  const countries = useMemo(() => {
+    return allCountries.map((country) => (
+      <MenuItem key={country.name} value={country.name} dense>
+        {country.name}
+      </MenuItem>
+    ));
+  }, [allCountries]);
 
   const formik = useFormik({
     initialValues: formData,
     validationSchema: ValidationSchema,
     onSubmit: (values) => {
       setFormData(values);
-      router.push(`/book/${params.source}/${params.id}/payment`);
+      router.push(
+        `/book/${params.source}/${params.id}/payment?${searchParams.toString()}`,
+      );
     },
   });
 
@@ -173,7 +168,10 @@ export default function BillingAddressForm({
           )}
         </div>
       </div>
-      <ActionButton disabled={!formik.isValid || !formik.dirty} text="Next" />
+      <ActionButton
+        disabled={!formik.isValid || formik.values.street === ""}
+        text="Next"
+      />
     </form>
   );
 }

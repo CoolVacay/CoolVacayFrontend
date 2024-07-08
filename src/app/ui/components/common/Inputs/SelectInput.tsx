@@ -10,10 +10,12 @@ export default function SelectInput({
   size,
   value,
   onChange,
+  disabled = false,
 }: {
   size: "small" | "big";
   value: string;
   onChange: (event: SelectChangeEvent<string>, child: React.ReactNode) => void;
+  disabled?: boolean;
 }) {
   const bigSize = size === "big";
   return (
@@ -30,14 +32,16 @@ export default function SelectInput({
           <Select
             fullWidth
             value={value}
-            IconComponent={() => (
-              <IconGenerator
-                alt="avatar icon"
-                src={`/down-arrow.svg`}
-                width={bigSize ? "33px" : "26px"}
-                className={`pointer-events-none absolute ${bigSize ? "right-1 top-7" : "right-1 top-[22px]"}`}
-              />
-            )}
+            IconComponent={() =>
+              disabled ? null : (
+                <IconGenerator
+                  alt="avatar icon"
+                  src={`/down-arrow.svg`}
+                  width={bigSize ? "33px" : "26px"}
+                  className={`pointer-events-none absolute ${bigSize ? "right-1 top-7" : "right-1 top-[22px]"}`}
+                />
+              )
+            }
             onChange={onChange}
             sx={{
               padding: bigSize ? "24px 0px 10px 0px" : "18px 0px 0px 0px",

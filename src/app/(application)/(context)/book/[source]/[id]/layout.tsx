@@ -1,9 +1,10 @@
 import BookedListingCard from "~/app/ui/components/common/Cards/BookedListingCard/BookedListingCard.server";
 import { Breadcrumbs } from "~/app/ui/components/common";
-import BookNow from "~/app/ui/components/listing/BookNow/BookNowCard.server";
 import { FormProvider } from "./FormContext";
 import { Suspense } from "react";
 import { BookedListingCardSkeleton } from "~/app/ui/components/common";
+import { PricingDetailsCardSkeleton } from "~/app/ui/components/common/Skeletons/ListingSkeletons";
+import PricingDetailsCard from "~/app/ui/components/listing/PricingDetailsCard/PricingDetails.server";
 //TODO: add a loading page
 export default async function Layout({
   children,
@@ -44,7 +45,9 @@ export default async function Layout({
                 <FormProvider>{children}</FormProvider>
               </div>
               <div className="flex shrink-0 flex-col gap-4">
-                <BookNow params={params} />
+                <Suspense fallback={<PricingDetailsCardSkeleton />}>
+                  <PricingDetailsCard params={params} />
+                </Suspense>
               </div>
             </div>
           </div>
