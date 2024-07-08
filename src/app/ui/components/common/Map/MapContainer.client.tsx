@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import Map, {
   NavigationControl,
@@ -10,11 +9,6 @@ import Map, {
   Layer,
 } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
-import "./map.css";
-import dayjs from "dayjs";
-import { useSearchParams } from "next/navigation";
-
 import type {
   ListingData,
   MapboxMarkerData,
@@ -25,6 +19,11 @@ import {
   clusterCountLayer,
   unclusteredPointLayer,
 } from "./layers";
+import { useMemo, useRef, useState, useCallback } from "react";
+import dayjs from "dayjs";
+import { useSearchParams } from "next/navigation";
+import "mapbox-gl/dist/mapbox-gl.css";
+import "./map.css";
 
 const listingsToGeoJSON = (
   listings: ListingData[],
@@ -40,12 +39,12 @@ const listingsToGeoJSON = (
   })),
 });
 
-export default function MapContainer({
-  listings,
+export default function MapContent({
   singleListing = false,
+  listings,
 }: {
-  listings: ListingData[];
   singleListing?: boolean;
+  listings: ListingData[];
 }) {
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
   const [selectedMarker, setSelectedMarker] = useState<
@@ -64,7 +63,6 @@ export default function MapContainer({
   };
   const startDate = dayjs(params.get("FromDate")).format("MMM DD");
   const endDate = dayjs(params.get("ToDate")).format("MMM DD");
-
   const handleClick = useCallback(
     (event: mapboxgl.MapLayerMouseEvent) => {
       if (!mapRef.current) return;
@@ -115,7 +113,6 @@ export default function MapContainer({
     },
     [selectedMarker],
   );
-
   return (
     <main>
       <Map

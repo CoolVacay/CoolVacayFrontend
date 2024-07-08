@@ -10,12 +10,13 @@ import {
 } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import dayjs from "dayjs";
-import type { Dayjs } from "dayjs";
+
 interface SearchParams {
   FromDate: dayjs.Dayjs;
   ToDate: dayjs.Dayjs;
   NumberOfGuests: string;
-  category?: string;
+  category: string;
+  Match: string;
 }
 
 interface SearchParamsContextType {
@@ -44,8 +45,6 @@ export const SearchParamsProvider = ({
     return new URLSearchParams(readOnlySearchParams.toString());
   }, [readOnlySearchParams]);
 
-  // console.log(searchParams, "searchParams");
-
   const toDate =
     searchParams.get("ToDate") !== null
       ? dayjs(searchParams.get("ToDate"))
@@ -55,13 +54,12 @@ export const SearchParamsProvider = ({
     FromDate: dayjs(searchParams.get("FromDate") ?? undefined),
     ToDate: toDate,
     NumberOfGuests: searchParams.get("NumberOfGuests") ?? "1",
+    Match: searchParams.get("Match") ?? "",
     category: searchParams.get("category") ?? "",
   });
 
   const updateSearchParams = useCallback(
     (params: string[], values: string[] | dayjs.Dayjs[]) => {
-      console.log("runs here");
-      // const params = new URLSearchParams(readOnlySearchParams.toString());
       params.forEach((param, index) => {
         if (typeof values[index] !== "string") {
           searchParams.set(
@@ -69,10 +67,12 @@ export const SearchParamsProvider = ({
             (values[index] as dayjs.Dayjs)?.format("YYYY-MM-DD"),
           );
         } else {
-          searchParams.set(param, values[index]!);
+          if (values[0] !== "") {
+            searchParams.set(param, values[index]!);
+          } else {
+            searchParams.delete(param);
+          }
         }
-        console.log(param, "param");
-        console.log(values[index], "values[index]");
         setSearchParams((prevParams) => ({
           ...prevParams,
           [param]: values[index],
@@ -85,23 +85,18 @@ export const SearchParamsProvider = ({
     [pathname, router, searchParams],
   );
 
-  console.log(searchParamsValues, "searchParamsValues");
-
   useEffect(() => {
     searchParamsValues.FromDate &&
       updateSearchParams(["FromDate"], [searchParamsValues.FromDate]);
-    console.log("runs here 1 ");
   }, [updateSearchParams, searchParamsValues.FromDate]);
 
   useEffect(() => {
     searchParamsValues.ToDate &&
       updateSearchParams(["ToDate"], [searchParamsValues.ToDate]);
-    console.log("runs here 2 ");
   }, [updateSearchParams, searchParamsValues.ToDate]);
 
   useEffect(() => {
     updateSearchParams(["NumberOfGuests"], [searchParamsValues.NumberOfGuests]);
-    console.log("runs here 3");
   }, [updateSearchParams, searchParamsValues.NumberOfGuests]);
 
   return (

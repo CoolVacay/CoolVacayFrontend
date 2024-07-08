@@ -10,8 +10,6 @@ export function PricingDetails({
   pricingDetails: IPricingDetails | undefined;
   nights: number;
 }) {
-  console.log(pricingDetails, "pp");
-  console.log(listing, "ll");
   return (
     <div className="flex flex-col gap-4 font-medium">
       <h6 className="flex justify-between text-lg text-[#858C93]">

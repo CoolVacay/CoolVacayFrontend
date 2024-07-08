@@ -55,7 +55,7 @@ export default function SimpleSelectInput({
             "&:focus": {
               borderRadius: 300,
               borderColor: "#29ABE2",
-              padding: "18px 14px",
+              padding: "9px 14px",
               boxShadow: "0 0 0 0.1rem #29ABE2",
             },
           },

@@ -99,10 +99,22 @@ export async function getListingData({
   id: string;
 }) {
   try {
-    // await new Promise((resolve) => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     const res = await getFetch<ListingData>(`/Listings/${source}/${id}`);
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch listing data");
+    }
+    return res;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+export async function getFilteredListings(query: string) {
+  try {
+    const res = await getFetch<ListingData[]>(`/listings?${query}`, true);
+    if (res instanceof FetchError) {
+      throw new Error("Failed to fetch listings");
     }
     return res;
   } catch (error) {

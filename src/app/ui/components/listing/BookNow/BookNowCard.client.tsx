@@ -5,12 +5,12 @@ import { Divider } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { RangeDatePicker, FormDialog, SelectInput } from "../../common";
 import type { SelectChangeEvent } from "@mui/material";
-import { useAppSearchParams } from "~/context/SearchParamsContext";
 import type { DateRangeType } from "../../home/SearchCard";
 import type { ListingData } from "~/app/(application)/definitions";
 import { PricingDetails } from "./PricingDetails";
 import { useState, useEffect } from "react";
 import { getPricingDetails } from "~/app/(application)/actions";
+import { useAppSearchParams } from "~/context/SearchParamsContext";
 
 export interface IPricingDetails {
   totalPrice: number;
@@ -33,27 +33,28 @@ export default function BookNowContent({
   const pathname = usePathname();
   const { searchParams, searchParamsValues, updateSearchParams } =
     useAppSearchParams();
+
   const isPriceCalculated =
     pathname.endsWith("billing-address") || pathname.endsWith("payment");
 
-  const dates: DateRangeType = [
-    searchParamsValues?.FromDate,
-    searchParamsValues?.ToDate,
-  ];
+  const [dates, setDates] = useState<DateRangeType>([
+    searchParamsValues.FromDate,
+    searchParamsValues.ToDate,
+  ]);
   const [pricingDetails, setPricingDetails] = useState<
     IPricingDetails | undefined
   >();
 
   useEffect(() => {
-    if (searchParamsValues?.FromDate && searchParamsValues?.ToDate) {
+    if (searchParamsValues?.FromDate && searchParamsValues.ToDate) {
       async function fetchPricingDetails() {
         try {
           const details = await getPricingDetails(
             params.source,
             params.id,
-            searchParamsValues?.FromDate.format("YYYY-MM-DD"),
-            searchParamsValues?.ToDate.format("YYYY-MM-DD"),
-            searchParamsValues?.NumberOfGuests,
+            searchParamsValues.FromDate.format("YYYY-MM-DD"),
+            searchParamsValues.ToDate.format("YYYY-MM-DD"),
+            searchParamsValues.NumberOfGuests,
           );
           setPricingDetails(details);
         } catch (err) {
@@ -63,12 +64,16 @@ export default function BookNowContent({
       void fetchPricingDetails();
     }
   }, [
-    searchParamsValues?.FromDate,
-    searchParamsValues?.ToDate,
-    searchParamsValues?.NumberOfGuests,
+    searchParamsValues.FromDate,
+    searchParamsValues.ToDate,
+    searchParamsValues.NumberOfGuests,
     params.source,
     params.id,
   ]);
+
+  useEffect(() => {
+    updateSearchParams(["FromDate", "ToDate"], [dates[0], dates[1]]);
+  }, [dates, updateSearchParams]);
 
   return (
     <div
@@ -85,12 +90,12 @@ export default function BookNowContent({
           className="relative px-6 py-5"
           style={{ borderBottom: "1px solid #EAEAEF" }}
         >
-          <RangeDatePicker size="small" dates={dates} />
+          <RangeDatePicker size="small" dates={dates} setDates={setDates} />
         </div>
         <div className="px-6 py-5">
           <SelectInput
             size="small"
-            value={searchParamsValues?.NumberOfGuests ?? "1"}
+            value={searchParamsValues.NumberOfGuests ?? "1"}
             onChange={(e: SelectChangeEvent<string>) =>
               updateSearchParams(["NumberOfGuests"], [e.target.value])
             }
@@ -122,8 +127,8 @@ export default function BookNowContent({
         <PricingDetails
           listing={listingInfo}
           pricingDetails={pricingDetails}
-          nights={searchParamsValues?.ToDate.diff(
-            searchParamsValues?.FromDate,
+          nights={searchParamsValues.ToDate.diff(
+            searchParamsValues.FromDate,
             "day",
           )}
         />

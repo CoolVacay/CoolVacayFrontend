@@ -6,6 +6,7 @@ import Overview from "~/app/ui/components/listing/OverviewSection";
 import BookNow from "~/app/ui/components/listing/BookNow/BookNowCard.server";
 import { SimilarCard, Breadcrumbs } from "~/app/ui/components/common";
 import { capitalize } from "~/app/utils/helpers";
+import { MapContainer } from "~/app/ui/components/common";
 
 async function getListingData({ source, id }: { source: string; id: string }) {
   try {
@@ -91,8 +92,24 @@ export default async function Page({
             </div>
             <Gallery listing={listing} />
             <div className="flex gap-6 py-10">
-              <Overview listing={listing} />
-              <BookNow listing={listing} params={params} />
+              <div>
+                <Overview listing={listing} />
+                <div className="max-h-60 w-full">
+                  <MapContainer
+                    singleListing={true}
+                    query={query}
+                    listing={[{ ...listing }]}
+                  />
+                </div>
+                <div className="py-6">
+                  <h1 className="text-sm text-[#676D73]">
+                    Listed by{" "}
+                    <span className="text-sm text-black">{listing.source}</span>
+                  </h1>
+                </div>
+              </div>
+
+              <BookNow params={params} />
             </div>
             <h5 className="mb-10 text-2xl font-bold">
               View similar homes in this area

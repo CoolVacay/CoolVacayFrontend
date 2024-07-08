@@ -6,7 +6,6 @@ import FooterSection from "../ui/components/FooterSection";
 import MuiXLicense from "../MuiXLicense";
 import theme from "../../theme";
 import { ThemeProvider } from "@mui/material/styles";
-import { SearchParamsProvider } from "~/context/SearchParamsContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +26,7 @@ export default function RootLayout({
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <NavBarWrapper />
-            <SearchParamsProvider>{children}</SearchParamsProvider>
+            {children}
             <FooterSection />
             <MuiXLicense />
           </ThemeProvider>
