@@ -13,12 +13,12 @@ const RangeDatePicker = ({
   dates,
   setDates,
 }: {
-  size: "small" | "big";
+  size: "small" | "medium" | "big";
   dates: DateRangeType;
   setDates: React.Dispatch<React.SetStateAction<DateRangeType>>;
 }) => {
   const bigFont = size === "big";
-
+  const mediumFont = size === "medium";
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer
@@ -42,24 +42,27 @@ const RangeDatePicker = ({
                 backgroundColor: "#EAEAEF",
                 color: "transparent",
                 width: "1px",
-                height: "62px",
+                height: bigFont || mediumFont ? "62px" : "42px",
                 position: "absolute",
-                left: bigFont ? "190px" : "175px",
-                top: bigFont ? "20px" : "12px",
+                left: bigFont ? "190px" : mediumFont ? "175px" : "122px",
+                top: bigFont ? "20px" : mediumFont ? "12px" : "10px",
               },
             },
             textField: {
               variant: "standard",
               InputLabelProps: {
-                className: `${bigFont ? "text-2xl -top-3" : "text-xl -top-2"} font-medium absolute`,
+                className: `${bigFont ? "text-2xl -top-3" : mediumFont ? "text-xl -top-2" : "text-base -top-1"} font-medium absolute`,
               },
               InputProps: {
-                sx: { fontSize: bigFont ? "20px" : "16px", fontWeight: 500 },
+                sx: {
+                  fontSize: bigFont ? "20px" : mediumFont ? "16px" : "12px",
+                  fontWeight: 500,
+                },
                 startAdornment: (
                   <IconGenerator
                     alt="Calendar icon"
                     src={`/calendar_icon.svg`}
-                    width={bigFont ? "32px" : "21px"}
+                    width={bigFont ? "32px" : mediumFont ? "21px" : "16px"}
                     className={bigFont ? "mr-3" : "mr-2"}
                   />
                 ),

@@ -12,18 +12,19 @@ export default function SelectInput({
   onChange,
   disabled = false,
 }: {
-  size: "small" | "big";
+  size: "small" | "medium" | "big";
   value: string;
   onChange: (event: SelectChangeEvent<string>, child: React.ReactNode) => void;
   disabled?: boolean;
 }) {
-  const bigSize = size === "big";
+  const isBigSize = size === "big";
+  const isMediumSize = size === "medium";
   return (
     <FormControl fullWidth variant="standard" sx={{ height: "100%" }}>
       <InputLabel
         shrink={true}
         htmlFor="component-simple"
-        className={`block ${bigSize ? "text-2xl" : "text-xl"} font-medium`}
+        className={`block ${isBigSize ? "text-2xl" : isMediumSize ? "text-xl" : "text-base"} font-medium`}
       >
         Guests
       </InputLabel>
@@ -37,15 +38,15 @@ export default function SelectInput({
                 <IconGenerator
                   alt="avatar icon"
                   src={`/down-arrow.svg`}
-                  width={bigSize ? "33px" : "26px"}
-                  className={`pointer-events-none absolute ${bigSize ? "right-1 top-7" : "right-1 top-[22px]"}`}
+                  width={isBigSize ? "33px" : isMediumSize ? "26px" : "18px"}
+                  className={`pointer-events-none absolute ${isBigSize ? "right-1 top-7" : isMediumSize ? "right-1 top-[22px]" : "right-[2px]"}`}
                 />
               )
             }
             onChange={onChange}
             sx={{
-              padding: bigSize ? "24px 0px 10px 0px" : "18px 0px 0px 0px",
-              fontSize: bigSize ? "20px" : "16px",
+              padding: isBigSize ? "24px 0px 10px 0px" : "18px 0px 0px 0px",
+              fontSize: isBigSize ? "20px" : isMediumSize ? "16px" : "12px",
               fontWeight: 500,
             }}
             labelId="customized-select-label"
@@ -53,7 +54,7 @@ export default function SelectInput({
             defaultValue={guests[0]}
           >
             {guests.map((guest) => (
-              <MenuItem key={guest} value={guest}>
+              <MenuItem key={guest} value={guest} dense sx={{ fontSize: 12 }}>
                 {`${guest} ${guest === "1" ? "guest" : "guests"}`}
               </MenuItem>
             ))}

@@ -11,7 +11,7 @@ import type { Dayjs } from "dayjs";
 export type DateRangeType = [Dayjs, Dayjs];
 
 //TODO: re-style/refactor when you add functionality
-export function SearchCard() {
+export function SearchCard({ size }: { size: "small" | "big" }) {
   const [location, setLocation] = useState("");
 
   const [dates, setDates] = useState<DateRangeType>([
@@ -21,7 +21,7 @@ export function SearchCard() {
   const [numberOfGuests, setNumberOfGuests] = useState("1");
   const [fromDate, toDate] = dates;
   const router = useRouter();
-
+  const isSmallSize = size === "small";
   const handleSearch = () => {
     const params = new URLSearchParams();
     if (location) params.append("Match", location);
@@ -39,14 +39,18 @@ export function SearchCard() {
   return (
     <search>
       <form onSubmit={handleSubmit}>
-        <div className="grid h-[410px] w-[420px] shrink-0 grid-rows-4 divide-y rounded-xl border-[#EAEAEF] bg-white">
-          <div className="border-b-4-grey flex w-full items-center px-4 pb-4 pt-5">
+        <div
+          className={`grid ${isSmallSize ? "h-[250px] w-[258px]" : "h-[410px] w-[420px]"} shrink-0 grid-rows-4 divide-y rounded-xl border-[#EAEAEF] bg-white`}
+        >
+          <div
+            className={`border-b-4-grey flex w-full items-center ${isSmallSize ? "px-3 py-2" : "px-4 pb-4"} pt-5`}
+          >
             <div className="flex h-full grow flex-col">
               <FormControl fullWidth variant="standard" sx={{ height: "100%" }}>
                 <InputLabel
                   shrink={true}
                   htmlFor="component-simple"
-                  className="block text-2xl font-medium"
+                  className={`block ${isSmallSize ? "text-sm" : "text-2xl"} font-medium`}
                 >
                   Location
                 </InputLabel>
@@ -56,8 +60,8 @@ export function SearchCard() {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   sx={{
-                    padding: "14px 26px 10px 0px",
-                    fontSize: "20px",
+                    padding: isSmallSize ? "0px" : "14px 26px 10px 0px",
+                    fontSize: isSmallSize ? "12px" : "20px",
                     fontWeight: 500,
                   }}
                   fullWidth
@@ -65,20 +69,28 @@ export function SearchCard() {
                     <IconGenerator
                       alt="Location Icon"
                       src="/location-pin.svg"
-                      width="28px"
-                      className="pointer-events-none absolute right-2 top-2"
+                      width={isSmallSize ? "16px" : "28px"}
+                      className={`pointer-events-none absolute ${isSmallSize ? "right-[2px]" : "right-2 top-2"}`}
                     />
                   }
                 />
               </FormControl>
             </div>
           </div>
-          <div className="relative px-4 pb-4 pt-5">
-            <RangeDatePicker size="big" dates={dates} setDates={setDates} />
+          <div
+            className={`relative ${isSmallSize ? "px-3 py-2" : "px-4 pb-4 pt-5"}`}
+          >
+            <RangeDatePicker
+              size={isSmallSize ? "small" : "big"}
+              dates={dates}
+              setDates={setDates}
+            />
           </div>
-          <div className="flex h-full grow flex-col px-4 pb-4 pt-5">
+          <div
+            className={`flex h-full grow flex-col ${isSmallSize ? "px-3 py-2" : "px-4 pb-4 pt-5"}`}
+          >
             <SelectInput
-              size="big"
+              size={isSmallSize ? "small" : "big"}
               value={numberOfGuests}
               onChange={(e: SelectChangeEvent<string>) =>
                 setNumberOfGuests(e.target.value)
@@ -87,14 +99,14 @@ export function SearchCard() {
           </div>
           <button
             type="submit"
-            className="flex grow items-center rounded-b-xl bg-primary p-5 text-2xl"
+            className={`flex grow items-center rounded-b-xl bg-primary text-white ${isSmallSize ? "p-3 text-sm" : "p-5 text-2xl"}`}
           >
             Search
             <span className="ml-auto">
               <IconGenerator
                 alt="avatar icon"
                 src={`/search_icon.svg`}
-                width="33px"
+                width={isSmallSize ? "20px" : "33px"}
               />
             </span>
           </button>

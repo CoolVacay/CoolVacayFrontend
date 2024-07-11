@@ -16,8 +16,6 @@ export function BlogSection() {
         {Array.from({ length: 4 }, (_, i) => i + 1).map((card) => {
           return (
             <MainCard
-              id="static-id"
-              source={""}
               imageUrl="/blog_photo.jpeg"
               name="How to get more bookings with Coolvacay in 2024"
               subtitle="August 1, 2024  •  2 min read "

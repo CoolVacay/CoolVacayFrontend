@@ -32,7 +32,7 @@ export type ListingCardProps = Pick<
 
 export type MainCardProps = Pick<
   ListingData,
-  "name" | "imageUrl" | "propertyType" | "squareFeets" | "id" | "source"
+  "name" | "imageUrl" | "propertyType" | "squareFeets"
 > & { isBlogCard?: boolean; subtitle: string };
 
 export type SimilarCardProps = MainCardProps &

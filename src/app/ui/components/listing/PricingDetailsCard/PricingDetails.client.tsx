@@ -30,11 +30,11 @@ export default function PricingDetailsCardContent({
           className="relative px-6 py-5"
           style={{ borderBottom: "1px solid #EAEAEF" }}
         >
-          <RangeDatePicker size="small" dates={dates} setDates={setDates} />
+          <RangeDatePicker size="medium" dates={dates} setDates={setDates} />
         </div>
         <div className="px-6 py-5">
           <SelectInput
-            size="small"
+            size="medium"
             disabled={true}
             value={searchParamsValues.NumberOfGuests ?? "1"}
             onChange={(e: SelectChangeEvent<string>) =>
@@ -48,9 +48,10 @@ export default function PricingDetailsCardContent({
         listing={listingInfo}
         params={params}
         searchParamsValues={searchParamsValues}
-        nights={
-          searchParamsValues.ToDate.diff(searchParamsValues.FromDate, "day") + 1
-        }
+        nights={searchParamsValues.ToDate.diff(
+          searchParamsValues.FromDate,
+          "day",
+        )}
       />
     </div>
   );

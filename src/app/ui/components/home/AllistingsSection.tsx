@@ -53,16 +53,20 @@ export async function AllistingsSection() {
         <div className="grid grid-cols-3 gap-5 py-10 desktop:grid-cols-4">
           {firstListings?.map((listing) => {
             return (
-              <MainCard
-                id={listing.id}
-                source={listing.source}
-                name={truncateText(listing.name, 50)}
-                subtitle={`${listing.city}, ${listing.state}`}
+              <Link
                 key={listing.id}
-                imageUrl={listing.imageUrl}
-                propertyType={listing.propertyType}
-                squareFeets={listing.squareFeets}
-              />
+                href={`/listing/${listing.source}/${listing.id}`}
+                className="h-82"
+              >
+                <MainCard
+                  name={truncateText(listing.name, 50)}
+                  subtitle={`${listing.city}, ${listing.state}`}
+                  key={listing.id}
+                  imageUrl={listing.imageUrl}
+                  propertyType={listing.propertyType}
+                  squareFeets={listing.squareFeets}
+                />
+              </Link>
             );
           })}
         </div>
@@ -78,16 +82,20 @@ export async function AllistingsSection() {
         <div className="grid grid-cols-3 gap-5 py-10 desktop:grid-cols-4">
           {lastListings?.map((listing) => {
             return (
-              <MainCard
-                id={listing.id}
-                source={listing.source}
-                name={truncateText(listing.name, 50)}
-                subtitle={`${listing.city}, ${listing.state}`}
+              <Link
                 key={listing.id}
-                imageUrl={listing.imageUrl}
-                propertyType={listing.propertyType}
-                squareFeets={listing.squareFeets}
-              />
+                href={`/listing/${listing.source}/${listing.id}`}
+                className="h-82"
+              >
+                <MainCard
+                  name={truncateText(listing.name, 50)}
+                  subtitle={`${listing.city}, ${listing.state}`}
+                  key={listing.id}
+                  imageUrl={listing.imageUrl}
+                  propertyType={listing.propertyType}
+                  squareFeets={listing.squareFeets}
+                />
+              </Link>
             );
           })}
         </div>

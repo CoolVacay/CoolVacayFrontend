@@ -13,6 +13,7 @@ export default function SimpleSelectInput({
   onBlur,
   error,
   name,
+  placeholder,
 }: {
   value?: string;
   onChange: (event: SelectChangeEvent<string>, child: React.ReactNode) => void;
@@ -23,6 +24,7 @@ export default function SimpleSelectInput({
     event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
   ) => void;
   name?: string;
+  placeholder?: string;
 }) {
   const isSmallSize = size === "small";
   return (
@@ -33,6 +35,7 @@ export default function SimpleSelectInput({
         fullWidth
         value={value}
         name={name}
+        placeholder={placeholder}
         onBlur={onBlur}
         error={error}
         onChange={onChange}
@@ -55,16 +58,38 @@ export default function SimpleSelectInput({
             "&:focus": {
               borderRadius: 300,
               borderColor: "#29ABE2",
-              padding: "9px 14px",
+              padding: isSmallSize ? "9px 14px" : "18px 14px",
               boxShadow: "0 0 0 0.1rem #29ABE2",
             },
           },
         }}
-        labelId="customized-select-label"
-        id="customized-select"
+        labelId={`${name}-select-label`}
+        id={`${name}-select`}
       >
         {listOptions}
       </Select>
     </div>
   );
+}
+
+{
+  /* <div className="w-full">
+<label htmlFor="country" className="mb-1 block text-lg font-medium">
+  Country<span className="absolute">*</span>
+</label>
+<SimpleSelectInput
+  listOptions={countries}
+  name="country"
+  value={formik.values.country}
+  onChange={(e) => formik.setFieldValue("country", e.target.value)}
+  size="medium"
+  onBlur={formik.handleBlur}
+  error={formik.touched.country && Boolean(formik.errors.country)}
+/>
+{formik.touched.country && Boolean(formik.errors.country) && (
+  <p className="mt-1 text-sm text-red-500">
+    {formik.touched.country && formik.errors.country}
+  </p>
+)}
+</div> */
 }

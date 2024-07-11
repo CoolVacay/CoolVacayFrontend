@@ -31,7 +31,7 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
     street: "",
     aptNr: "",
     city: "",
-    state: "",
+    state: "California",
     zip: "",
     country: "USA",
   });

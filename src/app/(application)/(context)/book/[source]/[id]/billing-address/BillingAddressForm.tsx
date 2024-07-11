@@ -41,6 +41,15 @@ export default function BillingAddressForm({
     ));
   }, [allCountries]);
 
+  const states = useMemo(() => {
+    const usaCountry = allCountries.filter((country) => country.name === "USA");
+    return usaCountry[0]?.states.map((state) => (
+      <MenuItem key={state.id} value={state.name} dense>
+        {state.name}
+      </MenuItem>
+    ));
+  }, [allCountries]);
+
   const formik = useFormik({
     initialValues: formData,
     validationSchema: ValidationSchema,
@@ -110,21 +119,21 @@ export default function BillingAddressForm({
         </div>
         <div className="flex gap-4">
           <div className="w-full">
-            <label htmlFor="state" className="mb-1 block text-lg font-medium">
-              State<span className="absolute">*</span>
+            <label htmlFor="country" className="mb-1 block text-lg font-medium">
+              Country<span className="absolute">*</span>
             </label>
-            <SimpleInput
-              placeholder="State"
-              name="state"
+            <SimpleSelectInput
+              listOptions={countries}
+              name="country"
+              value={formik.values.country}
+              onChange={(e) => formik.setFieldValue("country", e.target.value)}
+              size="medium"
               onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.state}
-              error={formik.touched.state && Boolean(formik.errors.state)}
-              variant="rounded"
+              error={formik.touched.country && Boolean(formik.errors.country)}
             />
-            {formik.touched.state && Boolean(formik.errors.state) && (
+            {formik.touched.country && Boolean(formik.errors.country) && (
               <p className="mt-1 text-sm text-red-500">
-                {formik.touched.state && formik.errors.state}
+                {formik.touched.country && formik.errors.country}
               </p>
             )}
           </div>
@@ -148,25 +157,28 @@ export default function BillingAddressForm({
             )}
           </div>
         </div>
-        <div>
-          <label htmlFor="country" className="mb-1 block text-lg font-medium">
-            Country<span className="absolute">*</span>
-          </label>
-          <SimpleSelectInput
-            listOptions={countries}
-            name="country"
-            value={formik.values.country}
-            onChange={(e) => formik.setFieldValue("country", e.target.value)}
-            size="medium"
-            onBlur={formik.handleBlur}
-            error={formik.touched.country && Boolean(formik.errors.country)}
-          />
-          {formik.touched.country && Boolean(formik.errors.country) && (
-            <p className="mt-1 text-sm text-red-500">
-              {formik.touched.country && formik.errors.country}
-            </p>
-          )}
-        </div>
+        {formik.values.country === "USA" ? (
+          <div className="w-full">
+            <label htmlFor="state" className="mb-1 block text-lg font-medium">
+              State<span className="absolute">*</span>
+            </label>
+            <SimpleSelectInput
+              placeholder="Select State"
+              name="state"
+              listOptions={states}
+              onBlur={formik.handleBlur}
+              onChange={(e) => formik.setFieldValue("state", e.target.value)}
+              value={formik.values.state}
+              error={formik.touched.state && Boolean(formik.errors.state)}
+              size="medium"
+            />
+            {formik.touched.state && Boolean(formik.errors.state) && (
+              <p className="mt-1 text-sm text-red-500">
+                {formik.touched.state && formik.errors.state}
+              </p>
+            )}
+          </div>
+        ) : null}
       </div>
       <ActionButton
         disabled={!formik.isValid || formik.values.street === ""}

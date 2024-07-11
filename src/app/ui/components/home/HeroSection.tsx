@@ -20,7 +20,7 @@ export async function HeroSection() {
             </div>
           </div>
         </div>
-        <SearchCard />
+        <SearchCard size="big" />
       </div>
     </main>
   );

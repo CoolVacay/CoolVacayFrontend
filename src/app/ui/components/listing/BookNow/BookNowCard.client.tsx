@@ -45,11 +45,11 @@ export default function BookNowContent({
           className="relative px-6 py-5"
           style={{ borderBottom: "1px solid #EAEAEF" }}
         >
-          <RangeDatePicker size="small" dates={dates} setDates={setDates} />
+          <RangeDatePicker size="medium" dates={dates} setDates={setDates} />
         </div>
         <div className="px-6 py-5">
           <SelectInput
-            size="small"
+            size="medium"
             value={searchParamsValues.NumberOfGuests ?? "1"}
             onChange={(e: SelectChangeEvent<string>) =>
               updateSearchParams(["NumberOfGuests"], [e.target.value])
