@@ -9,7 +9,12 @@ import NavBarLoginButton from "./NavBarLoginButton";
 
 export default function NavBar({ session }: { session: Session | null }) {
   const pathname = usePathname();
-  const isWhiteVariant = pathname === "/" || pathname.endsWith("about-us");
+  const isWhiteVariant =
+    pathname === "/" ||
+    pathname.endsWith("about-us") ||
+    pathname.endsWith("terms-and-conditions") ||
+    pathname.endsWith("privacy-policy") ||
+    pathname.endsWith("accessibility-statement");
   const noMaxWidth = pathname.startsWith("/listings/");
 
   return (
