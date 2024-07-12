@@ -2,33 +2,16 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import type { ListingData } from "~/app/(application)/definitions";
 import FullScreenDialog from "../common/Dialogs/FullScreenDialog";
+import { useAppSearchParams } from "~/context/SearchParamsContext";
 
 export default function Gallery({ listing }: { listing: ListingData }) {
-  const photoParams = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { updateSearchParams } = useAppSearchParams();
 
-  const preloadRoute = (url: number | string = "") => {
-    const params = new URLSearchParams(photoParams.toString());
-    if (url) {
-      params.set("query", `photoGallery=${url}`);
-    }
-    // const newUrl = `${pathname}?${params.toString()}`;
-    // router.replace(newUrl); // Prefetch the route
-    window.history.pushState(null, "", `${pathname}?${params.toString()}`);
-  };
-  //TODO: refactor code
-  //previously set a param to load faster
   const handleClick = (url: number | string = "") => {
-    const params = new URLSearchParams(photoParams);
-    if (url) {
-      params.set("query", `photoGallery=${url}`);
-    }
-    router.replace(`${pathname}?${params.toString()}`);
+    if (url) updateSearchParams(["modal"], [`photoGallery=${url}`]);
   };
 
   return (
@@ -47,7 +30,6 @@ export default function Gallery({ listing }: { listing: ListingData }) {
                   alt={image.name}
                   onClick={() => {
                     setIsModalOpen(true);
-                    preloadRoute(index + 1); // Prefetch the route before navigating
                     handleClick(index + 1);
                   }}
                   sizes="100vw"

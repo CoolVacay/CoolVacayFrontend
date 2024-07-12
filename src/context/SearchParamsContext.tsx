@@ -12,11 +12,12 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import dayjs from "dayjs";
 
 export interface ISearchParams {
-  FromDate: dayjs.Dayjs;
-  ToDate: dayjs.Dayjs;
-  NumberOfGuests: string;
+  fromDate: dayjs.Dayjs;
+  toDate: dayjs.Dayjs;
+  numberOfGuests: string;
   category: string;
-  Match: string;
+  match: string;
+  modal: string;
 }
 
 interface SearchParamsContextType {
@@ -46,16 +47,17 @@ export const SearchParamsProvider = ({
   }, [readOnlySearchParams]);
 
   const toDate =
-    searchParams.get("ToDate") !== null
-      ? dayjs(searchParams.get("ToDate"))
+    searchParams.get("toDate") !== null
+      ? dayjs(searchParams.get("toDate"))
       : dayjs().add(6, "day");
 
   const [searchParamsValues, setSearchParams] = useState<ISearchParams>({
-    FromDate: dayjs(searchParams.get("FromDate") ?? undefined),
-    ToDate: toDate,
-    NumberOfGuests: searchParams.get("NumberOfGuests") ?? "1",
-    Match: searchParams.get("Match") ?? "",
+    fromDate: dayjs(searchParams.get("fromDate") ?? undefined),
+    toDate: toDate,
+    numberOfGuests: searchParams.get("numberOfGuests") ?? "1",
+    match: searchParams.get("match") ?? "",
     category: searchParams.get("category") ?? "",
+    modal: searchParams.get("modal") ?? "",
   });
 
   const updateSearchParams = useCallback(
@@ -86,18 +88,18 @@ export const SearchParamsProvider = ({
   );
 
   useEffect(() => {
-    searchParamsValues.FromDate &&
-      updateSearchParams(["FromDate"], [searchParamsValues.FromDate]);
-  }, [updateSearchParams, searchParamsValues.FromDate]);
+    searchParamsValues.fromDate &&
+      updateSearchParams(["fromDate"], [searchParamsValues.fromDate]);
+  }, [updateSearchParams, searchParamsValues.fromDate]);
 
   useEffect(() => {
-    searchParamsValues.ToDate &&
-      updateSearchParams(["ToDate"], [searchParamsValues.ToDate]);
-  }, [updateSearchParams, searchParamsValues.ToDate]);
+    searchParamsValues.toDate &&
+      updateSearchParams(["toDate"], [searchParamsValues.toDate]);
+  }, [updateSearchParams, searchParamsValues.toDate]);
 
   useEffect(() => {
-    updateSearchParams(["NumberOfGuests"], [searchParamsValues.NumberOfGuests]);
-  }, [updateSearchParams, searchParamsValues.NumberOfGuests]);
+    updateSearchParams(["numberOfGuests"], [searchParamsValues.numberOfGuests]);
+  }, [updateSearchParams, searchParamsValues.numberOfGuests]);
 
   return (
     <SearchParamsContext.Provider

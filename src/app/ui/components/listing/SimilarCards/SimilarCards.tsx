@@ -1,5 +1,5 @@
-import { SimilarCard } from "../../common";
 import { getSimilarListings } from "~/app/(application)/actions";
+import EmblaCarousel from "../Carousel/EmblaCarousel";
 
 export default async function SimilarCards({
   pageParams,
@@ -11,23 +11,9 @@ export default async function SimilarCards({
 }) {
   const similarListings = (await getSimilarListings(pageParams))!;
 
-  return similarListings
-    ? similarListings.map((listing, index) => {
-        return (
-          <SimilarCard
-            key={index}
-            id={listing.id}
-            source={listing.source}
-            name={listing.name}
-            subtitle={`${listing.city}, ${listing.state}`}
-            imageUrl={listing.imageUrl}
-            numberOfGuests={listing.numberOfGuests}
-            bedrooms={listing.bedrooms}
-            bathrooms={listing.bathrooms}
-            price={listing.price}
-            className="snap-start"
-          />
-        );
-      })
-    : "Cannot find similar homes at this moment";
+  return similarListings ? (
+    <EmblaCarousel data={similarListings} type="card" slideNr={0} />
+  ) : (
+    "Cannot find similar homes at this moment"
+  );
 }

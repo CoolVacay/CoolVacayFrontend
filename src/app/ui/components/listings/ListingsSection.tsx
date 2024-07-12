@@ -6,7 +6,7 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
   const listings = (await getFilteredListings(query.toString()))!;
   const title =
     query.get("category") ??
-    (query.get("Match") && capitalize(query.get("Match")!));
+    (query.get("match") && capitalize(query.get("match")!));
 
   return listings?.length > 0 ? (
     <>

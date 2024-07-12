@@ -13,10 +13,10 @@ export async function getAllListings() {
   try {
     const results = await Promise.allSettled([
       getFetch<ListingData[]>(
-        `/Listings?Limit=8&Offset=0&FromDate=${startDate}&ToDate=${endDate}`,
+        `/listings?limit=8&offset=0&fromDate=${startDate}&toDate=${endDate}`,
       ),
       getFetch<ListingData[]>(
-        `/Listings?Limit=8&Offset=8&FromDate=${startDate}&ToDate=${endDate}`,
+        `/listings?limit=8&offset=8&fromDate=${startDate}&toDate=${endDate}`,
       ),
     ]);
 

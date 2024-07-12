@@ -18,8 +18,8 @@ export default function PricingDetailsCardContent({
 }) {
   const { searchParamsValues, updateSearchParams } = useAppSearchParams();
   const [dates, setDates] = useState<DateRangeType>([
-    searchParamsValues.FromDate,
-    searchParamsValues.ToDate,
+    searchParamsValues.fromDate,
+    searchParamsValues.toDate,
   ]);
   return (
     <div
@@ -36,9 +36,9 @@ export default function PricingDetailsCardContent({
           <SelectInput
             size="medium"
             disabled={true}
-            value={searchParamsValues.NumberOfGuests ?? "1"}
+            value={searchParamsValues.numberOfGuests ?? "1"}
             onChange={(e: SelectChangeEvent<string>) =>
-              updateSearchParams(["NumberOfGuests"], [e.target.value])
+              updateSearchParams(["numberOfGuests"], [e.target.value])
             }
           />
         </div>
@@ -48,8 +48,8 @@ export default function PricingDetailsCardContent({
         listing={listingInfo}
         params={params}
         searchParamsValues={searchParamsValues}
-        nights={searchParamsValues.ToDate.diff(
-          searchParamsValues.FromDate,
+        nights={searchParamsValues.toDate.diff(
+          searchParamsValues.fromDate,
           "day",
         )}
       />

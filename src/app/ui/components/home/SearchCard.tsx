@@ -22,13 +22,14 @@ export function SearchCard({ size }: { size: "small" | "big" }) {
   const [fromDate, toDate] = dates;
   const router = useRouter();
   const isSmallSize = size === "small";
+
   const handleSearch = () => {
     const params = new URLSearchParams();
-    if (location) params.append("Match", location);
-    if (fromDate) params.append("FromDate", fromDate.format("YYYY-MM-DD"));
-    if (toDate) params.append("ToDate", toDate.format("YYYY-MM-DD"));
-    params.append("NumberOfGuests", numberOfGuests);
-    return `/listings?Limit=10&Offset=0&${params.toString()}`;
+    if (location) params.append("match", location);
+    if (fromDate) params.append("fromDate", fromDate.format("YYYY-MM-DD"));
+    if (toDate) params.append("toDate", toDate.format("YYYY-MM-DD"));
+    params.append("numberOfGuests", numberOfGuests);
+    return `/listings?limit=10&offset=0&${params.toString()}`;
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

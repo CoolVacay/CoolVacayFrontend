@@ -28,12 +28,12 @@ export default function BookNowContent({
     useAppSearchParams();
 
   const [dates, setDates] = useState<DateRangeType>([
-    searchParamsValues.FromDate,
-    searchParamsValues.ToDate,
+    searchParamsValues.fromDate,
+    searchParamsValues.toDate,
   ]);
 
   useEffect(() => {
-    updateSearchParams(["FromDate", "ToDate"], [dates[0], dates[1]]);
+    updateSearchParams(["fromDate", "toDate"], [dates[0], dates[1]]);
   }, [dates, updateSearchParams]);
 
   return (
@@ -50,9 +50,9 @@ export default function BookNowContent({
         <div className="px-6 py-5">
           <SelectInput
             size="medium"
-            value={searchParamsValues.NumberOfGuests ?? "1"}
+            value={searchParamsValues.numberOfGuests ?? "1"}
             onChange={(e: SelectChangeEvent<string>) =>
-              updateSearchParams(["NumberOfGuests"], [e.target.value])
+              updateSearchParams(["numberOfGuests"], [e.target.value])
             }
           />
         </div>

@@ -30,9 +30,9 @@ export function PricingDetails({
         const details = await getPricingDetails(
           params.source,
           params.id,
-          searchParamsValues.FromDate.format("YYYY-MM-DD"),
-          searchParamsValues.ToDate.format("YYYY-MM-DD"),
-          searchParamsValues.NumberOfGuests,
+          searchParamsValues.fromDate.format("YYYY-MM-DD"),
+          searchParamsValues.toDate.format("YYYY-MM-DD"),
+          searchParamsValues.numberOfGuests,
         );
         setPricingDetails(details);
       } catch (err) {
@@ -43,9 +43,9 @@ export function PricingDetails({
     }
     void fetchPricingDetails();
   }, [
-    searchParamsValues.FromDate,
-    searchParamsValues.ToDate,
-    searchParamsValues.NumberOfGuests,
+    searchParamsValues.fromDate,
+    searchParamsValues.toDate,
+    searchParamsValues.numberOfGuests,
     params.source,
     params.id,
   ]);

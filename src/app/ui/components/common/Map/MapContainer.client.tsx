@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import Map, {
   NavigationControl,
@@ -9,19 +10,18 @@ import Map, {
   Layer,
 } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
+
+import { useAppSearchParams } from "~/context/SearchParamsContext";
+import { IconGenerator } from "../IconGenerator";
 import type {
   ListingData,
   MapboxMarkerData,
 } from "~/app/(application)/definitions";
-import { IconGenerator } from "../IconGenerator";
 import {
   clusterLayer,
   clusterCountLayer,
   unclusteredPointLayer,
 } from "./layers";
-import { useMemo, useRef, useState, useCallback } from "react";
-import dayjs from "dayjs";
-import { useSearchParams } from "next/navigation";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
 
@@ -52,17 +52,17 @@ export default function MapContent({
   >();
   const mapRef = useRef<MapRef>(null);
   const geojson = useMemo(() => listingsToGeoJSON(listings), [listings]);
-  const searchParams = useSearchParams();
-  const params = useMemo(() => {
-    return new URLSearchParams(searchParams);
-  }, [searchParams]);
+  const { searchParamsValues, searchParams } = useAppSearchParams();
+
   const newParams = () => {
-    params.delete("offset");
-    params.delete("limit");
-    return params;
+    searchParams.delete("offset");
+    searchParams.delete("limit");
+    return searchParams;
   };
-  const startDate = dayjs(params.get("FromDate")).format("MMM DD");
-  const endDate = dayjs(params.get("ToDate")).format("MMM DD");
+
+  const startDate = searchParamsValues.fromDate.format("MMM DD");
+  const endDate = searchParamsValues.toDate.format("MMM DD");
+
   const handleClick = useCallback(
     (event: mapboxgl.MapLayerMouseEvent) => {
       if (!mapRef.current) return;

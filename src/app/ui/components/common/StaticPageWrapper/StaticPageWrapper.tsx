@@ -22,7 +22,7 @@ export default function StaticPageWrapper({
           <Image
             alt={img.alt}
             src={img.src}
-            quality={90}
+            quality={100}
             fill
             priority={true}
             sizes="100vw"

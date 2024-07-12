@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import type { Dispatch, SetStateAction } from "react";
-import type { EmblaOptionsType } from "embla-carousel";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { Dialog, DialogContent } from "@mui/material";
+import { useAppSearchParams } from "~/context/SearchParamsContext";
 
 import type { ListingData } from "~/app/(application)/definitions";
 import EmblaCarousel from "../../listing/Carousel/EmblaCarousel";
@@ -22,25 +21,17 @@ export default function FullScreenDialog({
   listing: ListingData;
   handleClick: (url?: number | string) => void;
 }) {
-  const searchParams = useSearchParams();
-  const params = useMemo(() => {
-    return new URLSearchParams(searchParams);
-  }, [searchParams]);
-
-  const router = useRouter();
-  const pathname = usePathname();
-  const OPTIONS: EmblaOptionsType = {};
-  const SLIDES = Array.from(Array(listing.images).keys());
+  const { updateSearchParams, searchParamsValues, searchParams } =
+    useAppSearchParams();
 
   //TODO: replace params with Link, check Link options
   useEffect(() => {
-    setIsModalOpen(params?.get("query")?.includes("photoGallery") ?? false);
-  }, [params, setIsModalOpen]);
+    setIsModalOpen(searchParamsValues.modal.includes("photoGallery") ?? false);
+  }, [searchParamsValues.modal, setIsModalOpen]);
 
   const handleClose = () => {
     setIsModalOpen(false);
-    params.delete("query");
-    router.replace(`${pathname}?${params.toString()}`);
+    updateSearchParams(["modal"], [""]);
   };
 
   return (
@@ -64,11 +55,10 @@ export default function FullScreenDialog({
         </div>
         <DialogContent className="align-center flex justify-center pt-0">
           <EmblaCarousel
-            slides={SLIDES}
             handleClick={handleClick}
-            options={OPTIONS}
-            images={listing.images}
-            slideNr={Number.parseInt(params.get("query")?.at(-1) ?? "0")}
+            data={listing.images}
+            slideNr={Number.parseInt(searchParams.get("modal")?.at(-1) ?? "0")}
+            type="image"
           />
         </DialogContent>
       </Dialog>

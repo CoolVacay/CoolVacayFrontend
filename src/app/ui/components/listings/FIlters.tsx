@@ -31,22 +31,22 @@ export default function Filters() {
     useAppSearchParams();
 
   const [dates, setDates] = useState<DateRangeType>([
-    searchParamsValues.FromDate,
-    searchParamsValues.ToDate,
+    searchParamsValues.fromDate,
+    searchParamsValues.toDate,
   ]);
 
   const title =
     searchParams.get("category") ??
-    (searchParams?.get("Match") && capitalize(searchParams.get("Match")!));
+    (searchParams?.get("match") && capitalize(searchParams.get("match")!));
   const [location, setLocation] = useState(title);
 
   const handleSearch = useDebouncedCallback((term: string) => {
     if (!term) searchParams.delete("category");
-    updateSearchParams(["Match"], [term]);
+    updateSearchParams(["match"], [term]);
   }, 300);
 
   useEffect(() => {
-    updateSearchParams(["FromDate", "ToDate"], [dates[0], dates[1]]);
+    updateSearchParams(["fromDate", "toDate"], [dates[0], dates[1]]);
   }, [dates, updateSearchParams]);
 
   return (
@@ -68,7 +68,7 @@ export default function Filters() {
           onClick={() => {
             setLocation("");
             handleSearch("");
-            searchParams.delete("Match");
+            searchParams.delete("match");
             searchParams.delete("category");
             router.replace(`/listings?${searchParams.toString()}`);
           }}
@@ -117,9 +117,9 @@ export default function Filters() {
       </div>
       <div>
         <SimpleSelectInput
-          value={searchParamsValues.NumberOfGuests ?? "1"}
+          value={searchParamsValues.numberOfGuests ?? "1"}
           onChange={(e: SelectChangeEvent<string>) =>
-            updateSearchParams(["NumberOfGuests"], [e.target.value])
+            updateSearchParams(["numberOfGuests"], [e.target.value])
           }
           listOptions={guests}
         />

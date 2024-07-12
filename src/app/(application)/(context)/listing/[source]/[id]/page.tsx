@@ -17,13 +17,13 @@ export default async function Page({
   };
   searchParams: {
     category: string;
-    Match: string;
+    match: string;
   };
 }) {
   const pageParams = params ?? "";
   const listing = (await getListingData(pageParams))!;
   const query = new URLSearchParams(searchParams);
-  const navigateHome = !(query.get("Match") ?? query.get("category"));
+  const navigateHome = !(query.get("match") ?? query.get("category"));
 
   return (
     <main className="flex flex-col">

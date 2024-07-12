@@ -2,9 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import dayjs from "dayjs";
-
+import { useAppSearchParams } from "~/context/SearchParamsContext";
 import { IconGenerator } from "../IconGenerator";
 import type { ListingCardProps } from "~/app/(application)/definitions";
 import { truncateText } from "../../../../utils/helpers";
@@ -17,18 +15,17 @@ export default function ListingCard({
   imageUrl,
   price,
 }: ListingCardProps) {
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams.toString());
-  const startDate = dayjs(params.get("FromDate")).format("MMM DD, YYYY");
-  const endDate = dayjs(params.get("ToDate")).format("MMM DD, YYYY");
-  params.delete("Offset");
-  params.delete("Limit");
+  const { searchParamsValues, searchParams } = useAppSearchParams();
+  const startDate = searchParamsValues.fromDate.format("MMM DD, YYYY");
+  const endDate = searchParamsValues.toDate.format("MMM DD, YYYY");
+  searchParams.delete("offset");
+  searchParams.delete("limit");
 
   return (
     <div className="flex h-[405px] w-[360px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1">
       <div className="relative">
         <Link
-          href={`listing/${source}/${id}?${params.toString()}`}
+          href={`listing/${source}/${id}?${searchParams.toString()}`}
           className="w-min"
         >
           <Image
@@ -77,7 +74,7 @@ export default function ListingCard({
             </h6>
           </div>
         </div>
-        <Link href={`listing/${source}/${id}?${params.toString()}`}>
+        <Link href={`listing/${source}/${id}?${searchParams.toString()}`}>
           <button className="w-full rounded-full border border-primary py-3 font-bold text-primary hover:bg-primary hover:text-white">
             Book
           </button>

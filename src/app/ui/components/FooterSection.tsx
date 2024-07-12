@@ -10,7 +10,7 @@ const popularSearchLinks = [
 const quickLinks = [
   { name: "About Company", href: "/about-us" },
   { name: "Blog", href: "/blog" },
-  { name: "Policies", href: "/policies" },
+  { name: "Policies", href: "/privacy-policy" },
   { name: "Contact Us", href: "/contact-us" },
 ];
 const discoverLinks = ["Miami", "Los Angeles", "Chicago", "New York"];
@@ -104,7 +104,11 @@ function FooterSection() {
           <span className="text-primary-grey400"> - All rights reserved</span>
         </h6>
         <h6 className="text-primary-grey400">
-          Privacy · Terms · Accessibility
+          <Link href="/privacy-policy">Privacy</Link>
+          {" · "}
+          <Link href="/terms-and-conditions">Terms</Link>
+          {" · "}
+          <Link href="/accessibility-statement">Accessibility</Link>
         </h6>
       </div>
     </footer>
