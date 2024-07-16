@@ -20,3 +20,4 @@ export { Breadcrumbs } from "./Breadcrumbs/index";
 export { IconGenerator } from "./IconGenerator/index";
 export { RangeDatePicker } from "./RangeDatePicker/index";
 export { CustomChip } from "./CustomChip";
+export { StaticPageWrapper } from "./StaticPageWrapper/index";

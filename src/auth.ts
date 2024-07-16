@@ -11,7 +11,11 @@ import type { UserData } from "./app/(application)/definitions";
 import { authenticateGO } from "./app/(authentication)/actions";
 
 type CustomUser =
-  | (User & Pick<UserData["profile"], "phone" | "dateOfBirth" | "lastName">)
+  | (User &
+      Pick<
+        UserData["profile"],
+        "phone" | "dateOfBirth" | "lastName" | "nationality"
+      >)
   | null;
 
 declare module "next-auth" {
@@ -21,10 +25,13 @@ declare module "next-auth" {
   interface User {
     id?: string;
     name?: string | null;
-    lastName?: string | null;
-    phone?: string;
+    image?: string | null;
     email?: string | null;
-    dateOfBirth?: string;
+    lastName: string | null;
+    phone: string;
+    dateOfBirth: string;
+    nationality: string;
+    accessToken: string;
   }
 }
 
@@ -33,7 +40,10 @@ declare module "next-auth/jwt" {
     id: string;
     lastName: string;
     phone: string;
+    image: string;
     dateOfBirth: string;
+    nationality: string;
+    accessToken: string;
   }
 }
 
@@ -70,12 +80,15 @@ const providers: Provider[] = [
         const user = (await getUserFromDb(email, password)) as UserData;
         if (user?.accessToken) {
           return {
+            accessToken: user.accessToken,
             id: user.profile.id.toString(),
             name: user.profile.firstName,
             lastName: user.profile.lastName,
             phone: user.profile.phone,
             email: user.profile.email,
+            image: user.profile.image,
             dateOfBirth: user.profile.dateOfBirth,
+            nationality: user.profile.nationality,
           };
         } else {
           return null;
@@ -104,9 +117,22 @@ const authOptions: NextAuthConfig = {
     signIn: "/signin",
   },
   callbacks: {
-    async signIn({ account }) {
+    async signIn({ user, account }) {
       if (account?.provider === "google") {
-        await authenticateGO(account.id_token, account.access_token);
+        const googleUser = await authenticateGO(
+          account.id_token,
+          account.access_token,
+        );
+        if (googleUser) {
+          const userData = googleUser as UserData;
+          user.id = userData.profile.id.toString();
+          user.lastName = userData.profile.lastName;
+          user.phone = userData.profile.phone;
+          user.dateOfBirth = userData.profile.dateOfBirth;
+          user.nationality = userData.profile.nationality;
+          user.accessToken = userData.accessToken;
+          user.image = userData.profile.image;
+        }
       }
       return true;
     },
@@ -117,6 +143,9 @@ const authOptions: NextAuthConfig = {
         session.user.lastName = token.lastName;
         session.user.phone = token.phone;
         session.user.dateOfBirth = token.dateOfBirth;
+        session.user.nationality = token.nationality;
+        session.user.accessToken = token.accessToken;
+        session.user.image = token.image;
       }
       return session;
     },
@@ -126,6 +155,7 @@ const authOptions: NextAuthConfig = {
         token.lastName = user.lastName!;
         token.phone = user.phone!;
         token.dateOfBirth = user.dateOfBirth!;
+        token.accessToken = user.accessToken!;
       }
       return token;
     },

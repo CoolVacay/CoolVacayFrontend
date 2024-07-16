@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { Session } from "next-auth";
-
 import { IconGenerator } from "../IconGenerator";
 import NavBarLoginButton from "./NavBarLoginButton";
+import type { UserData } from "~/app/(application)/definitions";
 
-export default function NavBar({ session }: { session: Session | null }) {
+export default function NavBar({
+  session,
+}: {
+  session: UserData["profile"] | null;
+}) {
   const pathname = usePathname();
   const isWhiteVariant =
     pathname === "/" ||

@@ -69,6 +69,7 @@ export type UserData = {
     lastName: string;
     email: string;
     phone: string;
+    image: string;
     nationality: string;
     dateOfBirth: string;
     gender: string;

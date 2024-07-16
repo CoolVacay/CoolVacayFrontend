@@ -5,6 +5,7 @@ import { FetchError } from "../utils/definitions";
 import type { ListingData } from "./definitions";
 import type { IPricingDetails } from "../ui/components/listing/BookNow/BookNowCard.client";
 import type { IParams } from "./definitions";
+import type { UserData } from "./definitions";
 export interface IInquireArgs {
   name?: string;
   message?: string;
@@ -31,6 +32,53 @@ export async function inquire(
       Object.entries(values).filter(([_, v]) => v != ""),
     );
     const res = await postFetch(`/inquire`, modValues);
+    if (res instanceof FetchError) {
+      throw res;
+    }
+  } catch (error) {
+    if (error instanceof FetchError) {
+      return `${error.message}`;
+    } else {
+      return "Failed to send the inquiry";
+    }
+  }
+}
+
+interface IProfileDetails {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  phone: string;
+  nationality: string;
+  dateOfBirth: string;
+  gender: string;
+}
+export async function updateProfile(
+  prevState: string | undefined,
+  {
+    email,
+    firstName,
+    lastName,
+    phone,
+    nationality,
+    dateOfBirth,
+    gender,
+  }: IProfileDetails,
+) {
+  try {
+    const values = {
+      email,
+      firstName,
+      lastName,
+      phone,
+      dateOfBirth,
+      nationality,
+      gender,
+    };
+    const modValues = Object.fromEntries(
+      Object.entries(values).filter(([_, v]) => v != ""),
+    );
+    const res = await postFetch(`/users`, modValues, "PUT");
     if (res instanceof FetchError) {
       throw res;
     }
@@ -114,6 +162,19 @@ export async function getFilteredListings(query: string) {
     return res;
   } catch (error) {
     console.error("Error:", error);
+  }
+}
+
+export async function getProfileInfo(email: string) {
+  try {
+    const res = await getFetch<UserData["profile"]>(`/Users/email/${email}`);
+    if (res instanceof FetchError) {
+      throw new Error("Failed to fetch profile data");
+    }
+    return res;
+  } catch (error) {
+    console.error("Error:", error);
+    return null;
   }
 }
 

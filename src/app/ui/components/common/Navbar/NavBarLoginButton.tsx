@@ -1,6 +1,5 @@
 "use client";
 
-import type { Session } from "next-auth";
 import { useState } from "react";
 import { Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
@@ -8,12 +7,13 @@ import Logout from "@mui/icons-material/Logout";
 import { logOut } from "~/app/(authentication)/actions";
 import Link from "next/link";
 import Image from "next/image";
+import type { UserData } from "~/app/(application)/definitions";
 
 const NavBarLoginButton = ({
   session,
   isWhiteVariant,
 }: {
-  session: Session;
+  session: UserData["profile"];
   isWhiteVariant: boolean;
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -34,11 +34,11 @@ const NavBarLoginButton = ({
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
       >
-        {`${session.user?.name}` + " " + `${session.user?.lastName ?? ""}`}
+        {`${session.firstName}` + " " + `${session.lastName ?? ""}`}
         <span className="ml-2">
           <Image
             alt="avatar icon"
-            src={`${session.user?.image ?? `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}`}
+            src={`${session.image ?? `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}`}
             width={32}
             height={32}
             className="rounded-full"
@@ -85,7 +85,7 @@ const NavBarLoginButton = ({
             <ListItemIcon>
               <Image
                 alt="avatar icon"
-                src={`${session.user?.image ?? `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}`}
+                src={`${session.image ?? `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}`}
                 width={24}
                 height={24}
                 className="rounded-full"

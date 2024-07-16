@@ -7,18 +7,18 @@ import { FetchError } from "~/app/utils/definitions";
 
 async function getCategories() {
   try {
-    const res = await revalidateFetch("categories");
+    const res = await revalidateFetch<PopularCategoriesData[]>("categories");
     if (res instanceof FetchError) {
       throw new Error("Failed to load popular categories");
     }
-    return res.json();
+    return res;
   } catch (error) {
     console.error("Error:", error);
   }
 }
 
 export async function PopularCategories() {
-  const popularCategories = (await getCategories()) as PopularCategoriesData[];
+  const popularCategories = (await getCategories())!;
   return (
     <div className="flex flex-wrap md:justify-between">
       {popularCategories

@@ -1,5 +1,5 @@
-import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { CustomChip } from "../common";
 
 export function DiscoverSection() {
@@ -36,9 +36,12 @@ export function DiscoverSection() {
           Coast’s laidback surf. Skip the same old stretch of sand and find a
           new favorite beach hideaway.
         </h4>
-        <button className="w-40 rounded-[48px] bg-primary px-6 py-4 text-white">
+        <Link
+          href="/blog"
+          className="flex w-40 items-center justify-center rounded-[48px] bg-primary px-6 py-4 text-white"
+        >
           More details
-        </button>
+        </Link>
       </div>
     </section>
   );

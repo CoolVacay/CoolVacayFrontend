@@ -1,4 +1,4 @@
-import StaticPageWrapper from "../../ui/components/common/StaticPageWrapper/StaticPageWrapper";
+import { StaticPageWrapper } from "~/app/ui/components/common";
 
 export default function Page() {
   return (
