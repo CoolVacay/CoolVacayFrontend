@@ -6,7 +6,7 @@ import { signIn, signOut } from "~/auth";
 import { capitalize } from "../utils/helpers";
 import { redirect } from "next/navigation";
 import { FetchError } from "../utils/definitions";
-import { UserData } from "../(application)/definitions";
+import type { UserData } from "../(application)/definitions";
 
 export async function authenticateCR(
   prevState: string | undefined,

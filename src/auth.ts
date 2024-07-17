@@ -117,6 +117,18 @@ const authOptions: NextAuthConfig = {
     signIn: "/signin",
   },
   callbacks: {
+    async authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isOnProfile = nextUrl.pathname.startsWith("/profile");
+
+      if (isOnProfile) {
+        if (isLoggedIn) return true;
+        return false;
+      } else if (isLoggedIn) {
+        return Response.redirect(new URL("/", nextUrl));
+      }
+      return true;
+    },
     async signIn({ user, account }) {
       if (account?.provider === "google") {
         const googleUser = await authenticateGO(

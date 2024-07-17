@@ -5,6 +5,7 @@ import { auth } from "~/auth";
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 const STORE_CASHE_IN_HOURS = 24;
 
+//TODO:refactor headers
 export async function getFetch<T>(
   url: string,
   noCache = false,

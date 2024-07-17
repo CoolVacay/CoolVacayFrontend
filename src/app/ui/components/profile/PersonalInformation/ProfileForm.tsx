@@ -7,20 +7,12 @@ import { useFormik } from "formik";
 import { useFormState } from "react-dom";
 import { updateProfile } from "~/app/(application)/actions";
 import { ActionButton } from "../../authentication";
+import type { UserData } from "~/app/(application)/definitions";
 
 export default function ProfileForm({
   profileInfo,
 }: {
-  profileInfo: {
-    id: number | string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    nationality: string;
-    dateOfBirth: string;
-    gender: string;
-  } | null;
+  profileInfo: UserData["profile"] | null;
 }) {
   const [editMode, setEditMode] = useState(false);
   const [errorMessage, dispatch] = useFormState(updateProfile, undefined);
