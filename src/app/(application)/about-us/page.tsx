@@ -19,12 +19,12 @@ export default function Page() {
 
   return (
     <main className="flex flex-col">
-      <div className={`relative -mt-[96px] flex h-[588px]`}>
+      <div className="relative -mt-[96px] flex h-[588px]">
         <div className="absolute flex h-[588px] w-full">
           <Image
             alt="Coolvacay about us hero image"
             src="/about_us.jpeg"
-            quality={60}
+            quality={90}
             fill
             priority={true}
             sizes="100vw"

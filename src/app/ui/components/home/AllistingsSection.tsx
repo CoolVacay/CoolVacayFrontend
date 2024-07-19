@@ -39,7 +39,7 @@ export async function AllistingsSection() {
   ];
 
   return (
-    <section>
+    <section className="w-full">
       <div className="flex items-center justify-between">
         <h4 className="text-[28px]">All listings</h4>
         <Link href="/listings" className="flex items-center text-primary">

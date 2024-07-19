@@ -1,7 +1,10 @@
+import Link from "next/link";
 import { MainCard } from "../common";
+import { getBlogs } from "~/app/(application)/actions";
 
-//TODO:make blogSection dynamic
-export function BlogSection() {
+export async function BlogSection() {
+  const blogs = (await getBlogs())!;
+
   return (
     <section className="flex w-full flex-col">
       <div className="flex flex-col items-center">
@@ -13,17 +16,26 @@ export function BlogSection() {
         </h1>
       </div>
       <div className="grid grid-cols-3 gap-5 pb-12 pt-10 desktop:grid-cols-4">
-        {Array.from({ length: 4 }, (_, i) => i + 1).map((card) => {
-          return (
-            <MainCard
-              imageUrl="/blog_photo.jpeg"
-              name="How to get more bookings with Coolvacay in 2024"
-              subtitle="August 1, 2024  •  2 min read "
-              key={card}
-              isBlogCard
-            />
-          );
-        })}
+        {blogs.length > 0 ? (
+          blogs.slice(0, 4).map((blog) => {
+            return (
+              <Link href={`/blog/${blog.id}`} key={blog.id}>
+                <MainCard
+                  imageUrl={blog.image ?? "/blog_photo.jpeg"}
+                  name={
+                    blog.name ??
+                    "How to get more bookings with Coolvacay in 2024"
+                  }
+                  subtitle={blog.subtitle ?? "August 1, 2024  •  2 min read "}
+                  key={blog.id}
+                  isBlogCard
+                />
+              </Link>
+            );
+          })
+        ) : (
+          <p>No blogs available at the moment</p>
+        )}
       </div>
     </section>
   );

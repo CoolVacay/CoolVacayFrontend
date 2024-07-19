@@ -31,14 +31,19 @@ export default function AuthenticationLayout({
                 </div>
               </div>
               <div className="invisible relative h-full desktop:visible desktop:w-1/2">
-                {
-                  <Image
-                    alt="Cool Vacay Sign In Background Image"
-                    src="/signInImage.png"
-                    fill
-                    quality={100}
-                  />
-                }
+                <Image
+                  alt="Cool Vacay Authentication Image"
+                  src="/authentication_image.jpeg"
+                  fill
+                  width={0}
+                  priority={true}
+                  height={0}
+                  sizes="100vw"
+                  quality={90}
+                  style={{
+                    objectFit: "cover",
+                  }}
+                />
               </div>
             </div>
           </ThemeProvider>

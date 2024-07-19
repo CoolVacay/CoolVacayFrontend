@@ -85,8 +85,8 @@ export default function Page() {
       <div className="relative mt-16 flex w-full">
         <Image
           alt="Coolvacay about us, second image"
-          src="/contact_us_map.svg"
-          quality={90}
+          src="/location.png"
+          quality={100}
           width={0}
           height={0}
           sizes="100vw"

@@ -18,18 +18,17 @@ import {
 export default async function HomePage() {
   return (
     <main className="flex flex-col">
-      <div className="relative flex h-[614px]">
+      <div className="relative -mt-[96px] flex h-[714px]">
         <div className="absolute flex h-[714px] w-full">
           <Image
             alt="Coolvacay background image"
             src="/landing_background.png"
-            quality={100}
+            quality={80}
             fill
             priority={true}
             sizes="100vw"
             style={{
               position: "absolute",
-              top: -100,
               objectFit: "cover",
               filter: "brightness(60%)",
               zIndex: -1,
@@ -39,7 +38,9 @@ export default async function HomePage() {
       </div>
       <div className="flex justify-center">
         <div className="flex max-w-[1220px] flex-col items-center justify-center">
-          <HeroSection />
+          <div className="flex w-full items-center justify-center">
+            <HeroSection />
+          </div>
           <div className="w-full">
             <h1 className="py-7 text-[28px]">Popular Categories</h1>
             <Suspense fallback={<PopularCategoriesSkeleton />}>
@@ -54,7 +55,9 @@ export default async function HomePage() {
           <Suspense fallback={<AllListingsSkeleton />}>
             <AllistingsSection />
           </Suspense>
-          <BlogSection />
+          <Suspense fallback={<FeaturedListingsSection />}>
+            <BlogSection />
+          </Suspense>
         </div>
       </div>
     </main>

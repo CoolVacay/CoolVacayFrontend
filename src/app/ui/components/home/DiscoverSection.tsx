@@ -12,8 +12,12 @@ export function DiscoverSection() {
           width={0}
           height={0}
           sizes="100vw"
-          quality={90}
-          style={{ height: "460px", width: "auto" }}
+          quality={30}
+          style={{
+            objectFit: "cover",
+            height: "460px",
+            width: "492px",
+          }}
           className="rounded-[30px]"
         />
       </div>

@@ -140,6 +140,25 @@ export async function getCountries() {
   }
 }
 
+export interface IBlog {
+  id: string;
+  image: string;
+  name: string;
+  subtitle: string;
+}
+
+export async function getBlogs() {
+  try {
+    const res = await getFetch<IBlog[]>(`/Blogs`);
+    if (res instanceof FetchError) {
+      throw new Error("Failed to fetch blogs");
+    }
+    return res;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 export async function getListingData({ source, id }: IParams) {
   try {
     // await new Promise((resolve) => setTimeout(resolve, 5000));
