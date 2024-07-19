@@ -1,19 +1,16 @@
 "use client";
 
-import { RangeDatePicker, SelectInput } from "../../common";
-import { Divider } from "@mui/material";
-import { PricingDetails } from "./PricingDetails";
-import type { IParams, ListingData } from "~/app/(application)/definitions";
-import { useAppSearchParams } from "~/context/SearchParamsContext";
 import { useState } from "react";
+import { useAppSearchParams } from "~/context/SearchParamsContext";
+import { Divider, type SelectChangeEvent } from "@mui/material";
+import { PricingDetails } from "./PricingDetails";
+import { RangeDatePicker, SelectInput } from "../../common";
+import type { IParams } from "~/app/(application)/definitions";
 import type { DateRangeType } from "../../home/SearchCard";
-import type { SelectChangeEvent } from "@mui/material";
 
 export default function PricingDetailsCardContent({
-  listingInfo,
   params,
 }: {
-  listingInfo: ListingData;
   params: IParams;
 }) {
   const { searchParamsValues, updateSearchParams } = useAppSearchParams();
@@ -44,15 +41,7 @@ export default function PricingDetailsCardContent({
         </div>
       </div>
       <Divider />
-      <PricingDetails
-        listing={listingInfo}
-        params={params}
-        searchParamsValues={searchParamsValues}
-        nights={searchParamsValues.toDate.diff(
-          searchParamsValues.fromDate,
-          "day",
-        )}
-      />
+      <PricingDetails params={params} searchParamsValues={searchParamsValues} />
     </div>
   );
 }

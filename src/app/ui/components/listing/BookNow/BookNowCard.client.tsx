@@ -11,9 +11,14 @@ import { useAppSearchParams } from "~/context/SearchParamsContext";
 
 export interface IPricingDetails {
   totalPrice: number;
+  totalPriceStr: string;
+  numberOfNights: number;
+  pricePerNight: number;
+  pricePerNightStr: string;
   components: {
     name: string;
     total: number;
+    totalStr: string;
   }[];
 }
 
