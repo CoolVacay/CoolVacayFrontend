@@ -1,6 +1,6 @@
 "use server";
 
-import { postFetch, getFetch } from "../utils/api-helpers";
+import { postFetch, getFetch, getHTMLFetch } from "../utils/api-helpers";
 import { FetchError } from "../utils/definitions";
 import type { ListingData } from "./definitions";
 import type { IPricingDetails } from "../ui/components/listing/BookNow/BookNowCard.client";
@@ -178,6 +178,19 @@ export async function getProfileInfo(email: string) {
   }
 }
 
+export async function getStaticPage(type: string) {
+  try {
+    const res = await getHTMLFetch(`/StaticPages/${type}`);
+    if (res instanceof FetchError) {
+      throw new Error(`Failed to get ${type} static page`);
+    }
+    return res;
+  } catch (error) {
+    console.error("Error:", error);
+    return null;
+  }
+}
+
 export async function getSimilarListings({ source, id }: IParams) {
   try {
     const res = await getFetch<ListingData[]>(
@@ -190,5 +203,23 @@ export async function getSimilarListings({ source, id }: IParams) {
     return res;
   } catch (error) {
     console.error("Error:", error);
+  }
+}
+
+export async function registerFollower(
+  prevState: string | undefined,
+  { email }: { email: string },
+) {
+  try {
+    const res = await postFetch(`/Followers/Register`, { email });
+    if (res instanceof FetchError) {
+      throw res;
+    }
+  } catch (error) {
+    if (error instanceof FetchError) {
+      return `${error.message}`;
+    } else {
+      return "Failed to subscribe";
+    }
   }
 }

@@ -6,18 +6,30 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 const STORE_CASHE_IN_HOURS = 24;
 
 //TODO:refactor headers
+export async function createHeaders(contentType: string) {
+  try {
+    const session = await auth();
+    const headers = {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+      "Content-Type": contentType,
+    };
+    return headers;
+  } catch (err) {
+    const headers = {
+      "Content-Type": "application/json; charset=utf-8",
+    };
+    return headers;
+  }
+}
+
 export async function getFetch<T>(
   url: string,
   noCache = false,
 ): Promise<T | FetchError> {
   try {
-    const session = await auth();
     const res = await fetch(`${API_BASE_URL}/api${url}`, {
       cache: noCache ? "no-store" : "force-cache",
-      headers: {
-        Authorization: `Bearer ${session?.user?.accessToken}`,
-        "Content-Type": "application/json",
-      },
+      headers: await createHeaders("application/json"),
     });
     if (!res.ok) {
       const errResponse = await res.text();
@@ -25,16 +37,34 @@ export async function getFetch<T>(
       throw new FetchError(errorText.error);
     }
     const data = (await res.json()) as T;
-    if (!res.ok) {
-      const errResponse = await res.text();
-      const errorText = JSON.parse(errResponse) as ErrorInterface;
-      throw new FetchError(errorText.error);
-    }
     return data;
   } catch (err) {
     if (err instanceof FetchError) {
       return err;
     } else {
+      console.error(err, "err");
+      return new FetchError("An unknown error occurred");
+    }
+  }
+}
+
+export async function getHTMLFetch(url: string) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api${url}`, {
+      headers: await createHeaders("text/html"),
+    });
+    if (!res.ok) {
+      const errResponse = await res.text();
+      const errorText = JSON.parse(errResponse) as ErrorInterface;
+      throw new FetchError(errorText.error);
+    }
+    const data = await res.text();
+    return data;
+  } catch (err) {
+    if (err instanceof FetchError) {
+      return err;
+    } else {
+      console.error(err, "err");
       return new FetchError("An unknown error occurred");
     }
   }

@@ -18,9 +18,9 @@ export default function ProfileForm({
   const [errorMessage, dispatch] = useFormState(updateProfile, undefined);
 
   const ValidationSchema = Yup.object({
-    email: Yup.string().required("Street field is required"),
-    firstName: Yup.string().required("City field is required"),
-    lastName: Yup.string().required("State field is required"),
+    email: Yup.string().required("Email field is required"),
+    firstName: Yup.string().required("First Name field is required"),
+    lastName: Yup.string().required("Last Name field is required"),
   });
 
   const formik = useFormik({
@@ -124,6 +124,7 @@ export default function ProfileForm({
                 name="dateOfBirth"
                 value={formik.values.dateOfBirth}
                 variant="rectangle"
+                placeholder="Birthdate"
                 disabled={!editMode && true}
                 styles="h-[40px] border border-[#EAEAEF]"
               />

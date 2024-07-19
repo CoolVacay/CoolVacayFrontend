@@ -10,19 +10,18 @@ export default function StaticPageWrapper({
   img: {
     src: string;
     alt: string;
-    height: string;
   };
   title: string;
   subtitle: string;
 }) {
   return (
     <main className="flex flex-col">
-      <div className={`relative -mt-[96px] flex h-[${img.height}]`}>
-        <div className={`absolute flex h-[${img.height}] w-full`}>
+      <div className={`relative -mt-[96px] flex h-[588px]`}>
+        <div className={`absolute flex h-[588px] w-full`}>
           <Image
             alt={img.alt}
             src={img.src}
-            quality={100}
+            quality={50}
             fill
             priority={true}
             sizes="100vw"

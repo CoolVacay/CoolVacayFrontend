@@ -19,18 +19,17 @@ export default function Page() {
 
   return (
     <main className="flex flex-col">
-      <div className="relative flex h-[614px]">
-        <div className="absolute flex h-[714px] w-full">
+      <div className={`relative -mt-[96px] flex h-[588px]`}>
+        <div className="absolute flex h-[588px] w-full">
           <Image
             alt="Coolvacay about us hero image"
-            src="/about_us.png"
-            quality={100}
+            src="/about_us.jpeg"
+            quality={60}
             fill
             priority={true}
             sizes="100vw"
             style={{
               position: "absolute",
-              top: -100,
               objectFit: "cover",
               filter: "brightness(40%)",
               zIndex: -1,
@@ -42,13 +41,13 @@ export default function Page() {
         <div className="flex max-w-[1220px] flex-col items-center justify-center">
           <div className="absolute top-0 text-white">
             <div className="flex max-w-[1220px] items-center justify-center py-56">
-              <div className="w-full">
+              <div className="w-full text-center">
                 <h1 className="mb-8 text-[80px] font-medium leading-[80px] tracking-tight">
-                  About Coolvacay
+                  Welcome to CoolVacay!
                 </h1>
-                <h6 className="text-center text-xl leading-[30px]">
-                  At CoolVacay, we specialize in turning your dreams into
-                  reality.
+                <h6 className="mx-60 text-center text-xl leading-[30px]">
+                  At CoolVacay, we believe in transforming the way timeshare
+                  resorts and individual vacation properties are managed.
                 </h6>
               </div>
             </div>
@@ -59,9 +58,9 @@ export default function Page() {
                 <div className="flex h-[549px] w-[592px] shrink-0">
                   <Image
                     alt="Coolvacay about us, second image"
-                    src="/about-us-2.jpeg"
+                    src="/about_us_2.jpeg"
                     className="rounded-2xl"
-                    quality={90}
+                    quality={60}
                     width={0}
                     height={0}
                     sizes="100vw"
@@ -76,15 +75,13 @@ export default function Page() {
                 <div className="flex flex-col gap-3">
                   <CustomChip label="Know more" width={100} />
                   <h2 className="text-[58px] font-medium leading-[67px]">
-                    Rent with peace of mind with Coolvacay
+                    Join the CoolVacay Family
                   </h2>
                   <p className="text-lg leading-7 text-[#676D73]">
-                    Specializing in the marketing and management of vacation
-                    rental properties, we partner directly with owners to unlock
-                    the full potential of unused vacation rental and resort
-                    properties. Our expertise lies in optimizing earnings for
-                    owners, ensuring that every property sees maximum occupancy
-                    and delivers consistent returns.
+                    {`We invite you to join the CoolVacay family and experience
+                    the difference our dedicated team and innovative solutions
+                    can make. Let's unlock the full potential of your property
+                    together.`}
                   </p>
                   <div className="mt-8 grid grid-cols-3 gap-8">
                     {partners.map((partner) => {
@@ -108,15 +105,14 @@ export default function Page() {
         <div className="flex justify-center bg-[#FAFAFA] py-16">
           <div className="flex max-w-[1220px] items-center justify-center gap-24">
             <div className="flex flex-col gap-8">
-              <h1 className="text-[40px] font-bold leading-10	">Our mission</h1>
+              <h1 className="text-[40px] font-bold leading-10	">Our Story</h1>
               <p className="font-medium text-[#676D73]">
-                At CoolVacay, our mission is to transform your dreams into
-                unforgettable experiences. We specialize in curating exceptional
-                vacation options that cater to your unique desires and
-                preferences. Whether you seek the tranquility of a cozy cabin
-                nestled in the woods or the luxury of a coastal resort
-                overlooking pristine beaches, we are dedicated to making your
-                vacation dreams a reality.
+                {` Founded by a group of passionate travelers and real estate
+                experts, CoolVacay was born from a desire to help property
+                owners maximize their income and share their amazing properties
+                with the world. We understand the challenges and joys of
+                property ownership, and we're here to make the experience as
+                rewarding as possible.`}
               </p>
               <div className="grid grid-cols-2 gap-8">
                 <InfoCard
@@ -144,7 +140,7 @@ export default function Page() {
             <div className="flex h-[537px] w-[542px] shrink-0">
               <Image
                 alt="Coolvacay about us, third image"
-                src="/contact_us_2.png"
+                src="/about_us_3.jpeg"
                 className="rounded-2xl"
                 quality={90}
                 width={0}
@@ -169,7 +165,7 @@ export default function Page() {
           </p>
           <div className="mt-14 flex items-center justify-start gap-6">
             <ReviewCard
-              title={`"Best vacation of my life"`}
+              title="Best vacation of my life"
               description=""
               size="small"
               iconSrc="/avatar_1.svg"
@@ -179,27 +175,27 @@ export default function Page() {
               }}
             />
             <ReviewCard
-              title={`"It was a very good experience"`}
+              title="It was a very good experience"
               description=""
               size="medium"
               iconSrc="/avatar_2.svg"
               iconDescription={{
-                name: "John Doe",
-                proffesion: "CTE of Nerooni",
+                name: "Jerry Narrow",
+                proffesion: "CTF of Vectorian",
               }}
             />
             <ReviewCard
-              title={`"Smoothest experience ever"`}
+              title="Smoothest experience ever"
               description=""
               size="small"
               iconSrc="/avatar_3.svg"
               iconDescription={{
-                name: "John Doe",
-                proffesion: "CTE of Nerooni",
+                name: "Liam Meri",
+                proffesion: "CTO of HeroSection",
               }}
             />
           </div>
-          <div className="my-16">
+          <div className="my-16 w-full">
             <Newsletter />
           </div>
         </div>
