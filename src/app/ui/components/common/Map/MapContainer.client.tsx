@@ -60,8 +60,8 @@ export default function MapContent({
     return searchParams;
   };
 
-  const startDate = searchParamsValues.fromDate.format("MMM DD");
-  const endDate = searchParamsValues.toDate.format("MMM DD");
+  const startDate = searchParamsValues.fromDate?.format("MMM DD");
+  const endDate = searchParamsValues.toDate?.format("MMM DD");
 
   const handleClick = useCallback(
     (event: mapboxgl.MapLayerMouseEvent) => {

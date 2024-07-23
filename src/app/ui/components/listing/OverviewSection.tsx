@@ -7,11 +7,12 @@ import { IconGenerator } from "../common";
 export default function Overview({ listing }: { listing: ListingData }) {
   const [readMore, setReadMore] = useState(false);
   const [viewMore, setViewMore] = useState(false);
+
   return (
     <div className="max-w-[800px]">
       <h1 className="text-2xl font-bold">Overview</h1>
       <article
-        className={`${readMore ? "line-clamp-none" : "line-clamp-6 "} pt-4 text-justify `}
+        className={`${readMore ? "line-clamp-none" : "line-clamp-6 "} whitespace-pre-line pt-4 text-justify	`}
       >
         {listing.description}
       </article>

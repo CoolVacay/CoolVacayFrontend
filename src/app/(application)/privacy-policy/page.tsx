@@ -14,7 +14,6 @@ export default async function Page() {
       title="Privacy Policy"
       subtitle="Last modified: May 15, 2024"
     >
-      hi
       {privacyPolicyHTML ? parse(privacyPolicyHTML) : "Under construction"}
     </StaticPageWrapper>
   );

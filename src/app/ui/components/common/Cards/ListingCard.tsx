@@ -16,8 +16,8 @@ export default function ListingCard({
   price,
 }: ListingCardProps) {
   const { searchParamsValues, searchParams } = useAppSearchParams();
-  const startDate = searchParamsValues.fromDate.format("MMM DD, YYYY");
-  const endDate = searchParamsValues.toDate.format("MMM DD, YYYY");
+  const startDate = searchParamsValues.fromDate?.format("MMM DD, YYYY");
+  const endDate = searchParamsValues.toDate?.format("MMM DD, YYYY");
   searchParams.delete("offset");
   searchParams.delete("limit");
 

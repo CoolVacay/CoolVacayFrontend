@@ -12,7 +12,6 @@ import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
 import { MenuItem } from "@mui/material";
 
-import { capitalize } from "~/app/utils/helpers";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 import { IconGenerator, SimpleInput, SimpleSelectInput } from "../common";
 import type { DateRangeType } from "../home/SearchCard";
@@ -35,9 +34,7 @@ export default function Filters() {
     searchParamsValues.toDate,
   ]);
 
-  const title =
-    searchParams.get("category") ??
-    (searchParams?.get("match") && capitalize(searchParams.get("match")!));
+  const title = searchParams.get("category") ?? searchParams?.get("match");
   const [location, setLocation] = useState(title);
 
   const handleSearch = useDebouncedCallback((term: string) => {

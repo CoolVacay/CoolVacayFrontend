@@ -23,6 +23,8 @@ export interface ListingData {
   }[];
   amenities: string[];
   numberOfGuests: number;
+  cancellationPolicy: string;
+  houseRules: string;
 }
 
 export type ListingCardProps = Pick<

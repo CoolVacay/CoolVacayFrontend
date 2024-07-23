@@ -6,6 +6,8 @@ import Overview from "~/app/ui/components/listing/OverviewSection";
 import BookNow from "~/app/ui/components/listing/BookNow/BookNowCard.server";
 import { Breadcrumbs, MapContainer } from "~/app/ui/components/common";
 import SimilarCards from "~/app/ui/components/listing/SimilarCards/SimilarCards";
+import PolicyAndRules from "~/app/ui/components/listing/PolicyAndRules";
+import { Divider } from "@mui/material";
 
 export default async function Page({
   params,
@@ -58,7 +60,7 @@ export default async function Page({
               </div>
             </div>
             <Gallery listing={listing} />
-            <div className="flex gap-6 py-10">
+            <div className="my-10 flex gap-6">
               <div>
                 <Overview listing={listing} />
                 <div className="max-h-60 w-full">
@@ -68,15 +70,19 @@ export default async function Page({
                     listing={[{ ...listing }]}
                   />
                 </div>
-                <div className="py-6">
+                <div className="mt-6">
                   <h1 className="text-sm text-[#676D73]">
                     Listed by{" "}
-                    <span className="text-sm text-black">{listing.source}</span>
+                    <span className="text-sm font-medium text-black">
+                      {listing.source}
+                    </span>
                   </h1>
                 </div>
               </div>
               <BookNow params={params} />
             </div>
+            <Divider className="mb-10" />
+            <PolicyAndRules listing={listing} />
             <h5 className="mb-10 text-2xl font-bold">
               View similar homes in this area
             </h5>

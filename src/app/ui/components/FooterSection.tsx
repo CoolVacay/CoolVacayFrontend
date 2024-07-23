@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import { IconGenerator } from "./common";
 
@@ -12,6 +13,11 @@ const quickLinks = [
   { name: "Blog", href: "/blog" },
   { name: "Policies", href: "/privacy-policy" },
   { name: "Contact Us", href: "/contact-us" },
+];
+const staticPages = [
+  { name: "Privacy", href: "/privacy-policy" },
+  { name: "Terms", href: "/terms-and-conditions" },
+  { name: "Accessibility", href: "/accessibility-statement" },
 ];
 const discoverLinks = ["Miami", "Los Angeles", "Chicago", "New York"];
 
@@ -104,11 +110,21 @@ function FooterSection() {
           <span className="text-primary-grey400"> - All rights reserved</span>
         </h6>
         <h6 className="text-primary-grey400">
-          <Link href="/privacy-policy">Privacy</Link>
-          {" · "}
-          <Link href="/terms-and-conditions">Terms</Link>
-          {" · "}
-          <Link href="/accessibility-statement">Accessibility</Link>
+          {staticPages.map((page, index) => {
+            return (
+              <React.Fragment key={page.name}>
+                <Link
+                  key={page.name}
+                  href={page.href}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {page.name}
+                </Link>
+                {index < 2 && " · "}
+              </React.Fragment>
+            );
+          })}
         </h6>
       </div>
     </footer>

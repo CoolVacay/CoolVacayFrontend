@@ -128,7 +128,7 @@ export default function Blogpage() {
                 <h5 className="text-2xl font-medium">
                   Find your perfect place now
                 </h5>
-                <SearchCard size="small" />
+                <SearchCard size="small" locationsList={[]} />
               </div>
               <div className="flex h-min flex-col gap-5 rounded-[10px] bg-[#F7F7F7] p-6">
                 <NewsletterForm orientation="vertical" />

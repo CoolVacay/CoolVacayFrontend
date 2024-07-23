@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MainCard } from "../common";
 import { getBlogs } from "~/app/(application)/actions";
+import dayjs from "dayjs";
 
 export async function BlogSection() {
   const blogs = (await getBlogs())!;
@@ -21,12 +22,16 @@ export async function BlogSection() {
             return (
               <Link href={`/blog/${blog.id}`} key={blog.id}>
                 <MainCard
-                  imageUrl={blog.image ?? "/blog_photo.jpeg"}
+                  imageUrl={
+                    blog.thumbnailImageUrl.length > 0
+                      ? blog.thumbnailImageUrl
+                      : "/blog_photo.jpeg"
+                  }
                   name={
-                    blog.name ??
+                    blog.title ??
                     "How to get more bookings with Coolvacay in 2024"
                   }
-                  subtitle={blog.subtitle ?? "August 1, 2024  •  2 min read "}
+                  subtitle={`${dayjs(blog.createdOn).format("MMMM D, YYYY")}  •  ${blog.readTime} read `}
                   key={blog.id}
                   isBlogCard
                 />

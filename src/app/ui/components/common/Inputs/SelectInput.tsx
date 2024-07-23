@@ -54,7 +54,14 @@ export default function SelectInput({
             defaultValue={guests[0]}
           >
             {guests.map((guest) => (
-              <MenuItem key={guest} value={guest} dense sx={{ fontSize: 12 }}>
+              <MenuItem
+                key={guest}
+                value={guest}
+                dense
+                sx={{
+                  fontSize: size === "small" ? "12px" : "16px",
+                }}
+              >
                 {`${guest} ${guest === "1" ? "guest" : "guests"}`}
               </MenuItem>
             ))}

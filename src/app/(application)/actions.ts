@@ -142,9 +142,13 @@ export async function getCountries() {
 
 export interface IBlog {
   id: string;
-  image: string;
-  name: string;
-  subtitle: string;
+  title: string;
+  description: string;
+  isFeatured: boolean;
+  thumbnailImageUrl: string;
+  readTime: string;
+  createdOn: string;
+  relatedLocation: string;
 }
 
 export async function getBlogs() {
@@ -159,9 +163,26 @@ export async function getBlogs() {
   }
 }
 
+export interface ILocationsList {
+  icon: string;
+  match: string;
+  displayName: string;
+}
+
+export async function getLocationsList() {
+  try {
+    const res = await getFetch<ILocationsList[]>(`/Listings/Codifiers`);
+    if (res instanceof FetchError) {
+      throw new Error("Failed to fetch locations");
+    }
+    return res;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 export async function getListingData({ source, id }: IParams) {
   try {
-    // await new Promise((resolve) => setTimeout(resolve, 5000));
     const res = await getFetch<ListingData>(`/Listings/${source}/${id}`);
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch listing data");

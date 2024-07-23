@@ -1,18 +1,29 @@
 "use client";
 
-import { InputLabel, Input, FormControl } from "@mui/material";
+import { Autocomplete, Box, FormControl, TextField } from "@mui/material";
 import { IconGenerator, RangeDatePicker, SelectInput } from "../common";
 import { useRouter } from "next/navigation";
 import type { SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
+import type { ILocationsList } from "~/app/(application)/actions";
 
 export type DateRangeType = [Dayjs, Dayjs];
-
+interface CustomHTMLAttributes extends React.HTMLAttributes<HTMLLIElement> {
+  key?: React.Key;
+}
 //TODO: re-style/refactor when you add functionality
-export function SearchCard({ size }: { size: "small" | "big" }) {
+
+export function SearchCard({
+  size,
+  locationsList,
+}: {
+  size: "small" | "big";
+  locationsList: ILocationsList[];
+}) {
   const [location, setLocation] = useState("");
+  const [autocompleteValue, setAutocompleteValue] = useState("");
 
   const [dates, setDates] = useState<DateRangeType>([
     dayjs(),
@@ -25,7 +36,7 @@ export function SearchCard({ size }: { size: "small" | "big" }) {
 
   const handleSearch = () => {
     const params = new URLSearchParams();
-    if (location) params.append("match", location);
+    if (autocompleteValue) params.append("match", autocompleteValue);
     if (fromDate) params.append("fromDate", fromDate.format("YYYY-MM-DD"));
     if (toDate) params.append("toDate", toDate.format("YYYY-MM-DD"));
     params.append("numberOfGuests", numberOfGuests);
@@ -48,32 +59,76 @@ export function SearchCard({ size }: { size: "small" | "big" }) {
           >
             <div className="flex h-full grow flex-col">
               <FormControl fullWidth variant="standard" sx={{ height: "100%" }}>
-                <InputLabel
-                  shrink={true}
-                  htmlFor="component-simple"
-                  className={`block ${isSmallSize ? "text-sm" : "text-2xl"} font-medium`}
-                >
-                  Location
-                </InputLabel>
-                <Input
-                  id="component-simple"
-                  placeholder="Select Location"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  sx={{
-                    padding: isSmallSize ? "0px" : "14px 26px 10px 0px",
-                    fontSize: isSmallSize ? "12px" : "20px",
-                    fontWeight: 500,
+                <Autocomplete
+                  id="location-select"
+                  options={locationsList}
+                  autoHighlight
+                  getOptionLabel={(option) => option.displayName}
+                  inputValue={location}
+                  onChange={(event, newValue) => {
+                    setAutocompleteValue(newValue ? newValue.match : "");
                   }}
-                  fullWidth
-                  endAdornment={
-                    <IconGenerator
-                      alt="Location Icon"
-                      src="/location-pin.svg"
-                      width={isSmallSize ? "16px" : "28px"}
-                      className={`pointer-events-none absolute ${isSmallSize ? "right-[2px]" : "right-2 top-2"}`}
+                  onInputChange={(event, newInputValue) => {
+                    setLocation(newInputValue);
+                  }}
+                  renderOption={(props: CustomHTMLAttributes, option) => {
+                    const { key, ...optionProps } = props;
+                    return (
+                      <Box
+                        key={key}
+                        component="li"
+                        sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                        {...optionProps}
+                      >
+                        <IconGenerator
+                          width="20px"
+                          src="/location-pin.svg"
+                          alt={option.displayName}
+                        />
+                        {option.displayName}
+                      </Box>
+                    );
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Location"
+                      variant="standard"
+                      placeholder="Select Location"
+                      inputProps={{
+                        ...params.inputProps,
+                      }}
+                      InputLabelProps={{
+                        className: `block ${isSmallSize ? "text-sm" : "text-2xl"} font-medium`,
+                      }}
+                      InputProps={{
+                        ...params.InputProps,
+                        sx: {
+                          padding: isSmallSize
+                            ? "0px"
+                            : "14px 0px 14px 0px !important",
+                          fontSize: isSmallSize ? "12px" : "20px",
+                          fontWeight: 500,
+                        },
+                        startAdornment: (
+                          <IconGenerator
+                            alt="Location Icon"
+                            src="/location-pin.svg"
+                            width={isSmallSize ? "16px" : "28px"}
+                            className={`${isSmallSize ? "right-[2px]" : "left-0 top-3"} mr-2`}
+                          />
+                        ),
+                        endAdornment: (
+                          <IconGenerator
+                            alt="avatar icon"
+                            src={`/down-arrow.svg`}
+                            width={"32px"}
+                            className={`absolute right-1 top-3`}
+                          />
+                        ),
+                      }}
                     />
-                  }
+                  )}
                 />
               </FormControl>
             </div>

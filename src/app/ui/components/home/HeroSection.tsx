@@ -1,6 +1,8 @@
 import { SearchCard } from "./SearchCard";
+import { getLocationsList } from "~/app/(application)/actions";
 
 export async function HeroSection() {
+  const locationsList = (await getLocationsList())!;
   return (
     <main className="absolute top-44 text-white">
       <div className="flex max-w-[1220px] justify-between">
@@ -20,7 +22,7 @@ export async function HeroSection() {
             </div>
           </div>
         </div>
-        <SearchCard size="big" />
+        <SearchCard size="big" locationsList={locationsList} />
       </div>
     </main>
   );
