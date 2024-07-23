@@ -71,25 +71,3 @@ export default function SimpleSelectInput({
     </div>
   );
 }
-
-{
-  /* <div className="w-full">
-<label htmlFor="country" className="mb-1 block text-lg font-medium">
-  Country<span className="absolute">*</span>
-</label>
-<SimpleSelectInput
-  listOptions={countries}
-  name="country"
-  value={formik.values.country}
-  onChange={(e) => formik.setFieldValue("country", e.target.value)}
-  size="medium"
-  onBlur={formik.handleBlur}
-  error={formik.touched.country && Boolean(formik.errors.country)}
-/>
-{formik.touched.country && Boolean(formik.errors.country) && (
-  <p className="mt-1 text-sm text-red-500">
-    {formik.touched.country && formik.errors.country}
-  </p>
-)}
-</div> */
-}

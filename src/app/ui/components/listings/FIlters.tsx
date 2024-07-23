@@ -1,19 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useDebouncedCallback } from "use-debounce";
 import type { Dayjs } from "dayjs";
-
 import type { SelectChangeEvent } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
 import { MenuItem } from "@mui/material";
-
+import type { ILocationsList } from "~/app/(application)/actions";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
-import { IconGenerator, SimpleInput, SimpleSelectInput } from "../common";
+import {
+  CitiesAutocomplete,
+  IconGenerator,
+  SimpleSelectInput,
+} from "../common";
 import type { DateRangeType } from "../home/SearchCard";
 
 const guests = Array.from({ length: 8 }, (v, i) => i + 1)
@@ -24,8 +25,11 @@ const guests = Array.from({ length: 8 }, (v, i) => i + 1)
     </MenuItem>
   ));
 
-export default function Filters() {
-  const router = useRouter();
+export default function Filters({
+  locationsList,
+}: {
+  locationsList: ILocationsList[];
+}) {
   const { searchParams, searchParamsValues, updateSearchParams } =
     useAppSearchParams();
 
@@ -33,14 +37,20 @@ export default function Filters() {
     searchParamsValues.fromDate,
     searchParamsValues.toDate,
   ]);
+  const selectedLocation =
+    locationsList.find((item) => item.match === searchParams?.get("match")) ??
+    null;
 
-  const title = searchParams.get("category") ?? searchParams?.get("match");
-  const [location, setLocation] = useState(title);
+  const [location, setLocation] = useState<string>(
+    selectedLocation?.displayName ?? "",
+  );
+  const [autocompleteValue, setAutocompleteValue] = useState(
+    locationsList.find((item) => item.match === searchParams?.get("match"))
+      ?.displayName ?? "",
+  );
 
-  const handleSearch = useDebouncedCallback((term: string) => {
-    if (!term) searchParams.delete("category");
-    updateSearchParams(["match"], [term]);
-  }, 300);
+  console.log(autocompleteValue, "auto");
+  console.log(location, "location");
 
   useEffect(() => {
     updateSearchParams(["fromDate", "toDate"], [dates[0], dates[1]]);
@@ -48,31 +58,19 @@ export default function Filters() {
 
   return (
     <div className="mb-5 flex items-center gap-4">
-      <div className="relative">
-        <SimpleInput
-          name="location"
-          value={location ?? ""}
-          placeholder="Enter location"
-          variant="rounded"
-          styles={"bg-[#EAF7FD] text-[#212529] h-9 text-sm"}
-          onChange={(e) => {
-            handleSearch(e.target.value);
-            setLocation(e.target.value);
-          }}
-        />
-        <button
-          className="absolute right-4 top-[5px] text-[#B4CAE4]"
-          onClick={() => {
-            setLocation("");
-            handleSearch("");
-            searchParams.delete("match");
-            searchParams.delete("category");
-            router.replace(`/listings?${searchParams.toString()}`);
-          }}
-        >
-          ×
-        </button>
-      </div>
+      <CitiesAutocomplete
+        locationsList={locationsList}
+        isSmallSize={true}
+        variant="blue"
+        inputValue={location}
+        value={selectedLocation}
+        setValue={setLocation}
+        onChange={(event, newValue) => {
+          if (!newValue) searchParams.delete("category");
+          setAutocompleteValue(newValue ? newValue.match : "");
+          updateSearchParams(["match"], [newValue?.match ?? ""]);
+        }}
+      />
       <div className="relative w-[200px]">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateRangePicker

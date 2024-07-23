@@ -11,6 +11,7 @@ export {
   SimpleInput,
   FormikTextField,
   SimpleSelectInput,
+  CitiesAutocomplete,
 } from "./Inputs/index";
 export { MapContainer } from "./Map/index";
 export { NavBar } from "./Navbar/index";

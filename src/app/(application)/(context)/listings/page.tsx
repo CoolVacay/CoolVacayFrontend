@@ -6,19 +6,19 @@ import {
 } from "~/app/ui/components/common";
 import Filters from "~/app/ui/components/listings/FIlters";
 import { Suspense } from "react";
-
+import { getLocationsList } from "../../actions";
 export default async function Page({
   searchParams,
 }: {
   searchParams: Record<string, string>;
 }) {
   const query = new URLSearchParams(searchParams);
-
+  const locationsList = (await getLocationsList())!;
   return (
     <main className="static w-full pl-[70px]">
       <div className="flex">
         <div className="flex w-5/12 flex-col pb-6 desktop:w-7/12">
-          <Filters />
+          <Filters locationsList={locationsList} />
           <Suspense
             fallback={<FilteredListingsSkeleton />}
             key={query.toString()}

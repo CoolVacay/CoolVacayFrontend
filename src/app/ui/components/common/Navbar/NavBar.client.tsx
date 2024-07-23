@@ -18,7 +18,7 @@ export default function NavBar({
     pathname.endsWith("terms-and-conditions") ||
     pathname.endsWith("privacy-policy") ||
     pathname.endsWith("accessibility-statement");
-  const noMaxWidth = pathname.startsWith("/listings/");
+  const noMaxWidth = pathname.startsWith("/listings");
 
   return (
     <nav className="z-10 block flex w-full scroll-px-4 justify-center overflow-hidden py-6">
