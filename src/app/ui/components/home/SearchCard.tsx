@@ -50,7 +50,7 @@ export function SearchCard({
     event.preventDefault();
     router.push(handleSearch());
   };
-  console.log(location, "location");
+
   return (
     <search>
       <form onSubmit={handleSubmit}>

@@ -1,27 +1,39 @@
 "use client";
 
-import { useState } from "react";
-import { SimpleInput } from "../../common";
+import { useState, useMemo } from "react";
+import { useFormState } from "react-dom";
+
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useFormState } from "react-dom";
+import { MenuItem } from "@mui/material";
+
 import { updateProfile } from "~/app/(application)/actions";
 import { ActionButton } from "../../authentication";
+import { SimpleInput, SimpleSelectInput } from "../../common";
+import type { ICountries } from "~/app/(application)/actions";
 import type { UserData } from "~/app/(application)/definitions";
-
 export default function ProfileForm({
   profileInfo,
+  countries,
 }: {
   profileInfo: UserData["profile"] | null;
+  countries: ICountries[];
 }) {
   const [editMode, setEditMode] = useState(false);
   const [errorMessage, dispatch] = useFormState(updateProfile, undefined);
 
   const ValidationSchema = Yup.object({
-    email: Yup.string().required("Email field is required"),
-    firstName: Yup.string().required("First Name field is required"),
-    lastName: Yup.string().required("Last Name field is required"),
+    firstName: Yup.string().required("First Name is required"),
+    lastName: Yup.string().required("Last Name is required"),
   });
+
+  const allCountries = useMemo(() => {
+    return countries.map((country) => (
+      <MenuItem key={country.name} value={country.name} dense>
+        {country.name}
+      </MenuItem>
+    ));
+  }, [countries]);
 
   const formik = useFormik({
     initialValues: {
@@ -55,10 +67,16 @@ export default function ProfileForm({
                 name="firstName"
                 value={formik.values.firstName}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 variant="rectangle"
                 disabled={!editMode && true}
                 styles="h-[40px] border border-[#EAEAEF]"
               />
+              {formik.touched.firstName && Boolean(formik.errors.firstName) && (
+                <p className="mt-1 text-sm text-red-500">
+                  {formik.touched.firstName && formik.errors.firstName}
+                </p>
+              )}
             </div>
             <div className="relative w-[300px]">
               <label htmlFor="lastName" className="mb-1 block font-medium">
@@ -67,11 +85,18 @@ export default function ProfileForm({
               <SimpleInput
                 name="lastName"
                 placeholder="Last Name"
+                onBlur={formik.handleBlur}
                 value={formik.values.lastName}
+                onChange={formik.handleChange}
                 variant="rectangle"
                 disabled={!editMode && true}
                 styles="h-[40px] border border-[#EAEAEF]"
               />
+              {formik.touched.lastName && Boolean(formik.errors.lastName) && (
+                <p className="mt-1 text-sm text-red-500">
+                  {formik.touched.lastName && formik.errors.lastName}
+                </p>
+              )}
             </div>
           </div>
           <div className="flex w-full gap-5">
@@ -81,10 +106,12 @@ export default function ProfileForm({
               </label>
               <SimpleInput
                 name="email"
+                onBlur={formik.handleBlur}
                 value={formik.values.email}
+                onChange={formik.handleChange}
                 placeholder="Email"
                 variant="rectangle"
-                disabled={!editMode && true}
+                disabled={true}
                 styles="h-[40px] border border-[#EAEAEF]"
               />
             </div>
@@ -95,6 +122,8 @@ export default function ProfileForm({
               <SimpleInput
                 name="phone"
                 value={formik.values.phone}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 placeholder="Phone Number"
                 variant="rectangle"
                 disabled={!editMode && true}
@@ -107,13 +136,32 @@ export default function ProfileForm({
               <label htmlFor="nationality" className="mb-1 block font-medium">
                 Nationality
               </label>
-              <SimpleInput
+              {/* <SimpleInput
                 name="nationality"
                 value={formik.values.nationality}
                 variant="rectangle"
                 placeholder="Nationality"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
                 styles="h-[40px] border border-[#EAEAEF]"
                 disabled={!editMode && true}
+              /> */}
+              <SimpleSelectInput
+                name="nationality"
+                value={formik.values.nationality}
+                placeholder="Nationality"
+                onBlur={formik.handleBlur}
+                onChange={(e) =>
+                  formik.setFieldValue("nationality", e.target.value)
+                }
+                size="medium"
+                disabled={!editMode && true}
+                error={
+                  formik.touched.nationality &&
+                  Boolean(formik.errors.nationality)
+                }
+                listOptions={allCountries}
+                variant="rectangle"
               />
             </div>
             <div className="relative w-[300px]">
@@ -123,6 +171,8 @@ export default function ProfileForm({
               <SimpleInput
                 name="dateOfBirth"
                 value={formik.values.dateOfBirth}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 variant="rectangle"
                 placeholder="Birthdate"
                 disabled={!editMode && true}
@@ -146,7 +196,7 @@ export default function ProfileForm({
               text="Save"
               disabled={!formik.isValid || !formik.dirty}
               borderRadius="rounded"
-              className="w-[200px] rounded-full bg-primary px-12 py-2 text-white"
+              className="w-[200px] rounded-full bg-primary px-12 py-2 text-white disabled:opacity-50"
             />
           </div>
         ) : (

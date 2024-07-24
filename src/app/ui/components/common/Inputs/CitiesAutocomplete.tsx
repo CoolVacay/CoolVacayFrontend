@@ -47,8 +47,8 @@ export default function CitiesAutocomplete({
           <IconGenerator
             alt="avatar icon"
             src={`/down-arrow.svg`}
-            width={whiteVariant ? "32px" : "15px"}
-            className="mr-2"
+            width={!isSmallSize ? "32px" : "18px"}
+            className={!whiteVariant ? "mr-2" : ""}
           />
         }
         getOptionLabel={(option) => option.displayName}
@@ -92,16 +92,19 @@ export default function CitiesAutocomplete({
             }}
             InputLabelProps={{
               className: whiteVariant
-                ? `block ${isSmallSize ? "text-sm" : "text-2xl"} font-medium`
+                ? `block ${isSmallSize ? "text" : "text-2xl"} font-medium`
                 : ``,
             }}
             InputProps={{
               ...params.InputProps,
               sx: {
-                padding: isSmallSize
-                  ? "0px 50px"
-                  : "14px 65px 14px 0px !important",
-                fontSize: isSmallSize ? "10px" : "20px",
+                padding:
+                  isSmallSize && !whiteVariant
+                    ? "0px 50px"
+                    : isSmallSize && whiteVariant
+                      ? "0px"
+                      : "14px 65px 14px 0px !important",
+                fontSize: isSmallSize ? "12px" : "20px",
                 fontWeight: whiteVariant ? 500 : 400,
               },
               className: whiteVariant

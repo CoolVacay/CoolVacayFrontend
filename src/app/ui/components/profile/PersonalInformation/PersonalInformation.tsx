@@ -1,7 +1,7 @@
 import type { Session } from "next-auth";
 import Image from "next/image";
 import ProfileForm from "./ProfileForm";
-import { getProfileInfo } from "~/app/(application)/actions";
+import { getCountries, getProfileInfo } from "~/app/(application)/actions";
 
 export default async function PersonalInformation({
   session,
@@ -9,6 +9,7 @@ export default async function PersonalInformation({
   session: Session["user"];
 }) {
   const profileInfo = session && (await getProfileInfo(session.email!));
+  const countries = await getCountries();
   return (
     <div>
       <p className="text-[28px] font-medium">Personal Information</p>
@@ -34,7 +35,7 @@ export default async function PersonalInformation({
             </div>
           </div>
         </div>
-        <ProfileForm profileInfo={profileInfo} />
+        <ProfileForm profileInfo={profileInfo} countries={countries} />
       </div>
     </div>
   );

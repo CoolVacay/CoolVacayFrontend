@@ -6,6 +6,8 @@ import type { ListingData } from "./definitions";
 import type { IPricingDetails } from "../ui/components/listing/BookNow/BookNowCard.client";
 import type { IParams } from "./definitions";
 import type { UserData } from "./definitions";
+import { revalidatePath } from "next/cache";
+
 export interface IInquireArgs {
   name?: string;
   message?: string;
@@ -79,6 +81,7 @@ export async function updateProfile(
       Object.entries(values).filter(([_, v]) => v != ""),
     );
     const res = await postFetch(`/users`, modValues, "PUT");
+    revalidatePath("/profile");
     if (res instanceof FetchError) {
       throw res;
     }
@@ -122,10 +125,12 @@ export async function getPricingDetails(
 export interface ICountries {
   id: string;
   name: string;
-  states: {
-    id: string;
-    name: string;
-  }[];
+  states:
+    | {
+        id: string;
+        name: string;
+      }[]
+    | [];
 }
 
 export async function getCountries() {
@@ -137,6 +142,7 @@ export async function getCountries() {
     return res;
   } catch (error) {
     console.error("Error:", error);
+    return [];
   }
 }
 

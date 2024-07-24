@@ -49,9 +49,6 @@ export default function Filters({
       ?.displayName ?? "",
   );
 
-  console.log(autocompleteValue, "auto");
-  console.log(location, "location");
-
   useEffect(() => {
     updateSearchParams(["fromDate", "toDate"], [dates[0], dates[1]]);
   }, [dates, updateSearchParams]);
@@ -90,7 +87,7 @@ export default function Filters({
                     fontWeight: 400,
                     width: "200px",
                     display: "flex",
-                    pl: "15px",
+                    p: "15px 10px 15px",
                     backgroundColor: "#EAF7FD",
                     height: "36px",
                     borderRadius: "300px",
@@ -100,8 +97,8 @@ export default function Filters({
                     <IconGenerator
                       src="/down-arrow-light.svg"
                       alt="Down arrow"
-                      width="16px"
-                      className="mr-2"
+                      width="18px"
+                      className="w-[20px]"
                     />
                   ),
                 },
