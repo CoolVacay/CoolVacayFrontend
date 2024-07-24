@@ -44,10 +44,6 @@ export default function Filters({
   const [location, setLocation] = useState<string>(
     selectedLocation?.displayName ?? "",
   );
-  const [autocompleteValue, setAutocompleteValue] = useState(
-    locationsList.find((item) => item.match === searchParams?.get("match"))
-      ?.displayName ?? "",
-  );
 
   useEffect(() => {
     updateSearchParams(["fromDate", "toDate"], [dates[0], dates[1]]);
@@ -64,7 +60,6 @@ export default function Filters({
         setValue={setLocation}
         onChange={(event, newValue) => {
           if (!newValue) searchParams.delete("category");
-          setAutocompleteValue(newValue ? newValue.match : "");
           updateSearchParams(["match"], [newValue?.match ?? ""]);
         }}
       />

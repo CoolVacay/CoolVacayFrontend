@@ -252,6 +252,45 @@ export async function getSimilarListings({ source, id }: IParams) {
   }
 }
 
+export interface IReservationsDetails {
+  id: number;
+  userId: number;
+  listingId: string;
+  source: string;
+  fromDate: string;
+  toDate: string;
+  adults: number;
+  children: number;
+  infants: number;
+  pets: number;
+  status: number;
+  details: {
+    listingName: string;
+    listingType: string;
+    squareFeets: number | null;
+    bedrooms: number;
+    bathrooms: number;
+    pricePerNight: number;
+    fromDate: string;
+    toDate: string;
+    totalPrice: number;
+    imageSrc: string;
+  };
+}
+export async function getReservationsDetails(userId: string) {
+  try {
+    const res = await getFetch<IReservationsDetails[]>(
+      `/Reservations/user/${userId}`,
+    );
+    if (res instanceof FetchError) {
+      throw new Error("Failed to fetch reservations");
+    }
+    return res ?? [];
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 export async function registerFollower(
   prevState: string | undefined,
   { email }: { email: string },

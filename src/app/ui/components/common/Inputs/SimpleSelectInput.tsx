@@ -57,9 +57,10 @@ const SimpleSelectInput: React.FC<SimpleSelectInputProps> = ({
         ? "9px 14px"
         : isRoundedVariant
           ? "18px 14px"
-          : "9px",
+          : "9px 14px",
       backgroundColor: "#E7E7E7",
       borderRadius: "6px",
+      WebkitTextFillColor: "#676D73",
     },
   };
 
