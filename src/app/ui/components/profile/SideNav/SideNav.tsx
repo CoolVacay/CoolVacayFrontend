@@ -10,7 +10,7 @@ export default async function SideNav() {
     session?.user && (await getProfileInfo(session.user.email!));
 
   return (
-    <div className="flex flex-col gap-4 rounded-[8px] border border-[#EAEAEF] pt-5">
+    <div className="flex max-w-[280px] flex-col gap-4 rounded-[8px] border border-[#EAEAEF] pt-5">
       <div className="flex items-center gap-4 px-5">
         <div className="flex w-[50px]">
           <Image
