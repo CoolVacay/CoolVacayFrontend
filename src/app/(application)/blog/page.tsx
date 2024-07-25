@@ -1,13 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import CustomButton from "../../ui/components/common/CustomButton";
 import { CustomChip, MainCard } from "~/app/ui/components/common";
-import { getBlogs } from "../actions";
-import dayjs from "dayjs";
 
-async function Page() {
-  const blogs = await getBlogs();
-
+function Page() {
   return (
     <main className="flex flex-col">
       <div className="flex justify-center">
@@ -19,7 +16,7 @@ async function Page() {
                 <h2 className="text-[50px] font-medium leading-[67px]">
                   A complete travel guide to Siesta & Longboat Key
                 </h2>
-                <p className="mb-2 leading-[30px] text-gray-600">
+                <p className="mb-2 leading-[30px] text-[#676D73] text-gray-600">
                   Repeatedly named the best beach in the country, it is baffling
                   how discovered Siesta Key beach still is. The white sand
                   against the crystal clear turquoise waters of the Gulf of
@@ -46,14 +43,14 @@ async function Page() {
             </div>
           </div>
           <div className="mt-10 grid grid-cols-4 gap-8 py-10">
-            {blogs.map((card) => {
+            {Array.from({ length: 8 }, (_, i) => i + 1).map((card) => {
               return (
-                <Link key={card.id} href={`/blog/${card.id}`} className="h-82">
+                <Link key={card} href={`/blog/${card}`} className="h-82">
                   <MainCard
                     imageUrl="/blog_photo.jpeg"
-                    name={card.title}
-                    subtitle={`${dayjs(card.createdOn).format('MMMM d, YYYY')}  •  ${card.readTime} min`}
-                    key={card.id}
+                    name="How to get more bookings with Coolvacay in 2024"
+                    subtitle="August 1, 2024  •  2 min read "
+                    key={card}
                     isBlogCard
                   />
                 </Link>

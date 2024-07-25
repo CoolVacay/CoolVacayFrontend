@@ -163,36 +163,9 @@ export async function getBlogs() {
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch blogs");
     }
-    return res ?? [];
-  } catch (error) {
-    console.error("Error:", error);
-    return [];
-  }
-}
-
-export async function getBlogContent(id:string) {
-  console.log(id)
-  try {
-    const res = await getHTMLFetch(`/Blogs/${id}/content`);
-    if (res instanceof FetchError) {
-      throw new Error("Failed to fetch blog content");
-    }
     return res;
   } catch (error) {
     console.error("Error:", error);
-  }
-}
-
-export async function getBlogHTML() {
-  try {
-    const res = await getFetch<IBlog[]>(`/Blogs`);
-    if (res instanceof FetchError) {
-      throw new Error("Failed to fetch blogs");
-    }
-    return res ?? [];
-  } catch (error) {
-    console.error("Error:", error);
-    return [];
   }
 }
 
