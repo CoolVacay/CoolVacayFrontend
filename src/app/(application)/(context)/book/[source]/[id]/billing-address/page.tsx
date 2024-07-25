@@ -9,7 +9,7 @@ export default async function Page({
     id: string;
   };
 }) {
-  const allCountries = (await getCountries())!;
+  const allCountries = await getCountries();
 
   return (
     <div className="flex w-full flex-col gap-6">
