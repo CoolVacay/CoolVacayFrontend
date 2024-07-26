@@ -73,7 +73,8 @@ export default function BookNowContent({
         title="Inquire now"
         subtitle="Have a question or feedback? Fill out the form
             below, and we'll get back to you as soon as possible."
-        listing={listingInfo}
+        data={listingInfo}
+        content="inquiry"
       >
         <button className="w-full rounded-full border border-primary bg-white py-4 text-primary hover:bg-primary hover:text-white">
           Inquire now

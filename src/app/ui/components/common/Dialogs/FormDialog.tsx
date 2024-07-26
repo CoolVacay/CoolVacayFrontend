@@ -1,49 +1,72 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogContent } from "@mui/material";
+import { Dialog, DialogContent, Divider } from "@mui/material";
 import type { ListingData } from "~/app/(application)/definitions";
 import InquireForm from "../../listing/InquireForm";
 import CloseIcon from "@mui/icons-material/Close";
+import ChangePasswordForm from "../../profile/ChangePasswordForm";
 
 export default function FormDialog({
   title,
   subtitle,
-  listing,
+  data,
   children,
+  content,
 }: {
   title: string;
-  subtitle: string;
-  listing: ListingData;
+  subtitle?: string;
+  data?: ListingData | string;
   children: React.ReactNode;
+  content: "password" | "inquiry";
 }) {
   const [open, setOpen] = useState(false);
+  const isContentInquiry = content === "inquiry";
   return (
     <>
       <span onClick={() => setOpen(true)}>{children}</span>
       <Dialog open={open} onClose={() => setOpen(false)}>
+        <div
+          className={`flex flex-col gap-4 ${isContentInquiry ? "bg-[#F7F7F7] px-[60px] pt-10" : "px-6 py-4"}`}
+        >
+          <h2
+            className={
+              isContentInquiry
+                ? "text-2xl text-primary "
+                : "text-[20px] font-medium"
+            }
+          >
+            {title}
+          </h2>
+          {subtitle ? (
+            <h6 className="text-lg text-[#676D73]">{subtitle}</h6>
+          ) : null}
+        </div>
+        <div
+          className={`absolute ${isContentInquiry ? "right-3 top-3" : "right-5 top-5"}`}
+        >
+          <button
+            onClick={() => setOpen(false)}
+            className="hover:text-primary"
+            aria-label="close button"
+          >
+            <CloseIcon fontSize={isContentInquiry ? "large" : "medium"} />
+          </button>
+        </div>
+        {isContentInquiry ? null : <Divider variant="fullWidth" flexItem />}
         <DialogContent
           sx={{
-            padding: "40px 60px",
-            backgroundColor: "#F7F7F7",
+            padding: isContentInquiry ? "40px 60px" : "15px 24px",
+            backgroundColor: isContentInquiry ? "#F7F7F7" : "#FFF",
             position: "relative",
           }}
         >
-          <div className="absolute right-3 top-3">
-            <button
-              onClick={() => setOpen(false)}
-              className="hover:text-primary"
-              aria-label="close button"
-            >
-              <CloseIcon fontSize="large" />
-            </button>
-          </div>
           <div className="flex flex-col gap-5">
-            <div className="flex flex-col gap-4">
-              <h2 className="text-2xl text-primary ">{title}</h2>
-              <h6 className="text-lg text-[#676D73]">{subtitle}</h6>
-            </div>
-            <InquireForm listing={listing} setOpen={setOpen} />
+            {content === "inquiry" ? (
+              <InquireForm listing={data as ListingData} setOpen={setOpen} />
+            ) : (
+              <ChangePasswordForm setOpen={setOpen} userId={data as string} />
+            )}
           </div>
         </DialogContent>
       </Dialog>

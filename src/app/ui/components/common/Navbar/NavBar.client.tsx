@@ -21,7 +21,7 @@ export default function NavBar({
   const noMaxWidth = pathname.startsWith("/listings");
 
   return (
-    <nav className="z-10 block flex w-full scroll-px-4 justify-center overflow-hidden py-6">
+    <nav className="z-10 block flex h-[96px] w-full scroll-px-4 justify-center py-6">
       <div
         className={`flex h-12 w-full ${isWhiteVariant || !noMaxWidth ? "max-w-[1220px]" : "px-[70px]"} scroll-px-4 items-center justify-between gap-44`}
       >

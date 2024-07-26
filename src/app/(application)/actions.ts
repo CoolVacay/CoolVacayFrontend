@@ -89,7 +89,42 @@ export async function updateProfile(
     if (error instanceof FetchError) {
       return `${error.message}`;
     } else {
-      return "Failed to send the inquiry";
+      return "Failed to update the profile details";
+    }
+  }
+}
+
+export interface IPassArgs {
+  userId: string;
+  oldPassword: string;
+  newPassword: string;
+}
+export async function updatePassword(
+  prevState: string | undefined,
+  { userId, oldPassword, newPassword }: IPassArgs,
+) {
+  try {
+    const values = {
+      oldPassword,
+      newPassword,
+    };
+    const modValues = Object.fromEntries(
+      Object.entries(values).filter(([k, _]) => k !== "confirmPassword"),
+    );
+    const res = await postFetch(
+      `/Users/${userId}/change-password`,
+      modValues,
+      "PATCH",
+    );
+    revalidatePath("/profile");
+    if (res instanceof FetchError) {
+      throw res;
+    }
+  } catch (error) {
+    if (error instanceof FetchError) {
+      return `${error.message}`;
+    } else {
+      return "Failed to update password";
     }
   }
 }
@@ -170,8 +205,7 @@ export async function getBlogs() {
   }
 }
 
-export async function getBlogContent(id:string) {
-  console.log(id)
+export async function getBlogContent(id: string) {
   try {
     const res = await getHTMLFetch(`/Blogs/${id}/content`);
     if (res instanceof FetchError) {

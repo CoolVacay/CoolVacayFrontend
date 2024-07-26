@@ -4,6 +4,7 @@ export {
   ListingCard,
   InfoCard,
   ReviewCard,
+  ReservationCard,
 } from "./Cards/index";
 export { FormDialog, FullScreenDialog } from "./Dialogs/index";
 export {

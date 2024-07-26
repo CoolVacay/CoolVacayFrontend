@@ -24,7 +24,7 @@ const discoverLinks = ["Miami", "Los Angeles", "Chicago", "New York"];
 function FooterSection() {
   return (
     <footer
-      className="flex flex-col px-[72px] pt-14"
+      className="mt-auto flex flex-col px-[72px] pt-14"
       style={{ borderTop: "1px solid rgba(173, 181, 189, 0.5)" }}
     >
       <div className="flex justify-between">
