@@ -1,3 +1,5 @@
+import { Divider } from "@mui/material";
+
 export function CardSkeleton() {
   return (
     <div
@@ -127,6 +129,89 @@ export function PricingDetailsSkeleton() {
           ))}
         </div>
       ))}
+    </div>
+  );
+}
+
+export function PersonalInformationSkeleton() {
+  return (
+    <div className="animate-pulse">
+      <div className="h-8 w-[280px] bg-gray-100" />
+      <div className="mt-12 flex flex-col">
+        <div className="flex justify-between">
+          <div className="flex gap-10">
+            <div className="h-[80px] w-[80px] rounded-full bg-gray-100" />
+            <div className="flex flex-col">
+              <div className="h-[22px] w-[120px] bg-gray-100" />
+              <div className="mt-4 rounded-full border bg-gray-100 px-12 py-7" />
+            </div>
+          </div>
+        </div>
+        <div className="mb-8 flex flex-col">
+          <div className="my-10 flex flex-col gap-5">
+            {Array.from({ length: 3 }, (_, i) => i + 1).map((i) => {
+              return (
+                <div className="flex w-full gap-5" key={i}>
+                  <div className="relative w-[300px]">
+                    <div className="mb-1 block h-[22px] w-[120px] bg-gray-100" />
+                    <div className="h-[40px] w-[300px] bg-gray-100" />
+                  </div>
+                  <div className="relative w-[300px]">
+                    <div className="mb-1 block h-[22px] w-[120px] bg-gray-100" />
+                    <div className="h-[40px] w-[300px] bg-gray-100" />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="w-[200px] rounded-full border bg-gray-100 px-12 py-2 py-6 text-[#676D73]" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function ReservationCardsSkeleton() {
+  return (
+    <div className="mb-8 flex animate-pulse flex-col gap-8">
+      <div className="h-8 w-[160px] bg-gray-100" />
+      {Array.from({ length: 3 }, (_, i) => i + 1).map((i) => {
+        return (
+          <div key={i} className="flex flex-col gap-8">
+            <div className="flex gap-8">
+              <div className="flex h-[130px] w-[180px] rounded-xl bg-gray-100" />
+              <div className="flex w-full flex-col gap-2">
+                <div className="h-8 w-[200px] bg-gray-300" />
+                <div className="items-left flex h-[22px] gap-8">
+                  <div className="flex h-[22px] w-[50px] shrink-0 items-center justify-center rounded-full bg-gray-300" />
+                  <div className="h-[22px] w-20 bg-gray-300" />
+                  <div className="h-[22px] w-20 bg-gray-300" />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="h-5 w-5  bg-gray-300" />
+                    <div className="h-5 w-20  bg-gray-300" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="h-5 w-5  bg-gray-300" />
+                    <div className="h-5 w-20  bg-gray-300" />
+                  </div>
+                  <div className="mx-5 h-8 h-full w-[1px] bg-[#EAEAEF]" />
+                  <div className="flex flex-col gap-2">
+                    <div className="h-6 w-[120px] bg-gray-300" />
+                    <div className="h-5 w-20  bg-gray-300" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <div className="h-5 w-20  bg-gray-300" />
+                    <div className="h-5 w-20  bg-gray-300" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {i < 2 ? <Divider /> : null}
+          </div>
+        );
+      })}
     </div>
   );
 }
