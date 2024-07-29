@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { registerFollower } from "~/app/(application)/actions";
 import { ActionButton } from "../../authentication";
+import { toastNotifier } from "~/app/utils/helpers";
+import { Toaster } from "react-hot-toast";
 
 export default function NewsletterForm({
   orientation,
@@ -28,6 +30,7 @@ export default function NewsletterForm({
       action={() => {
         dispatch(formik.values);
         formik.resetForm();
+        toastNotifier(errorMessage);
       }}
     >
       <div
@@ -80,6 +83,7 @@ export default function NewsletterForm({
           )}
         </div>
       </div>
+      <Toaster />
     </form>
   );
 }

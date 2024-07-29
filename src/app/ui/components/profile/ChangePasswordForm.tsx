@@ -9,6 +9,8 @@ import { SimpleInput } from "../common";
 import { updatePassword } from "~/app/(application)/actions";
 import type { IPassArgs } from "~/app/(application)/actions";
 import { PasswordCheckSchema } from "~/app/(authentication)/schemas";
+import { toastNotifier } from "~/app/utils/helpers";
+import { Toaster } from "react-hot-toast";
 
 const ValidationSchema = PasswordCheckSchema.concat(
   Yup.object().shape({
@@ -40,6 +42,7 @@ export default function ChangePasswordForm({
       action={() => {
         dispatch(formik.values as IPassArgs);
         formik.resetForm();
+        toastNotifier(errorMessage);
         if (setOpen) {
           setOpen(false);
         }
@@ -127,6 +130,7 @@ export default function ChangePasswordForm({
           />
         </div>
       </div>
+      <Toaster />
     </form>
   );
 }

@@ -32,6 +32,7 @@ export default function SignInForm() {
 
   if (typeof window !== "undefined") {
     localStorage.removeItem("regEmail");
+    localStorage.removeItem("otpCode");
   }
 
   return (

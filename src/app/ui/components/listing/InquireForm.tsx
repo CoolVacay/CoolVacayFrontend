@@ -3,7 +3,9 @@
 import { useFormState } from "react-dom";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { Toaster } from "react-hot-toast";
 
+import { toastNotifier } from "~/app/utils/helpers";
 import { ActionButton } from "../authentication/common";
 import type { ListingData } from "~/app/(application)/definitions";
 import { SimpleInput } from "../common";
@@ -56,6 +58,7 @@ export default function InquireForm({
       action={() => {
         dispatch(formik.values as IInquireArgs);
         formik.resetForm();
+        toastNotifier(errorMessage);
         if (setOpen) {
           setOpen(false);
         }
@@ -144,6 +147,7 @@ export default function InquireForm({
           borderRadius={listing ? "rounded" : "rectangle"}
         />
       </div>
+      <Toaster />
     </form>
   );
 }

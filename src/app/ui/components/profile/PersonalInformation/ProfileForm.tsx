@@ -15,6 +15,8 @@ import { ActionButton } from "../../authentication";
 import { SimpleInput, SimpleSelectInput } from "../../common";
 import type { ICountries } from "~/app/(application)/actions";
 import type { UserData } from "~/app/(application)/definitions";
+import { Toaster } from "react-hot-toast";
+import { toastNotifier } from "~/app/utils/helpers";
 export default function ProfileForm({
   profileInfo,
   countries,
@@ -55,6 +57,7 @@ export default function ProfileForm({
     <form
       action={() => {
         dispatch(formik.values);
+        toastNotifier(errorMessage);
         setEditMode(false);
       }}
     >
@@ -231,6 +234,7 @@ export default function ProfileForm({
           </button>
         )}
       </div>
+      <Toaster />
     </form>
   );
 }

@@ -7,7 +7,7 @@ import type { IPricingDetails } from "../ui/components/listing/BookNow/BookNowCa
 import type { IParams } from "./definitions";
 import type { UserData } from "./definitions";
 import { revalidatePath } from "next/cache";
-
+import { redirect } from "next/navigation";
 export interface IInquireArgs {
   name?: string;
   message?: string;
@@ -383,4 +383,5 @@ export async function deactivateAccount({ userId }: { userId: string }) {
       return "Failed to deactivate user";
     }
   }
+  redirect("/signin");
 }

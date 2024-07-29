@@ -28,7 +28,7 @@ export default function Page() {
       <div className="flex flex-col gap-12">
         <div>
           <h1 className="mb-3 text-3xl">Password reset</h1>
-          <p className="text-[#9FA4AA]">We send a code to {userEmail}</p>
+          <p className="text-[#9FA4AA]">We sent a code to {userEmail}</p>
         </div>
         <div className="flex flex-col">
           <OTPForm type="reset" />

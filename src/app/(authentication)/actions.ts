@@ -151,14 +151,14 @@ export async function setNewPassword(
   prevState: string | undefined,
   {
     email,
-    code,
+    resetCode,
     newPassword,
-  }: { email: string; code: string; newPassword: string },
+  }: { email: string; resetCode: string; newPassword: string },
 ) {
   try {
-    const res = await postFetch("/Users/forgot-password", {
+    const res = await postFetch("/Users/reset-password", {
       email,
-      code,
+      resetCode,
       newPassword,
     });
     if (res instanceof FetchError) {
@@ -171,7 +171,7 @@ export async function setNewPassword(
       return "Failed to find user";
     }
   }
-  redirect("/password-reset");
+  redirect("/signin");
 }
 
 export async function resendOtp(
