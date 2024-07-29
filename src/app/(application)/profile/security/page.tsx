@@ -1,6 +1,5 @@
 import { Divider } from "@mui/material";
 import { FormDialog } from "~/app/ui/components/common";
-// import { IconGenerator } from "~/app/ui/components/common";
 import { auth } from "~/auth";
 
 export default async function Page() {
@@ -36,9 +35,15 @@ export default async function Page() {
             won't be able to sign in again until your account is reactivated.`}
             </p>
           </div>
-          <button className="flex h-[22px] items-center justify-center text-[#FF6565] hover:text-[#FF6565]/[0.8]">
-            Deactivate account
-          </button>
+          <FormDialog
+            title="Deactivate Account"
+            content="deactivate"
+            data={session.user?.id}
+          >
+            <button className="flex h-[22px] items-center justify-center text-[#FF6565] hover:text-[#FF6565]/[0.8]">
+              Deactivate account
+            </button>
+          </FormDialog>
         </div>
       </div>
     </main>

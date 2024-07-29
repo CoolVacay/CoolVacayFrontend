@@ -30,6 +30,10 @@ export default function SignInForm() {
     onSubmit: () => console.log("Validating credentials"),
   });
 
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("regEmail");
+  }
+
   return (
     <>
       <form action={dispatch} className="flex flex-col gap-8">
@@ -52,6 +56,7 @@ export default function SignInForm() {
           </label>
           <FormikTextField
             name="password"
+            type="password"
             placeholder="Password"
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}

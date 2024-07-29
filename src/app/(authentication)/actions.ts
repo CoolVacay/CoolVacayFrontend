@@ -89,7 +89,7 @@ export async function register(
 
 export async function verifyAccount(
   prevState: string | undefined,
-  code: string,
+  { code }: { code: string },
 ) {
   try {
     const res = await postFetch("/Users/activate", { code: code });
@@ -104,6 +104,74 @@ export async function verifyAccount(
     }
   }
   redirect("/signin");
+}
+
+export async function resetPassOTP(
+  prevState: string | undefined,
+  { code, email }: { code: string; email: string },
+) {
+  try {
+    const res = await postFetch("/Users/verify-reset-password", {
+      resetCode: code,
+      email: email,
+    });
+    if (res instanceof FetchError) {
+      throw res;
+    }
+  } catch (error) {
+    if (error instanceof FetchError) {
+      return `${error.message}`;
+    } else {
+      return "Failed to validate OTP";
+    }
+  }
+  redirect("/set-new-password");
+}
+
+export async function resetPassViaEmail(
+  prevState: string | undefined,
+  { email }: { email: string },
+) {
+  try {
+    const res = await postFetch("/Users/forgot-password", { email: email });
+    if (res instanceof FetchError) {
+      throw res;
+    }
+  } catch (error) {
+    if (error instanceof FetchError) {
+      return `${error.message}`;
+    } else {
+      return "Failed to find user";
+    }
+  }
+  redirect("/password-reset");
+}
+
+export async function setNewPassword(
+  prevState: string | undefined,
+  {
+    email,
+    code,
+    newPassword,
+  }: { email: string; code: string; newPassword: string },
+) {
+  try {
+    const res = await postFetch("/Users/forgot-password", {
+      email,
+      code,
+      newPassword,
+    });
+    if (res instanceof FetchError) {
+      throw res;
+    }
+  } catch (error) {
+    if (error instanceof FetchError) {
+      return `${error.message}`;
+    } else {
+      return "Failed to find user";
+    }
+  }
+  redirect("/password-reset");
 }
 
 export async function resendOtp(

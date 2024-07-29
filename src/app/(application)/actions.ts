@@ -369,3 +369,18 @@ export async function registerFollower(
     }
   }
 }
+
+export async function deactivateAccount({ userId }: { userId: string }) {
+  try {
+    const res = await postFetch(`/Users/${userId}`, { userId }, "DELETE");
+    if (res instanceof FetchError) {
+      throw res;
+    }
+  } catch (error) {
+    if (error instanceof FetchError) {
+      return `${error.message}`;
+    } else {
+      return "Failed to deactivate user";
+    }
+  }
+}

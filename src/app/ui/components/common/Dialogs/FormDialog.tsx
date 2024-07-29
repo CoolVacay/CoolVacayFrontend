@@ -6,6 +6,7 @@ import type { ListingData } from "~/app/(application)/definitions";
 import InquireForm from "../../listing/InquireForm";
 import CloseIcon from "@mui/icons-material/Close";
 import ChangePasswordForm from "../../profile/ChangePasswordForm";
+import DeactivateAccountForm from "../../profile/DeactivateAccountForm";
 
 export default function FormDialog({
   title,
@@ -18,10 +19,18 @@ export default function FormDialog({
   subtitle?: string;
   data?: ListingData | string;
   children: React.ReactNode;
-  content: "password" | "inquiry";
+  content: "password" | "inquiry" | "deactivate";
 }) {
   const [open, setOpen] = useState(false);
   const isContentInquiry = content === "inquiry";
+
+  const modalContentOptions = {
+    inquiry: <InquireForm listing={data as ListingData} setOpen={setOpen} />,
+    password: <ChangePasswordForm setOpen={setOpen} userId={data as string} />,
+    deactivate: (
+      <DeactivateAccountForm setOpen={setOpen} userId={data as string} />
+    ),
+  };
   return (
     <>
       <span onClick={() => setOpen(true)}>{children}</span>
@@ -62,11 +71,7 @@ export default function FormDialog({
           }}
         >
           <div className="flex flex-col gap-5">
-            {content === "inquiry" ? (
-              <InquireForm listing={data as ListingData} setOpen={setOpen} />
-            ) : (
-              <ChangePasswordForm setOpen={setOpen} userId={data as string} />
-            )}
+            {modalContentOptions[content]}
           </div>
         </DialogContent>
       </Dialog>

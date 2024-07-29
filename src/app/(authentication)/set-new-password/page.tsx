@@ -1,152 +1,112 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
-import { Formik, Form, type FormikHelpers } from "formik";
-import Loader from "../../ui/components/common/Loader/loader";
-import * as Yup from "yup";
-import { Button } from "@mui/base";
-// import { FormikTextField } from "~/app/ui/components/common";
-
-export type LoginValue = {
-  confirmPassword: string;
-  password: string;
-};
-
-const initialValues: LoginValue = {
-  confirmPassword: "",
-  password: "",
-};
-
-const validationSchema = Yup.object().shape({
-  confirmPassword: Yup.string().oneOf(
-    [Yup.ref("password")],
-    "Passwords must match",
-  ),
-  password: Yup.string().required("Password is required"),
-});
+import { useFormState } from "react-dom";
+import { useFormik } from "formik";
+import { ActionButton } from "~/app/ui/components/authentication";
+import { FormikTextField } from "~/app/ui/components/common";
+import { setNewPassword } from "../actions";
+import Link from "next/link";
+import { PasswordCheckSchema } from "../schemas";
 
 function SetNewPassword() {
-  const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState("");
+  const [errorMessage, dispatch] = useFormState(setNewPassword, undefined);
 
-  const handleSubmit = async (
-    values: LoginValue,
-    { setSubmitting }: FormikHelpers<LoginValue>,
-  ) => {
-    setLoading(true);
-    setSubmitting(true);
-    try {
-      const resp = await fetch("http://localhost:5076/api/auth/access-token", {
-        method: "POST",
-        body: JSON.stringify({
-          confirmPassword: values.confirmPassword,
-          password: values.password,
-        }),
-      });
+  let userEmail = "";
+  let otpCode = "";
+  if (typeof window !== "undefined") {
+    userEmail = localStorage.getItem("regEmail") ?? "";
+    otpCode = localStorage.getItem("otpCode") ?? "";
+  }
 
-      console.log(resp);
-    } catch (err) {
-      console.log("Error: ", err);
-    } finally {
-      setLoading(false);
-      setSubmitting(false);
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: userEmail,
+      code: otpCode,
+      newPassword: "",
+      confirmPassword: "",
+    },
+    validationSchema: PasswordCheckSchema,
+    onSubmit: () => console.log("Updating password"),
+  });
 
-  if (loading)
-    return (
-      <div className="h-screen w-screen">
-        <Loader />
-      </div>
-    );
-  //TODO:refactor login page
   return (
     <div className="flex flex-col gap-20">
-      <Image
-        src="/cool_vacay_logo_blue.svg"
-        alt="CoolVacay Logo"
-        width={200}
-        height={22}
-        className="gap-10"
-      />
+      <Link href="/" className="w-[200px]">
+        <Image
+          src="/cool_vacay_logo_blue.svg"
+          alt="CoolVacay Logo"
+          width={200}
+          height={22}
+          className="gap-10"
+        />
+      </Link>
       <div className="flex flex-col gap-8">
         <div>
           <h1 className="mb-4 text-3xl">Set a new password</h1>
           <p className="text-[#9FA4AA]">
-            Yor new password must be different to previously used passwords.
+            Your new password must be different to previously used passwords.
           </p>
         </div>
         <div>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            validateOnMount={true}
-            onSubmit={handleSubmit}
-          >
-            {({
-              // errors,
-              // touched,
-              // values,
-              // handleChange,
-              // handleBlur,
-              isValid,
-              isSubmitting,
-            }) => {
-              return (
-                <Form className="flex flex-col gap-8">
-                  <div>
-                    <label
-                      htmlFor="password"
-                      className="mb-1 block text-lg font-medium"
-                    >
-                      New Password
-                    </label>
-                    {/* TODO: refactor here */}
-                    {/* <FormikTextField
-                      placeholder="Password"
-                      name="password"
-                      error={!!touched.password && !!errors.password}
-                      // value={values.password}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        handleChange(e);
-                        setError("");
-                      }}
-                      onBlur={handleBlur}
-                    /> */}
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="confirmPassword"
-                      className="mb-1 block text-lg font-medium"
-                    >
-                      Confirm Password
-                    </label>
-                    {/* <PasswordInput
-                      placeholder="Confirm Password"
-                      name="confirmPassword"
-                      error={
-                        !!touched.confirmPassword && !!errors.confirmPassword
-                      }
-                      value={values.confirmPassword}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        handleChange(e);
-                        setError("");
-                      }}
-                      onBlur={handleBlur}
-                    /> */}
-                  </div>
-                  <Button
-                    className={`h-15 flex w-full items-center justify-center rounded-[100px] bg-primary p-4 text-white disabled:opacity-50`}
-                    type="submit"
-                    disabled={isSubmitting || !isValid}
-                  >
-                    Save New Password
-                  </Button>
-                </Form>
-              );
+          <form
+            action={() => {
+              //eslint-disable-next-line @typescript-eslint/no-unused-vars
+              const { confirmPassword, ...rest } = formik.values;
+              dispatch(rest);
             }}
-          </Formik>
+            className="flex flex-col gap-8"
+          >
+            <div>
+              <label htmlFor="email" className="mb-1 block text-lg font-medium">
+                New Password
+              </label>
+              <FormikTextField
+                placeholder="New Password"
+                name="newPassword"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                type="password"
+                error={
+                  formik.touched.newPassword &&
+                  Boolean(formik.errors.newPassword)
+                }
+                helperText={
+                  formik.touched.newPassword && formik.errors.newPassword
+                }
+              />
+              {errorMessage && (
+                <p className="text-sm text-red-500">{errorMessage}</p>
+              )}
+            </div>
+            <div>
+              <label htmlFor="email" className="mb-1 block text-lg font-medium">
+                Confirm Password
+              </label>
+              <FormikTextField
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                type="password"
+                error={
+                  formik.touched.confirmPassword &&
+                  Boolean(formik.errors.confirmPassword)
+                }
+                helperText={
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
+                }
+              />
+              {errorMessage && (
+                <p className="text-sm text-red-500">{errorMessage}</p>
+              )}
+            </div>
+            <ActionButton
+              disabled={!formik.isValid || !formik.dirty}
+              text="Save New Password"
+            />
+          </form>
         </div>
       </div>
     </div>

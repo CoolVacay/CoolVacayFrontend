@@ -1,13 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-//TODO: ask where to put loader
-// import Loader from "../../ui/components/common/Loader/loader";
-
 import SignUpForm from "~/app/ui/components/authentication/SignUpForm";
 import OAuthProviders from "~/app/ui/components/authentication/OAuthProviders";
 
-export default function SignUp() {
+export default async function SignUp() {
   return (
     <div className="flex w-full flex-col gap-12">
       <div className="w-full">
