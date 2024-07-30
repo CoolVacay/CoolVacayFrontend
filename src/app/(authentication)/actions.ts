@@ -40,6 +40,9 @@ export async function authenticateGO(
         idToken: idToken,
         accessToken: accessToken,
       });
+      if (res instanceof FetchError) {
+        throw res;
+      }
       return res;
     } else {
       return "User not found";

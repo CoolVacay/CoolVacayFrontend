@@ -55,6 +55,15 @@ export default function NavBar({
               Vacation Rental Management
             </p>
           </Link>
+          {session ? (
+            <Link href="/profile/reservations">
+              <p
+                className={`text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
+              >
+                <span className="mr-[14px]">•</span> My bookings
+              </p>
+            </Link>
+          ) : null}
           {!session ? (
             <Link href="/signin">
               <button

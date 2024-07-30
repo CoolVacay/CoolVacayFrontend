@@ -7,7 +7,8 @@ import type { IPricingDetails } from "../ui/components/listing/BookNow/BookNowCa
 import type { IParams } from "./definitions";
 import type { UserData } from "./definitions";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { logOut } from "../(authentication)/actions";
+
 export interface IInquireArgs {
   name?: string;
   message?: string;
@@ -370,9 +371,13 @@ export async function registerFollower(
   }
 }
 
-export async function deactivateAccount({ userId }: { userId: string }) {
+export async function deactivateAccount(
+  prevState: string | undefined,
+  { userId }: { userId: string },
+) {
   try {
     const res = await postFetch(`/Users/${userId}`, { userId }, "DELETE");
+    await logOut();
     if (res instanceof FetchError) {
       throw res;
     }
@@ -383,5 +388,4 @@ export async function deactivateAccount({ userId }: { userId: string }) {
       return "Failed to deactivate user";
     }
   }
-  redirect("/signin");
 }

@@ -9,6 +9,7 @@ import type { Provider } from "next-auth/providers";
 import type { JWT } from "next-auth/jwt";
 import type { UserData } from "./app/(application)/definitions";
 import { authenticateGO } from "./app/(authentication)/actions";
+import { redirect } from "next/navigation";
 
 type CustomUser =
   | (User &
@@ -111,16 +112,16 @@ export const providerMap = providers.map((provider) => {
 
 const authOptions: NextAuthConfig = {
   //TODO: add when needed
-  debug: process.env.NODE_ENV !== "production" ? true : false,
+  // debug: process.env.NODE_ENV !== "production" ? true : false,
   providers,
   pages: {
     signIn: "/signin",
+    error: "/access-denied",
   },
   callbacks: {
     async authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnProfile = nextUrl.pathname.startsWith("/profile");
-
       if (isOnProfile) {
         if (isLoggedIn) return true;
         return false;
@@ -135,8 +136,8 @@ const authOptions: NextAuthConfig = {
           account.id_token,
           account.access_token,
         );
-        if (googleUser) {
-          const userData = googleUser as UserData;
+        if (typeof googleUser !== "string") {
+          const userData = googleUser!;
           user.id = userData.profile.id.toString();
           user.lastName = userData.profile.lastName;
           user.phone = userData.profile.phone;
@@ -144,6 +145,8 @@ const authOptions: NextAuthConfig = {
           user.nationality = userData.profile.nationality;
           user.accessToken = userData.accessToken;
           user.image = userData.profile.image;
+        } else {
+          redirect("/signin");
         }
       }
       return true;
