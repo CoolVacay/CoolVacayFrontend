@@ -15,10 +15,10 @@ export async function HeroSection() {
               Find your perfect place now
             </h1>
             <div className="text-xl leading-[30px] tracking-[0.16px]">
-              <p>Your personalized destination discovery platform.</p>
-              <p>
+              <h1 className="text-[16px]">Your personalized destination discovery platform.</h1>
+              <h2 className="text-[16px]">
                 Explore, compare, and uncover your dream location effortlessly.
-              </p>
+              </h2>
             </div>
           </div>
         </div>

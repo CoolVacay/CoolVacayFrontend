@@ -52,7 +52,7 @@ export async function FeaturedListingsSection() {
           );
         })
       ) : (
-        <h6>There are no featured listings at this moment</h6>
+        <h1 className="text-[16px]">There are no featured listings at this moment</h1>
       )}
     </section>
   );

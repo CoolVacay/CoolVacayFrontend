@@ -202,12 +202,12 @@ export default function MapContent({
                   width="16px"
                   height={16}
                 />
-                <h6 className="text-sm font-bold text-primary">
+                <h1 className="text-sm font-bold text-primary">
                   4.5
                   <span className="text-sm font-medium text-primary-grey400">
                     {` (293 review)`}
                   </span>
-                </h6>
+                </h1>
               </div>
               <Link
                 href={`listing/${selectedMarker.source}/${selectedMarker.id}?${newParams()?.toString()}`}

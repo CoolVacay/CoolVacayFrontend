@@ -23,7 +23,7 @@ export default function Overview({ listing }: { listing: ListingData }) {
         {readMore ? "Read less" : "Read more"}
       </button>
       <article className="grid grid-cols-3 pt-10">
-        {listing.amenities.map((amenitie, index) => {
+        {listing.amenities.map((amenity, index) => {
           return (
             (!viewMore ? index < 9 : index >= 0) && (
               <div key={index} className="flex items-center gap-2">
@@ -33,7 +33,7 @@ export default function Overview({ listing }: { listing: ListingData }) {
                   width="20px"
                   alt="home icon"
                 />
-                <h6 className="font-medium">{amenitie}</h6>
+                <h1 className="text-sm font-medium">{amenity}</h1>
               </div>
             )
           );

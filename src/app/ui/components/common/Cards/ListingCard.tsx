@@ -44,13 +44,13 @@ export default function ListingCard({
       <div className="flex grow flex-col justify-between">
         <div className="flex flex-col gap-1">
           <div className="flex items-center justify-between font-medium">
-            <h6 className="text-lg">
+            <h2 className="text-lg">
               ${price}
               <span className="text-sm text-primary-grey400"> night</span>
-            </h6>
-            <h6 className="text-sm text-primary-grey400">
+            </h2>
+            <h2 className="text-sm text-primary-grey400">
               {startDate} - {endDate}
-            </h6>
+            </h2>
           </div>
           <div>
             <div className="mb-1 text-base font-medium">
@@ -65,13 +65,13 @@ export default function ListingCard({
               width="16px"
               height={16}
             />
-            <h6 className="text-sm">
+            <h2 className="text-sm">
               4.5
               <span className="text-sm font-medium text-primary-grey400">
                 {" "}
                 (293 review)
               </span>
-            </h6>
+            </h2>
           </div>
         </div>
         <Link href={`listing/${source}/${id}?${searchParams.toString()}`}>
