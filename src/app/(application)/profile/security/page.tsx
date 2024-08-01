@@ -4,6 +4,8 @@ import { auth } from "~/auth";
 
 export default async function Page() {
   const session = (await auth())!;
+  const signedInWith = session.user?.signedInWith;
+  const canChangePassword = signedInWith === "Coolvacay";
   return (
     <main className="w-full">
       <div className="flex flex-col gap-5">
@@ -11,19 +13,25 @@ export default async function Page() {
         <div className="flex w-full items-center justify-between">
           <div className="flex flex-col gap-2">
             <p className="text-lg font-medium">Password</p>
-            <p className="text-sm font-medium text-[#676D73]">
-              Set a unique password to protect your account
-            </p>
+            {canChangePassword ? (
+              <p className="text-sm font-medium text-[#676D73]">
+                Set a unique password to protect your account
+              </p>
+            ) : (
+              <p className="text-sm font-medium text-[#676D73]">{`You are signed in with ${signedInWith}. You can't change your password`}</p>
+            )}
           </div>
-          <FormDialog
-            title="Change password"
-            content="password"
-            data={session.user?.id}
-          >
-            <button className="flex h-[48px] items-center justify-center rounded-full border border-primary px-6 py-2 text-primary hover:bg-primary hover:text-white">
-              Edit Password
-            </button>
-          </FormDialog>
+          {canChangePassword ? (
+            <FormDialog
+              title="Change password"
+              content="password"
+              data={session.user?.id}
+            >
+              <button className="flex h-[48px] items-center justify-center rounded-full border border-primary px-6 py-2 text-primary hover:bg-primary hover:text-white">
+                Edit Password
+              </button>
+            </FormDialog>
+          ) : null}
         </div>
         <Divider />
         <h2 className="text-2xl font-medium">Manage Account</h2>

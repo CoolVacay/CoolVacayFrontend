@@ -1,13 +1,14 @@
 import { getFilteredListings } from "~/app/(application)/actions";
 import { capitalize } from "~/app/utils/helpers";
 import { ListingCard } from "../common";
+import Pagination from "./Pagination";
 
 export async function ListingSection({ query }: { query: URLSearchParams }) {
   const listings = (await getFilteredListings(query.toString()))!;
   const title =
     query.get("category") ??
     (query.get("match") && capitalize(query.get("match")!));
-
+  const totalPages = 12;
   return listings?.length > 0 ? (
     <>
       <div className="flex place-items-baseline gap-8 pb-6">
@@ -30,6 +31,9 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
             />
           );
         })}
+      </div>
+      <div className="my-8 flex justify-center">
+        <Pagination totalPages={totalPages} />
       </div>
     </>
   ) : (

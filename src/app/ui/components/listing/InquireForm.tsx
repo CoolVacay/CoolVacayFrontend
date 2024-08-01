@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Toaster } from "react-hot-toast";
@@ -32,7 +32,9 @@ export default function InquireForm({
   listing?: ListingData;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [errorMessage, dispatch] = useFormState(inquire, undefined);
+  const [errorMessage, setErrorMessage] = useState<undefined | string>(
+    undefined,
+  );
 
   const formik = useFormik({
     initialValues: listing
@@ -55,11 +57,12 @@ export default function InquireForm({
   });
   return (
     <form
-      action={() => {
-        dispatch(formik.values as IInquireArgs);
+      action={async () => {
+        const response = await inquire(formik.values as IInquireArgs);
+        toastNotifier(response);
+        setErrorMessage(typeof response === "string" ? response : undefined);
         formik.resetForm();
-        toastNotifier(errorMessage);
-        if (setOpen) {
+        if (setOpen && typeof response !== "string") {
           setOpen(false);
         }
       }}

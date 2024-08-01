@@ -1,22 +1,22 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useFormState } from "react-dom";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { MenuItem } from "@mui/material";
+import { Toaster } from "react-hot-toast";
+
+import { toastNotifier } from "~/app/utils/helpers";
 import { IconGenerator } from "../../common";
 import { updateProfile } from "~/app/(application)/actions";
 import { ActionButton } from "../../authentication";
 import { SimpleInput, SimpleSelectInput } from "../../common";
 import type { ICountries } from "~/app/(application)/actions";
 import type { UserData } from "~/app/(application)/definitions";
-import { Toaster } from "react-hot-toast";
-import { toastNotifier } from "~/app/utils/helpers";
+
 export default function ProfileForm({
   profileInfo,
   countries,
@@ -25,8 +25,9 @@ export default function ProfileForm({
   countries: ICountries[];
 }) {
   const [editMode, setEditMode] = useState(false);
-  const [errorMessage, dispatch] = useFormState(updateProfile, undefined);
-
+  const [errorMessage, setErrorMessage] = useState<undefined | string>(
+    undefined,
+  );
   const ValidationSchema = Yup.object({
     firstName: Yup.string().required("First Name is required"),
     lastName: Yup.string().required("Last Name is required"),
@@ -55,9 +56,10 @@ export default function ProfileForm({
   });
   return (
     <form
-      action={() => {
-        dispatch(formik.values);
-        toastNotifier(errorMessage);
+      action={async () => {
+        const response = await updateProfile(formik.values);
+        toastNotifier(response);
+        setErrorMessage(typeof response === "string" ? response : undefined);
         setEditMode(false);
       }}
     >
@@ -205,10 +207,10 @@ export default function ProfileForm({
                 />
               </LocalizationProvider>
             </div>
-            {errorMessage && (
-              <p className="text-sm text-red-500">{errorMessage}</p>
-            )}
           </div>
+          {errorMessage && (
+            <p className="text-sm text-red-500">{errorMessage}</p>
+          )}
         </div>
         {editMode ? (
           <div className="flex gap-5">

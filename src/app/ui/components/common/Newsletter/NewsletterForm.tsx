@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { registerFollower } from "~/app/(application)/actions";
@@ -8,15 +8,19 @@ import { ActionButton } from "../../authentication";
 import { toastNotifier } from "~/app/utils/helpers";
 import { Toaster } from "react-hot-toast";
 
+const ValidationSchema = Yup.object({
+  email: Yup.string().email("Invalid email"),
+});
+
 export default function NewsletterForm({
   orientation,
 }: {
   orientation: "horizontal" | "vertical";
 }) {
-  const [errorMessage, dispatch] = useFormState(registerFollower, undefined);
-  const ValidationSchema = Yup.object({
-    email: Yup.string().email("Invalid email"),
-  });
+  const [errorMessage, setErrorMessage] = useState<undefined | string>(
+    undefined,
+  );
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -24,13 +28,16 @@ export default function NewsletterForm({
     validationSchema: ValidationSchema,
     onSubmit: () => console.log("Subscribing user"),
   });
+
   const horizontalOrientation = orientation === "horizontal";
+
   return (
     <form
-      action={() => {
-        dispatch(formik.values);
+      action={async () => {
+        const resp = await registerFollower(formik.values);
+        toastNotifier(resp);
+        setErrorMessage(typeof resp === "string" ? resp : undefined);
         formik.resetForm();
-        toastNotifier(errorMessage);
       }}
     >
       <div

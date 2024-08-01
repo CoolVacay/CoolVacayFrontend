@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 
@@ -25,7 +25,9 @@ export default function ChangePasswordForm({
   userId: string;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [errorMessage, dispatch] = useFormState(updatePassword, undefined);
+  const [errorMessage, setErrorMessage] = useState<undefined | string>(
+    undefined,
+  );
 
   const formik = useFormik({
     initialValues: {
@@ -39,11 +41,12 @@ export default function ChangePasswordForm({
   });
   return (
     <form
-      action={() => {
-        dispatch(formik.values as IPassArgs);
+      action={async () => {
+        const response = await updatePassword(formik.values as IPassArgs);
+        toastNotifier(response);
+        setErrorMessage(typeof response === "string" ? response : undefined);
         formik.resetForm();
-        toastNotifier(errorMessage);
-        if (setOpen) {
+        if (setOpen && typeof response !== "string") {
           setOpen(false);
         }
       }}

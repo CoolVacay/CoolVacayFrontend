@@ -18,10 +18,14 @@ export interface IInquireArgs {
   id?: string;
 }
 
-export async function inquire(
-  prevState: string | undefined,
-  { name, message, phone, email, source, id }: IInquireArgs,
-) {
+export async function inquire({
+  name,
+  message,
+  phone,
+  email,
+  source,
+  id,
+}: IInquireArgs) {
   try {
     const values = {
       name: name,
@@ -56,18 +60,15 @@ interface IProfileDetails {
   dateOfBirth: string;
   gender: string;
 }
-export async function updateProfile(
-  prevState: string | undefined,
-  {
-    email,
-    firstName,
-    lastName,
-    phone,
-    nationality,
-    dateOfBirth,
-    gender,
-  }: IProfileDetails,
-) {
+export async function updateProfile({
+  email,
+  firstName,
+  lastName,
+  phone,
+  nationality,
+  dateOfBirth,
+  gender,
+}: IProfileDetails) {
   try {
     const values = {
       email,
@@ -100,10 +101,11 @@ export interface IPassArgs {
   oldPassword: string;
   newPassword: string;
 }
-export async function updatePassword(
-  prevState: string | undefined,
-  { userId, oldPassword, newPassword }: IPassArgs,
-) {
+export async function updatePassword({
+  userId,
+  oldPassword,
+  newPassword,
+}: IPassArgs) {
   try {
     const values = {
       oldPassword,
@@ -353,10 +355,7 @@ export async function getReservationsDetails(userId: string) {
   }
 }
 
-export async function registerFollower(
-  prevState: string | undefined,
-  { email }: { email: string },
-) {
+export async function registerFollower({ email }: { email: string }) {
   try {
     const res = await postFetch(`/Followers/Register`, { email });
     if (res instanceof FetchError) {

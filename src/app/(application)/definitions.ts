@@ -65,6 +65,7 @@ export type MapboxMarkerData = Pick<
 export type UserData = {
   accessToken: string;
   accessTokenExpiresAt: string;
+  signedInWith: string;
   profile: {
     id: number | string;
     firstName: string;

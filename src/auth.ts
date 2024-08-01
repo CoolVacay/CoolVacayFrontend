@@ -33,6 +33,7 @@ declare module "next-auth" {
     dateOfBirth: string;
     nationality: string;
     accessToken: string;
+    signedInWith: string;
   }
 }
 
@@ -45,6 +46,7 @@ declare module "next-auth/jwt" {
     dateOfBirth: string;
     nationality: string;
     accessToken: string;
+    signedInWith: string;
   }
 }
 
@@ -82,6 +84,7 @@ const providers: Provider[] = [
         if (user?.accessToken) {
           return {
             accessToken: user.accessToken,
+            signedInWith: user.signedInWith,
             id: user.profile.id.toString(),
             name: user.profile.firstName,
             lastName: user.profile.lastName,
@@ -145,6 +148,7 @@ const authOptions: NextAuthConfig = {
           user.nationality = userData.profile.nationality;
           user.accessToken = userData.accessToken;
           user.image = userData.profile.image;
+          user.signedInWith = userData.signedInWith;
         } else {
           redirect("/signin");
         }
@@ -161,6 +165,7 @@ const authOptions: NextAuthConfig = {
         session.user.nationality = token.nationality;
         session.user.accessToken = token.accessToken;
         session.user.image = token.image;
+        session.user.signedInWith = token.signedInWith;
       }
       return session;
     },
@@ -171,6 +176,7 @@ const authOptions: NextAuthConfig = {
         token.phone = user.phone!;
         token.dateOfBirth = user.dateOfBirth!;
         token.accessToken = user.accessToken!;
+        token.signedInWith = user.signedInWith!;
       }
       return token;
     },
