@@ -3,6 +3,7 @@
 import { useState } from "react";
 import dayjs, { type Dayjs } from "dayjs";
 import { useRouter } from "next/navigation";
+import type { SelectChangeEvent } from "@mui/material";
 
 import {
   CitiesAutocomplete,
@@ -10,9 +11,7 @@ import {
   RangeDatePicker,
   SelectInput,
 } from "../common";
-import type { SelectChangeEvent } from "@mui/material";
-import type { ILocationsList } from "~/app/(application)/actions";
-
+import type { ILocationsList } from "~/app/(application)/definitions";
 export type DateRangeType = [Dayjs, Dayjs];
 
 //TODO: re-style/refactor when you add functionality

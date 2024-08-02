@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Dialog, DialogContent, Divider } from "@mui/material";
-import type { ListingData } from "~/app/(application)/definitions";
+import type { IListingData } from "~/app/(application)/definitions";
 import InquireForm from "../../listing/InquireForm";
 import CloseIcon from "@mui/icons-material/Close";
 import ChangePasswordForm from "../../profile/ChangePasswordForm";
@@ -17,7 +17,7 @@ export default function FormDialog({
 }: {
   title: string;
   subtitle?: string;
-  data?: ListingData | string;
+  data?: IListingData | string;
   children: React.ReactNode;
   content: "password" | "inquiry" | "deactivate";
 }) {
@@ -25,7 +25,7 @@ export default function FormDialog({
   const isContentInquiry = content === "inquiry";
 
   const modalContentOptions = {
-    inquiry: <InquireForm listing={data as ListingData} setOpen={setOpen} />,
+    inquiry: <InquireForm listing={data as IListingData} setOpen={setOpen} />,
     password: <ChangePasswordForm setOpen={setOpen} userId={data as string} />,
     deactivate: (
       <DeactivateAccountForm setOpen={setOpen} userId={data as string} />

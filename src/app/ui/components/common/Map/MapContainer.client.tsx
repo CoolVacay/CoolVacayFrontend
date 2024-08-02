@@ -14,8 +14,8 @@ import type { MapRef } from "react-map-gl";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 import { IconGenerator } from "../IconGenerator";
 import type {
-  ListingData,
-  MapboxMarkerData,
+  IListingData,
+  TMapboxMarkerData,
 } from "~/app/(application)/definitions";
 import {
   clusterLayer,
@@ -26,7 +26,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
 
 const listingsToGeoJSON = (
-  listings: ListingData[],
+  listings: IListingData[],
 ): GeoJSON.FeatureCollection<GeoJSON.Geometry> => ({
   type: "FeatureCollection",
   features: listings.map((listing) => ({
@@ -44,11 +44,11 @@ export default function MapContent({
   listings,
 }: {
   singleListing?: boolean;
-  listings: ListingData[];
+  listings: IListingData[];
 }) {
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
   const [selectedMarker, setSelectedMarker] = useState<
-    MapboxMarkerData | undefined
+    TMapboxMarkerData | undefined
   >();
   const mapRef = useRef<MapRef>(null);
   const geojson = useMemo(() => listingsToGeoJSON(listings), [listings]);
@@ -97,7 +97,7 @@ export default function MapContent({
           setSelectedMarker(undefined);
           return;
         }
-        const property = feature.properties as ListingData;
+        const property = feature.properties as IListingData;
         const coordinates = feature.geometry.coordinates as [number, number];
         setSelectedMarker({
           id: property.id,

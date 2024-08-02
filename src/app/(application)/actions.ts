@@ -2,21 +2,21 @@
 
 import { postFetch, getFetch, getHTMLFetch } from "../utils/api-helpers";
 import { FetchError } from "../utils/definitions";
-import type { ListingData } from "./definitions";
+import type { IListingData } from "./definitions";
 import type { IPricingDetails } from "../ui/components/listing/BookNow/BookNowCard.client";
 import type { IParams } from "./definitions";
-import type { UserData } from "./definitions";
+import type { TUserData } from "./definitions";
 import { revalidatePath } from "next/cache";
 import { logOut } from "../(authentication)/actions";
-
-export interface IInquireArgs {
-  name?: string;
-  message?: string;
-  phone?: string;
-  email?: string;
-  source?: string;
-  id?: string;
-}
+import type {
+  IInquireArgs,
+  IProfileDetails,
+  IBookingPaymentArgs,
+  IPassArgs,
+  ICountries,
+  ILocationsList,
+  IReservationsDetails,
+} from "./definitions";
 
 export async function inquire({
   name,
@@ -51,15 +51,6 @@ export async function inquire({
   }
 }
 
-interface IProfileDetails {
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  phone: string;
-  nationality: string;
-  dateOfBirth: string;
-  gender: string;
-}
 export async function updateProfile({
   email,
   firstName,
@@ -96,11 +87,49 @@ export async function updateProfile({
   }
 }
 
-export interface IPassArgs {
-  userId: string;
-  oldPassword: string;
-  newPassword: string;
+export async function bookingPayment({
+  userId,
+  listingId,
+  source,
+  fromDate,
+  toDate,
+  adults,
+  children,
+  infants,
+  pets,
+  cardDetails: { cardNumber, expiryDate, cvc, cardHolderName },
+}: IBookingPaymentArgs) {
+  try {
+    const values = {
+      userId: userId,
+      listingId: listingId,
+      source: source,
+      fromDate: fromDate,
+      toDate: toDate,
+      adults: adults,
+      children: children,
+      infants: infants,
+      pets: pets,
+      cardDetails: {
+        cardNumber: cardNumber.replace(/-/g, ""),
+        expiryDate: expiryDate,
+        cvc: cvc,
+        cardHolderName: cardHolderName,
+      },
+    };
+    const res = await postFetch(`/Reservations`, values);
+    if (res instanceof FetchError) {
+      throw res;
+    }
+  } catch (error) {
+    if (error instanceof FetchError) {
+      return `${error.message}`;
+    } else {
+      return "Failed to complete payment";
+    }
+  }
 }
+
 export async function updatePassword({
   userId,
   oldPassword,
@@ -132,14 +161,6 @@ export async function updatePassword({
   }
 }
 
-export interface PricingDetailsArgs {
-  source: string;
-  id: string;
-  startDate: string;
-  endDate: string;
-  numberOfGuests: string;
-}
-
 export async function getPricingDetails(
   source: string,
   id: string,
@@ -158,17 +179,6 @@ export async function getPricingDetails(
   } catch (error) {
     console.error("Error:", error);
   }
-}
-
-export interface ICountries {
-  id: string;
-  name: string;
-  states:
-    | {
-        id: string;
-        name: string;
-      }[]
-    | [];
 }
 
 export async function getCountries() {
@@ -233,12 +243,6 @@ export async function getBlogHTML() {
   }
 }
 
-export interface ILocationsList {
-  icon: string;
-  match: string;
-  displayName: string;
-}
-
 export async function getLocationsList() {
   try {
     const res = await getFetch<ILocationsList[]>(`/Listings/Codifiers`);
@@ -253,7 +257,7 @@ export async function getLocationsList() {
 
 export async function getListingData({ source, id }: IParams) {
   try {
-    const res = await getFetch<ListingData>(`/Listings/${source}/${id}`);
+    const res = await getFetch<IListingData>(`/Listings/${source}/${id}`);
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch listing data");
     }
@@ -265,7 +269,7 @@ export async function getListingData({ source, id }: IParams) {
 
 export async function getFilteredListings(query: string) {
   try {
-    const res = await getFetch<ListingData[]>(`/listings?${query}`, true);
+    const res = await getFetch<IListingData[]>(`/listings?${query}`, true);
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch listings");
     }
@@ -277,7 +281,7 @@ export async function getFilteredListings(query: string) {
 
 export async function getProfileInfo(email: string) {
   try {
-    const res = await getFetch<UserData["profile"]>(`/Users/email/${email}`);
+    const res = await getFetch<TUserData["profile"]>(`/Users/email/${email}`);
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch profile data");
     }
@@ -303,7 +307,7 @@ export async function getStaticPage(type: string) {
 
 export async function getSimilarListings({ source, id }: IParams) {
   try {
-    const res = await getFetch<ListingData[]>(
+    const res = await getFetch<IListingData[]>(
       `/Listings/${source}/${id}/similar`,
       true,
     );
@@ -316,31 +320,6 @@ export async function getSimilarListings({ source, id }: IParams) {
   }
 }
 
-export interface IReservationsDetails {
-  id: number;
-  userId: number;
-  listingId: string;
-  source: string;
-  fromDate: string;
-  toDate: string;
-  adults: number;
-  children: number;
-  infants: number;
-  pets: number;
-  status: number;
-  details: {
-    listingName: string;
-    listingType: string;
-    squareFeets: number | null;
-    bedrooms: number;
-    bathrooms: number;
-    pricePerNight: number;
-    fromDate: string;
-    toDate: string;
-    totalPrice: number;
-    imageSrc: string;
-  };
-}
 export async function getReservationsDetails(userId: string) {
   try {
     const res = await getFetch<IReservationsDetails[]>(

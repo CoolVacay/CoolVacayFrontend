@@ -5,7 +5,7 @@ import type { Dispatch, SetStateAction } from "react";
 import { Dialog, DialogContent } from "@mui/material";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 
-import type { ListingData } from "~/app/(application)/definitions";
+import type { IListingData } from "~/app/(application)/definitions";
 import EmblaCarousel from "../../listing/Carousel/EmblaCarousel";
 import CloseIcon from "@mui/icons-material/Close";
 import "../../listing/Carousel/embla.css";
@@ -18,7 +18,7 @@ export default function FullScreenDialog({
 }: {
   isModalOpen: boolean;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  listing: ListingData;
+  listing: IListingData;
   handleClick: (url?: number | string) => void;
 }) {
   const { updateSearchParams, searchParamsValues, searchParams } =

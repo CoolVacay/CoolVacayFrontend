@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { IconGenerator } from "../IconGenerator";
-import type { SimilarCardProps } from "~/app/(application)/definitions";
+import type { TSimilarCardProps } from "~/app/(application)/definitions";
 
 export default function SimilarCard({
   name,
@@ -11,7 +11,7 @@ export default function SimilarCard({
   bathrooms,
   price,
   className,
-}: SimilarCardProps & { className?: string }) {
+}: TSimilarCardProps & { className?: string }) {
   return (
     <div
       className={`flex h-full w-[470px] grow-0 overflow-hidden rounded-xl p-2 shadow-cardShadow ${className}`}

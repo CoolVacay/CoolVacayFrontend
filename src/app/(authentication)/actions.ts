@@ -6,7 +6,7 @@ import { signIn, signOut } from "~/auth";
 import { capitalize } from "../utils/helpers";
 import { redirect } from "next/navigation";
 import { FetchError } from "../utils/definitions";
-import type { UserData } from "../(application)/definitions";
+import type { TUserData } from "../(application)/definitions";
 
 export async function authenticateCR(
   prevState: string | undefined,
@@ -36,7 +36,7 @@ export async function authenticateGO(
 ) {
   try {
     if (idToken && accessToken) {
-      const res = await postFetch<UserData>("/Auth/google-login", {
+      const res = await postFetch<TUserData>("/Auth/google-login", {
         idToken: idToken,
         accessToken: accessToken,
       });
@@ -55,14 +55,17 @@ export async function authenticateGO(
 
 export async function authenticateFB(accessToken: string | undefined) {
   try {
-    await postFetch("/Auth/facebook-login", {
+    const res = await postFetch<TUserData>("/Auth/facebook-login", {
       accessToken: accessToken,
     });
+    if (res instanceof FetchError) {
+      throw res;
+    }
+    return res;
   } catch (error) {
     console.error("Failed to login user via Facebook:", error);
     return "Failed to login user via Facebook, please try another method.";
   }
-  redirect("/account-verification");
 }
 
 export async function register(

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { IconGenerator } from "../IconGenerator";
-import type { MainCardProps } from "~/app/(application)/definitions";
+import type { TMainCardProps } from "~/app/(application)/definitions";
 
 export default function MainCard({
   isBlogCard,
@@ -9,7 +9,7 @@ export default function MainCard({
   imageUrl,
   propertyType,
   squareFeets,
-}: MainCardProps) {
+}: TMainCardProps) {
   return (
     <div
       className={`${!isBlogCard && "shadow-cardShadow"} flex h-full w-[280px] grow-0 flex-col overflow-hidden rounded-xl`}
@@ -47,16 +47,18 @@ export default function MainCard({
                 alt="Cabin icon"
                 width="16px"
               />
-              <h6 className="text-sm">{propertyType}</h6>
+              <h6 className="text-sm">{propertyType ?? "House"}</h6>
             </div>
-            <div className="flex gap-2">
-              <IconGenerator
-                src="/square_foot_icon.svg"
-                alt="Square foot"
-                width="16px"
-              />
-              <h6 className="text-sm">{`${Math.floor(squareFeets ?? 0)} sqft`}</h6>
-            </div>
+            {squareFeets ? (
+              <div className="flex gap-2">
+                <IconGenerator
+                  src="/square_foot_icon.svg"
+                  alt="Square foot"
+                  width="16px"
+                />
+                <h6 className="text-sm">{`${Math.floor(squareFeets ?? 0)} sqft`}</h6>
+              </div>
+            ) : null}
           </div>
         )}
       </div>

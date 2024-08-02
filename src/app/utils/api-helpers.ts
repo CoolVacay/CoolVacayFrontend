@@ -72,7 +72,7 @@ export async function getHTMLFetch(url: string) {
 
 export async function postFetch<T>(
   url: string,
-  body: Record<string, string | number | undefined>,
+  body: Record<string, string | Record<string, string> | number | undefined>,
   method?: string,
 ): Promise<T | FetchError | null> {
   const session = await auth();
@@ -85,14 +85,14 @@ export async function postFetch<T>(
   try {
     const res = await fetch(`${API_BASE_URL}/api${url}`, {
       method: method ?? "POST",
-      headers,
+      headers: headers,
       body: JSON.stringify(body),
     });
     //if error in response,throw the custom error
     if (!res.ok) {
       const errResponse = await res.text();
       const errorText = JSON.parse(errResponse) as ErrorInterface;
-      throw new FetchError(errorText.error);
+      throw new FetchError(errorText?.error ?? errorText?.message);
     }
     //if successful response,return the data
     const text = await res.text();

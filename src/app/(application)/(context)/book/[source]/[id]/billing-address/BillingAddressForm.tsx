@@ -1,15 +1,16 @@
 "use client";
 
+import { useMemo } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { useRouter } from "next/navigation";
+import { MenuItem } from "@mui/material";
+
 import { ActionButton } from "~/app/ui/components/authentication";
 import { SimpleInput, SimpleSelectInput } from "~/app/ui/components/common";
 import { useFormContext } from "../FormContext";
-import { useRouter } from "next/navigation";
-import { useMemo } from "react";
-import { MenuItem } from "@mui/material";
-import type { ICountries } from "~/app/(application)/actions";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
+import type { ICountries } from "~/app/(application)/definitions";
 
 const ValidationSchema = Yup.object({
   street: Yup.string().required("Street field is required"),

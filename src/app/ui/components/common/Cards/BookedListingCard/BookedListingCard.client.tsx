@@ -1,9 +1,9 @@
 "use client";
 
-import type { ListingData } from "~/app/(application)/definitions";
+import type { IListingData } from "~/app/(application)/definitions";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 
-export function Content({ listing }: { listing: ListingData }) {
+export function Content({ listing }: { listing: IListingData }) {
   const { searchParamsValues } = useAppSearchParams();
 
   return (

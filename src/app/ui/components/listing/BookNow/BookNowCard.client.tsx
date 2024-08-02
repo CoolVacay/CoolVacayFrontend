@@ -5,7 +5,7 @@ import { Divider } from "@mui/material";
 import { RangeDatePicker, FormDialog, SelectInput } from "../../common";
 import type { SelectChangeEvent } from "@mui/material";
 import type { DateRangeType } from "../../home/SearchCard";
-import type { IParams, ListingData } from "~/app/(application)/definitions";
+import type { IParams, IListingData } from "~/app/(application)/definitions";
 import { useState, useEffect } from "react";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 
@@ -26,7 +26,7 @@ export default function BookNowContent({
   listingInfo,
   params,
 }: {
-  listingInfo: ListingData;
+  listingInfo: IListingData;
   params: IParams;
 }) {
   const { searchParams, searchParamsValues, updateSearchParams } =

@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 
 import { toastNotifier } from "~/app/utils/helpers";
 import { ActionButton } from "../authentication/common";
-import type { ListingData } from "~/app/(application)/definitions";
+import type { IListingData } from "~/app/(application)/definitions";
 import { SimpleInput } from "../common";
 import { inquire } from "~/app/(application)/actions";
 import type { IInquireArgs } from "~/app/(application)/actions";
@@ -29,7 +29,7 @@ export default function InquireForm({
   listing,
   setOpen,
 }: {
-  listing?: ListingData;
+  listing?: IListingData;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<undefined | string>(

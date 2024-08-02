@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Thumb } from "./EmblaCarouselThumbsButton";
-import type { ListingData } from "~/app/(application)/definitions";
+import type { IListingData } from "~/app/(application)/definitions";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { SimilarCard } from "../../common";
@@ -13,7 +13,7 @@ import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutl
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 
 type CarouselType = {
-  data: ListingData["images"] | ListingData[];
+  data: IListingData["images"] | IListingData[];
   slideNr: number;
   handleClick?: (url?: number | string) => void;
   type: "image" | "card";
@@ -61,7 +61,7 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
   return (
     <div className="embla">
       <div className="flex flex-col gap-4">
-        <div className="grid-cols-24 grid">
+        <div className="grid grid-cols-24">
           <div
             className={`grid ${type === "image" ? "col-span-2 desktop:col-span-4" : "col-span-1"}`}
           >
@@ -79,7 +79,7 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
             <div className="embla__viewport" ref={emblaMainRef}>
               <div className="embla__container">
                 {type === "image"
-                  ? (data as ListingData["images"]).map((image, index) => (
+                  ? (data as IListingData["images"]).map((image, index) => (
                       <div className="embla__slide" key={index + 1}>
                         <div className="embla__slide__number">
                           {
@@ -104,7 +104,7 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
                         </div>
                       </div>
                     ))
-                  : (data as ListingData[]).map((listing, index) => {
+                  : (data as IListingData[]).map((listing, index) => {
                       return (
                         <Link
                           key={listing.id}
@@ -145,7 +145,7 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
             <div className="embla-thumbs__container">
               {type === "image" &&
                 handleClick &&
-                (data as ListingData["images"]).map((image, index) => (
+                (data as IListingData["images"]).map((image, index) => (
                   <Thumb
                     key={index}
                     onClick={() => {

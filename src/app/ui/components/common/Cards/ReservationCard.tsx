@@ -2,7 +2,7 @@ import Image from "next/image";
 import dayjs from "dayjs";
 
 import { IconGenerator } from "../IconGenerator";
-import type { IReservationsDetails } from "~/app/(application)/actions";
+import type { IReservationsDetails } from "~/app/(application)/definitions";
 
 export default function ReservationCard({
   reservation,

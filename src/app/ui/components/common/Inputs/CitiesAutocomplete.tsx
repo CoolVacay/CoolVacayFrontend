@@ -1,12 +1,12 @@
 "use client";
 
 import { FormControl, Box, Autocomplete, TextField } from "@mui/material";
-import { IconGenerator } from "../IconGenerator";
-import type { ILocationsList } from "~/app/(application)/actions";
 import type {
   AutocompleteChangeReason,
   AutocompleteChangeDetails,
 } from "@mui/material";
+import { IconGenerator } from "../IconGenerator";
+import type { ILocationsList } from "~/app/(application)/definitions";
 
 export interface CustomHTMLAttributes
   extends React.HTMLAttributes<HTMLLIElement> {

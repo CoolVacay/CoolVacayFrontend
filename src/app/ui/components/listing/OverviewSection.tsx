@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type { ListingData } from "~/app/(application)/definitions";
+import type { IListingData } from "~/app/(application)/definitions";
 import { IconGenerator } from "../common";
 
-export default function Overview({ listing }: { listing: ListingData }) {
+export default function Overview({ listing }: { listing: IListingData }) {
   const [readMore, setReadMore] = useState(false);
   const [viewMore, setViewMore] = useState(false);
 

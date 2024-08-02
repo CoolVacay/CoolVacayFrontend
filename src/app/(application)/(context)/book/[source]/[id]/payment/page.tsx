@@ -1,12 +1,7 @@
-// "use client";
-
-// import { useFormContext } from "../FormContext";
-// import { useEffect } from "react";
-// import { useRouter } from "next/navigation";
-
 import PaymentForm from "./PaymentForm";
+import { auth } from "~/auth";
 
-export default function Page({
+export default async function Page({
   params,
 }: {
   params: {
@@ -14,23 +9,13 @@ export default function Page({
     id: string;
   };
 }) {
-  // const { formData } = useFormContext();
-  // const searchParams = useSearchParams();
-  // const router = useRouter();
-
-  //TODO: refactor
-  // useEffect(() => {
-  //   if (!formData.country && router) {
-  //     // const pageParams = new URLSearchParams(searchParams.toString());
-  //     router.push(`/book/${params.source}/${params.id}/billing-address`);
-  //   }
-  // }, [router, formData.country, params.id, params.source, params]);
+  const session = (await auth())!;
 
   return (
     <div className="flex w-full flex-col gap-6">
       <h3 className="text-2xl font-bold">Payment</h3>
       <div className="rounded-xl border border-[#EAEAEF] p-6">
-        <PaymentForm params={params} />
+        <PaymentForm params={params} userId={Number(session.user!.id)} />
       </div>
     </div>
   );

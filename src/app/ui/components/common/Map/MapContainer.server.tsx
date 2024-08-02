@@ -1,6 +1,6 @@
 import { getFilteredListings } from "~/app/(application)/actions";
 import MapContent from "./MapContainer.client";
-import type { ListingData } from "~/app/(application)/definitions";
+import type { IListingData } from "~/app/(application)/definitions";
 
 export default async function MapContainer({
   singleListing = false,
@@ -9,7 +9,7 @@ export default async function MapContainer({
 }: {
   singleListing?: boolean;
   query: URLSearchParams;
-  listing: ListingData[];
+  listing: IListingData[];
 }) {
   const listings = singleListing
     ? listing

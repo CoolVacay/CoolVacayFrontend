@@ -15,13 +15,13 @@ import { updateProfile } from "~/app/(application)/actions";
 import { ActionButton } from "../../authentication";
 import { SimpleInput, SimpleSelectInput } from "../../common";
 import type { ICountries } from "~/app/(application)/actions";
-import type { UserData } from "~/app/(application)/definitions";
+import type { TUserData } from "~/app/(application)/definitions";
 
 export default function ProfileForm({
   profileInfo,
   countries,
 }: {
-  profileInfo: UserData["profile"] | null;
+  profileInfo: TUserData["profile"] | null;
   countries: ICountries[];
 }) {
   const [editMode, setEditMode] = useState(false);

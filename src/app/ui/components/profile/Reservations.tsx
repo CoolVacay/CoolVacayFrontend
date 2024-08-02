@@ -1,5 +1,5 @@
 import { Divider } from "@mui/material";
-import type { IReservationsDetails } from "~/app/(application)/actions";
+import type { IReservationsDetails } from "~/app/(application)/definitions";
 import { ReservationCard } from "../common";
 
 export default function Reservations({

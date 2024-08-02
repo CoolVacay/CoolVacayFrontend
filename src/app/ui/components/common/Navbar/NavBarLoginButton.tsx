@@ -7,13 +7,13 @@ import Logout from "@mui/icons-material/Logout";
 import { logOut } from "~/app/(authentication)/actions";
 import Link from "next/link";
 import Image from "next/image";
-import type { UserData } from "~/app/(application)/definitions";
+import type { TUserData } from "~/app/(application)/definitions";
 
 const NavBarLoginButton = ({
   session,
   isWhiteVariant,
 }: {
-  session: UserData["profile"];
+  session: TUserData["profile"];
   isWhiteVariant: boolean;
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

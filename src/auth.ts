@@ -7,14 +7,14 @@ import { postFetch } from "./app/utils/api-helpers";
 import type { User, NextAuthConfig, Session } from "next-auth";
 import type { Provider } from "next-auth/providers";
 import type { JWT } from "next-auth/jwt";
-import type { UserData } from "./app/(application)/definitions";
-import { authenticateGO } from "./app/(authentication)/actions";
+import type { TUserData } from "./app/(application)/definitions";
+import { authenticateFB, authenticateGO } from "./app/(authentication)/actions";
 import { redirect } from "next/navigation";
 
 type CustomUser =
   | (User &
       Pick<
-        UserData["profile"],
+        TUserData["profile"],
         "phone" | "dateOfBirth" | "lastName" | "nationality"
       >)
   | null;
@@ -52,7 +52,7 @@ declare module "next-auth/jwt" {
 
 async function getUserFromDb(email: string, password: string) {
   try {
-    const userData = await postFetch<UserData | Error>("/Auth/access-token", {
+    const userData = await postFetch<TUserData | Error>("/Auth/access-token", {
       email,
       password,
     });
@@ -80,7 +80,7 @@ const providers: Provider[] = [
 
       if (parsedCredentials.success) {
         const { email, password } = parsedCredentials.data;
-        const user = (await getUserFromDb(email, password)) as UserData;
+        const user = (await getUserFromDb(email, password)) as TUserData;
         if (user?.accessToken) {
           return {
             accessToken: user.accessToken,
@@ -141,6 +141,21 @@ const authOptions: NextAuthConfig = {
         );
         if (typeof googleUser !== "string") {
           const userData = googleUser!;
+          user.id = userData.profile.id.toString();
+          user.lastName = userData.profile.lastName;
+          user.phone = userData.profile.phone;
+          user.dateOfBirth = userData.profile.dateOfBirth;
+          user.nationality = userData.profile.nationality;
+          user.accessToken = userData.accessToken;
+          user.image = userData.profile.image;
+          user.signedInWith = userData.signedInWith;
+        } else {
+          redirect("/signin");
+        }
+      } else if (account?.provider === "facebook") {
+        const facebookUser = await authenticateFB(account.access_token);
+        if (typeof facebookUser !== "string") {
+          const userData = facebookUser!;
           user.id = userData.profile.id.toString();
           user.lastName = userData.profile.lastName;
           user.phone = userData.profile.phone;

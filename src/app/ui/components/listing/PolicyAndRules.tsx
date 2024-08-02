@@ -1,7 +1,7 @@
 import { Divider } from "@mui/material";
-import type { ListingData } from "~/app/(application)/definitions";
+import type { IListingData } from "~/app/(application)/definitions";
 
-export default function PolicyAndRules({ listing }: { listing: ListingData }) {
+export default function PolicyAndRules({ listing }: { listing: IListingData }) {
   return (
     <div className="mb-10">
       {listing.cancellationPolicy ? (

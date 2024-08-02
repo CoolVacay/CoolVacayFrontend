@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import { ActionButton } from "../authentication/common";
 import { SimpleInput } from "../common";
 import { updatePassword } from "~/app/(application)/actions";
-import type { IPassArgs } from "~/app/(application)/actions";
+import type { IPassArgs } from "~/app/(application)/definitions";
 import { PasswordCheckSchema } from "~/app/(authentication)/schemas";
 import { toastNotifier } from "~/app/utils/helpers";
 import { Toaster } from "react-hot-toast";

@@ -1,13 +1,13 @@
 import Link from "next/link";
 
 import { revalidateFetch } from "../../../utils/api-helpers";
-import type { PopularCategoriesData } from "../../../(application)/definitions";
+import type { IPopularCategoriesData } from "../../../(application)/definitions";
 import { IconGenerator } from "../common";
 import { FetchError } from "~/app/utils/definitions";
 
 async function getCategories() {
   try {
-    const res = await revalidateFetch<PopularCategoriesData[]>("categories");
+    const res = await revalidateFetch<IPopularCategoriesData[]>("categories");
     if (res instanceof FetchError) {
       throw new Error("Failed to load popular categories");
     }

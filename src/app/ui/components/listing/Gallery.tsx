@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import type { ListingData } from "~/app/(application)/definitions";
+import type { IListingData } from "~/app/(application)/definitions";
 import FullScreenDialog from "../common/Dialogs/FullScreenDialog";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 
-export default function Gallery({ listing }: { listing: ListingData }) {
+export default function Gallery({ listing }: { listing: IListingData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { updateSearchParams } = useAppSearchParams();
 

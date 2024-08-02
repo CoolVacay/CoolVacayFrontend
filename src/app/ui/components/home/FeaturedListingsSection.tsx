@@ -3,11 +3,11 @@ import { getFetch } from "../../../utils/api-helpers";
 import { truncateText } from "../../../utils/helpers";
 import { FetchError } from "~/app/utils/definitions";
 import { IconGenerator, MainCard } from "../common";
-import type { ListingData } from "../../../(application)/definitions";
+import type { IListingData } from "../../../(application)/definitions";
 
 async function getFeaturedListings() {
   try {
-    const res = await getFetch<ListingData[]>("/listings/featured");
+    const res = await getFetch<IListingData[]>("/listings/featured");
     if (res instanceof FetchError) {
       throw new Error("Failed to fetch all listings");
     }

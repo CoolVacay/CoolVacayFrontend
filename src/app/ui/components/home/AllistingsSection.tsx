@@ -3,7 +3,7 @@ import React from "react";
 import dayjs from "dayjs";
 import { IconGenerator, Newsletter, MainCard } from "../common";
 import { getFetch } from "../../../utils/api-helpers";
-import type { ListingData } from "../../../(application)/definitions";
+import type { IListingData } from "../../../(application)/definitions";
 import { truncateText } from "../../../utils/helpers";
 
 const startDate = dayjs().format("YYYY-MM-DD");
@@ -12,10 +12,10 @@ const endDate = dayjs().add(6, "day").format("YYYY-MM-DD");
 export async function getAllListings() {
   try {
     const results = await Promise.allSettled([
-      getFetch<ListingData[]>(
+      getFetch<IListingData[]>(
         `/listings?limit=8&offset=0&fromDate=${startDate}&toDate=${endDate}`,
       ),
-      getFetch<ListingData[]>(
+      getFetch<IListingData[]>(
         `/listings?limit=8&offset=8&fromDate=${startDate}&toDate=${endDate}`,
       ),
     ]);
@@ -34,8 +34,8 @@ export async function getAllListings() {
 
 export async function AllistingsSection() {
   const [firstListings, lastListings] = (await getAllListings()) as [
-    ListingData[],
-    ListingData[],
+    IListingData[],
+    IListingData[],
   ];
 
   return (
