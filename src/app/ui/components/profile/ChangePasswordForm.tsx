@@ -42,7 +42,12 @@ export default function ChangePasswordForm({
   return (
     <form
       action={async () => {
-        const response = await updatePassword(formik.values as IPassArgs);
+        const modValues = Object.fromEntries(
+          Object.entries(formik.values).filter(
+            ([k, _]) => k !== "confirmPassword",
+          ),
+        );
+        const response = await updatePassword(modValues as IPassArgs);
         toastNotifier(response);
         setErrorMessage(typeof response === "string" ? response : undefined);
         formik.resetForm();

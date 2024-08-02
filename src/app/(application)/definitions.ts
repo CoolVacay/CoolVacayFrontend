@@ -79,8 +79,8 @@ export type TUserData = {
   };
 };
 export interface IParams {
-  source: string;
-  id: string;
+  source?: string;
+  id?: string;
 }
 
 export interface IInquireArgs {
@@ -88,18 +88,18 @@ export interface IInquireArgs {
   message?: string;
   phone?: string;
   email?: string;
-  source?: string;
-  id?: string;
+  propertySource?: string;
+  propertyId?: string;
 }
 
 export interface IProfileDetails {
   email?: string;
   firstName?: string;
   lastName?: string;
-  phone: string;
-  nationality: string;
-  dateOfBirth: string;
-  gender: string;
+  phone?: string;
+  nationality?: string;
+  dateOfBirth?: string;
+  gender?: string;
 }
 
 export interface IBookingPaymentArgs {
@@ -121,9 +121,9 @@ export interface IBookingPaymentArgs {
 }
 
 export interface IPassArgs {
-  userId: string;
-  oldPassword: string;
-  newPassword: string;
+  userId?: string;
+  oldPassword?: string;
+  newPassword?: string;
 }
 
 export interface IPricingDetailsArgs {
@@ -175,4 +175,15 @@ export interface IReservationsDetails {
     totalPrice: number;
     imageSrc: string;
   };
+}
+
+export interface IBlog {
+  id: string;
+  title: string;
+  description: string;
+  isFeatured: boolean;
+  thumbnailImageUrl: string;
+  readTime: string;
+  createdOn: string;
+  relatedLocation: string;
 }

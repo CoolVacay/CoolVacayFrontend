@@ -1,7 +1,7 @@
 import type { ErrorInterface } from "./definitions";
+import { revalidatePath } from "next/cache";
 import { FetchError } from "./definitions";
 import { auth } from "~/auth";
-
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 const STORE_CASHE_IN_HOURS = 24;
 
@@ -72,7 +72,9 @@ export async function getHTMLFetch(url: string) {
 
 export async function postFetch<T>(
   url: string,
-  body: Record<string, string | Record<string, string> | number | undefined>,
+  body:
+    | Record<string, string | Record<string, string> | number | undefined>
+    | T,
   method?: string,
 ): Promise<T | FetchError | null> {
   const session = await auth();
@@ -133,6 +135,46 @@ export async function revalidateFetch<T>(
       return err;
     } else {
       return new FetchError("An unknown error occurred");
+    }
+  }
+}
+
+export async function getData<T>(
+  url: string,
+  errorMessage: string,
+  noCache?: boolean,
+) {
+  try {
+    const res = await getFetch<T>(url, noCache);
+    if (res instanceof FetchError) {
+      throw new Error(errorMessage);
+    }
+    return res;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+export async function postData<T>(
+  url: string,
+  values: Record<string, string> | T,
+  errorMessage: string,
+  method?: string,
+  pathToRevalidate?: string,
+) {
+  try {
+    const res = await postFetch<T>(url, values, method);
+    if (pathToRevalidate) {
+      revalidatePath(pathToRevalidate);
+    }
+    if (res instanceof FetchError) {
+      throw res;
+    }
+  } catch (error) {
+    if (error instanceof FetchError) {
+      return `${error.message}`;
+    } else {
+      return errorMessage;
     }
   }
 }

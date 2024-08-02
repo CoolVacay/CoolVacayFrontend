@@ -14,7 +14,10 @@ import { IconGenerator } from "../../common";
 import { updateProfile } from "~/app/(application)/actions";
 import { ActionButton } from "../../authentication";
 import { SimpleInput, SimpleSelectInput } from "../../common";
-import type { ICountries } from "~/app/(application)/actions";
+import type {
+  ICountries,
+  IProfileDetails,
+} from "~/app/(application)/definitions";
 import type { TUserData } from "~/app/(application)/definitions";
 
 export default function ProfileForm({
@@ -57,7 +60,10 @@ export default function ProfileForm({
   return (
     <form
       action={async () => {
-        const response = await updateProfile(formik.values);
+        const modifiedValues = Object.fromEntries(
+          Object.entries(formik.values).filter(([_, v]) => v != ""),
+        );
+        const response = await updateProfile(modifiedValues as IProfileDetails);
         toastNotifier(response);
         setErrorMessage(typeof response === "string" ? response : undefined);
         setEditMode(false);

@@ -89,8 +89,15 @@ export default function PaymentForm({
   ) : (
     <form
       action={async () => {
+        const modifiedValues = {
+          ...formik.values,
+          cardDetails: {
+            ...formik.values.cardDetails,
+            cardNumber: formik.values.cardDetails.cardNumber.replace(/-/g, ""),
+          },
+        };
         const response = await bookingPayment(
-          formik.values as IBookingPaymentArgs,
+          modifiedValues as IBookingPaymentArgs,
         );
         const errorResponse = typeof response === "string";
         toastNotifier(response);

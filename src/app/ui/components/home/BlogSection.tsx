@@ -4,7 +4,7 @@ import { getBlogs } from "~/app/(application)/actions";
 import dayjs from "dayjs";
 
 export async function BlogSection() {
-  const blogs = await getBlogs();
+  const blogs = (await getBlogs())!;
 
   return (
     <section className="flex w-full flex-col">

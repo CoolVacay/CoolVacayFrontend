@@ -7,5 +7,5 @@ export default async function NavBarWrapper() {
   const userData = session?.user
     ? await getProfileInfo(session.user.email!)
     : null;
-  return <NavBar session={userData} />;
+  return <NavBar session={userData!} />;
 }

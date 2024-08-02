@@ -8,8 +8,8 @@ export default async function PersonalInformation({
 }: {
   session: Session["user"];
 }) {
-  const profileInfo = session && (await getProfileInfo(session.email!));
-  const countries = await getCountries();
+  const profileInfo = session && (await getProfileInfo(session.email!))!;
+  const countries = (await getCountries())!;
   return (
     <div>
       <p className="text-[28px] font-medium">Personal Information</p>

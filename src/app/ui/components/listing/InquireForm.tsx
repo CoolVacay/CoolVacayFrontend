@@ -10,7 +10,7 @@ import { ActionButton } from "../authentication/common";
 import type { IListingData } from "~/app/(application)/definitions";
 import { SimpleInput } from "../common";
 import { inquire } from "~/app/(application)/actions";
-import type { IInquireArgs } from "~/app/(application)/actions";
+import type { IInquireArgs } from "~/app/(application)/definitions";
 
 const ValidationSchema = Yup.object().shape({
   name: Yup.string().required("This field is required"),
@@ -39,8 +39,8 @@ export default function InquireForm({
   const formik = useFormik({
     initialValues: listing
       ? {
-          id: listing.id,
-          source: listing.source,
+          propertyId: listing.id,
+          propertySource: listing.source,
           name: "",
           email: "",
           phone: "",
@@ -58,7 +58,10 @@ export default function InquireForm({
   return (
     <form
       action={async () => {
-        const response = await inquire(formik.values as IInquireArgs);
+        const modifiedValues = Object.fromEntries(
+          Object.entries(formik.values).filter(([_, v]) => v != ""),
+        );
+        const response = await inquire(modifiedValues as IInquireArgs);
         toastNotifier(response);
         setErrorMessage(typeof response === "string" ? response : undefined);
         formik.resetForm();
@@ -71,7 +74,7 @@ export default function InquireForm({
         {listing ? (
           <div>
             <SimpleInput
-              name="id"
+              name="propertyId"
               disabled={true}
               defaultValue={`Property ID: ${listing.id}`}
             />

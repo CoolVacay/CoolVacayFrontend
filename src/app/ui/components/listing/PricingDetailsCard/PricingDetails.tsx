@@ -24,8 +24,8 @@ export function PricingDetails({
       try {
         setLoading(true);
         const details = await getPricingDetails(
-          params.source,
-          params.id,
+          params.source!,
+          params.id!,
           searchParamsValues.fromDate.format("YYYY-MM-DD"),
           searchParamsValues.toDate.format("YYYY-MM-DD"),
           searchParamsValues.numberOfGuests,

@@ -2,9 +2,10 @@ import { getFilteredListings } from "~/app/(application)/actions";
 import { capitalize } from "~/app/utils/helpers";
 import { ListingCard } from "../common";
 import Pagination from "./Pagination";
+import type { IParams } from "~/app/(application)/definitions";
 
 export async function ListingSection({ query }: { query: URLSearchParams }) {
-  const listings = (await getFilteredListings(query.toString()))!;
+  const listings = (await getFilteredListings(query.toString() as IParams))!;
   const title =
     query.get("category") ??
     (query.get("match") && capitalize(query.get("match")!));
