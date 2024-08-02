@@ -75,15 +75,15 @@ function FooterSection() {
         </div>
         <div className="flex grow justify-end gap-[100px] desktop:gap-[200px]">
           <div className="flex flex-col gap-5">
-            <h6 className="text-[15px] font-semibold">Popular Search</h6>
+            <h2 className="text-[15px] font-semibold">Popular Search</h2>
             {popularSearchLinks.map((link) => (
-              <h6 key={link} className="text-sm text-primary-grey400">
+              <h2 key={link} className="text-sm text-primary-grey400">
                 {link}
-              </h6>
+              </h2>
             ))}
           </div>
           <div className="flex flex-col gap-5">
-            <h6 className="text-[15px] font-semibold">Quick Links</h6>
+            <h2 className="text-[15px] font-semibold">Quick Links</h2>
             {quickLinks.map((link) => (
               <Link
                 href={link.href}
@@ -95,21 +95,21 @@ function FooterSection() {
             ))}
           </div>
           <div className="flex flex-col gap-5">
-            <h6 className="text-[15px] font-semibold">Discover</h6>
+            <h2 className="text-[15px] font-semibold">Discover</h2>
             {discoverLinks.map((link) => (
-              <h6 key={link} className="text-sm text-primary-grey400">
+              <h2 key={link} className="text-sm text-primary-grey400">
                 {link}
-              </h6>
+              </h2>
             ))}
           </div>
         </div>
       </div>
       <div className="flex justify-between py-6 text-sm">
-        <h6>
+        <h2>
           © Coolvacay 2024
           <span className="text-primary-grey400"> - All rights reserved</span>
-        </h6>
-        <h6 className="text-primary-grey400">
+        </h2>
+        <h2 className="text-sm text-primary-grey400">
           {staticPages.map((page, index) => {
             return (
               <React.Fragment key={page.name}>
@@ -125,7 +125,7 @@ function FooterSection() {
               </React.Fragment>
             );
           })}
-        </h6>
+        </h2>
       </div>
     </footer>
   );

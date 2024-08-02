@@ -13,7 +13,7 @@ export default async function Page({
 
   return (
     <div className="flex w-full flex-col gap-6">
-      <h3 className="text-2xl font-bold">Payment</h3>
+      <h1 className="text-2xl font-bold">Payment</h1>
       <div className="rounded-xl border border-[#EAEAEF] p-6">
         <PaymentForm params={params} userId={Number(session.user!.id)} />
       </div>

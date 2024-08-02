@@ -18,10 +18,10 @@ export default function Error({
       <div className="py-3 text-center text-3xl font-medium">
         Looks like you are lost.
       </div>
-      <h6 className="max-w-[410px] text-wrap text-center text-[#676D73]">
+      <h1 className="text-[16px] max-w-[410px] text-wrap text-center text-[#676D73]">
         We can’t seem to find the page you’re looking for. Try searching for
         something else.
-      </h6>
+      </h1>
       <Link href="/">
         <button className="mt-4 rounded-full bg-primary px-4 py-2 text-sm text-white transition-colors">
           Go Home

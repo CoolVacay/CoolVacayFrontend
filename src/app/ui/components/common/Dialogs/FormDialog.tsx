@@ -71,7 +71,7 @@ export default function FormDialog({
           }}
         >
           <div className="flex flex-col gap-5">
-            {modalContentOptions[content]}
+          {modalContentOptions[content]} 
           </div>
         </DialogContent>
       </Dialog>

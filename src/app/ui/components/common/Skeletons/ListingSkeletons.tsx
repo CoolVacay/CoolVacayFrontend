@@ -58,8 +58,8 @@ export function BookItNowSkeleton() {
       <h1 className="mb-4 text-2xl font-bold">Book it now</h1>
       <div className="flex animate-pulse flex-col gap-6 rounded-[11px] border border-[#EAEAEF] px-6 py-5">
         <div className="flex justify-between">
-          <h6>Choose your preferred day</h6>
-          <h6 className="font-medium text-primary">View calendar</h6>
+          <h2>Choose your preferred day</h2>
+          <h3 className="font-medium text-primary">View calendar</h3>
         </div>
         <div className="flex-col rounded-[11px] border border-[#EAEAEF]">
           <div

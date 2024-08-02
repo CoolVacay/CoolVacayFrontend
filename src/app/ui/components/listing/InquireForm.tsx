@@ -133,7 +133,7 @@ export default function InquireForm({
         </div>
         {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
         {listing ? (
-          <h6 className="text-justify text-sm font-normal	text-[#858C93]">
+          <h1 className="text-justify text-sm font-normal	text-[#858C93]">
             By proceeding, you consent to receive calls and texts at the number
             you provided, including marketing by autodialer and prerecorded and
             artificial voice, and email, from realtor.com and about your inquiry
@@ -142,7 +142,7 @@ export default function InquireForm({
             Policy regarding the information relating to you. Msg/data rates may
             apply. This consent applies even if you are on a corporate, state or
             national Do Not Call list.
-          </h6>
+          </h1>
         ) : null}
         <ActionButton
           text={listing ? "Inquire now" : "Submit"}

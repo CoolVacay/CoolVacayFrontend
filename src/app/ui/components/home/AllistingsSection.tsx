@@ -41,7 +41,7 @@ export async function AllistingsSection() {
   return (
     <section className="w-full">
       <div className="flex items-center justify-between">
-        <h4 className="text-[28px]">All listings</h4>
+        <h1 className="text-[28px]">All listings</h1>
         <Link href="/listings" className="flex items-center text-primary">
           See all listings
           <span className="ml-2">
@@ -71,9 +71,9 @@ export async function AllistingsSection() {
           })}
         </div>
       ) : (
-        <h6 className="py-6">
+        <h2 className="text-[16px] py-6">
           There are no available listings at this moment.
-        </h6>
+        </h2>
       )}
       <div>
         <Newsletter />

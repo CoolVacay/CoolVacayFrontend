@@ -26,11 +26,11 @@ export function DiscoverSection() {
         <h1 className="font-500 leading-80 text-[32px] desktop:text-[46px] desktop:leading-[47px]">
           Explore vacation rentals with beach access
         </h1>
-        <h4 className="font-500 text-md leading-7 desktop:text-base">
+        <h2 className="font-500 text-md leading-7 desktop:text-base">
           Add to your vacation with amenities like direct beach access,
           oceanfront homes, pools, hot tubs, and pet-friendly stays.
-        </h4>
-        <h4 className="desktop:text-md font-400 text-sm leading-6 text-[#020101]/[.60]">
+        </h2>
+        <h3 className="desktop:text-md font-400 text-sm leading-6 text-[#020101]/[.60]">
           With every coast comes a unique way to relax by the ocean. Enjoy the
           East Coast’s bustling boardwalks in Myrtle Beach or historic New
           England lighthouses. Reel in a trophy catch on the Gulf Coast or bring
@@ -39,7 +39,7 @@ export function DiscoverSection() {
           hop along the San Juan Islands, or laze beside the Southern California
           Coast’s laidback surf. Skip the same old stretch of sand and find a
           new favorite beach hideaway.
-        </h4>
+        </h3>
         <Link
           href="/blog"
           className="flex w-40 items-center justify-center rounded-[48px] bg-primary px-6 py-4 text-white"

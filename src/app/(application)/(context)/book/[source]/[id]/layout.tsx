@@ -37,7 +37,7 @@ export default async function Layout({
             <div className="flex gap-5">
               <div className="flex w-full flex-col gap-5">
                 <div className="flex flex-col gap-4">
-                  <h3 className="text-2xl font-bold">Reserve Information</h3>
+                  <h1 className="text-2xl font-bold">Reserve Information</h1>
                   <Suspense fallback={<BookedListingCardSkeleton />}>
                     <BookedListingCard params={params} />
                   </Suspense>
