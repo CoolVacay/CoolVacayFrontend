@@ -42,7 +42,7 @@ export function SearchCard({
     if (fromDate) params.append("fromDate", fromDate.format("YYYY-MM-DD"));
     if (toDate) params.append("toDate", toDate.format("YYYY-MM-DD"));
     params.append("numberOfGuests", numberOfGuests);
-    return `/listings?limit=10&offset=0&${params.toString()}`;
+    return `/listings?${params.toString()}`;
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

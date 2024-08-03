@@ -9,12 +9,12 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 export default function Pagination({ totalPages }: { totalPages: number }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get("page")) || 1;
+  const currentPage = Number(searchParams.get("pageNum")) || 1;
   const allPages = generatePagination(currentPage, totalPages);
 
   const createPageURL = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams);
-    params.set("offset", (Number(pageNumber) * 10).toString());
+    params.set("pageNum", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
 
@@ -22,7 +22,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     <div className="inline-flex">
       <PaginationArrow
         direction="left"
-        href={createPageURL(currentPage)}
+        href={createPageURL(currentPage - 1)}
         isDisabled={currentPage <= 1}
       />
       <div className="flex -space-x-px">
@@ -47,7 +47,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
       </div>
       <PaginationArrow
         direction="right"
-        href={createPageURL(currentPage)}
+        href={createPageURL(currentPage + 1)}
         isDisabled={currentPage >= totalPages}
       />
     </div>

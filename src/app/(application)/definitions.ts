@@ -27,6 +27,14 @@ export interface IListingData {
   houseRules: string;
 }
 
+export interface IAllListings {
+  page: number;
+  pageSize: number;
+  totalItems: number;
+  totalPages: number;
+  items: IListingData[];
+}
+
 export type ListingCardProps = Pick<
   IListingData,
   "name" | "imageUrl" | "price" | "id" | "source"

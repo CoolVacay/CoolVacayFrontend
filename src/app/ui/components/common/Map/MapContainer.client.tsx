@@ -29,7 +29,7 @@ const listingsToGeoJSON = (
   listings: IListingData[],
 ): GeoJSON.FeatureCollection<GeoJSON.Geometry> => ({
   type: "FeatureCollection",
-  features: listings.map((listing) => ({
+  features: listings?.map((listing) => ({
     type: "Feature",
     properties: { ...listing },
     geometry: {

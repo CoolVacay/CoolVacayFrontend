@@ -17,6 +17,7 @@ import type {
   IListingData,
   IParams,
   TUserData,
+  IAllListings,
 } from "./definitions";
 
 //////////////GET/////////////
@@ -36,10 +37,10 @@ export const getListingData = ({ source, id }: IParams) =>
     "Failed to fetch listing data",
   );
 
-export const getFilteredListings = ({ source, id }: IParams) =>
-  getData<IListingData[]>(
-    `/Listings/${source}/${id}`,
-    "Failed to fetch listings",
+export const getFilteredListings = (query: string) =>
+  getData<IAllListings>(
+    `/Listings?${query}`,
+    "Failed to fetch filtered listings",
   );
 
 export const getProfileInfo = (email: string) =>

@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import {
   AllListingsSkeleton,
@@ -14,6 +15,7 @@ import {
   FeaturedListingsSection,
   DiscoverSection,
 } from "../ui/components/home/index";
+import { Newsletter, IconGenerator } from "../ui/components/common";
 
 export default async function HomePage() {
   return (
@@ -52,9 +54,24 @@ export default async function HomePage() {
             </Suspense>
           </div>
           <DiscoverSection />
-          <Suspense fallback={<AllListingsSkeleton />}>
-            <AllistingsSection />
-          </Suspense>
+          <section className="w-full">
+            <div className="flex items-center justify-between">
+              <h1 className="text-[28px]">All listings</h1>
+              <Link href="/listings" className="flex items-center text-primary">
+                See all listings
+                <span className="ml-2">
+                  <IconGenerator src="/link.svg" width="13px" alt="link icon" />
+                </span>
+              </Link>
+            </div>
+            <Suspense fallback={<AllListingsSkeleton />}>
+              <AllistingsSection page={1} />
+            </Suspense>
+            <Newsletter />
+            <Suspense fallback={<AllListingsSkeleton />}>
+              <AllistingsSection page={2} />
+            </Suspense>
+          </section>
           <Suspense fallback={<FeaturedListingsSection />}>
             <BlogSection />
           </Suspense>
