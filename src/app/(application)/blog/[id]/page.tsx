@@ -10,19 +10,19 @@ const BlogSidebar = async () => {
   const locationsList = (await getLocationsList())!;
 
   return (
-  <div className="mt-24 flex flex-col gap-5">
+  <div className="md:mt-24 flex-col gap-5">
   <div className="flex h-min flex-col gap-5 rounded-[10px] bg-[#F7F7F7] p-6">
     <h5 className="text-2xl font-medium">
       Find your perfect place now
     </h5>
     <SearchCard size="small" locationsList={locationsList} />
   </div>
-  <div className="flex h-min flex-col gap-5 rounded-[10px] bg-[#F7F7F7] p-6">
-    <NewsletterForm orientation="vertical" />
-    <div className="flex h-[190px] w-[260px] shrink-0">
+  <div className="flex h-min flex-col gap-5 rounded-[10px] bg-[#F7F7F7] p-6 mt-5">
+    <NewsletterForm isTextBlack={true} />
+    <div className="flex h-[190px] w-full shrink-0">
       <Image
         alt="Blog image"
-        src="/blog_image_png.jpeg"
+        src="/newsletter_img.jpeg"
         className="rounded-sm"
         quality={10}
         width={0}
@@ -31,7 +31,7 @@ const BlogSidebar = async () => {
         style={{
           objectFit: "cover",
           height: "190px",
-          width: "262px",
+          width: "100%",
         }}
       />
     </div>
@@ -50,9 +50,9 @@ export default async function Blogpage({params} : {params: {id:string}}) {
     <main className="flex flex-col">
       <div className="flex justify-center">
         <div className="flex max-w-[1220px] flex-col items-center justify-center">
-          <div className="flex gap-10">
+          <div className="flex-col md:flex md:flex-row gap-10 p-10">
             {parse(currentBlogsHTML)}
-            <BlogSidebar/>
+            <BlogSidebar />
           </div>
         </div>
       </div>

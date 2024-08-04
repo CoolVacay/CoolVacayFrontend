@@ -22,22 +22,21 @@ export default function AuthenticationLayout({
       <body className={`${inter.className}`}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
-            <div className="flex h-screen w-full">
-              <div className="flex w-full justify-center desktop:w-1/2">
-                <div className="flex justify-center">
-                  <div className="flex w-[510px] justify-center py-20">
-                    {children}
-                  </div>
+            <div className="flex h-screen w-full justify-center items-center xl:items-start">
+              {/* Authentication Form Section */}
+              <div className="flex w-full justify-center lg:w-1/2 px-4 sm:px-6 lg:px-8 py-10 lg:py-20">
+                <div className="flex w-full max-w-[510px] justify-center">
+                  {children}
                 </div>
               </div>
-              <div className="invisible relative h-full desktop:visible desktop:w-1/2">
+
+              {/* Image Section */}
+              <div className="relative hidden h-full xl:block lg:w-1/2">
                 <Image
                   alt="Cool Vacay Authentication Image"
                   src="/authentication_image.jpeg"
                   fill
-                  width={0}
                   priority={true}
-                  height={0}
                   sizes="100vw"
                   quality={90}
                   style={{
