@@ -48,9 +48,11 @@ export default function ListingCard({
               ${price}
               <span className="text-sm text-primary-grey400"> night</span>
             </h2>
-            <h2 className="text-sm text-primary-grey400">
-              {startDate} - {endDate}
-            </h2>
+            {startDate && endDate ? (
+              <h2 className="text-sm text-primary-grey400">
+                {startDate} - {endDate}
+              </h2>
+            ) : null}
           </div>
           <div>
             <div className="mb-1 text-base font-medium">

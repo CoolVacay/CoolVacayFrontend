@@ -1,5 +1,6 @@
 "use client";
 
+import dayjs from "dayjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconGenerator } from "../IconGenerator";
@@ -20,6 +21,8 @@ export default function NavBar({
     pathname.endsWith("accessibility-statement");
   const noMaxWidth = pathname.startsWith("/listings");
 
+  const startDate = dayjs().format("YYYY-MM-DD");
+  const endDate = dayjs().add(6, "day").format("YYYY-MM-DD");
   return (
     <nav className="z-10 block flex h-[96px] w-full scroll-px-4 justify-center py-6">
       <div
@@ -38,12 +41,14 @@ export default function NavBar({
             <div
               className={`flex gap-5 ${isWhiteVariant ? "text-white" : "text-black"}`}
             >
-              <Link href="/listings">
+              <Link
+                href={`/listings?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1&pageNum=1`}
+              >
                 <p className="text-sm">Listed places</p>
               </Link>
-              <Link href="/listings">
+              {/* <Link href="/listings">
                 <p className="text-sm">Offers</p>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

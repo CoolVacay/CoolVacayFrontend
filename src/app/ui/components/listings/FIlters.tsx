@@ -1,21 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import type { Dayjs } from "dayjs";
+import { useState } from "react";
+import dayjs from "dayjs";
 import type { SelectChangeEvent } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
 import { MenuItem } from "@mui/material";
-
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 import {
   CitiesAutocomplete,
   IconGenerator,
   SimpleSelectInput,
+  StyledDatePicker,
 } from "../common";
 import type { DateRangeType } from "../home/SearchCard";
+import { IconButton, InputAdornment } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
 import type { ILocationsList } from "~/app/(application)/definitions";
 
 const guests = Array.from({ length: 8 }, (v, i) => i + 1)
@@ -34,10 +36,13 @@ export default function Filters({
   const { searchParams, searchParamsValues, updateSearchParams } =
     useAppSearchParams();
 
-  const [dates, setDates] = useState<DateRangeType>([
+  const dates = [
     searchParamsValues.fromDate,
     searchParamsValues.toDate,
-  ]);
+  ] as DateRangeType;
+
+  const [showClearButton, setShowClearButton] = useState(false);
+
   const selectedLocation =
     locationsList.find((item) => item.match === searchParams?.get("match")) ??
     null;
@@ -45,10 +50,6 @@ export default function Filters({
   const [location, setLocation] = useState<string>(
     selectedLocation?.displayName ?? "",
   );
-
-  useEffect(() => {
-    updateSearchParams(["fromDate", "toDate"], [dates[0], dates[1]]);
-  }, [dates, updateSearchParams]);
 
   return (
     <div className="mb-5 flex items-center gap-4">
@@ -67,16 +68,28 @@ export default function Filters({
       <div className="relative w-[200px]">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateRangePicker
-            slots={{ field: SingleInputDateRangeField }}
+            slots={{
+              field: SingleInputDateRangeField,
+              day: StyledDatePicker,
+            }}
             name="allowedRange"
             value={dates}
             format="MMM DD"
+            minDate={dayjs()}
             className="rounded-full border border-[#EAEAEF]"
-            onChange={(newValue) => setDates(newValue as [Dayjs, Dayjs])}
+            onAccept={(newValue) =>
+              updateSearchParams(["fromDate", "toDate"], newValue)
+            }
             slotProps={{
               textField: {
                 variant: "standard",
                 color: "primary",
+                onMouseEnter: () => setShowClearButton(true),
+                onMouseLeave: () => setShowClearButton(false),
+
+                inputProps: {
+                  placeholder: "Check-in / Check-out",
+                },
                 InputProps: {
                   sx: {
                     fontSize: "14px",
@@ -90,12 +103,35 @@ export default function Filters({
                     cursor: "pointer",
                   },
                   endAdornment: (
-                    <IconGenerator
-                      src="/down-arrow-light.svg"
-                      alt="Down arrow"
-                      width="18px"
-                      className="w-[20px]"
-                    />
+                    <>
+                      {showClearButton && (
+                        <InputAdornment position="end">
+                          <IconButton
+                            size="small"
+                            onClick={() =>
+                              updateSearchParams(
+                                ["fromDate", "toDate"],
+                                [null, null],
+                              )
+                            }
+                          >
+                            <ClearIcon
+                              sx={{
+                                width: "20px",
+                                mr: "2px",
+                                color: "black",
+                              }}
+                            />
+                          </IconButton>
+                        </InputAdornment>
+                      )}
+                      <IconGenerator
+                        src="/down-arrow-light.svg"
+                        alt="Down arrow"
+                        width="18px"
+                        className="w-[20px]"
+                      />
+                    </>
                   ),
                 },
               },
@@ -105,7 +141,11 @@ export default function Filters({
       </div>
       <div>
         <SimpleSelectInput
-          value={searchParamsValues.numberOfGuests ?? "1"}
+          value={
+            searchParamsValues.numberOfGuests !== ""
+              ? searchParamsValues.numberOfGuests
+              : "1"
+          }
           onChange={(e: SelectChangeEvent<string>) =>
             updateSearchParams(["numberOfGuests"], [e.target.value])
           }

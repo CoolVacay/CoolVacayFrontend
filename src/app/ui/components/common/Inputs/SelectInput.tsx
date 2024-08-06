@@ -13,7 +13,7 @@ export default function SelectInput({
   disabled = false,
 }: {
   size: "small" | "medium" | "big";
-  value: string;
+  value?: string;
   onChange: (event: SelectChangeEvent<string>, child: React.ReactNode) => void;
   disabled?: boolean;
 }) {
@@ -51,7 +51,6 @@ export default function SelectInput({
             }}
             labelId="customized-select-label"
             id="customized-select"
-            defaultValue={guests[0]}
           >
             {guests.map((guest) => (
               <MenuItem

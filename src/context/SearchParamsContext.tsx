@@ -5,26 +5,25 @@ import {
   useContext,
   useMemo,
   useState,
-  useEffect,
   useCallback,
 } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import dayjs from "dayjs";
-
 export interface ISearchParams {
-  fromDate: dayjs.Dayjs;
-  toDate: dayjs.Dayjs;
+  fromDate: dayjs.Dayjs | null;
+  toDate: dayjs.Dayjs | null;
   numberOfGuests: string;
   category: string;
   match: string;
   modal: string;
+  pageNum: string;
 }
-
+import type { DateRangeType } from "~/app/ui/components/home/SearchCard";
 interface SearchParamsContextType {
   searchParamsValues: ISearchParams;
   updateSearchParams: (
     params: string[],
-    values: string[] | dayjs.Dayjs[],
+    values: string[] | DateRangeType,
   ) => void;
   searchParams: URLSearchParams;
 }
@@ -46,28 +45,32 @@ export const SearchParamsProvider = ({
     return new URLSearchParams(readOnlySearchParams.toString());
   }, [readOnlySearchParams]);
 
-  const toDate =
-    searchParams.get("toDate") !== null
-      ? dayjs(searchParams.get("toDate"))
-      : dayjs().add(6, "day");
+  const toDate = dayjs(searchParams.get("toDate"));
 
   const [searchParamsValues, setSearchParams] = useState<ISearchParams>({
-    fromDate: dayjs(searchParams.get("fromDate") ?? undefined),
-    toDate: toDate,
-    numberOfGuests: searchParams.get("numberOfGuests") ?? "1",
+    fromDate: searchParams.get("fromDate")
+      ? dayjs(searchParams.get("fromDate"))
+      : null,
+    toDate: searchParams.get("toDate") ? toDate : null,
+    numberOfGuests: searchParams.get("numberOfGuests") ?? "",
     match: searchParams.get("match") ?? "",
     category: searchParams.get("category") ?? "",
     modal: searchParams.get("modal") ?? "",
+    pageNum: searchParams.get("pageNum") ?? "",
   });
 
   const updateSearchParams = useCallback(
-    (params: string[], values: string[] | dayjs.Dayjs[]) => {
+    (params: string[], values: string[] | DateRangeType) => {
       params.forEach((param, index) => {
         if (typeof values[index] !== "string") {
-          searchParams.set(
-            param,
-            (values[index] as dayjs.Dayjs)?.format("YYYY-MM-DD"),
-          );
+          if (values[index] !== null) {
+            searchParams.set(
+              param,
+              (values[index] as dayjs.Dayjs)?.format("YYYY-MM-DD"),
+            );
+          } else {
+            searchParams.delete(param);
+          }
         } else {
           if (values[0] !== "") {
             searchParams.set(param, values[index] as string);
@@ -86,20 +89,6 @@ export const SearchParamsProvider = ({
     },
     [pathname, router, searchParams],
   );
-
-  useEffect(() => {
-    searchParamsValues.fromDate &&
-      updateSearchParams(["fromDate"], [searchParamsValues.fromDate]);
-  }, [updateSearchParams, searchParamsValues.fromDate]);
-
-  useEffect(() => {
-    searchParamsValues.toDate &&
-      updateSearchParams(["toDate"], [searchParamsValues.toDate]);
-  }, [updateSearchParams, searchParamsValues.toDate]);
-
-  useEffect(() => {
-    updateSearchParams(["numberOfGuests"], [searchParamsValues.numberOfGuests]);
-  }, [updateSearchParams, searchParamsValues.numberOfGuests]);
 
   return (
     <SearchParamsContext.Provider

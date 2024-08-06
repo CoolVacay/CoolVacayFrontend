@@ -1,4 +1,6 @@
 import Link from "next/link";
+import dayjs from "dayjs";
+
 import { getFetch } from "../../../utils/api-helpers";
 import { truncateText } from "../../../utils/helpers";
 import { FetchError } from "~/app/utils/definitions";
@@ -17,6 +19,9 @@ async function getFeaturedListings() {
   }
 }
 
+const startDate = dayjs().format("YYYY-MM-DD");
+const endDate = dayjs().add(6, "day").format("YYYY-MM-DD");
+
 export async function FeaturedListingsSection() {
   const featuredListings = (await getFeaturedListings())!;
 
@@ -27,7 +32,7 @@ export async function FeaturedListingsSection() {
           return (
             <div key={listing.id} className="relative">
               <Link
-                href={`/listing/${listing.source}/${listing.id}`}
+                href={`/listing/${listing.source}/${listing.id}?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1`}
                 className="h-82"
               >
                 <MainCard
@@ -52,7 +57,9 @@ export async function FeaturedListingsSection() {
           );
         })
       ) : (
-        <h1 className="text-[16px]">There are no featured listings at this moment</h1>
+        <h1 className="text-[16px]">
+          There are no featured listings at this moment
+        </h1>
       )}
     </section>
   );

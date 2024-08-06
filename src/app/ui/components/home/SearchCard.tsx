@@ -12,7 +12,7 @@ import {
   SelectInput,
 } from "../common";
 import type { ILocationsList } from "~/app/(application)/definitions";
-export type DateRangeType = [Dayjs, Dayjs];
+export type DateRangeType = [Dayjs | null, Dayjs | null];
 
 //TODO: re-style/refactor when you add functionality
 
@@ -42,6 +42,7 @@ export function SearchCard({
     if (fromDate) params.append("fromDate", fromDate.format("YYYY-MM-DD"));
     if (toDate) params.append("toDate", toDate.format("YYYY-MM-DD"));
     params.append("numberOfGuests", numberOfGuests);
+    params.append("pageNum", "1");
     return `/listings?${params.toString()}`;
   };
 
@@ -70,8 +71,9 @@ export function SearchCard({
                 setValue={setLocation}
                 inputValue={location}
                 value={
-                  locationsList.find((item) => item.displayName === location) ??
-                  null
+                  locationsList?.find(
+                    (item) => item.displayName === location,
+                  ) ?? null
                 }
               />
             </div>

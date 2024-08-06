@@ -18,7 +18,7 @@ export async function AllistingsSection({ page }: { page: number }) {
         return (
           <Link
             key={listing.id}
-            href={`/listing/${listing.source}/${listing.id}`}
+            href={`/listing/${listing.source}/${listing.id}?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1`}
             className="h-82"
           >
             <MainCard

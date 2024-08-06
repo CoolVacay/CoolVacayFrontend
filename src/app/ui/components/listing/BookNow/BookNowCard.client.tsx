@@ -2,12 +2,11 @@
 
 import Link from "next/link";
 import { Divider } from "@mui/material";
+import { useAppSearchParams } from "~/context/SearchParamsContext";
 import { RangeDatePicker, FormDialog, SelectInput } from "../../common";
 import type { SelectChangeEvent } from "@mui/material";
 import type { DateRangeType } from "../../home/SearchCard";
 import type { IParams, IListingData } from "~/app/(application)/definitions";
-import { useState, useEffect } from "react";
-import { useAppSearchParams } from "~/context/SearchParamsContext";
 
 export interface IPricingDetails {
   totalPrice: number;
@@ -32,14 +31,7 @@ export default function BookNowContent({
   const { searchParams, searchParamsValues, updateSearchParams } =
     useAppSearchParams();
 
-  const [dates, setDates] = useState<DateRangeType>([
-    searchParamsValues.fromDate,
-    searchParamsValues.toDate,
-  ]);
-
-  useEffect(() => {
-    updateSearchParams(["fromDate", "toDate"], [dates[0], dates[1]]);
-  }, [dates, updateSearchParams]);
+  const dates = [searchParamsValues.fromDate, searchParamsValues.toDate];
 
   return (
     <div
@@ -50,7 +42,13 @@ export default function BookNowContent({
           className="relative px-6 py-5"
           style={{ borderBottom: "1px solid #EAEAEF" }}
         >
-          <RangeDatePicker size="medium" dates={dates} setDates={setDates} />
+          <RangeDatePicker
+            size="medium"
+            dates={dates as DateRangeType}
+            setDates={(values: DateRangeType) =>
+              updateSearchParams(["fromDate", "toDate"], values)
+            }
+          />
         </div>
         <div className="px-6 py-5">
           <SelectInput
