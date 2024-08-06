@@ -7,20 +7,23 @@ import { IconGenerator } from "../IconGenerator";
 import type { DateRangeType } from "../../home/SearchCard";
 import type { Dayjs } from "dayjs";
 import StyledDatePicker from "./StyledDatePicker";
-
+import type { IPropertyAvailability } from "~/app/(application)/definitions";
 const RangeDatePicker = ({
   size,
   dates,
   setDates,
+  availableDates,
 }: {
   size: "small" | "medium" | "big";
   dates: DateRangeType;
   setDates:
     | React.Dispatch<React.SetStateAction<DateRangeType>>
     | ((values: DateRangeType) => void);
+  availableDates?: IPropertyAvailability;
 }) => {
   const bigFont = size === "big";
   const mediumFont = size === "medium";
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DateRangePicker
@@ -42,6 +45,10 @@ const RangeDatePicker = ({
               left: bigFont ? "198px" : mediumFont ? "175px" : "122px",
               top: bigFont ? "20px" : mediumFont ? "12px" : "10px",
             },
+          },
+          day: {
+            // @ts-expect-error MUI doesnt recognize forwardProp
+            availableDates: availableDates,
           },
           textField: {
             variant: "standard",

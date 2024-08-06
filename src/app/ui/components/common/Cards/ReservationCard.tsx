@@ -31,9 +31,11 @@ export default function ReservationCard({
       <div className="flex w-full flex-col gap-2">
         <p className="text-2xl font-medium">{details.listingName}</p>
         <div className="flex h-[22px] items-center gap-8 font-medium text-[#858C93]">
-          <div className="flex h-[22px] w-[50px] shrink-0 items-center justify-center rounded-full bg-[#29ABE2]/[.10] text-xs text-primary">
-            {details.listingType}
-          </div>
+          {details.listingType ? (
+            <div className="flex h-[22px] w-[50px] shrink-0 items-center justify-center rounded-full bg-[#29ABE2]/[.10] text-xs text-primary">
+              {details.listingType}
+            </div>
+          ) : null}
           <p>Sleeps {reservation.adults}</p>
           <p>{details.squareFeets} ft2</p>
         </div>

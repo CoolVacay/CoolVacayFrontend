@@ -7,7 +7,7 @@ import { RangeDatePicker, FormDialog, SelectInput } from "../../common";
 import type { SelectChangeEvent } from "@mui/material";
 import type { DateRangeType } from "../../home/SearchCard";
 import type { IParams, IListingData } from "~/app/(application)/definitions";
-
+import type { IPropertyAvailability } from "~/app/(application)/definitions";
 export interface IPricingDetails {
   totalPrice: number;
   totalPriceStr: string;
@@ -24,9 +24,11 @@ export interface IPricingDetails {
 export default function BookNowContent({
   listingInfo,
   params,
+  availableDates,
 }: {
   listingInfo: IListingData;
   params: IParams;
+  availableDates?: IPropertyAvailability | undefined;
 }) {
   const { searchParams, searchParamsValues, updateSearchParams } =
     useAppSearchParams();
@@ -44,6 +46,7 @@ export default function BookNowContent({
         >
           <RangeDatePicker
             size="medium"
+            availableDates={availableDates}
             dates={dates as DateRangeType}
             setDates={(values: DateRangeType) =>
               updateSearchParams(["fromDate", "toDate"], values)

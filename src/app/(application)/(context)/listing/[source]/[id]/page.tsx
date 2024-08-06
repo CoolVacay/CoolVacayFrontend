@@ -51,7 +51,7 @@ export default async function Page({
               ]}
             />
             <div className="flex w-full justify-between pb-6">
-              <h1 className="pt-3 text-3xl">
+              <h1 className="w-2/3 pt-3 text-3xl">
                 {listing.name}, {listing.city}, {listing.state}
               </h1>
               <div className="flex max-h-[50px] w-[300px] items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2">

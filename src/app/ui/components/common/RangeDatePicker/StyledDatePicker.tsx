@@ -8,8 +8,15 @@ import {
 import dayjs from "dayjs";
 
 import type { Dayjs } from "dayjs";
+import type { IPropertyAvailability } from "~/app/(application)/definitions";
 
-const StyledDatePicker = styled(DateRangePickerDay)(
+interface CustomDateRangePickerDayProps extends DateRangePickerDayProps<Dayjs> {
+  availableDates?: IPropertyAvailability;
+}
+
+const StyledDatePicker = styled(DateRangePickerDay, {
+  shouldForwardProp: (prop) => prop !== "availableDates",
+})<CustomDateRangePickerDayProps>(
   ({
     theme,
     isHighlighting,
@@ -20,10 +27,14 @@ const StyledDatePicker = styled(DateRangePickerDay)(
     isStartOfPreviewing,
     isEndOfPreviewing,
     day,
+    availableDates,
   }) => {
     const today = dayjs();
     const isDisabled = day.isBefore(today, "day");
-
+    const isDay = availableDates?.availabilityArray.find((item) =>
+      dayjs(item.date).isSame(day, "day"),
+    );
+    const isAvailable = isDay?.isAvailable;
     return {
       ...(outsideCurrentMonth
         ? {
@@ -57,13 +68,24 @@ const StyledDatePicker = styled(DateRangePickerDay)(
                   borderBottomRightRadius: "50%",
                 }
               : {}),
-            ...(isDisabled && {
+            ...((isDisabled || !isAvailable) && {
+              position: "relative",
               color: theme.palette.text.disabled,
               pointerEvents: "none",
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                width: "70%",
+                height: "2px",
+                backgroundColor: theme.palette.text.disabled,
+                transform: "translate(-50%, -50%) rotate(-45deg)",
+              },
             }),
           }),
     };
   },
-) as React.ComponentType<DateRangePickerDayProps<Dayjs>>;
+) as React.ComponentType<CustomDateRangePickerDayProps>;
 
 export default StyledDatePicker;

@@ -18,9 +18,7 @@ export default function ListingCard({
   const { searchParamsValues, searchParams } = useAppSearchParams();
   const startDate = searchParamsValues.fromDate?.format("MMM DD, YYYY");
   const endDate = searchParamsValues.toDate?.format("MMM DD, YYYY");
-  searchParams.delete("offset");
-  searchParams.delete("limit");
-
+  searchParams.delete("pageNum");
   return (
     <div className="flex h-[405px] w-[360px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1">
       <div className="relative">

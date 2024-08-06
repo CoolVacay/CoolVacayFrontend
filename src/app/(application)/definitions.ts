@@ -195,3 +195,12 @@ export interface IBlog {
   createdOn: string;
   relatedLocation: string;
 }
+
+export interface IPropertyAvailability {
+  from: string;
+  to: string;
+  availabilityArray: {
+    date: string;
+    isAvailable: boolean;
+  }[];
+}

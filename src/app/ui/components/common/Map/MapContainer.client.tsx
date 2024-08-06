@@ -54,12 +54,6 @@ export default function MapContent({
   const geojson = useMemo(() => listingsToGeoJSON(listings), [listings]);
   const { searchParamsValues, searchParams } = useAppSearchParams();
 
-  const newParams = () => {
-    searchParams.delete("offset");
-    searchParams.delete("limit");
-    return searchParams;
-  };
-
   const startDate = searchParamsValues.fromDate?.format("MMM DD");
   const endDate = searchParamsValues.toDate?.format("MMM DD");
 
@@ -210,7 +204,7 @@ export default function MapContent({
                 </h1>
               </div>
               <Link
-                href={`listing/${selectedMarker.source}/${selectedMarker.id}?${newParams()?.toString()}`}
+                href={`listing/${selectedMarker.source}/${selectedMarker.id}?${searchParams.toString()}`}
                 className="max-content"
               >
                 <button className="w-full rounded-full border border-primary py-3 text-base font-bold text-primary hover:bg-primary hover:text-white">

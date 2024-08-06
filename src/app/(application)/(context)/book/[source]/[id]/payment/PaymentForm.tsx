@@ -34,8 +34,8 @@ const ValidationSchema = Yup.object().shape({
         "Enter a correct expiration date",
         function (value) {
           if (!value) return false;
-          const currentYear = new Date().getFullYear();
-          const year = value.substring(3, 7);
+          const currentYear = new Date().getFullYear() % 100;
+          const year = value.substring(3, 5);
           const yearInt = parseInt(year, 10);
           return yearInt >= currentYear;
         },
@@ -94,6 +94,10 @@ export default function PaymentForm({
           cardDetails: {
             ...formik.values.cardDetails,
             cardNumber: formik.values.cardDetails.cardNumber.replace(/-/g, ""),
+            expiryDate: formik.values.cardDetails.expiryDate.replace(
+              /(\d{2})\/(\d{2})/,
+              "$1/20$2",
+            ),
           },
         };
         const response = await bookingPayment(
@@ -164,11 +168,11 @@ export default function PaymentForm({
               Expiration Date<span className="absolute">*</span>
             </label>
             <SimpleInput
-              placeholder="MM/YYYY"
+              placeholder="MM/YY"
               name="cardDetails.expiryDate"
               onBlur={formik.handleBlur}
               value={formik.values.cardDetails.expiryDate}
-              maxLength={7}
+              maxLength={5}
               onChange={(e) => {
                 const input = e.target.value.replace(/\D/g, "");
                 let formattedInput = "";

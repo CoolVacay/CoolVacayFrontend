@@ -18,6 +18,7 @@ import type {
   IParams,
   TUserData,
   IAllListings,
+  IPropertyAvailability,
 } from "./definitions";
 
 //////////////GET/////////////
@@ -59,6 +60,17 @@ export const getPricingDetails = (
   getData<IPricingDetails>(
     `/Listings/${source}/${id}/priceDetails?startDate=${startDate}&endDate=${endDate}&numberOfGuests=${numberOfGuests}`,
     "Failed to fetch listing data",
+  );
+
+export const getAvailabilityDates = (
+  source: string,
+  id: string,
+  startDate: string,
+  endDate: string,
+) =>
+  getData<IPropertyAvailability>(
+    `/Listings/availability?FromDate=${startDate}&ToDate=${endDate}&source=${source}&ListingId=${id}`,
+    "Failed to fetch available dates",
   );
 
 export const getSimilarListings = ({ source, id }: IParams) =>
