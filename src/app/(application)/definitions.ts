@@ -38,7 +38,7 @@ export interface IAllListings {
 export type ListingCardProps = Pick<
   IListingData,
   "name" | "imageUrl" | "price" | "id" | "source"
-> & { subtitle: string };
+> & { subtitle: string; closeDates?: [Date, Date] };
 
 export type TMainCardProps = Pick<
   IListingData,
@@ -203,4 +203,10 @@ export interface IPropertyAvailability {
     date: string;
     isAvailable: boolean;
   }[];
+}
+
+export interface ICloseDatesListings {
+  startDate: string;
+  endDate: string;
+  listing: IListingData;
 }

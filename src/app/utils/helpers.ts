@@ -1,4 +1,5 @@
 import toast from "react-hot-toast";
+import dayjs from "dayjs";
 
 export const truncateText = (text: string, includedLetters: number) => {
   return (
@@ -9,6 +10,10 @@ export const truncateText = (text: string, includedLetters: number) => {
 
 export const capitalize = (word: string) => {
   return `${word.at(0)?.toUpperCase()}${word.substring(1).toLowerCase()}`;
+};
+
+export const formatDateMMMDD = (date: Date) => {
+  return dayjs(date).format("MMM DD");
 };
 
 export function toastNotifier(errorMessage: string | undefined) {

@@ -31,10 +31,12 @@ const StyledDatePicker = styled(DateRangePickerDay, {
   }) => {
     const today = dayjs();
     const isDisabled = day.isBefore(today, "day");
-    const isDay = availableDates?.availabilityArray.find((item) =>
-      dayjs(item.date).isSame(day, "day"),
-    );
-    const isAvailable = isDay?.isAvailable;
+    const isDay = availableDates
+      ? availableDates?.availabilityArray.find((item) =>
+          dayjs(item.date).isSame(day, "day"),
+        )
+      : undefined;
+    const isAvailable = availableDates ? isDay?.isAvailable : true;
     return {
       ...(outsideCurrentMonth
         ? {

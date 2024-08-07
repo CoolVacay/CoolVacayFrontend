@@ -19,6 +19,7 @@ import type {
   TUserData,
   IAllListings,
   IPropertyAvailability,
+  ICloseDatesListings,
 } from "./definitions";
 
 //////////////GET/////////////
@@ -71,6 +72,17 @@ export const getAvailabilityDates = (
   getData<IPropertyAvailability>(
     `/Listings/availability?FromDate=${startDate}&ToDate=${endDate}&source=${source}&ListingId=${id}`,
     "Failed to fetch available dates",
+  );
+
+export const getCloseDatesListings = (
+  pageSize: string,
+  match: string,
+  startDate: string,
+  endDate: string,
+) =>
+  getData<ICloseDatesListings[]>(
+    `/Listings/close_dates?PageSize=${pageSize}&Match=${match}&FromDate=${startDate}&ToDate=${endDate}`,
+    "Failed to fetch close dates listings",
   );
 
 export const getSimilarListings = ({ source, id }: IParams) =>

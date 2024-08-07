@@ -1,16 +1,30 @@
-import { getFilteredListings } from "~/app/(application)/actions";
+import {
+  getCloseDatesListings,
+  getFilteredListings,
+} from "~/app/(application)/actions";
 import { capitalize } from "~/app/utils/helpers";
 import { ListingCard } from "../common";
 import Pagination from "./Pagination";
 
+const PAGESIZE = "6";
+
 export async function ListingSection({ query }: { query: URLSearchParams }) {
   const listings = (await getFilteredListings(query.toString()))!;
+  const closeAvailabilityListings =
+    listings.totalItems < 5
+      ? (await getCloseDatesListings(
+          PAGESIZE,
+          query.get("match")!,
+          query.get("fromDate")!,
+          query.get("toDate")!,
+        ))!
+      : [];
 
   const title =
     query.get("category") ??
     (query.get("match") && capitalize(query.get("match")!));
 
-  return listings?.totalItems > 0 ? (
+  return listings?.totalItems > 0 || closeAvailabilityListings?.length > 0 ? (
     <>
       <div className="flex place-items-baseline gap-8 pb-6">
         <h1 className="text-3xl">{`${title ? `${title} available properties` : "Available properties"}`}</h1>
@@ -19,7 +33,7 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
         </h6>
       </div>
       <div className="grid grid-cols-1 gap-5 desktop:grid-cols-2">
-        {listings.items.map((listing) => {
+        {listings?.items?.map((listing) => {
           return (
             <ListingCard
               id={listing.id}
@@ -29,6 +43,23 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
               subtitle={`${listing.city}, ${listing.state}`}
               imageUrl={listing.imageUrl}
               price={listing.price}
+            />
+          );
+        })}
+        {/* TODO ://modify the card */}
+        {closeAvailabilityListings?.map((item) => {
+          const startDate = new Date(item.startDate);
+          const endDate = new Date(item.endDate);
+          return (
+            <ListingCard
+              id={item.listing.id}
+              source={item.listing.source}
+              key={item.listing.id}
+              name={item.listing.name}
+              subtitle={`${item.listing.city}, ${item.listing.state}`}
+              imageUrl={item.listing.imageUrl}
+              price={item.listing.price}
+              closeDates={[startDate, endDate]}
             />
           );
         })}
