@@ -47,8 +47,8 @@ export default function CitiesAutocomplete({
           <IconGenerator
             alt="avatar icon"
             src={`/down-arrow.svg`}
-            width={!isSmallSize ? "32px" : "18px"}
-            className={!whiteVariant ? "mr-2" : ""}
+            // width={}
+            className={`${!whiteVariant ? "mr-2" : ""} ${!isSmallSize ? "w-6 sm:w-8" : "w-[18px]"}`}
           />
         }
         getOptionLabel={(option) => option.displayName}
@@ -68,7 +68,7 @@ export default function CitiesAutocomplete({
               {...optionProps}
             >
               <IconGenerator
-                width={whiteVariant ? "20px" : "16px"}
+                className={whiteVariant ? "w-4 sm:w-5" : "w-4"}
                 src="/location-pin.svg"
                 alt={option.displayName}
               />
@@ -92,7 +92,7 @@ export default function CitiesAutocomplete({
             }}
             InputLabelProps={{
               className: whiteVariant
-                ? `block ${isSmallSize ? "text" : "text-2xl"} font-medium`
+                ? `block ${isSmallSize ? "text-base" : "sm:text-2xl text-xl"} font-medium`
                 : ``,
             }}
             InputProps={{
@@ -104,18 +104,16 @@ export default function CitiesAutocomplete({
                     : isSmallSize && whiteVariant
                       ? "0px"
                       : "14px 65px 14px 0px !important",
-                fontSize: isSmallSize ? "12px" : "20px",
                 fontWeight: whiteVariant ? 500 : 400,
               },
               className: whiteVariant
-                ? ""
-                : "pl-3 bg-[#EAF7FD] text-[#212529] h-9 text-sm rounded-full border border-[#EAEAEF]",
+                ? `${isSmallSize ? "text-xs" : "sm:text-xl text-base"}`
+                : `pl-3 bg-[#EAF7FD] ${isSmallSize ? "text-xs" : "text-xl"} text-[#212529] h-9 text-sm rounded-full border border-[#EAEAEF]`,
               startAdornment: (
                 <IconGenerator
                   alt="Location Icon"
                   src="/location-pin.svg"
-                  width={isSmallSize ? "16px" : "28px"}
-                  className={`${isSmallSize ? "right-[2px]" : "left-0 top-3"} mr-2`}
+                  className={`${isSmallSize ? "right-[2px] w-4" : "left-0 top-3 w-5 sm:w-7"} mr-2`}
                 />
               ),
             }}

@@ -55,7 +55,7 @@ export function SearchCard({
     <search>
       <form onSubmit={handleSubmit}>
         <div
-          className={`grid ${isSmallSize ? "h-[250px] w-[258px]" : "h-[410px] w-[420px]"} shrink-0 grid-rows-4 divide-y rounded-xl border-[#EAEAEF] bg-white`}
+          className={`grid ${isSmallSize ? "h-[250px] w-[258px]" : "h-[330px] w-[330px] sm:h-[410px] sm:w-[420px]"} shrink-0 grid-rows-4 divide-y rounded-xl border-[#EAEAEF] bg-white`}
         >
           <div
             className={`border-b-4-grey flex w-full items-center ${isSmallSize ? "px-3 py-2" : "px-4 pb-4"} pt-5`}
@@ -100,14 +100,14 @@ export function SearchCard({
           </div>
           <button
             type="submit"
-            className={`flex grow items-center rounded-b-xl bg-primary text-white ${isSmallSize ? "p-3 text-sm" : "p-5 text-2xl"}`}
+            className={`flex grow items-center rounded-b-xl bg-primary text-white ${isSmallSize ? "p-3 text-sm" : "p-5 text-lg sm:text-2xl"}`}
           >
             Search
             <span className="ml-auto">
               <IconGenerator
                 alt="avatar icon"
                 src={`/search_icon.svg`}
-                width={isSmallSize ? "20px" : "33px"}
+                className={isSmallSize ? "w-5" : "w-6 sm:w-8"}
               />
             </span>
           </button>

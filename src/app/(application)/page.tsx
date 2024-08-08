@@ -20,7 +20,7 @@ import { Newsletter, IconGenerator } from "../ui/components/common";
 export default async function HomePage() {
   return (
     <main className="flex flex-col">
-      <div className="relative -mt-[96px] flex h-[714px]">
+      <div className="relative -mt-24 flex h-[714px]">
         <div className="absolute flex h-[714px] w-full">
           <Image
             alt="Coolvacay background image"

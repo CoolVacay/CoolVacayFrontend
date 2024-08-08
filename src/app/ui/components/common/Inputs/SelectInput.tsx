@@ -19,12 +19,13 @@ export default function SelectInput({
 }) {
   const isBigSize = size === "big";
   const isMediumSize = size === "medium";
+
   return (
     <FormControl fullWidth variant="standard" sx={{ height: "100%" }}>
       <InputLabel
         shrink={true}
         htmlFor="component-simple"
-        className={`block ${isBigSize ? "text-2xl" : isMediumSize ? "text-xl" : "text-base"} font-medium`}
+        className={`block ${isBigSize ? "text-xl sm:text-2xl" : isMediumSize ? "text-xl" : "text-base"} font-medium`}
       >
         Guests
       </InputLabel>
@@ -38,17 +39,12 @@ export default function SelectInput({
                 <IconGenerator
                   alt="avatar icon"
                   src={`/down-arrow.svg`}
-                  width={isBigSize ? "33px" : isMediumSize ? "26px" : "18px"}
-                  className={`pointer-events-none absolute ${isBigSize ? "right-1 top-7" : isMediumSize ? "right-1 top-[22px]" : "right-[2px]"}`}
+                  className={`pointer-events-none absolute ${isBigSize ? "right-0 top-6 w-6 sm:right-1 sm:top-7 sm:w-8" : isMediumSize ? "right-1 top-[22px] w-6" : "right-[2px] w-4"}`}
                 />
               )
             }
             onChange={onChange}
-            sx={{
-              padding: isBigSize ? "24px 0px 10px 0px" : "18px 0px 0px 0px",
-              fontSize: isBigSize ? "20px" : isMediumSize ? "16px" : "12px",
-              fontWeight: 500,
-            }}
+            className={`${isBigSize ? "pb-2.5 pt-5 sm:pt-6" : "pt-4"} ${isBigSize ? "text-base sm:text-xl" : isMediumSize ? "text-base" : "text-sm"}  font-medium`}
             labelId="customized-select-label"
             id="customized-select"
           >
@@ -57,9 +53,7 @@ export default function SelectInput({
                 key={guest}
                 value={guest}
                 dense
-                sx={{
-                  fontSize: size === "small" ? "12px" : "16px",
-                }}
+                className={`${size === "small" ? "text-xs" : "text-sm sm:text-base"}`}
               >
                 {`${guest} ${guest === "1" ? "guest" : "guests"}`}
               </MenuItem>

@@ -30,6 +30,12 @@ export function toastNotifier(errorMessage: string | undefined) {
   }
 }
 
+export const getCurrentDates = () => {
+  const startDate = dayjs().format("YYYY-MM-DD");
+  const endDate = dayjs().add(6, "day").format("YYYY-MM-DD");
+  return { startDate, endDate };
+};
+
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
   // display all pages without any ellipsis.
