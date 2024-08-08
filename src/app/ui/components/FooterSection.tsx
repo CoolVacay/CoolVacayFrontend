@@ -27,7 +27,7 @@ function FooterSection() {
       className="mt-auto flex flex-col px-[72px] pt-14"
       style={{ borderTop: "1px solid rgba(173, 181, 189, 0.5)" }}
     >
-      <div className="flex justify-between">
+      <div className="flex flex-col gap-10 md:flex-row justify-between">
         <div className="flex flex-col gap-7">
           <div className="py-3">
             <IconGenerator
@@ -36,7 +36,7 @@ function FooterSection() {
               alt="Coolvacay logo"
             />
           </div>
-          <div className="flex gap-10">
+          <div className="flex flex-col md:flex-row gap-10">
             <div className="flex flex-col gap-7">
               <div className="flex flex-col gap-1">
                 <h1 className="text-sm text-primary-grey400">
@@ -73,7 +73,7 @@ function FooterSection() {
             </div>
           </div>
         </div>
-        <div className="flex grow justify-end gap-[100px] desktop:gap-[200px]">
+        <div className="grid grid-cols-2 gap-[50px] md:grid-cols-3 md:gap-[200px]">
           <div className="flex flex-col gap-5">
             <h2 className="text-[15px] font-semibold">Popular Search</h2>
             {popularSearchLinks.map((link) => (
@@ -104,28 +104,28 @@ function FooterSection() {
           </div>
         </div>
       </div>
-      <div className="flex justify-between py-6 text-sm">
+      <div className="flex flex-col items-center md:flex-row justify-between py-6 text-sm">
         <h2>
           © Coolvacay 2024
           <span className="text-primary-grey400"> - All rights reserved</span>
         </h2>
-        <h2 className="text-sm text-primary-grey400">
-          {staticPages.map((page, index) => {
-            return (
-              <React.Fragment key={page.name}>
-                <Link
-                  key={page.name}
-                  href={page.href}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {page.name}
-                </Link>
-                {index < 2 && " · "}
-              </React.Fragment>
-            );
-          })}
-        </h2>
+        <div className="flex gap-2">
+          {staticPages.map((page, index) => (
+            <React.Fragment key={page.name}>
+              <Link
+                href={page.href}
+                rel="noopener noreferrer"
+                target="_blank"
+                className="text-primary-grey400"
+              >
+                {page.name}
+              </Link>
+              {index < staticPages.length - 1 && (
+                <span className="text-primary-grey400"> · </span>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
       </div>
     </footer>
   );

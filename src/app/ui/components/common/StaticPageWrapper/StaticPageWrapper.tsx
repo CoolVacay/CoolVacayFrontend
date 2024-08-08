@@ -39,7 +39,7 @@ export default function StaticPageWrapper({
           <div className="absolute top-0 text-white">
             <div className="flex max-w-[1220px] items-center justify-center py-56">
               <div className="w-full">
-                <h1 className="mb-8 text-[80px] font-medium leading-[80px] tracking-tight">
+                <h1 className="mb-8 text-6xl md:text-[80px] font-medium leading-[80px] tracking-tight text-center">
                   {title}
                 </h1>
                 <h6 className="text-center text-xl leading-[30px]">
@@ -48,7 +48,7 @@ export default function StaticPageWrapper({
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-8 text-justify text-[#676D73]">
+          <div className="flex flex-col gap-8 text-justify text-[#676D73] p-10">
             {children}
           </div>
         </div>
