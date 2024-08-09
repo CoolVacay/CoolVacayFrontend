@@ -12,7 +12,11 @@ const ValidationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
 });
 
-export default function NewsletterForm({isTextBlack = false}: {isTextBlack: boolean}) {
+export default function NewsletterForm({
+  isTextBlack = false,
+}: {
+  isTextBlack: boolean;
+}) {
   const [errorMessage, setErrorMessage] = useState<undefined | string>(
     undefined,
   );
@@ -33,22 +37,20 @@ export default function NewsletterForm({isTextBlack = false}: {isTextBlack: bool
   return (
     <form onSubmit={formik.handleSubmit} className="w-[screen]">
       <div
-        className={`flex-col w-full items-center justify-center ${isTextBlack ? "text-black" : "text-white"} lg:flex-row lg:justify-center gap-4"}`}
+        className={`w-full flex-col items-center justify-center ${isTextBlack ? "text-black" : "text-white"} gap-4"} lg:flex-row lg:justify-center`}
       >
         <div className="flex flex-col gap-2 text-center">
           <h1
-            className={`lg:text-[36px] lg:leading-[40px] text-2xl font-medium`}
+            className={`text-2xl font-medium lg:text-[36px] lg:leading-[40px]`}
           >
             Stay up-to-date on our deals.
           </h1>
-          <h5
-            className={`text-xs lg:text-base`}
-          >
+          <h5 className={`text-xs lg:text-base`}>
             Curated tips, inspiration, and discounts for your next vacation.
           </h5>
         </div>
         <div
-          className={`flex ${isTextBlack ? "flex-col" : "lg:flex-row flex-col"} justify-center pt-4 lg:gap-6 gap-2 items-center w-full`}
+          className={`flex w-full items-center justify-center gap-2 pt-4 lg:gap-6`}
         >
           <input
             id="email"
@@ -57,19 +59,19 @@ export default function NewsletterForm({isTextBlack = false}: {isTextBlack: bool
             onBlur={formik.handleBlur}
             value={formik.values.email}
             placeholder="Enter your email"
-            className={`w-[260px] lg:w-[285px] appearance-none rounded-lg border px-4 py-2 leading-tight text-gray-700 shadow focus:outline-none focus:shadow-outline`}
+            className={`focus:shadow-outline w-[260px] appearance-none rounded-lg border px-4 py-2 leading-tight text-gray-700 shadow focus:outline-none lg:w-[285px]`}
           />
           <ActionButton
-            text={isTextBlack ? "Subscribe now": "Go"}
+            text={isTextBlack ? "Subscribe now" : "Go"}
             disabled={!formik.isValid || !formik.dirty}
             borderRadius="rounded"
-            className={`w-[260px] lg:w-[285px] rounded-lg bg-primary px-8 py-2 text-white ${
-              !formik.isValid || !formik.dirty ? "disabled:bg-gray-500" : ""}`
-            }
+            className={`w-[70px] rounded-lg bg-primary py-2 text-center text-white ${
+              !formik.isValid || !formik.dirty ? "disabled:bg-gray-500" : ""
+            }`}
           />
         </div>
         {errorMessage && (
-          <p className="text-sm text-red-500 mt-2">{errorMessage}</p>
+          <p className="mt-2 text-sm text-red-500">{errorMessage}</p>
         )}
       </div>
       <Toaster />

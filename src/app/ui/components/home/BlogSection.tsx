@@ -16,11 +16,15 @@ export async function BlogSection() {
           Latest blog from us
         </h1>
       </div>
-      <div className="grid grid-cols-3 gap-5 pb-12 pt-10 desktop:grid-cols-4">
+      <div className="flex flex-col items-center gap-5 pb-10 sm:flex-row sm:flex-wrap sm:justify-between">
         {blogs.length > 0 ? (
           blogs.slice(0, 4).map((blog) => {
             return (
-              <Link href={`/blog/${blog.id}`} key={blog.id}>
+              <Link
+                href={`/blog/${blog.id}`}
+                key={blog.id}
+                className="h-[340px]"
+              >
                 <MainCard
                   imageUrl={
                     blog.thumbnailImageUrl.length > 0

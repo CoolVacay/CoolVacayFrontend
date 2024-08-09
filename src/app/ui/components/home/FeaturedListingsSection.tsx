@@ -1,39 +1,21 @@
 import Link from "next/link";
-import dayjs from "dayjs";
 
-import { getFetch } from "../../../utils/api-helpers";
-import { truncateText } from "../../../utils/helpers";
-import { FetchError } from "~/app/utils/definitions";
+import { getCurrentDates, truncateText } from "~/app/utils/helpers";
+import { getFeaturedListings } from "~/app/(application)/actions";
 import { IconGenerator, MainCard } from "../common";
-import type { IListingData } from "../../../(application)/definitions";
-
-async function getFeaturedListings() {
-  try {
-    const res = await getFetch<IListingData[]>("/listings/featured");
-    if (res instanceof FetchError) {
-      throw new Error("Failed to fetch all listings");
-    }
-    return res;
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
-
-const startDate = dayjs().format("YYYY-MM-DD");
-const endDate = dayjs().add(6, "day").format("YYYY-MM-DD");
 
 export async function FeaturedListingsSection() {
   const featuredListings = (await getFeaturedListings())!;
-
+  const { startDate, endDate } = getCurrentDates();
   return (
-    <section className="flex w-full justify-between pb-10">
+    <section className="flex flex-col items-center gap-5 pb-10 sm:flex-row sm:flex-wrap sm:justify-between">
       {featuredListings?.length > 0 ? (
         featuredListings.map((listing) => {
           return (
-            <div key={listing.id} className="relative">
+            <div key={listing.id} className="relative h-[340px]">
               <Link
                 href={`/listing/${listing.source}/${listing.id}?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1`}
-                className="h-82"
+                className="h-full"
               >
                 <MainCard
                   name={truncateText(listing.name, 50)}

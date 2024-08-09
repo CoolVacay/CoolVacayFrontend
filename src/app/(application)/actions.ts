@@ -20,6 +20,7 @@ import type {
   IAllListings,
   IPropertyAvailability,
   ICloseDatesListings,
+  IPopularCategoriesData,
 } from "./definitions";
 
 //////////////GET/////////////
@@ -90,6 +91,18 @@ export const getSimilarListings = ({ source, id }: IParams) =>
     `/Listings/${source}/${id}/similar`,
     "Failed to fetch similar listings",
     true,
+  );
+
+export const getCategories = () =>
+  getData<IPopularCategoriesData[]>(
+    `/categories`,
+    "Failed to fetch popular categories",
+  );
+
+export const getFeaturedListings = () =>
+  getData<IListingData[]>(
+    `/listings/featured`,
+    "Failed to fetch featured listings",
   );
 
 export const getReservationsDetails = (userId: string) =>

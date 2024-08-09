@@ -10,16 +10,16 @@ const endDate = dayjs().add(6, "day").format("YYYY-MM-DD");
 
 export async function AllistingsSection({ page }: { page: number }) {
   const listings = (await getFilteredListings(
-    `/listings?fromDate=${startDate}&toDate=${endDate}&pageSize=8&pageNum=${page}`,
+    `fromDate=${startDate}&toDate=${endDate}&pageSize=8&pageNum=${page}`,
   ))!;
   return listings?.items.length > 0 ? (
-    <div className="grid grid-cols-3 gap-5 py-10 desktop:grid-cols-4">
+    <div className="my-10 flex  flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-between">
       {listings?.items.map((listing) => {
         return (
           <Link
             key={listing.id}
             href={`/listing/${listing.source}/${listing.id}?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1`}
-            className="h-82"
+            className="h-[340px]"
           >
             <MainCard
               name={truncateText(listing.name, 50)}

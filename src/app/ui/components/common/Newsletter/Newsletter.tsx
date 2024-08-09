@@ -5,12 +5,12 @@ import NewsletterForm from "./NewsletterForm";
 
 export default function Newsletter() {
   return (
-    <div className="relative flex w-full shrink-0 flex-col sm:flex-row rounded-xl">
+    <div className="relative flex w-full shrink-0 flex-col rounded-xl sm:flex-row">
       <div className="flex h-[250px] w-full shrink-0">
         <Image
           alt="Coolvacay newsletter image"
           src="/newsletter_img.jpeg"
-          className="rounded-xl sm:rounded-l-xl sm:rounded-r-none"
+          className="rounded-xl"
           quality={20}
           width={0}
           height={0}
