@@ -77,12 +77,21 @@ importers:
       react-hot-toast:
         specifier: ^2.4.1
         version: 2.4.1(csstype@3.1.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react-images-uploading:
+        specifier: ^3.1.7
+        version: 3.1.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-map-gl:
         specifier: ^7.1.7
         version: 7.1.7(mapbox-gl@3.4.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-payment-inputs:
         specifier: ^1.1.9
         version: 1.1.9(react@18.2.0)(styled-components@6.1.11(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      react-uploader:
+        specifier: ^3.43.0
+        version: 3.43.0(react@18.2.0)
+      uploader:
+        specifier: ^3.48.3
+        version: 3.48.3
       yup:
         specifier: ^1.4.0
         version: 1.4.0
@@ -809,6 +818,9 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
+  '@upload-io/upload-api-client-upload-js@2.18.0':
+    resolution: {integrity: sha512-yPwsRCecXSilYn4q5ZDD4fyI2PVyUcLimv2LQcfpV3hRyzc8t82NuWHYEYpRZa5K68zxw2RljDf30geT1vJN9g==}
+
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -982,6 +994,9 @@ packages:
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
+
+  classnames@2.5.1:
+    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
 
   client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
@@ -1763,6 +1778,9 @@ packages:
   lodash.clonedeep@4.5.0:
     resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
 
+  lodash.isequal@4.5.0:
+    resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
@@ -2102,6 +2120,9 @@ packages:
   pretty-format@3.8.0:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
 
+  progress-smoother@1.7.0:
+    resolution: {integrity: sha512-ZIbSbPQ8SnEf5Sa0If9lfvn5URyrZfgTTh5DM+04j1GafiLIaWDWW+1AkYXzGl7JQvzAvCy5E1ZPOgx8XORyew==}
+
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
 
@@ -2136,6 +2157,13 @@ packages:
       react: '>=16'
       react-dom: '>=16'
 
+  react-images-uploading@3.1.7:
+    resolution: {integrity: sha512-woET50eCezm645iIeP4gCoN7HjdR3T64UXC5l53yd+2vHFp+pwABH8Z/aAO5IXDeC1aP6doQ+K738L701zswAw==}
+    engines: {node: '>=8', npm: '>=5'}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -2169,6 +2197,11 @@ packages:
     peerDependencies:
       react: '>=16.6.0'
       react-dom: '>=16.6.0'
+
+  react-uploader@3.43.0:
+    resolution: {integrity: sha512-RCaMSdRsfrIC6Mt2UDhk9G4A+mzcuumW2bOfuPyKwKktotNdlcj8ZqRDihtzXVy/K9PVvxnr2PxCfQuDXOkcyQ==}
+    peerDependencies:
+      react: '>=16.3.0'
 
   react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
@@ -2515,6 +2548,12 @@ packages:
   union-value@1.0.1:
     resolution: {integrity: sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg==}
     engines: {node: '>=0.10.0'}
+
+  upload-js@2.24.3:
+    resolution: {integrity: sha512-iiTowtr2uRw2coGXlqiN1ff/wfMPVMv2MqaZYqEYBSNGmxD1pLl9R9wU8BT/mK+Yn8fDx7utlPovXziS8PVaIA==}
+
+  uploader@3.48.3:
+    resolution: {integrity: sha512-BGXSS9O54m81TL5Ogn4OHISD/WPuIS3kvNCYomDl8cltPGzUMrHseU1sXHKGrFg65L28qJL6LnGA2fXUxpQVBQ==}
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
@@ -3264,6 +3303,8 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
+  '@upload-io/upload-api-client-upload-js@2.18.0': {}
+
   acorn-jsx@5.3.2(acorn@8.12.0):
     dependencies:
       acorn: 8.12.0
@@ -3472,6 +3513,8 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+
+  classnames@2.5.1: {}
 
   client-only@0.0.1: {}
 
@@ -4399,6 +4442,8 @@ snapshots:
 
   lodash.clonedeep@4.5.0: {}
 
+  lodash.isequal@4.5.0: {}
+
   lodash.merge@4.6.2: {}
 
   lodash@4.17.21: {}
@@ -4687,6 +4732,8 @@ snapshots:
 
   pretty-format@3.8.0: {}
 
+  progress-smoother@1.7.0: {}
+
   prop-types@15.8.1:
     dependencies:
       loose-envify: 1.4.0
@@ -4719,6 +4766,11 @@ snapshots:
     transitivePeerDependencies:
       - csstype
 
+  react-images-uploading@3.1.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+
   react-is@16.13.1: {}
 
   react-is@18.3.1: {}
@@ -4747,6 +4799,12 @@ snapshots:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+
+  react-uploader@3.43.0(react@18.2.0):
+    dependencies:
+      lodash.isequal: 4.5.0
+      react: 18.2.0
+      uploader: 3.48.3
 
   react@18.2.0:
     dependencies:
@@ -5149,6 +5207,17 @@ snapshots:
       get-value: 2.0.6
       is-extendable: 0.1.1
       set-value: 2.0.1
+
+  upload-js@2.24.3:
+    dependencies:
+      '@upload-io/upload-api-client-upload-js': 2.18.0
+      progress-smoother: 1.7.0
+
+  uploader@3.48.3:
+    dependencies:
+      classnames: 2.5.1
+      preact: 10.11.3
+      upload-js: 2.24.3
 
   uri-js@4.4.1:
     dependencies:

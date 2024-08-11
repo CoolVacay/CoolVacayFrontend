@@ -7,7 +7,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
-import { MenuItem } from "@mui/material";
+import { MenuItem, IconButton, InputAdornment } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 import {
   CitiesAutocomplete,
@@ -16,9 +17,9 @@ import {
   StyledDatePicker,
 } from "../common";
 import type { DateRangeType } from "../home/SearchCard";
-import { IconButton, InputAdornment } from "@mui/material";
-import ClearIcon from "@mui/icons-material/Clear";
-import type { ILocationsList } from "~/app/(application)/definitions";
+import GridMapToggle from "./GridMapToggle";
+import type { ILocationsList, IPopularCategoriesData } from "~/app/(application)/definitions";
+import CategoriesAutocomplete from "../common/Inputs/CategoriesAutocomplete";
 
 const guests = Array.from({ length: 8 }, (v, i) => i + 1)
   .map((item) => item.toString())
@@ -30,8 +31,10 @@ const guests = Array.from({ length: 8 }, (v, i) => i + 1)
 
 export default function Filters({
   locationsList,
+  categories
 }: {
   locationsList: ILocationsList[];
+  categories: IPopularCategoriesData[];
 }) {
   const { searchParams, searchParamsValues, updateSearchParams } =
     useAppSearchParams();
@@ -42,30 +45,46 @@ export default function Filters({
   ] as DateRangeType;
 
   const [showClearButton, setShowClearButton] = useState(false);
+  const [isMapMode, setIsMapMode] = useState(searchParamsValues.isMapMode === "true");
+
+  const selectedCategory =
+    categories.find((item) => item.name === searchParams?.get("category")) ?? null;
+
+  const [category, setCategory] = useState<string>(
+    searchParamsValues.category ?? ""
+  );
 
   const selectedLocation =
-    locationsList.find((item) => item.match === searchParams?.get("match")) ??
-    null;
+    locationsList.find((item) => item.match === searchParams?.get("match")) ?? null;
 
   const [location, setLocation] = useState<string>(
-    selectedLocation?.displayName ?? "",
+    selectedLocation?.displayName ?? ""
   );
 
   return (
-    <div className="mb-5 flex items-center gap-4">
-      <CitiesAutocomplete
-        locationsList={locationsList}
-        isSmallSize={true}
-        variant="blue"
-        inputValue={location}
-        value={selectedLocation}
-        setValue={setLocation}
-        onChange={(event, newValue) => {
-          if (!newValue) searchParams.delete("category");
-          updateSearchParams(["match"], [newValue?.match ?? ""]);
-        }}
-      />
-      <div className="relative w-[200px]">
+    <div className="mr-7 mb-5 grid lg:flex lg:items-center gap-4 grid-cols-6">
+      <div className="col-span-4 lg:w-3/6">
+        <CitiesAutocomplete
+          locationsList={locationsList}
+          isSmallSize={true}
+          variant="blue"
+          inputValue={location}
+          value={selectedLocation}
+          setValue={setLocation}
+          onChange={(event, newValue) => {
+            if (!newValue) searchParams.delete("category");
+            updateSearchParams(["match"], [newValue?.match ?? ""]);
+          }}
+        />
+      </div>
+      <div className="col-span-2 lg:hidden">
+        <GridMapToggle
+          isMapMode={isMapMode}
+          setIsMapMode={setIsMapMode}
+          updateSearchParams={updateSearchParams}
+        />
+      </div>
+      <div className="lg:w-3/6 lg:relative col-span-2">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateRangePicker
             slots={{
@@ -94,7 +113,7 @@ export default function Filters({
                   sx: {
                     fontSize: "14px",
                     fontWeight: 400,
-                    width: "200px",
+                    width: "100%",
                     display: "flex",
                     p: "15px 10px 15px",
                     backgroundColor: "#EAF7FD",
@@ -109,10 +128,7 @@ export default function Filters({
                           <IconButton
                             size="small"
                             onClick={() =>
-                              updateSearchParams(
-                                ["fromDate", "toDate"],
-                                [null, null],
-                              )
+                              updateSearchParams(["fromDate", "toDate"], [null, null])
                             }
                           >
                             <ClearIcon
@@ -139,7 +155,7 @@ export default function Filters({
           />
         </LocalizationProvider>
       </div>
-      <div>
+      <div className="lg:w-3/6 col-span-2">
         <SimpleSelectInput
           value={
             searchParamsValues.numberOfGuests !== ""
@@ -150,6 +166,21 @@ export default function Filters({
             updateSearchParams(["numberOfGuests"], [e.target.value])
           }
           listOptions={guests}
+        />
+      </div>
+      <div className="col-span-2 lg:w-3/6">
+        <CategoriesAutocomplete
+          categories={categories}
+          isSmallSize={true}
+          iconUrl={selectedCategory?.iconUrl ?? '/pool.svg'}
+          variant="blue"
+          inputValue={category}
+          value={selectedCategory}
+          setValue={setCategory}
+          onChange={(event, newValue) => {
+            if (!newValue) searchParams.delete("category");
+            updateSearchParams(["category"], [newValue?.name ?? ""]);
+          }}
         />
       </div>
     </div>

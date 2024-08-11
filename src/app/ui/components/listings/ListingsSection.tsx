@@ -27,12 +27,10 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
   return listings?.totalItems > 0 || closeAvailabilityListings?.length > 0 ? (
     <>
       <div className="flex place-items-baseline gap-8 pb-6">
-        <h1 className="text-3xl">{`${title ? `${title} available properties` : "Available properties"}`}</h1>
-        <h6 className="text-sm text-primary-grey300">
-          {listings?.totalItems} properties
-        </h6>
+        <h1 className="text-3xl">{`${title ? `${title} available properties` : "Available properties"}`} <p className="text-sm text-primary-grey300">
+        {listings?.totalItems} properties</p></h1>
       </div>
-      <div className="grid grid-cols-1 gap-5 desktop:grid-cols-2">
+      <div className="grid sm:grid-cols-1 gap-5 md:grid-cols-2"> 
         {listings?.items?.map((listing) => {
           return (
             <ListingCard

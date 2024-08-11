@@ -60,16 +60,16 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
 
   return (
     <div className="embla">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         <div className="grid grid-cols-24">
           <div
             className={`grid ${type === "image" ? "col-span-2 desktop:col-span-4" : "col-span-1"}`}
           >
             <button aria-label="back arrow button" onClick={scrollPrev}>
               {type === "image" ? (
-                <KeyboardArrowLeftIcon className="h-[70px] w-[70px] hover:text-primary" />
+                <KeyboardArrowLeftIcon className="h-[70px] w-[70px] hover:text-primary hidden lg:block" />
               ) : (
-                <ArrowCircleLeftOutlinedIcon className="size-[46px]" />
+                <ArrowCircleLeftOutlinedIcon className="size-[46px] hidden lg:block" />
               )}
             </button>
           </div>
@@ -81,7 +81,7 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
                 {type === "image"
                   ? (data as IListingData["images"]).map((image, index) => (
                       <div className="embla__slide" key={index + 1}>
-                        <div className="embla__slide__number">
+                        <div className="embla__slide__number !w-[240px] !h-[200px] lg:!w-full lg:!h-full">
                           {
                             <Image
                               key={index + 1}
@@ -89,8 +89,8 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
                               alt={image.name}
                               placeholder="blur"
                               sizes="100vw"
-                              width={640}
-                              height={500}
+                              width={300}
+                              height={200}
                               quality={90}
                               blurDataURL={`data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mP8/OVbPQMRgHFUIX0VAgBWRiGjO2Ny1QAAAABJRU5ErkJggg==`}
                               style={{
@@ -109,7 +109,7 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
                         <Link
                           key={listing.id}
                           href={`/listing/${listing.source}/${listing.id}`}
-                          className="h-[215px]"
+                          className="h-full lg:h-[215px]"
                         >
                           <SimilarCard
                             key={index}
@@ -133,9 +133,9 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
           >
             <button aria-label="back arrow button" onClick={scrollNext}>
               {type === "image" ? (
-                <KeyboardArrowRightIcon className="h-[70px] w-[70px] hover:text-primary" />
+                <KeyboardArrowRightIcon className="h-[70px] w-[70px] hover:text-primary hidden lg:block" />
               ) : (
-                <ArrowCircleRightOutlinedIcon className="size-[46px]" />
+                <ArrowCircleRightOutlinedIcon className="size-[46px] hidden lg:block" />
               )}
             </button>
           </div>

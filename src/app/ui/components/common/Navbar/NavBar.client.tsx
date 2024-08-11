@@ -35,7 +35,7 @@ export default function NavBar({
   return (
     <nav className="z-10 flex h-12 w-full scroll-px-4 justify-center px-6 py-3 sm:h-24 sm:py-6">
       <div
-        className={`flex w-full ${isWhiteVariant || !noMaxWidth ? "max-w-[1220px]" : "px-[70px]"} scroll-px-4 items-center justify-between gap-44`}
+        className={`flex w-full scroll-px-4 items-center justify-between gap-44`}
       >
         <div className="flex w-full items-center justify-between sm:w-auto md:flex-grow">
           <Link href="/">
@@ -108,11 +108,11 @@ export default function NavBar({
           </div>
         </div>
       </div>
-      <NavBardDialog
+      {openMenu && <NavBardDialog
         openMenu={openMenu}
         toggleMenu={toggleMenu}
         session={session}
-      />
+      />}
     </nav>
   );
 }

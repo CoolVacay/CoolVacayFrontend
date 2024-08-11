@@ -66,7 +66,7 @@ const SimpleSelectInput: React.FC<SimpleSelectInputProps> = ({
 
   return (
     <div
-      className={`relative ${isSmallSize ? "w-[200px]" : "w-full"} ${isRoundedVariant ? "rounded-[300px]" : "rounded-lg"} border border-[#EAEAEF]`}
+      className={`relative ${isSmallSize ? "max-w-[200px]" : "w-full"} ${isRoundedVariant ? "rounded-[300px]" : "rounded-lg"} border border-[#EAEAEF]`}
     >
       <Select
         fullWidth

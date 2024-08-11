@@ -71,7 +71,7 @@ export function FilteredListingsSkeleton() {
 
 export function MapSkeleton() {
   return (
-    <div className="sticky right-0 top-0 h-screen w-7/12 bg-gray-100 desktop:w-5/12" />
+    <div className="sticky right-0 top-0 h-screen bg-gray-100" />
   );
 }
 

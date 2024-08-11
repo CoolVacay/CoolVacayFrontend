@@ -28,69 +28,68 @@ export default async function Page({
   const navigateHome = !(query.get("match") ?? query.get("category"));
 
   return (
-    <main className="flex flex-col">
-      <div className="flex justify-center">
-        <div className="flex max-w-[1220px] flex-col items-center">
-          <div className="w-full">
-            <Breadcrumbs
-              navigateHome={navigateHome}
-              breadcrumbs={[
-                {
-                  label: navigateHome
-                    ? "Home"
-                    : query.get("category")
-                      ? `${capitalize(query.get("category")!)} listings`
-                      : "Listings",
-                  href: "/listings",
-                },
-                {
-                  label: `${listing.name}`,
-                  href: `/listing/${params.source}/${params.id}`,
-                  active: true,
-                },
-              ]}
-            />
-            <div className="flex w-full justify-between pb-6">
-              <h1 className="w-2/3 pt-3 text-3xl">
-                {listing.name}, {listing.city}, {listing.state}
-              </h1>
-              <div className="flex max-h-[50px] w-[300px] items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2">
-                Call us for more info:
-                <span className="ml-1 font-medium">(315) 434-2324</span>
-              </div>
-            </div>
-            <Gallery listing={listing} />
-            <div className="my-10 flex gap-6">
-              <div>
-                <Overview listing={listing} />
-                <div className="max-h-60 w-full">
-                  <MapContainer
-                    singleListing={true}
-                    query={query}
-                    listing={[{ ...listing }]}
-                  />
-                </div>
-                <div className="mt-6">
-                  <h1 className="text-sm text-[#676D73]">
-                    Listed by{" "}
-                    <span className="text-sm font-medium text-black">
-                      {listing.source}
-                    </span>
-                  </h1>
-                </div>
-              </div>
-              <BookNow params={params} />
-            </div>
-            <Divider className="mb-10" />
-            <PolicyAndRules listing={listing} />
-            <h5 className="mb-10 text-2xl font-bold">
-              View similar homes in this area
-            </h5>
-            <div className="no-scrollbar mb-10 flex snap-x gap-5 overflow-auto will-change-scroll">
-              <SimilarCards pageParams={pageParams} />
-            </div>
+    <main className="flex flex-col items-center px-4 md:px-6 lg:px-8">
+      <div className="w-full max-w-[1220px]">
+        <Breadcrumbs
+          navigateHome={navigateHome}
+          breadcrumbs={[
+            {
+              label: navigateHome
+                ? "Home"
+                : query.get("category")
+                  ? `${capitalize(query.get("category")!)} listings`
+                  : "Listings",
+              href: "/listings",
+            },
+            {
+              label: `${listing.name}`,
+              href: `/listing/${params.source}/${params.id}`,
+              active: true,
+            },
+          ]}
+        />
+        <div className="flex flex-col md:flex-row justify-between items-start pb-6">
+          <h1 className="text-2xl md:text-3xl leading-tight md:w-2/3">
+            {listing.name}, {listing.city}, {listing.state}
+          </h1>
+          <div className="mt-4 md:mt-0 flex max-h-[50px] w-full md:w-[300px] items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2">
+            Call us for more info:
+            <span className="ml-1 font-medium">(315) 434-2324</span>
           </div>
         </div>
+        <Gallery listing={listing} />
+        <div className="my-10 flex flex-col lg:flex-row gap-6">
+          <div className="w-full lg:w-2/3">
+            <Overview listing={listing} />
+            <div className="max-h-60 w-full">
+              <MapContainer
+                singleListing={true}
+                query={query}
+                listing={[{ ...listing }]}
+              />
+            </div>
+            <div className="mt-6">
+              <h1 className="text-sm text-[#676D73]">
+                Listed by{" "}
+                <span className="text-sm font-medium text-black">
+                  {listing.source}
+                </span>
+              </h1>
+            </div>
+          </div>
+          <div className="w-full lg:w-1/3">
+            <BookNow params={params} />
+          </div>
+        </div>
+        <Divider className="mb-10" />
+        <PolicyAndRules listing={listing} />
+        <h5 className="mb-10 text-xl md:text-2xl font-bold">
+          View similar homes in this area
+        </h5>
+        <div className="no-scrollbar mb-10 flex snap-x gap-5 overflow-auto will-change-scroll">
+          <SimilarCards pageParams={pageParams} />
+        </div>
+
       </div>
     </main>
   );

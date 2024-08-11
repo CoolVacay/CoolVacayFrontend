@@ -41,6 +41,7 @@ export default function FullScreenDialog({
         maxWidth="xl"
         open={isModalOpen}
         onClose={handleClose}
+        className="h-[60vh] lg:h-screen"
         PaperProps={{
           style: {
             height: "100vh",
@@ -53,7 +54,7 @@ export default function FullScreenDialog({
             <CloseIcon fontSize="large" />
           </button>
         </div>
-        <DialogContent className="align-center flex justify-center pt-0">
+        <DialogContent className="pt-0">
           <EmblaCarousel
             handleClick={handleClick}
             data={listing.images}

@@ -115,7 +115,7 @@ export default function MapContent({
         mapboxAccessToken={mapboxToken}
         mapStyle="mapbox://styles/mapbox/streets-v12"
         style={{
-          height: singleListing ? "240px" : "100vh",
+          height: singleListing ? "240px" : "90vh",
           borderRadius: singleListing ? "8px" : "0px",
         }}
         initialViewState={{

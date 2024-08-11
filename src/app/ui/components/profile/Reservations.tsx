@@ -8,8 +8,8 @@ export default function Reservations({
   reservationsDetails: IReservationsDetails[];
 }) {
   return (
-    <div className="mb-8 flex flex-col gap-8">
-      <h4 className="text-[28px] font-medium">
+    <div className="mb-8 flex flex-col gap-8 p-3">
+      <h4 className="text-[24px] font-medium sm:text-[28px]">
         {`${reservationsDetails.length} ${
           reservationsDetails.length === 1 ? "Booking" : "Bookings"
         }`}
@@ -17,14 +17,18 @@ export default function Reservations({
       {reservationsDetails?.length > 0 ? (
         reservationsDetails?.map((reservation, index) => {
           return (
-            <div key={reservation.id} className="flex flex-col gap-8">
+            <div key={reservation.id} className="flex flex-col gap-4 sm:gap-8">
               <ReservationCard reservation={reservation} />
-              {index < reservationsDetails.length - 1 ? <Divider /> : null}
+              {index < reservationsDetails.length - 1 ? (
+                <Divider className="hidden sm:block" />
+              ) : null}
             </div>
           );
         })
       ) : (
-        <p>{`You haven't made any reservations.`}</p>
+        <p className="text-sm sm:text-base">
+          {`You haven't made any reservations.`}
+        </p>
       )}
     </div>
   );

@@ -24,7 +24,7 @@ export default function ListingCard({
   searchParams.delete("pageNum");
   return (
     <div
-      className={`flex h-[${closeDates ? "440px" : "405px"}] w-[360px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1`}
+      className={`flex h-[${closeDates ? "440px" : "405px"}] w-[280px] lg:w-[360px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1`}
     >
       <div className="relative">
         <Link

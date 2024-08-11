@@ -35,20 +35,22 @@ export default function NavLinks() {
 
   return (
     <div className="flex flex-col">
-      {links.map((link) => {
-        return (
-          <Link
-            key={link.name}
-            href={link.href}
-            className={`flex h-[56px] cursor-pointer items-center gap-2 p-5 font-medium hover:bg-primary/[.10]
-              ${pathname === link.href ? "bg-primary/[.10] text-primary" : ""}
-            `}
-          >
+      {links.map((link) => (
+        <Link
+          key={link.name}
+          href={link.href}
+          className={`flex h-[56px] cursor-pointer items-center gap-2 p-5 font-medium hover:bg-primary/[.10]
+            ${pathname === link.href ? "bg-primary/[.10] text-primary" : ""}
+          `}
+        >
+          <div className="flex justify-center items-center">
             {link.icon(pathname === link.href)}
-            <p className="hidden md:block">{link.name}</p>
-          </Link>
-        );
-      })}
+          </div>
+          <p className="text-sm lg:text-base">
+            {link.name}
+          </p>
+        </Link>
+      ))}
     </div>
   );
 }
