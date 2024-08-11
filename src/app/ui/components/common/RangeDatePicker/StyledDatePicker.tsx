@@ -51,7 +51,7 @@ const StyledDatePicker = styled(DateRangePickerDay, {
                   borderRadius: 0,
                   backgroundColor: isHighlighting
                     ? theme.palette.primary.main
-                    : theme.palette.action.selected,
+                    : theme.palette.primary.light,
                   color: theme.palette.common.white,
                   "&:hover, &:focus": {
                     backgroundColor: theme.palette.primary.dark,
@@ -62,12 +62,14 @@ const StyledDatePicker = styled(DateRangePickerDay, {
               ? {
                   borderTopLeftRadius: "50%",
                   borderBottomLeftRadius: "50%",
+                  backgroundColor: theme.palette.primary.dark
                 }
               : {}),
             ...(isEndOfHighlighting || isEndOfPreviewing
               ? {
                   borderTopRightRadius: "50%",
                   borderBottomRightRadius: "50%",
+                  backgroundColor: theme.palette.primary.dark
                 }
               : {}),
             ...((isDisabled || !isAvailable) && {

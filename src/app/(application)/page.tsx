@@ -38,13 +38,13 @@ export default async function HomePage() {
           />
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center p-3">
         <div className="flex max-w-[400px] flex-col items-center justify-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
           <div className="flex w-full items-center justify-center">
             <HeroSection />
           </div>
           <div className="w-full">
-            <h1 className="hidden text-[28px] sm:block sm:py-7">
+            <h1 className="text-[28px] p-1 sm:py-7">
               Popular Categories
             </h1>
             <Suspense fallback={<PopularCategoriesSkeleton />}>

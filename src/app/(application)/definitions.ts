@@ -83,6 +83,7 @@ export type TUserData = {
     image: string;
     nationality: string;
     dateOfBirth: string;
+    creationDate: string;
     gender: string;
   };
 };

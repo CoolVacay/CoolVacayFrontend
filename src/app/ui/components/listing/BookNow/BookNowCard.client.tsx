@@ -39,7 +39,7 @@ export default function BookNowContent({
     <div
       className={`flex flex-col gap-6 rounded-[11px] border border-[#EAEAEF] px-6 py-5`}
     >
-      <div className="flex-col rounded-[11px] border border-[#EAEAEF]">
+      <div className="flex-col rounded-[11px] border border-[#EAEAEF] hidden lg:block">
         <div
           className="relative px-6 py-5"
           style={{ borderBottom: "1px solid #EAEAEF" }}
@@ -56,6 +56,30 @@ export default function BookNowContent({
         <div className="px-6 py-5">
           <SelectInput
             size="medium"
+            value={searchParamsValues.numberOfGuests ?? "1"}
+            onChange={(e: SelectChangeEvent<string>) =>
+              updateSearchParams(["numberOfGuests"], [e.target.value])
+            }
+          />
+        </div>
+      </div>
+      <div className="flex-col rounded-[11px] border border-[#EAEAEF] block lg:hidden">
+        <div
+          className="relative px-6 py-5"
+          style={{ borderBottom: "1px solid #EAEAEF" }}
+        >
+          <RangeDatePicker
+            size="small"
+            availableDates={availableDates}
+            dates={dates as DateRangeType}
+            setDates={(values: DateRangeType) =>
+              updateSearchParams(["fromDate", "toDate"], values)
+            }
+          />
+        </div>
+        <div className="px-6 py-5">
+          <SelectInput
+            size="small"
             value={searchParamsValues.numberOfGuests ?? "1"}
             onChange={(e: SelectChangeEvent<string>) =>
               updateSearchParams(["numberOfGuests"], [e.target.value])

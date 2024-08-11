@@ -2,6 +2,7 @@ import type { Session } from "next-auth";
 import Image from "next/image";
 import ProfileForm from "./ProfileForm";
 import { getCountries, getProfileInfo } from "~/app/(application)/actions";
+import UploadButton from "./UploadButton";
 
 export default async function PersonalInformation({
   session,
@@ -11,7 +12,7 @@ export default async function PersonalInformation({
   const profileInfo = session && (await getProfileInfo(session.email!))!;
   const countries = (await getCountries())!;
   return (
-    <div>
+    <div className="p-3">
       <p className="text-[28px] font-medium">Personal Information</p>
       <div className="mt-10 flex flex-col">
         <div className="flex justify-between">
@@ -29,9 +30,7 @@ export default async function PersonalInformation({
               <p className="text-[20px]">
                 {profileInfo?.firstName} {profileInfo?.lastName}
               </p>
-              <button className="mt-4 rounded-full  border border-[#29ABE2] px-5 py-3 text-primary">
-                Change Photo
-              </button>
+              <UploadButton />
             </div>
           </div>
         </div>

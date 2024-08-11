@@ -14,7 +14,7 @@ export default async function BookedListingCard({
 
   return (
     <div
-      className={`flex h-[136px] w-full gap-6 rounded-xl border border-[#EAEAEF] p-3`}
+      className={`flex items-center w-full gap-6 rounded-xl border border-[#EAEAEF] p-3`}
     >
       <div className="flex h-[112px] w-[138px]">
         <Image

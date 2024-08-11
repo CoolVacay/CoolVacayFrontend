@@ -279,7 +279,7 @@ export default function PaymentForm({
         </Link>
         <ActionButton
           disabled={!formik.isValid || !formik.dirty}
-          text="Book now"
+          text="Book"
           type="small"
         />
       </div>
