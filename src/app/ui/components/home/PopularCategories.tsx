@@ -10,7 +10,7 @@ export async function PopularCategories() {
   }
 
   return (
-    <div className="flex flex-wrap px-2 gap-5 sm:flex-nowrap sm:justify-between sm:gap-y-4 sm:overflow-auto sm:will-change-scroll">
+    <div className="flex flex-wrap px-2 gap-5 sm:gap-y-4">
       {popularCategories.map((category) => (
         <div key={category.name} className="flex flex-col items-center">
           {/* Large screen view */}

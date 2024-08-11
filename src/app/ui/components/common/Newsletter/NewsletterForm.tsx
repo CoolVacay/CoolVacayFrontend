@@ -59,13 +59,13 @@ export default function NewsletterForm({
             onBlur={formik.handleBlur}
             value={formik.values.email}
             placeholder="Enter your email"
-            className={`focus:shadow-outline w-[260px] appearance-none rounded-lg border px-4 py-2 leading-tight text-gray-700 shadow focus:outline-none lg:w-[285px]`}
+            className={`focus:shadow-outline appearance-none rounded-lg border px-4 py-2 leading-tight text-gray-700 shadow focus:outline-none w-[150px] lg:w-[285px]`}
           />
           <ActionButton
             text={isTextBlack ? "Subscribe now" : "Go"}
             disabled={!formik.isValid || !formik.dirty}
             borderRadius="rounded"
-            className={`w-[70px] rounded-lg bg-primary py-2 text-center text-white ${
+            className={`w-[130px] sm:w-[150px] rounded-lg bg-primary py-2 text-center text-white ${
               !formik.isValid || !formik.dirty ? "disabled:bg-gray-500" : ""
             }`}
           />

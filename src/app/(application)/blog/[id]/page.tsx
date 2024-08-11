@@ -11,11 +11,11 @@ const BlogSidebar = async () => {
 
   return (
   <div className="md:mt-24 flex-col gap-5">
-  <div className="flex h-min flex-col gap-5 rounded-[10px] bg-[#F7F7F7] p-6">
+  <div className="flex h-min flex-col gap-5 justify-center items-center rounded-[10px] bg-[#F7F7F7] p-6">
     <h5 className="text-2xl font-medium">
       Find your perfect place now
     </h5>
-    <SearchCard size="small" locationsList={locationsList} />
+    <SearchCard size="big" locationsList={locationsList} />
   </div>
   <div className="flex h-min flex-col gap-5 rounded-[10px] bg-[#F7F7F7] p-6 mt-5">
     <NewsletterForm isTextBlack={true} />
@@ -50,7 +50,7 @@ export default async function Blogpage({params} : {params: {id:string}}) {
     <main className="flex flex-col">
       <div className="flex justify-center">
         <div className="flex max-w-[1220px] flex-col items-center justify-center">
-          <div className="flex-col md:flex md:flex-row gap-10 p-10">
+          <div className="flex-col md:flex lg:flex-row gap-10 p-10">
             {parse(currentBlogsHTML)}
             <BlogSidebar />
           </div>

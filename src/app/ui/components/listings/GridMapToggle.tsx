@@ -18,8 +18,10 @@ function GridMapToggle({
           !isMapMode && 'bg-primary text-white'
         }`}
         onClick={() => {
-          setIsMapMode(false);
-          updateSearchParams(['isMapMode'], ['false']);
+            if(isMapMode !== false) {
+            setIsMapMode(false);
+            updateSearchParams(['isMapMode'], ['false']);
+          }
         }}
       >
         <Image
@@ -35,8 +37,10 @@ function GridMapToggle({
           isMapMode && 'bg-primary text-white'
         }`}
         onClick={() => {
-          setIsMapMode(true);
-          updateSearchParams(['isMapMode'], ['true']);
+          if(isMapMode !== true) {
+            setIsMapMode(true);
+            updateSearchParams(['isMapMode'], ['true']);
+          }
         }}
       >
         <Image
