@@ -22,7 +22,7 @@ export default function Overview({ listing }: { listing: IListingData }) {
       >
         {readMore ? "Read less" : "Read more"}
       </button>
-      <article className="grid grid-cols-3 pt-10">
+      <article className="grid grid-cols-2 pt-10 lg:grid-cols-3">
         {listing.amenities.map((amenity, index) => {
           return (
             (!viewMore ? index < 9 : index >= 0) && (

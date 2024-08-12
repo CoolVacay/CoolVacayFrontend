@@ -36,19 +36,19 @@ export default function FormDialog({
       <span onClick={() => setOpen(true)}>{children}</span>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <div
-          className={`flex flex-col gap-4 ${isContentInquiry ? "bg-[#F7F7F7] px-[60px] pt-10" : "px-6 py-4"}`}
+          className={`flex flex-col gap-4 ${isContentInquiry ? "bg-[#F7F7F7] px-4 pt-4 sm:px-10 sm:pt-10" : "px-6 py-4"}`}
         >
           <h2
             className={
               isContentInquiry
-                ? "text-2xl text-primary "
+                ? "text-lg text-primary sm:text-2xl "
                 : "text-[20px] font-medium"
             }
           >
             {title}
           </h2>
           {subtitle ? (
-            <h6 className="text-lg text-[#676D73]">{subtitle}</h6>
+            <h6 className="text-base text-[#676D73] sm:text-lg">{subtitle}</h6>
           ) : null}
         </div>
         <div
@@ -59,19 +59,21 @@ export default function FormDialog({
             className="hover:text-primary"
             aria-label="close button"
           >
-            <CloseIcon fontSize={isContentInquiry ? "large" : "medium"} />
+            <CloseIcon
+              className={
+                isContentInquiry ? "sm:text-[24px ]text-[18px]" : "text-[14px]"
+              }
+            />
           </button>
         </div>
         {isContentInquiry ? null : <Divider variant="fullWidth" flexItem />}
         <DialogContent
-          sx={{
-            padding: isContentInquiry ? "40px 60px" : "15px 24px",
-            backgroundColor: isContentInquiry ? "#F7F7F7" : "#FFF",
-            position: "relative",
-          }}
+          className={`relative ${
+            isContentInquiry ? "bg-[#F7F7F7] p-4 sm:p-10" : "bg-white p-4"
+          }`}
         >
           <div className="flex flex-col gap-5">
-          {modalContentOptions[content]} 
+            {modalContentOptions[content]}
           </div>
         </DialogContent>
       </Dialog>

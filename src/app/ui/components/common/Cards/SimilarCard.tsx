@@ -14,10 +14,10 @@ export default function SimilarCard({
 }: TSimilarCardProps & { className?: string }) {
   return (
     <div
-      className={`flex flex-col lg:flex-row  lg:h-full lg:w-[470px] grow-0 rounded-xl p-2 shadow-cardShadow ${className}`}
+      className={`flex h-full grow-0  flex-col rounded-xl p-2 shadow-cardShadow md:h-full md:w-[470px] md:flex-row ${className}`}
       style={{ border: "1px solid rgba(173, 181, 189, 0.70)" }}
     >
-      <div className="w-[250px] lg:flex lg:h-[195px] lg:w-[189px]">
+      <div className="w-[250px] md:flex md:h-[195px] md:w-[189px]">
         <Image
           src={imageUrl ?? "/cardImage.png"}
           width={0}

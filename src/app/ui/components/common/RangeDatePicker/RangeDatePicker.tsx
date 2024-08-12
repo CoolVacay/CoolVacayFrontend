@@ -9,6 +9,7 @@ import type { Dayjs } from "dayjs";
 import StyledDatePicker from "./StyledDatePicker";
 import type { IPropertyAvailability } from "~/app/(application)/definitions";
 import { useMediaQuery } from "@mui/material";
+
 const RangeDatePicker = ({
   size,
   dates,
@@ -34,13 +35,14 @@ const RangeDatePicker = ({
           height: "100%",
           display: "flex",
           alignItems: "center",
+          position: "relative",
         }}
         slots={{ day: StyledDatePicker }}
         format="MMM DD, YYYY"
         slotProps={{
           fieldSeparator: {
             sx: { color: "transparent" },
-            className: `${bigFont || mediumFont ? "sm:h-16 h-14" : "h-11"} w-[1px] absolute bg-primary-grey100 ${bigFont ? "sm:left-[198px] sm:top-5 top-3 left-[150px]" : mediumFont ? "left-44 top-3" : "left-[160px] top-10px"}`,
+            className: `${bigFont || mediumFont ? "sm:h-16 h-14" : "h-11"} w-[1px] absolute bg-primary-grey100 inset-x-2/4`,
           },
           day: {
             // @ts-expect-error MUI doesnt recognize forwardProp
@@ -52,7 +54,7 @@ const RangeDatePicker = ({
               className: `${bigFont ? "sm:text-2xl text-xl sm:-top-3 -top-2" : mediumFont ? "text-xl -top-2" : "text-base -top-1"} font-medium absolute`,
             },
             InputProps: {
-              className: `${bigFont ? "sm:text-xl sm:font-medium text-base" : mediumFont ? "text-base font-medium" : "text-xs font-medium"} `,
+              className: `${bigFont ? "sm:text-xl sm:font-medium" : mediumFont ? "text-base" : "text-xs "} ${matches ? "font-medium" : ""}`,
               startAdornment: matches ? (
                 <IconGenerator
                   alt="Calendar icon"

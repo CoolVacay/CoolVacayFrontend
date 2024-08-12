@@ -67,9 +67,9 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
           >
             <button aria-label="back arrow button" onClick={scrollPrev}>
               {type === "image" ? (
-                <KeyboardArrowLeftIcon className="h-[70px] w-[70px] hover:text-primary hidden lg:block" />
+                <KeyboardArrowLeftIcon className="hidden h-[70px] w-[70px] hover:text-primary md:block" />
               ) : (
-                <ArrowCircleLeftOutlinedIcon className="size-[46px] hidden lg:block" />
+                <ArrowCircleLeftOutlinedIcon className="hidden size-[46px] md:block" />
               )}
             </button>
           </div>
@@ -81,7 +81,7 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
                 {type === "image"
                   ? (data as IListingData["images"]).map((image, index) => (
                       <div className="embla__slide" key={index + 1}>
-                        <div className="embla__slide__number !w-[240px] !h-[200px] lg:!w-full lg:!h-full">
+                        <div className="embla__slide__number !h-[200px] !w-[240px] lg:!h-full lg:!w-full">
                           {
                             <Image
                               key={index + 1}
@@ -109,7 +109,7 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
                         <Link
                           key={listing.id}
                           href={`/listing/${listing.source}/${listing.id}`}
-                          className="h-full lg:h-[215px]"
+                          className="h-[420px] md:h-[215px]"
                         >
                           <SimilarCard
                             key={index}
@@ -133,9 +133,9 @@ const EmblaCarousel = ({ data, slideNr, handleClick, type }: CarouselType) => {
           >
             <button aria-label="back arrow button" onClick={scrollNext}>
               {type === "image" ? (
-                <KeyboardArrowRightIcon className="h-[70px] w-[70px] hover:text-primary hidden lg:block" />
+                <KeyboardArrowRightIcon className="hidden h-[70px] w-[70px] hover:text-primary md:block" />
               ) : (
-                <ArrowCircleRightOutlinedIcon className="size-[46px] hidden lg:block" />
+                <ArrowCircleRightOutlinedIcon className="hidden size-[46px] md:block" />
               )}
             </button>
           </div>
