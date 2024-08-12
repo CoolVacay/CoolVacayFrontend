@@ -10,12 +10,12 @@ export async function PopularCategories() {
   }
 
   return (
-    <div className="flex flex-wrap px-2 gap-5 sm:gap-y-4">
+    <div className="no-scrollbar flex justify-between gap-5 overflow-auto will-change-scroll md:justify-between md:gap-0">
       {popularCategories.map((category) => (
         <div key={category.name} className="flex flex-col items-center">
           {/* Large screen view */}
           <button
-            className={`hidden rounded-full bg-[#F7F7F7] p-2 text-sm sm:flex sm:p-3 sm:text-sm lg:p-4 lg:text-base`}
+            className={`hidden rounded-full bg-[#F7F7F7] p-2 text-sm lg:flex lg:p-3 lg:text-sm xl:p-4 xl:text-base`}
           >
             <Link href={category.page} className="flex items-center">
               <span className="mr-2 flex lg:mr-4">
@@ -30,8 +30,11 @@ export async function PopularCategories() {
           </button>
 
           {/* Small screen view */}
-          <div className="mt-6 flex snap-start flex-col items-center gap-x-4 sm:hidden">
-            <Link href={category.page} className="flex flex-col items-center">
+          <div className="mt-6 flex snap-start flex-col items-center gap-x-4 sm:mt-0 lg:hidden">
+            <Link
+              href={category.page}
+              className="flex scroll-mr-2 flex-col items-center"
+            >
               <button className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F7F7F7] p-3">
                 <span className="flex">
                   <IconGenerator
@@ -41,7 +44,7 @@ export async function PopularCategories() {
                   />
                 </span>
               </button>
-              <p className="text-center text-xs mt-2">{category.name}</p>
+              <p className="mt-2 text-center text-xs">{category.name}</p>
             </Link>
           </div>
         </div>

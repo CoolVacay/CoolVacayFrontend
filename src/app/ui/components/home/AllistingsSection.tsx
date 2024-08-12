@@ -13,7 +13,7 @@ export async function AllistingsSection({ page }: { page: number }) {
     `fromDate=${startDate}&toDate=${endDate}&pageSize=8&pageNum=${page}`,
   ))!;
   return listings?.items.length > 0 ? (
-    <div className="my-10 flex  flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-between">
+    <div className="no-scrollbar my-10 flex items-center gap-5 overflow-auto sm:flex-row sm:flex-wrap sm:justify-between">
       {listings?.items.map((listing) => {
         return (
           <Link

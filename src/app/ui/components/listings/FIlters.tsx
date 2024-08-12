@@ -18,7 +18,10 @@ import {
 } from "../common";
 import type { DateRangeType } from "../home/SearchCard";
 import GridMapToggle from "./GridMapToggle";
-import type { ILocationsList, IPopularCategoriesData } from "~/app/(application)/definitions";
+import type {
+  ILocationsList,
+  IPopularCategoriesData,
+} from "~/app/(application)/definitions";
 import CategoriesAutocomplete from "../common/Inputs/CategoriesAutocomplete";
 
 const guests = Array.from({ length: 8 }, (v, i) => i + 1)
@@ -31,7 +34,7 @@ const guests = Array.from({ length: 8 }, (v, i) => i + 1)
 
 export default function Filters({
   locationsList,
-  categories
+  categories,
 }: {
   locationsList: ILocationsList[];
   categories: IPopularCategoriesData[];
@@ -45,29 +48,34 @@ export default function Filters({
   ] as DateRangeType;
 
   const [showClearButton, setShowClearButton] = useState(false);
-  const [isMapMode, setIsMapMode] = useState(searchParamsValues.isMapMode === "true");
+  const [isMapMode, setIsMapMode] = useState(
+    searchParamsValues.isMapMode === "true",
+  );
 
   const selectedCategory =
-    categories.find((item) => item.name === searchParams?.get("category")) ?? null;
+    categories.find((item) => item.name === searchParams?.get("category")) ??
+    null;
 
   const [category, setCategory] = useState<string>(
-    searchParamsValues.category ?? ""
+    searchParamsValues.category ?? "",
   );
 
   const selectedLocation =
-    locationsList.find((item) => item.match === searchParams?.get("match")) ?? null;
+    locationsList.find((item) => item.match === searchParams?.get("match")) ??
+    null;
 
   const [location, setLocation] = useState<string>(
-    selectedLocation?.displayName ?? ""
+    selectedLocation?.displayName ?? "",
   );
 
   return (
-    <div className="mr-7 mb-5 grid lg:flex lg:items-center gap-4 grid-cols-6">
-      <div className="col-span-4 lg:w-3/6">
+    <div className="mb-5 mr-7 grid grid-cols-4 gap-4 xl:grid-cols-4">
+      <div className="col-span-3 sm:col-span-2 xl:col-span-1">
         <CitiesAutocomplete
           locationsList={locationsList}
           isSmallSize={true}
           variant="blue"
+          className={`w-full`}
           inputValue={location}
           value={selectedLocation}
           setValue={setLocation}
@@ -77,20 +85,21 @@ export default function Filters({
           }}
         />
       </div>
-      <div className="col-span-2 lg:hidden">
+      <div className="col-span-1 sm:hidden">
         <GridMapToggle
           isMapMode={isMapMode}
           setIsMapMode={setIsMapMode}
           updateSearchParams={updateSearchParams}
         />
       </div>
-      <div className="lg:w-3/6 lg:relative col-span-2">
+      <div className="col-span-2 sm:col-span-2 xl:col-span-1">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateRangePicker
             slots={{
               field: SingleInputDateRangeField,
               day: StyledDatePicker,
             }}
+            sx={{ width: "100%" }}
             name="allowedRange"
             value={dates}
             format="MMM DD"
@@ -105,7 +114,6 @@ export default function Filters({
                 color: "primary",
                 onMouseEnter: () => setShowClearButton(true),
                 onMouseLeave: () => setShowClearButton(false),
-
                 inputProps: {
                   placeholder: "Check-in / Check-out",
                 },
@@ -128,7 +136,10 @@ export default function Filters({
                           <IconButton
                             size="small"
                             onClick={() =>
-                              updateSearchParams(["fromDate", "toDate"], [null, null])
+                              updateSearchParams(
+                                ["fromDate", "toDate"],
+                                [null, null],
+                              )
                             }
                           >
                             <ClearIcon
@@ -155,7 +166,7 @@ export default function Filters({
           />
         </LocalizationProvider>
       </div>
-      <div className="lg:w-3/6 col-span-2">
+      <div className="col-span-1 sm:col-span-2 xl:col-span-1">
         <SimpleSelectInput
           value={
             searchParamsValues.numberOfGuests !== ""
@@ -168,11 +179,11 @@ export default function Filters({
           listOptions={guests}
         />
       </div>
-      <div className="col-span-2 lg:w-3/6">
+      <div className="col-span-1 sm:col-span-2 xl:col-span-1">
         <CategoriesAutocomplete
           categories={categories}
           isSmallSize={true}
-          iconUrl={selectedCategory?.iconUrl ?? '/pool.svg'}
+          iconUrl={selectedCategory?.iconUrl ?? "/pool.svg"}
           variant="blue"
           inputValue={category}
           value={selectedCategory}

@@ -21,6 +21,7 @@ export default function CitiesAutocomplete({
   value,
   setValue,
   variant,
+  className,
 }: {
   locationsList: readonly ILocationsList[];
   isSmallSize?: boolean;
@@ -28,6 +29,7 @@ export default function CitiesAutocomplete({
   inputValue: string;
   value: ILocationsList | null;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  className?: string;
   onChange: (
     event: React.SyntheticEvent,
     value: ILocationsList | null,
@@ -38,7 +40,7 @@ export default function CitiesAutocomplete({
   const whiteVariant = variant === "white";
 
   return (
-    <FormControl fullWidth={whiteVariant}>
+    <FormControl fullWidth={whiteVariant} className={className}>
       <Autocomplete
         id="location-select"
         options={locationsList}
@@ -47,7 +49,6 @@ export default function CitiesAutocomplete({
           <IconGenerator
             alt="avatar icon"
             src={`/down-arrow.svg`}
-            // width={}
             className={`${!whiteVariant ? "mr-2" : ""} ${!isSmallSize ? "w-6 sm:w-8" : "w-[18px]"}`}
           />
         }

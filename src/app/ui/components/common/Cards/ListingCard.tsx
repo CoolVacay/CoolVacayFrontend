@@ -24,7 +24,7 @@ export default function ListingCard({
   searchParams.delete("pageNum");
   return (
     <div
-      className={`flex h-[${closeDates ? "440px" : "405px"}] w-[280px] lg:w-[360px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1`}
+      className={`flex h-[${closeDates ? "440px" : "405px"}] w-[350px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1 sm:w-[280px] md:w-[350px]`}
     >
       <div className="relative">
         <Link
@@ -33,7 +33,7 @@ export default function ListingCard({
         >
           <Image
             src={imageUrl ?? "/listing_card.png"}
-            width={360}
+            width={350}
             height={240}
             alt="CoolVacay listing image"
             style={{
@@ -44,7 +44,7 @@ export default function ListingCard({
           />
         </Link>
       </div>
-      <div className="flex grow flex-col justify-between">
+      <div className="flex grow flex-col justify-between gap-3">
         <div className="flex flex-col gap-1">
           {!closeDates ? (
             <div className="flex items-center justify-between font-medium">
@@ -60,7 +60,7 @@ export default function ListingCard({
             </div>
           ) : null}
           <div>
-            <div className="mb-1 text-base font-medium">
+            <div className="mb-1 gap-3 text-base font-medium">
               {truncateText(name, 40)}
             </div>
             <p className="text-sm text-[#676D73]">{subtitle}</p>

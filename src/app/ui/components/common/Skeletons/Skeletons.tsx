@@ -19,15 +19,15 @@ export function CardSkeleton() {
 
 export function FilteredListingSkeleton() {
   return (
-    <div className="flex h-[400px] w-[350px] animate-pulse flex-col justify-between">
+    <div className="flex w-[350px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1 sm:w-[270px] md:w-[350px]">
       <div
-        className={`h-[340px] w-[350px] grow-0  overflow-hidden rounded-xl bg-gray-100 p-1 shadow-sm`}
+        className={`h-[340px] w-[350px] grow-0 overflow-hidden rounded-xl  bg-gray-100 p-1 shadow-sm sm:w-[270px] md:w-[350px]`}
       >
-        <div className="flex h-[210px] items-center justify-center truncate rounded-xl bg-white px-16 py-8" />
+        <div className="flex h-[210px] items-center justify-center truncate rounded-xl bg-white px-14 py-8" />
         <div className="flex flex-col">
           <div className="mt-3 flex justify-between">
             <div className="m-1 h-6 w-32 rounded-md bg-gray-200 text-sm font-medium" />
-            <div className="m-1 h-4 w-24 rounded-md bg-gray-200 text-sm font-medium" />
+            <div className="m-1 h-4 w-24 rounded-md bg-gray-200 text-sm font-medium sm:w-20" />
           </div>
           <div className="mx-1 my-1 flex h-[72px] grow rounded-md bg-gray-200" />
         </div>
@@ -61,7 +61,7 @@ export function AllListingsSkeleton() {
 
 export function FilteredListingsSkeleton() {
   return (
-    <div className="grid grid-cols-1 gap-5 desktop:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
       {Array.from({ length: 10 }, (_, i) => i + 1).map((skeleton) => {
         return <FilteredListingSkeleton key={skeleton} />;
       })}
@@ -70,9 +70,7 @@ export function FilteredListingsSkeleton() {
 }
 
 export function MapSkeleton() {
-  return (
-    <div className="sticky right-0 top-0 h-screen bg-gray-100" />
-  );
+  return <div className="sticky right-0 top-0 h-screen bg-gray-100" />;
 }
 
 export function PopularCategoriesSkeleton() {

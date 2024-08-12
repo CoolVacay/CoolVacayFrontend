@@ -8,7 +8,7 @@ import type { DateRangeType } from "../../home/SearchCard";
 import type { Dayjs } from "dayjs";
 import StyledDatePicker from "./StyledDatePicker";
 import type { IPropertyAvailability } from "~/app/(application)/definitions";
-
+import { useMediaQuery } from "@mui/material";
 const RangeDatePicker = ({
   size,
   dates,
@@ -24,6 +24,8 @@ const RangeDatePicker = ({
 }) => {
   const bigFont = size === "big";
   const mediumFont = size === "medium";
+
+  const matches = useMediaQuery("@media (pointer: fine)");
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -50,8 +52,8 @@ const RangeDatePicker = ({
               className: `${bigFont ? "sm:text-2xl text-xl sm:-top-3 -top-2" : mediumFont ? "text-xl -top-2" : "text-base -top-1"} font-medium absolute`,
             },
             InputProps: {
-              className: `${bigFont ? "sm:text-xl text-sm" : mediumFont ? "text-base" : "text-xs"} font-medium`,
-              startAdornment: (
+              className: `${bigFont ? "sm:text-xl sm:font-medium text-base" : mediumFont ? "text-base font-medium" : "text-xs font-medium"} `,
+              startAdornment: matches ? (
                 <IconGenerator
                   alt="Calendar icon"
                   src={`/calendar_icon.svg`}
@@ -63,7 +65,7 @@ const RangeDatePicker = ({
                         : "mr-2 w-4"
                   }
                 />
-              ),
+              ) : null,
             },
           },
         }}

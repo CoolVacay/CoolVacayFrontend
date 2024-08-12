@@ -35,7 +35,7 @@ export default function NavBar({
   return (
     <nav className="z-10 flex h-12 w-full scroll-px-4 justify-center px-6 py-3 sm:h-24 sm:py-6">
       <div
-        className={`flex w-full scroll-px-4 items-center justify-between gap-44`}
+        className={`flex w-full ${isWhiteVariant || !noMaxWidth ? "max-w-[1220px]" : "px-[70px]"} scroll-px-4 items-center justify-between gap-10 md:gap-44`}
       >
         <div className="flex w-full items-center justify-between sm:w-auto md:flex-grow">
           <Link href="/">
@@ -68,7 +68,7 @@ export default function NavBar({
           <div className="flex items-center gap-5">
             <Link
               href="/rental-income-estimator"
-              className={`text-center text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
+              className={`min-w-32 text-center text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
             >
               Vacation Rental Management
             </Link>
@@ -87,7 +87,7 @@ export default function NavBar({
             {!session ? (
               <Link href="/signin">
                 <button
-                  className={`flex items-center rounded-full px-4 py-2 text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
+                  className={`flex w-[190px] items-center rounded-full px-4 py-2 text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
                 >
                   Log In or Sign Up
                   <span className="ml-2">
@@ -108,11 +108,13 @@ export default function NavBar({
           </div>
         </div>
       </div>
-      {openMenu && <NavBardDialog
-        openMenu={openMenu}
-        toggleMenu={toggleMenu}
-        session={session}
-      />}
+      {openMenu && (
+        <NavBardDialog
+          openMenu={openMenu}
+          toggleMenu={toggleMenu}
+          session={session}
+        />
+      )}
     </nav>
   );
 }

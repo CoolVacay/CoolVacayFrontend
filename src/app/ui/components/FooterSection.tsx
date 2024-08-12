@@ -24,10 +24,10 @@ const discoverLinks = ["Miami", "Los Angeles", "Chicago", "New York"];
 function FooterSection() {
   return (
     <footer
-      className="mt-auto flex flex-col px-[72px] pt-14"
+      className="mt-auto flex flex-col p-4 sm:px-[72px] sm:pt-14"
       style={{ borderTop: "1px solid rgba(173, 181, 189, 0.5)" }}
     >
-      <div className="flex flex-col gap-10 md:flex-row justify-between">
+      <div className="flex flex-col justify-between gap-10 md:flex-row">
         <div className="flex flex-col gap-7">
           <div className="py-3">
             <IconGenerator
@@ -36,7 +36,7 @@ function FooterSection() {
               alt="Coolvacay logo"
             />
           </div>
-          <div className="flex flex-col md:flex-row gap-10">
+          <div className="flex flex-col gap-10 md:flex-row">
             <div className="flex flex-col gap-7">
               <div className="flex flex-col gap-1">
                 <h1 className="text-sm text-primary-grey400">
@@ -104,7 +104,7 @@ function FooterSection() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center md:flex-row justify-between py-6 text-sm">
+      <div className="flex flex-col items-center justify-between py-6 text-sm md:flex-row">
         <h2>
           © Coolvacay 2024
           <span className="text-primary-grey400"> - All rights reserved</span>

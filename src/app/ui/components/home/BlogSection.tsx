@@ -16,7 +16,7 @@ export async function BlogSection() {
           Latest blog from us
         </h1>
       </div>
-      <div className="flex flex-col items-center gap-5 pb-10 sm:flex-row sm:flex-wrap sm:justify-between">
+      <div className="no-scrollbar flex items-center gap-5 overflow-auto pb-10 sm:flex-row sm:flex-wrap sm:justify-between">
         {blogs.length > 0 ? (
           blogs.slice(0, 4).map((blog) => {
             return (

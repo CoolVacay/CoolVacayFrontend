@@ -8,7 +8,7 @@ export async function FeaturedListingsSection() {
   const featuredListings = (await getFeaturedListings())!;
   const { startDate, endDate } = getCurrentDates();
   return (
-    <section className="flex flex-col items-center gap-5 pb-10 sm:flex-row sm:flex-wrap sm:justify-between">
+    <section className="no-scrollbar flex items-center gap-5 overflow-auto pb-10 will-change-scroll sm:flex-row sm:flex-wrap sm:justify-between">
       {featuredListings?.length > 0 ? (
         featuredListings.map((listing) => {
           return (
