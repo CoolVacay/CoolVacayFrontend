@@ -10,7 +10,7 @@ const BlogSidebar = async () => {
   const locationsList = (await getLocationsList())!;
 
   return (
-  <div className="md:mt-24 flex-col gap-5">
+  <div className="md:mt-24 flex-col gap-5 -m-3">
   <div className="flex h-min flex-col gap-5 justify-center items-center rounded-[10px] bg-[#F7F7F7] p-6">
     <h5 className="text-2xl font-medium">
       Find your perfect place now
