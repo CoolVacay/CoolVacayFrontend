@@ -34,7 +34,7 @@ const NavBarLoginButton = ({
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
       >
-        {`${session.firstName}` + " " + `${session.lastName ?? ""}`}
+        {session.firstName}
         <span className="ml-2">
           <Image
             alt="avatar icon"

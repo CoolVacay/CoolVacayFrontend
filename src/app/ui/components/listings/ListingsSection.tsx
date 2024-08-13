@@ -11,7 +11,7 @@ const PAGESIZE = "6";
 export async function ListingSection({ query }: { query: URLSearchParams }) {
   const listings = (await getFilteredListings(query.toString()))!;
   const closeAvailabilityListings =
-    listings.totalItems < 5
+    listings?.totalItems < 5
       ? (await getCloseDatesListings(
           PAGESIZE,
           query.get("match")!,

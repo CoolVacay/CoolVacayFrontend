@@ -7,7 +7,7 @@ export default async function PricingDetailsCard({
   params: IParams;
 }) {
   return (
-    <div className="flex w-full max-w-[420px] shrink-0 flex-col">
+    <div className="flex w-full shrink-0 flex-col md:max-w-[420px]">
       <h1 className="mb-4 text-2xl font-bold">Book it now</h1>
       <PricingDetailsCardContent params={params} />
     </div>

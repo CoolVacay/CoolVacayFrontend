@@ -5,9 +5,5 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div>
-      <SearchParamsProvider>{children}</SearchParamsProvider>
-    </div>
-  );
+  return <SearchParamsProvider>{children}</SearchParamsProvider>;
 }

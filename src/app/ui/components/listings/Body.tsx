@@ -19,7 +19,7 @@ function Body({
   categories: IPopularCategoriesData[];
 }) {
   return (
-    <main className="static w-full p-4 sm:pl-6">
+    <main className="static w-full p-4 sm:py-0 sm:pl-4 sm:pr-0">
       <div className="relative w-full gap-4 sm:flex">
         <div
           className={`flex w-full shrink-0 flex-col pb-6 sm:max-w-[300px] md:max-w-[380px] lg:max-w-[480px] xl:max-w-[740px]`}

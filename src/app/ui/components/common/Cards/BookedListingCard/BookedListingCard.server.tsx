@@ -14,21 +14,17 @@ export default async function BookedListingCard({
 
   return (
     <div
-      className={`flex items-center w-full gap-6 rounded-xl border border-[#EAEAEF] p-3`}
+      className={`flex h-min w-full gap-6 rounded-xl border border-[#EAEAEF] p-3 md:flex-col lg:flex lg:w-full lg:flex-row lg:items-center`}
     >
-      <div className="flex h-[112px] w-[138px]">
+      <div className="flex h-[186px] w-full lg:h-[112px] lg:w-[138px]">
         <Image
           src={listing?.imageUrl ?? "/cardImage.png"}
           width={0}
           height={0}
           sizes="100vw"
           alt="Property image"
-          style={{
-            height: 112,
-            width: "auto",
-            objectFit: "cover",
-            borderRadius: 8,
-          }}
+          className="h-[186px] w-full rounded-lg lg:h-[112px]"
+          style={{ objectFit: "cover" }}
         />
       </div>
       <Content listing={listing} />

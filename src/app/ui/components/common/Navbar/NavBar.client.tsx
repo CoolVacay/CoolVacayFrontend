@@ -33,9 +33,9 @@ export default function NavBar({
   const toggleMenu = () => setOpenMenu(!openMenu);
 
   return (
-    <nav className="z-10 flex h-12 w-full scroll-px-4 justify-center px-6 py-3 sm:h-24 sm:py-6">
+    <nav className="z-10 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-24 sm:py-6">
       <div
-        className={`flex w-full ${isWhiteVariant || !noMaxWidth ? "max-w-[1220px]" : "px-[70px]"} scroll-px-4 items-center justify-between gap-10 md:gap-44`}
+        className={`flex w-full ${isWhiteVariant || !noMaxWidth ? "md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : ""} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
       >
         <div className="flex w-full items-center justify-between sm:w-auto md:flex-grow">
           <Link href="/">
@@ -50,7 +50,7 @@ export default function NavBar({
             <IconGenerator
               src={`/menu_icon_${isWhiteVariant ? "white" : "black"}.svg`}
               alt="Menu"
-              width="26px"
+              width={isWhiteVariant ? "22px" : "16px"}
             />
           </button>
         </div>

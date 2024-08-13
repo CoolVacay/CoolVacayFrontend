@@ -5,7 +5,7 @@ export async function HeroSection() {
   const locationsList = (await getLocationsList())!;
   return (
     <main className="absolute top-32 text-white md:top-44">
-      <div className="max-w-[1220px] justify-between md:flex md:px-6">
+      <div className="justify-between md:flex md:max-w-[680px] md:px-6 lg:max-w-[920px] xl:max-w-[1220px]">
         <div className="flex items-end justify-end font-medium">
           <div className="flex flex-col justify-center gap-5 lg:items-start">
             <div className="hidden h-[40px] w-[248px] items-center justify-center rounded-full bg-white/[.28] px-[20px] py-[10px] backdrop-blur-sm md:flex">

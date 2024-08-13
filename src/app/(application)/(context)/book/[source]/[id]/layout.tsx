@@ -20,8 +20,8 @@ export default async function Layout({
   return (
     <main className="flex flex-col px-4 sm:px-6 lg:px-8">
       <div className="flex justify-center">
-        <div className="flex w-full max-w-[1220px] grow flex-col items-center">
-          <div className="mb-12 w-full flex flex-col gap-3">
+        <div className="flex w-full max-w-[calc(100vw_-_32px)] grow flex-col items-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
+          <div className="mb-12 flex w-full flex-col gap-3">
             <Breadcrumbs
               breadcrumbs={[
                 {
@@ -35,17 +35,27 @@ export default async function Layout({
                 },
               ]}
             />
-            <div className="flex flex-col lg:flex-row lg:gap-5">
+            <div className="flex flex-col-reverse gap-5 lg:flex-row">
               <div className="flex w-full flex-col gap-5">
-                <div className="flex flex-col gap-4">
-                  <h1 className="text-xl sm:text-2xl font-bold">Reserve Information</h1>
+                <div className="md:hidden lg:flex lg:flex-col lg:gap-4">
+                  <h1 className="text-xl font-bold sm:text-2xl">
+                    Reserve Information
+                  </h1>
                   <Suspense fallback={<BookedListingCardSkeleton />}>
                     <BookedListingCard params={params} />
                   </Suspense>
                 </div>
                 <FormProvider>{children}</FormProvider>
               </div>
-              <div className="mt-8 lg:mt-0 flex shrink-0 flex-col gap-4">
+              <div className="flex shrink-0 flex-row gap-4">
+                <div className="hidden gap-4 md:flex md:flex-col lg:hidden">
+                  <h1 className="text-xl font-bold sm:text-2xl">
+                    Reserve Information
+                  </h1>
+                  <Suspense fallback={<BookedListingCardSkeleton />}>
+                    <BookedListingCard params={params} />
+                  </Suspense>
+                </div>
                 <Suspense fallback={<PricingDetailsCardSkeleton />}>
                   <PricingDetailsCard params={params} />
                 </Suspense>
