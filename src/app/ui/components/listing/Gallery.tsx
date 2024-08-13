@@ -10,8 +10,8 @@ export default function Gallery({ listing }: { listing: IListingData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { updateSearchParams } = useAppSearchParams();
 
-  const handleClick = (url: number | string = "") => {
-    if (url) updateSearchParams(["modal"], [`photoGallery=${url}`]);
+  const handleClick = () => {
+    updateSearchParams(["modal"], [`photoGallery`]);
   };
 
   return (
@@ -20,13 +20,13 @@ export default function Gallery({ listing }: { listing: IListingData }) {
         <div className="relative w-full">
           {/* Mobile view: Show only one image */}
           <div className="block md:hidden">
-            <div className="w-full h-[300px] overflow-hidden rounded-[8px]">
+            <div className="h-[300px] w-full overflow-hidden rounded-[8px]">
               <Image
                 src={listing.images[0]?.url ?? ""}
                 alt={listing.images[0]?.name ?? "Image name"}
                 onClick={() => {
                   setIsModalOpen(true);
-                  handleClick(1);
+                  handleClick();
                 }}
                 sizes="100vw"
                 width={640}
@@ -46,7 +46,7 @@ export default function Gallery({ listing }: { listing: IListingData }) {
               onClick={(e) => {
                 e.stopPropagation();
                 setIsModalOpen(true);
-                handleClick(1);
+                handleClick();
               }}
             >
               Show all photos
@@ -54,7 +54,7 @@ export default function Gallery({ listing }: { listing: IListingData }) {
           </div>
 
           {/* Desktop view: Show grid of images */}
-          <div className="hidden md:grid h-[470px] w-full grid-cols-4 grid-rows-2 gap-5">
+          <div className="hidden h-[470px] w-full grid-cols-4 grid-rows-2 gap-5 md:grid">
             {listing.images.slice(0, 5).map((image, index) => (
               <div
                 key={index}
@@ -65,7 +65,7 @@ export default function Gallery({ listing }: { listing: IListingData }) {
                   alt={image.name}
                   onClick={() => {
                     setIsModalOpen(true);
-                    handleClick(index + 1);
+                    handleClick();
                   }}
                   sizes="100vw"
                   width={640}
@@ -86,7 +86,7 @@ export default function Gallery({ listing }: { listing: IListingData }) {
               onClick={(e) => {
                 e.stopPropagation();
                 setIsModalOpen(true);
-                handleClick(1);
+                handleClick();
               }}
             >
               Show all photos
@@ -97,7 +97,6 @@ export default function Gallery({ listing }: { listing: IListingData }) {
         <p>This property has no images available at this moment</p>
       )}
       <FullScreenDialog
-        handleClick={handleClick}
         listing={listing}
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}

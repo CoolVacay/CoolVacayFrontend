@@ -12,7 +12,7 @@ export default async function SimilarCards({
   const similarListings = (await getSimilarListings(pageParams))!;
 
   return similarListings ? (
-    <EmblaCarousel data={similarListings} type="card" slideNr={0} />
+    <EmblaCarousel data={similarListings} type="card" />
   ) : (
     "Cannot find similar homes at this moment"
   );
