@@ -164,6 +164,7 @@ export interface IReservationsDetails {
   id: number;
   userId: number;
   listingId: string;
+  email: string;
   source: string;
   fromDate: string;
   toDate: string;
@@ -173,7 +174,10 @@ export interface IReservationsDetails {
   pets: number;
   status: number;
   details: {
+    listingId: string;
+    listingSource: string;
     listingName: string;
+    listingImage: string;
     listingType: string;
     squareFeets: number | null;
     bedrooms: number;
@@ -182,7 +186,6 @@ export interface IReservationsDetails {
     fromDate: string;
     toDate: string;
     totalPrice: number;
-    imageSrc: string;
   };
 }
 

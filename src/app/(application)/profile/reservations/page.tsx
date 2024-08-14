@@ -9,7 +9,7 @@ export default async function Page() {
   const reservationsDetails =
     session.user && (await getReservationsDetails(session.user.id!))!;
   return (
-    <main className="w-full">
+    <main className="flex w-full max-[500px]:justify-center">
       <Suspense fallback={<ReservationCardsSkeleton />}>
         <Reservations reservationsDetails={reservationsDetails!} />
       </Suspense>

@@ -35,7 +35,7 @@ export default function NavBar({
   return (
     <nav className="z-10 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-24 sm:py-6">
       <div
-        className={`flex w-full ${isWhiteVariant || !noMaxWidth ? "md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : ""} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
+        className={`flex w-full ${isWhiteVariant || !noMaxWidth ? "sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : ""} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
       >
         <div className="flex w-full items-center justify-between sm:w-auto md:flex-grow">
           <Link href="/">

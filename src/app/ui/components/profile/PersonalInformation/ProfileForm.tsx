@@ -71,8 +71,8 @@ export default function ProfileForm({
     >
       <div className="mb-8 flex flex-col">
         <div className="my-10 flex flex-col gap-5">
-          <div className="flex w-full gap-5">
-            <div className="relative w-[300px]">
+          <div className="flex flex-col gap-5 lg:w-full lg:flex-row">
+            <div className="relative w-full lg:w-[300px]">
               <label htmlFor="name" className="mb-1 block font-medium">
                 First Name
               </label>
@@ -92,7 +92,7 @@ export default function ProfileForm({
                 </p>
               )}
             </div>
-            <div className="relative w-[300px]">
+            <div className="relative w-full lg:w-[300px]">
               <label htmlFor="lastName" className="mb-1 block font-medium">
                 Last Name
               </label>
@@ -113,8 +113,8 @@ export default function ProfileForm({
               )}
             </div>
           </div>
-          <div className="flex w-full gap-5">
-            <div className="relative w-[300px]">
+          <div className="flex flex-col gap-5 lg:w-full lg:flex-row">
+            <div className="relative w-full lg:w-[300px]">
               <label htmlFor="email" className="mb-1 block font-medium">
                 Email
               </label>
@@ -129,7 +129,7 @@ export default function ProfileForm({
                 styles="h-[40px] border border-[#EAEAEF]"
               />
             </div>
-            <div className="relative w-[300px]">
+            <div className="relative w-full lg:w-[300px]">
               <label htmlFor="phone" className="mb-1 block font-medium">
                 Phone number
               </label>
@@ -145,8 +145,8 @@ export default function ProfileForm({
               />
             </div>
           </div>
-          <div className="flex w-full gap-5">
-            <div className="relative w-[300px]">
+          <div className="flex flex-col gap-5 lg:w-full lg:flex-row">
+            <div className="relative w-full lg:w-[300px]">
               <label htmlFor="nationality" className="mb-1 block font-medium">
                 Nationality
               </label>
@@ -168,7 +168,7 @@ export default function ProfileForm({
                 variant="rectangle"
               />
             </div>
-            <div className="relative w-[300px]">
+            <div className="relative w-full lg:w-[300px]">
               <label htmlFor="dateOfBirth" className="mb-1 block font-medium">
                 Birthdate
               </label>
