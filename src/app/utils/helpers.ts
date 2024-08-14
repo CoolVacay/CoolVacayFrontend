@@ -16,6 +16,14 @@ export const formatDateMMMDD = (date: Date) => {
   return dayjs(date).format("MMM DD");
 };
 
+export const removeEmptyValues = (
+  obj: Record<string, string | number | null | undefined>,
+) => {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([_, v]) => v !== "" && v !== null),
+  );
+};
+
 export function toastNotifier(errorMessage: string | undefined) {
   if (!errorMessage) {
     toast.success("Success", {

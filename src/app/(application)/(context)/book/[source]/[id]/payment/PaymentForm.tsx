@@ -1,57 +1,24 @@
 "use client";
 
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import { ActionButton } from "~/app/ui/components/authentication";
-import { SimpleInput } from "~/app/ui/components/common";
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
+import { useFormik } from "formik";
+import { Toaster } from "react-hot-toast";
+
+import { ActionButton } from "~/app/ui/components/authentication";
+import { SimpleInput, IconGenerator } from "~/app/ui/components/common";
 import BookingCompleted from "./BookingCompleted";
-import { IconGenerator } from "~/app/ui/components/common";
-import { toastNotifier } from "~/app/utils/helpers";
+import { removeEmptyValues, toastNotifier } from "~/app/utils/helpers";
 import { bookingPayment } from "~/app/(application)/actions";
 import type { IBookingPaymentArgs } from "~/app/(application)/definitions";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
-import { Toaster } from "react-hot-toast";
-
-const ValidationSchema = Yup.object().shape({
-  cardDetails: Yup.object().shape({
-    cardNumber: Yup.string().required("This field is required"),
-    expiryDate: Yup.string()
-      .required("This field is required")
-      .test(
-        "is-valid-month",
-        "The month must be between 01 and 12",
-        function (value) {
-          if (!value) return false;
-          const month = value.substring(0, 2);
-          const monthInt = parseInt(month, 10);
-          return monthInt >= 1 && monthInt <= 12;
-        },
-      )
-      .test(
-        "is-valid-year",
-        "Enter a correct expiration date",
-        function (value) {
-          if (!value) return false;
-          const currentYear = new Date().getFullYear() % 100;
-          const year = value.substring(3, 5);
-          const yearInt = parseInt(year, 10);
-          return yearInt >= currentYear;
-        },
-      ),
-    cvc: Yup.string()
-      .required("This field is required")
-      .min(3, "CVV must be 3 characters"),
-    cardHolderName: Yup.string().required("This field is required"),
-  }),
-});
-
+import { useFormContext } from "../FormContext";
+import { userIdSchema, missingUserIdSchema } from "./validationSchemas";
 export default function PaymentForm({
   userId,
   params,
 }: {
-  userId: number;
+  userId?: string;
   params: {
     source: string;
     id: string;
@@ -62,34 +29,65 @@ export default function PaymentForm({
   const [errorMessage, setErrorMessage] = useState<undefined | string>(
     undefined,
   );
+  const { formData } = useFormContext();
+
   const formik = useFormik({
-    initialValues: {
-      userId: userId,
-      listingId: params.id,
-      source: params.source,
-      fromDate: searchParamsValues.fromDate?.format("YYYY-MM-DD"),
-      toDate: searchParamsValues.toDate?.format("YYYY-MM-DD"),
-      adults: Number(searchParamsValues.numberOfGuests),
-      children: 0,
-      infants: 0,
-      pets: 0,
-      cardDetails: {
-        cardNumber: "",
-        expiryDate: "",
-        cvc: "",
-        cardHolderName: "",
-      },
-    },
-    validationSchema: ValidationSchema,
+    initialValues: userId
+      ? {
+          userId: Number(userId),
+          listingId: params.id,
+          source: params.source,
+          fromDate: searchParamsValues.fromDate?.format("YYYY-MM-DD"),
+          toDate: searchParamsValues.toDate?.format("YYYY-MM-DD"),
+          adults: Number(searchParamsValues.numberOfGuests),
+          children: 0,
+          infants: 0,
+          pets: 0,
+          cardDetails: {
+            cardNumber: "",
+            expiryDate: "",
+            cvc: "",
+            cardHolderName: "",
+          },
+        }
+      : {
+          userId: "",
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          address1: formData.street,
+          address2: "",
+          city: formData.city,
+          state: formData.state,
+          zip: formData.zip,
+          country: formData.country,
+          listingId: params.id,
+          source: params.source,
+          fromDate: searchParamsValues.fromDate?.format("YYYY-MM-DD"),
+          toDate: searchParamsValues.toDate?.format("YYYY-MM-DD"),
+          adults: Number(searchParamsValues.numberOfGuests),
+          children: 0,
+          infants: 0,
+          pets: 0,
+          cardDetails: {
+            cardNumber: "",
+            expiryDate: "",
+            cvc: "",
+            cardHolderName: "",
+          },
+        },
+    validationSchema: userId ? userIdSchema : missingUserIdSchema,
     onSubmit: () => console.log("Submitting"),
   });
+
   //TODO: refactor
   return paymentCompleted ? (
     <BookingCompleted />
   ) : (
     <form
       action={async () => {
-        const modifiedValues = {
+        const allValues = {
           ...formik.values,
           cardDetails: {
             ...formik.values.cardDetails,
@@ -100,9 +98,16 @@ export default function PaymentForm({
             ),
           },
         };
-        const response = await bookingPayment(
-          modifiedValues as IBookingPaymentArgs,
+        const { cardDetails, ...initialValuesWithoutCardDetails } = allValues;
+        const modifiedValues = removeEmptyValues(
+          initialValuesWithoutCardDetails,
         );
+
+        const response = await bookingPayment({
+          ...modifiedValues,
+          cardDetails,
+        } as IBookingPaymentArgs);
+
         const errorResponse = typeof response === "string";
         toastNotifier(response);
         setErrorMessage(errorResponse ? response : undefined);
@@ -111,6 +116,111 @@ export default function PaymentForm({
       className="flex flex-col gap-8"
     >
       <div className="flex flex-col gap-6">
+        {!userId ? (
+          <>
+            <div className="flex gap-4">
+              <div className="relative w-full">
+                <label
+                  htmlFor="firstName"
+                  className="mb-1 block text-lg font-medium"
+                >
+                  First Name<span className="absolute">*</span>
+                </label>
+                <SimpleInput
+                  placeholder="First Name"
+                  name="firstName"
+                  required={true}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.firstName}
+                  error={
+                    formik.touched.firstName && Boolean(formik.errors.firstName)
+                  }
+                  variant="rounded"
+                />
+                {formik.touched.firstName &&
+                  Boolean(formik.errors.firstName) && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {formik.touched.firstName && formik.errors.firstName}
+                    </p>
+                  )}
+              </div>
+              <div className="relative w-full">
+                <label
+                  htmlFor="lastName"
+                  className="mb-1 block text-lg font-medium"
+                >
+                  Last Name<span className="absolute">*</span>
+                </label>
+                <SimpleInput
+                  placeholder="Last Name"
+                  name="lastName"
+                  required={true}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.lastName}
+                  error={
+                    formik.touched.lastName && Boolean(formik.errors.lastName)
+                  }
+                  variant="rounded"
+                />
+                {formik.touched.lastName && Boolean(formik.errors.lastName) && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {formik.touched.lastName && formik.errors.lastName}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div className="relative w-full">
+                <label
+                  htmlFor="email"
+                  className="mb-1 block text-lg font-medium"
+                >
+                  Email<span className="absolute">*</span>
+                </label>
+                <SimpleInput
+                  placeholder="Email"
+                  name="email"
+                  required={true}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  variant="rounded"
+                />
+                {formik.touched.email && Boolean(formik.errors.email) && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {formik.touched.email && formik.errors.email}
+                  </p>
+                )}
+              </div>
+              <div className="relative w-full">
+                <label
+                  htmlFor="phone"
+                  className="mb-1 block text-lg font-medium"
+                >
+                  Phone<span className="absolute">*</span>
+                </label>
+                <SimpleInput
+                  placeholder="Phone"
+                  name="phone"
+                  required={true}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.phone}
+                  error={formik.touched.phone && Boolean(formik.errors.phone)}
+                  variant="rounded"
+                />
+                {formik.touched.phone && Boolean(formik.errors.phone) && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {formik.touched.phone && formik.errors.phone}
+                  </p>
+                )}
+              </div>
+            </div>
+          </>
+        ) : null}
         <div className="relative">
           <label
             htmlFor="cardDetails.cardNumber"

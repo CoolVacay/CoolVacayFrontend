@@ -112,16 +112,26 @@ export interface IProfileDetails {
 }
 
 export interface IBookingPaymentArgs {
-  userId: number;
-  listingId: string;
-  source: string;
-  fromDate: string;
-  toDate: string;
-  adults: number;
-  children: number;
-  infants: number;
-  pets: number;
-  cardDetails: {
+  userId?: number;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  address1?: string;
+  address2?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  country?: string;
+  listingId?: string;
+  source?: string;
+  fromDate?: string;
+  toDate?: string;
+  adults?: number;
+  children?: number;
+  infants?: number;
+  pets?: number;
+  cardDetails?: {
     cardNumber: string;
     expiryDate: string;
     cvc: string;

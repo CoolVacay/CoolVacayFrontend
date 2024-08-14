@@ -13,14 +13,14 @@ export default function ReservationCard({
 
   return (
     <div className="flex flex-col gap-4 max-[500px]:max-w-[310px] min-[500px]:flex-row lg:gap-8">
-      <div className="flex h-[180px] w-auto lg:h-[130px] lg:w-[180px]">
+      <div className="flex h-[180px] w-[310px] lg:h-[130px] lg:w-[180px]">
         <Image
           src={details.listingImage ?? "/cardImage.png"}
           width={0}
           height={0}
           sizes="100vw"
           alt="Property image"
-          className="h-[180px] w-auto rounded rounded-xl lg:h-[130px] lg:w-[180px]"
+          className="h-[180px] w-[310px] rounded rounded-xl lg:h-[130px] lg:w-[180px]"
           style={{ objectFit: "cover" }}
         />
       </div>

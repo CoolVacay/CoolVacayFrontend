@@ -28,8 +28,8 @@ export default async function Page({
   const navigateHome = !(query.get("match") ?? query.get("category"));
 
   return (
-    <main className="flex flex-col items-center px-6 lg:px-8">
-      <div className="w-full max-w-[1220px]">
+    <main className="flex flex-col items-center px-4 lg:px-0">
+      <div className="max-w-[calc(100vw_-_32px)] items-center justify-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
         <Breadcrumbs
           navigateHome={navigateHome}
           breadcrumbs={[

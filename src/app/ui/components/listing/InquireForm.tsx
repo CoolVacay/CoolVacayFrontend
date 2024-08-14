@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Toaster } from "react-hot-toast";
 
-import { toastNotifier } from "~/app/utils/helpers";
+import { removeEmptyValues, toastNotifier } from "~/app/utils/helpers";
 import { ActionButton } from "../authentication/common";
 import type { IListingData } from "~/app/(application)/definitions";
 import { SimpleInput } from "../common";
@@ -58,9 +58,7 @@ export default function InquireForm({
   return (
     <form
       action={async () => {
-        const modifiedValues = Object.fromEntries(
-          Object.entries(formik.values).filter(([_, v]) => v != ""),
-        );
+        const modifiedValues = removeEmptyValues(formik.values);
         const response = await inquire(modifiedValues as IInquireArgs);
         toastNotifier(response);
         setErrorMessage(typeof response === "string" ? response : undefined);

@@ -34,6 +34,7 @@ export default function BookNowContent({
     useAppSearchParams();
 
   const dates = [searchParamsValues.fromDate, searchParamsValues.toDate];
+  const bookButtonDisabled = dates[0] === null || dates[1] === null;
 
   return (
     <div
@@ -63,12 +64,17 @@ export default function BookNowContent({
           />
         </div>
       </div>
-      <Link
-        href={`/book/${params.source}/${params.id}/billing-address?${searchParams.toString()}`}
-        className="flex h-[58px] w-full justify-center rounded-full bg-primary py-4 text-white hover:border hover:border-primary hover:bg-white hover:text-primary"
+      <button
+        disabled={bookButtonDisabled}
+        className={`h-[58px] disabled:opacity-50`}
       >
-        Book now
-      </Link>
+        <Link
+          className={`flex w-full justify-center rounded-full bg-primary py-4 text-white ${!bookButtonDisabled ? "hover:border hover:border-primary hover:bg-white hover:text-primary" : "pointer-events-none"} disabled:opacity-50`}
+          href={`/book/${params.source}/${params.id}/billing-address?${searchParams.toString()}`}
+        >
+          Book now
+        </Link>
+      </button>
       <Divider />
       <FormDialog
         title="Inquire now"

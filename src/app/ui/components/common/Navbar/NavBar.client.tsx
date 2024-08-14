@@ -75,7 +75,7 @@ export default function NavBar({
             {session ? (
               <Link href="/profile/reservations" className="hidden sm:block">
                 <p
-                  className={`text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
+                  className={`text-center text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
                 >
                   <span className="mr-[14px] hidden  text-center lg:inline-block">
                     •

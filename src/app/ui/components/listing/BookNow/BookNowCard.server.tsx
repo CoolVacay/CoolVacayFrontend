@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import {
   getAvailabilityDates,
   getListingData,
@@ -7,7 +8,10 @@ import type { IParams } from "~/app/(application)/definitions";
 import { getCurrentDates } from "~/app/utils/helpers";
 
 export default async function BookNow({ params }: { params: IParams }) {
-  const { startDate, endDate } = getCurrentDates();
+  const { startDate } = getCurrentDates();
+
+  //if we want to change the search period,modify this line
+  const endDate = dayjs().add(1, "year").format("YYYY-MM-DD");
   const listingInfo = (await getListingData(params))!;
 
   const availabilityDate =
