@@ -34,6 +34,7 @@ declare module "next-auth" {
     nationality: string;
     accessToken: string;
     signedInWith: string;
+    profilePicture: string | null;
   }
 }
 
@@ -42,7 +43,7 @@ declare module "next-auth/jwt" {
     id: string;
     lastName: string;
     phone: string;
-    image: string;
+    profilePicture: string;
     dateOfBirth: string;
     nationality: string;
     accessToken: string;
@@ -93,6 +94,7 @@ const providers: Provider[] = [
             image: user.profile.image,
             dateOfBirth: user.profile.dateOfBirth,
             nationality: user.profile.nationality,
+            profilePicture: user.profile.profilePicture,
           };
         } else {
           return null;
@@ -147,7 +149,7 @@ const authOptions: NextAuthConfig = {
           user.dateOfBirth = userData.profile.dateOfBirth;
           user.nationality = userData.profile.nationality;
           user.accessToken = userData.accessToken;
-          user.image = userData.profile.image;
+          user.profilePicture = userData.profile.profilePicture;
           user.signedInWith = userData.signedInWith;
         } else {
           redirect("/signin");
@@ -162,7 +164,7 @@ const authOptions: NextAuthConfig = {
           user.dateOfBirth = userData.profile.dateOfBirth;
           user.nationality = userData.profile.nationality;
           user.accessToken = userData.accessToken;
-          user.image = userData.profile.image;
+          user.profilePicture = userData.profile.profilePicture;
           user.signedInWith = userData.signedInWith;
         } else {
           redirect("/signin");
@@ -179,8 +181,8 @@ const authOptions: NextAuthConfig = {
         session.user.dateOfBirth = token.dateOfBirth;
         session.user.nationality = token.nationality;
         session.user.accessToken = token.accessToken;
-        session.user.image = token.image;
         session.user.signedInWith = token.signedInWith;
+        session.user.profilePicture = token.profilePicture;
       }
       return session;
     },
@@ -192,6 +194,7 @@ const authOptions: NextAuthConfig = {
         token.dateOfBirth = user.dateOfBirth!;
         token.accessToken = user.accessToken!;
         token.signedInWith = user.signedInWith!;
+        token.profilePicture = user.profilePicture!;
       }
       return token;
     },

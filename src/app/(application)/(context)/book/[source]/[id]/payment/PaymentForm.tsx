@@ -14,6 +14,7 @@ import type { IBookingPaymentArgs } from "~/app/(application)/definitions";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 import { useFormContext } from "../FormContext";
 import { userIdSchema, missingUserIdSchema } from "./validationSchemas";
+
 export default function PaymentForm({
   userId,
   params,

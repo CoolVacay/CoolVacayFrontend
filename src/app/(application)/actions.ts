@@ -28,6 +28,12 @@ import type {
 export const getCountries = () =>
   getData<ICountries[]>(`/countries`, "Failed to fetch countries");
 
+export const isValidToken = (accessToken: string) =>
+  getData<boolean>(
+    `/Auth/is_valid?token=${accessToken}`,
+    "Failed to check token",
+  );
+
 export const getBlogs = () =>
   getData<IBlog[]>(`/Blogs`, "Failed to fetch blogs");
 
@@ -50,6 +56,7 @@ export const getProfileInfo = (email: string) =>
   getData<TUserData["profile"]>(
     `/Users/email/${email}`,
     "Failed to fetch profile data",
+    true,
   );
 
 export const getPricingDetails = (
@@ -166,6 +173,29 @@ export const updatePassword = ({ userId, ...rest }: IPassArgs) =>
     "Failed to update password",
     "PATCH",
     "/profile",
+  );
+
+export const uploadProfilePicture = ({
+  userId,
+  formData,
+}: {
+  userId: string;
+  formData: FormData;
+}) =>
+  postData(
+    `/users/${userId}/profile-picture`,
+    formData,
+    "Failed to upload",
+    "POST",
+    "/profile",
+  );
+
+export const deleteProfilePicture = (userId: string) =>
+  postData(
+    `/Users/${userId}/profile-picture`,
+    userId,
+    "Failed to delete profile picture",
+    "DELETE",
   );
 
 export const registerFollower = ({ email }: { email: string }) =>

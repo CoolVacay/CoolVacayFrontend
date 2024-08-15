@@ -3,6 +3,7 @@ import { getLocationsList } from "~/app/(application)/actions";
 
 export async function HeroSection() {
   const locationsList = (await getLocationsList())!;
+
   return (
     <main className="absolute top-32 text-white md:top-44">
       <div className="justify-between md:flex md:max-w-[680px] md:px-6 lg:max-w-[920px] xl:max-w-[1220px]">

@@ -9,16 +9,14 @@ const startDate = dayjs().format("YYYY-MM-DD");
 const endDate = dayjs().add(6, "day").format("YYYY-MM-DD");
 
 export async function AllistingsSection({ page }: { page: number }) {
-  const listings = (await getFilteredListings(
-    `fromDate=${startDate}&toDate=${endDate}&pageSize=8&pageNum=${page}`,
-  ))!;
+  const listings = (await getFilteredListings(`pageSize=8&pageNum=${page}`))!;
   return listings?.items.length > 0 ? (
     <div className="no-scrollbar my-10 flex items-center gap-5 overflow-auto sm:flex-row sm:flex-wrap sm:justify-between">
       {listings?.items.map((listing) => {
         return (
           <Link
             key={listing.id}
-            href={`/listing/${listing.source}/${listing.id}?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1`}
+            href={`/listing/${listing.source}/${listing.id}?&numberOfGuests=1`}
             className="h-[340px]"
           >
             <MainCard

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconGenerator } from "../IconGenerator";
@@ -9,6 +9,7 @@ import type { TUserData } from "~/app/(application)/definitions";
 
 import { getCurrentDates } from "~/app/utils/helpers";
 import NavBardDialog from "./NavBarDialog";
+import { logOut } from "~/app/(authentication)/actions";
 
 const whiteVariantPaths = [
   "/",
@@ -19,10 +20,23 @@ const whiteVariantPaths = [
 ];
 
 export default function NavBar({
-  session,
+  userData,
+  isTokenValid,
 }: {
-  session: TUserData["profile"] | null;
+  userData?: TUserData["profile"] | null;
+  isTokenValid: boolean;
 }) {
+  useEffect(() => {
+    if (!userData) {
+      const checkToken = async () => {
+        if (!isTokenValid) {
+          await logOut();
+        }
+      };
+      checkToken();
+    }
+  }, []);
+
   const pathname = usePathname();
   const isWhiteVariant = whiteVariantPaths.includes(pathname);
   const noMaxWidth = pathname.startsWith("/listings");
@@ -72,7 +86,7 @@ export default function NavBar({
             >
               Vacation Rental Management
             </Link>
-            {session ? (
+            {userData ? (
               <Link href="/profile/reservations" className="hidden sm:block">
                 <p
                   className={`text-center text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
@@ -84,7 +98,7 @@ export default function NavBar({
                 </p>
               </Link>
             ) : null}
-            {!session ? (
+            {!userData ? (
               <Link href="/signin">
                 <button
                   className={`flex w-[190px] items-center rounded-full px-4 py-2 text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
@@ -101,7 +115,7 @@ export default function NavBar({
               </Link>
             ) : (
               <NavBarLoginButton
-                session={session}
+                userData={userData}
                 isWhiteVariant={isWhiteVariant}
               />
             )}
@@ -112,7 +126,7 @@ export default function NavBar({
         <NavBardDialog
           openMenu={openMenu}
           toggleMenu={toggleMenu}
-          session={session}
+          session={userData!}
         />
       )}
     </nav>

@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 
 export default async function SideNav() {
   const session = await auth();
+
   const profileInfo =
     session?.user && (await getProfileInfo(session.user.email!));
 
@@ -15,7 +16,7 @@ export default async function SideNav() {
         <div className="flex w-[50px]">
           <Image
             alt="avatar icon"
-            src={`${profileInfo?.image ?? `/avatar_blue.svg`}`}
+            src={`${profileInfo?.profilePicture ?? `/avatar_blue.svg`}`}
             width={50}
             height={50}
             className="h-[50px] w-[50px] rounded-full"

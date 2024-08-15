@@ -85,6 +85,7 @@ export type TUserData = {
     dateOfBirth: string;
     creationDate: string;
     gender: string;
+    profilePicture: string;
   };
 };
 export interface IParams {

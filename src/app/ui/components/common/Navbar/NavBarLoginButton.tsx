@@ -10,10 +10,10 @@ import Image from "next/image";
 import type { TUserData } from "~/app/(application)/definitions";
 
 const NavBarLoginButton = ({
-  session,
+  userData,
   isWhiteVariant,
 }: {
-  session: TUserData["profile"];
+  userData: TUserData["profile"];
   isWhiteVariant: boolean;
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -25,6 +25,7 @@ const NavBarLoginButton = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <>
       <button
@@ -34,15 +35,21 @@ const NavBarLoginButton = ({
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
       >
-        {session.firstName}
+        {userData.firstName}
         <span className="ml-2">
-          <Image
-            alt="avatar icon"
-            src={`${session.image ?? `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}`}
-            width={32}
-            height={32}
-            className="rounded-full"
-          />
+          <div className="h-8 w-8">
+            <Image
+              alt="avatar icon"
+              src={
+                userData.profilePicture ??
+                `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`
+              }
+              width={32}
+              height={0}
+              quality={20}
+              className="h-8 w-8 rounded-full"
+            />
+          </div>
         </span>
       </button>
       <Menu
@@ -85,10 +92,13 @@ const NavBarLoginButton = ({
             <ListItemIcon>
               <Image
                 alt="avatar icon"
-                src={`${session.image ?? `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}`}
+                src={
+                  userData.profilePicture ??
+                  `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`
+                }
                 width={24}
-                height={24}
-                className="rounded-full"
+                height={0}
+                className="h-6 w-6 rounded-full"
               />
             </ListItemIcon>
             Profile

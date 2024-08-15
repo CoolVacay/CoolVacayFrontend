@@ -14,7 +14,7 @@ export async function FeaturedListingsSection() {
           return (
             <div key={listing.id} className="relative h-[340px]">
               <Link
-                href={`/listing/${listing.source}/${listing.id}?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1`}
+                href={`/listing/${listing.source}/${listing.id}?&numberOfGuests=1`}
                 className="h-full"
               >
                 <MainCard

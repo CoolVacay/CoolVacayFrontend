@@ -34,7 +34,7 @@ export async function getFetch<T>(
     if (!res.ok) {
       const errResponse = await res.text();
       const errorText = JSON.parse(errResponse) as ErrorInterface;
-      throw new FetchError(errorText.error);
+      throw new FetchError(errorText.error ?? errorText.message);
     }
     const data = (await res.json()) as T;
     return data;
@@ -74,21 +74,24 @@ export async function postFetch<T>(
   url: string,
   body:
     | Record<string, string | Record<string, string> | number | undefined>
+    | FormData
     | T,
   method?: string,
 ): Promise<T | FetchError | null> {
   const session = await auth();
 
   const headers = new Headers({
-    "Content-Type": "application/json",
     Authorization: `Bearer ${session?.user?.accessToken}`,
   });
 
+  if (!(body instanceof FormData)) {
+    headers.append("Content-Type", "application/json");
+  }
   try {
     const res = await fetch(`${API_BASE_URL}/api${url}`, {
       method: method ?? "POST",
       headers: headers,
-      body: JSON.stringify(body),
+      body: body instanceof FormData ? body : JSON.stringify(body),
     });
     //if error in response,throw the custom error
     if (!res.ok) {
@@ -157,7 +160,7 @@ export async function getData<T>(
 
 export async function postData<T>(
   url: string,
-  values: Record<string, string> | T,
+  values: Record<string, string> | FormData | T,
   errorMessage: string,
   method?: string,
   pathToRevalidate?: string,

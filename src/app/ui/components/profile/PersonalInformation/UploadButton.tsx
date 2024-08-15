@@ -1,63 +1,77 @@
-"use client"
-import React from 'react'
-import ImageUploading, { type ImageListType } from "react-images-uploading";
+"use client";
 
-function UploadButton() {
-    const [images, setImages] = React.useState([]);
+import React from "react";
+import { useDropzone } from "react-dropzone";
+import { Toaster } from "react-hot-toast";
+import {
+  deleteProfilePicture,
+  uploadProfilePicture,
+} from "~/app/(application)/actions";
+import { toastNotifier } from "~/app/utils/helpers";
+import type { TUserData } from "~/app/(application)/definitions";
 
-    const onChange = (
-        imageList: ImageListType,
-        addUpdateIndex: number[] | undefined
-    ) => {
-        // data for submit
-        console.log(imageList, addUpdateIndex);
-        setImages(imageList as never[]);
-    };
-
-    const onConfirm = ( onImageRemoveAll: () => void) => {
-        console.log("SEND REQUEST TO BACKEND WITH THIS: ", images);
-        //TODO: Make REQUEST
-        //TODO: EMPTY IMAGES
-        onImageRemoveAll(); //TODO: Keep this here only if the call was successful
-    };
+export default function UploadButton({
+  profileInfo,
+  editMode,
+  files,
+  setFiles,
+}: {
+  profileInfo: TUserData["profile"];
+  editMode: boolean;
+  files: File[];
+  setFiles: (value: React.SetStateAction<File[]>) => void;
+}) {
+  const { getRootProps, getInputProps } = useDropzone({
+    noDrag: true,
+    disabled: !editMode,
+    accept: {
+      "image/png": [".png"],
+      "image/jpeg": [".jpeg"],
+      "image/jpg": [".jpg"],
+    },
+    onDrop: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          }),
+        ),
+      );
+    },
+  });
 
   return (
-    <ImageUploading
-        value={images}
-        onChange={onChange}
-    >
-        {({
-        imageList,
-        onImageUpload,
-        onImageRemoveAll,
-        onImageRemove,
-        isDragging,
-        dragProps
-        }) => (
-        // write your building UI
-        <div className="upload__image-wrapper">
-            <button
-            className="mt-4 rounded-full  border border-[#29ABE2] px-5 py-3 text-primary"
-            style={isDragging ? { color: "red" } : undefined}
-            onClick={onImageUpload}
-            {...dragProps}
-            >
-            Change Photo
-            </button>
-            &nbsp;
-            {imageList.map((image, index) => (
-            <div key={index} className="my-2">
-                <img src={image.dataURL} alt="" width="100" />
-                <div className="flex gap-2 mt-2">
-                <button className='border rounded-full border-[#29ABE2] px-5 py-3 text-primary' onClick={() => onConfirm(onImageRemoveAll)}>Confirm</button>
-                <button className='border rounded-full border-[#29ABE2] px-5 py-3 text-primary' onClick={() => onImageRemove(index)}>Remove</button>
-                </div>
-            </div>
-            ))}
+    <section className="flex items-center gap-4">
+      <div {...getRootProps({})}>
+        <input {...getInputProps()} />
+        <div
+          className={`w-[152px] rounded-full px-5 py-3  ${!editMode ? "bg-[#E7E7E7] text-[#676D73]" : "cursor-pointer border border-[#29ABE2] text-primary"}`}
+        >
+          <p>Change Photo</p>
         </div>
-        )}
-    </ImageUploading>
-  )
-}
+      </div>
+      {files.length > 0 ? (
+        <button
+          onClick={async () => {
+            const formData = new FormData();
+            files.forEach((file) => formData.append(`[${file.name}]`, file));
+            if (profileInfo.profilePicture) {
+              await deleteProfilePicture(profileInfo.id.toString());
+            }
+            const res = await uploadProfilePicture({
+              userId: profileInfo.id.toString(),
+              formData: formData,
+            });
+            toastNotifier(res);
 
-export default UploadButton
+            setFiles([]);
+          }}
+          className={`w-[152px] rounded-full border border-[#29ABE2] bg-primary px-5 py-3 text-white`}
+        >
+          Save Photo
+        </button>
+      ) : null}
+      <Toaster />
+    </section>
+  );
+}
