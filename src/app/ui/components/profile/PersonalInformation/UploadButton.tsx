@@ -15,15 +15,18 @@ export default function UploadButton({
   editMode,
   files,
   setFiles,
+  setEditMode,
 }: {
   profileInfo: TUserData["profile"];
   editMode: boolean;
   files: File[];
   setFiles: (value: React.SetStateAction<File[]>) => void;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const { getRootProps, getInputProps } = useDropzone({
     noDrag: true,
     disabled: !editMode,
+    maxSize: 3000 * 1000,
     accept: {
       "image/png": [".png"],
       "image/jpeg": [".jpeg"],
@@ -63,8 +66,8 @@ export default function UploadButton({
               formData: formData,
             });
             toastNotifier(res);
-
             setFiles([]);
+            setEditMode(false);
           }}
           className={`w-[152px] rounded-full border border-[#29ABE2] bg-primary px-5 py-3 text-white`}
         >

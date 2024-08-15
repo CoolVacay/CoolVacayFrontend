@@ -11,7 +11,7 @@ export interface IListingData {
   bathrooms: number;
   bedrooms: number;
   propertyType?: string;
-  startRating: number | null;
+  starRating: number | null;
   squareFeets?: number | undefined;
   price: number;
   imageUrl: string;
@@ -38,7 +38,15 @@ export interface IAllListings {
 export type ListingCardProps = Pick<
   IListingData,
   "name" | "imageUrl" | "price" | "id" | "source"
-> & { subtitle: string; closeDates?: [Date, Date] };
+> & {
+  subtitle: string;
+  starRating?: number | null;
+  closeDates?: {
+    startDate: string;
+    endDate: string;
+    nrOfNights: number;
+  }[];
+};
 
 export type TMainCardProps = Pick<
   IListingData,
@@ -166,6 +174,7 @@ export interface ICountries {
 }
 
 export interface ILocationsList {
+  id: number;
   icon: string;
   match: string;
   displayName: string;
@@ -221,7 +230,11 @@ export interface IPropertyAvailability {
 }
 
 export interface ICloseDatesListings {
-  startDate: string;
-  endDate: string;
+  listingId: string;
+  availableDates: {
+    startDate: string;
+    endDate: string;
+    nrOfNights: number;
+  }[];
   listing: IListingData;
 }

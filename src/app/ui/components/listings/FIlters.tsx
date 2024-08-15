@@ -82,6 +82,7 @@ export default function Filters({
           onChange={(event, newValue) => {
             if (!newValue) searchParams.delete("category");
             updateSearchParams(["match"], [newValue?.match ?? ""]);
+            updateSearchParams(["category"], [""]);
           }}
         />
       </div>

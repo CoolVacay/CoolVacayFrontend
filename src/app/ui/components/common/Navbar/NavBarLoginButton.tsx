@@ -92,10 +92,7 @@ const NavBarLoginButton = ({
             <ListItemIcon>
               <Image
                 alt="avatar icon"
-                src={
-                  userData.profilePicture ??
-                  `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`
-                }
+                src={`/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}
                 width={24}
                 height={0}
                 className="h-6 w-6 rounded-full"

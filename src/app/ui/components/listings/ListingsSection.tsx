@@ -45,13 +45,12 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
               subtitle={`${listing.city}, ${listing.state}`}
               imageUrl={listing.imageUrl}
               price={listing.price}
+              starRating={listing.starRating}
             />
           );
         })}
         {/* TODO ://modify the card */}
         {closeAvailabilityListings?.map((item) => {
-          const startDate = new Date(item.startDate);
-          const endDate = new Date(item.endDate);
           return (
             <ListingCard
               id={item.listing.id}
@@ -61,7 +60,8 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
               subtitle={`${item.listing.city}, ${item.listing.state}`}
               imageUrl={item.listing.imageUrl}
               price={item.listing.price}
-              closeDates={[startDate, endDate]}
+              closeDates={item.availableDates}
+              starRating={item.listing.starRating}
             />
           );
         })}

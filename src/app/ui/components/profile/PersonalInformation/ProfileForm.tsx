@@ -67,19 +67,21 @@ export default function ProfileForm({
     <>
       <div className="flex justify-between">
         <div className="flex gap-10">
-          <div className="h-20 w-20">
-            <Image
-              alt="avatar icon"
-              src={`${files.length > 0 ? (files[0] as ModifiedFile).preview : profileInfo.profilePicture !== null ? profileInfo.profilePicture : `/avatar_blue.svg`}`}
-              width={0}
-              height={0}
-              quality={20}
-              sizes="100vw"
-              style={{ objectFit: "cover" }}
-              className="h-20 w-20 rounded-full"
-            />
-          </div>
-          <div className="flex flex-col font-medium">
+          {files.length > 0 ? (
+            <div className="h-20 w-20">
+              <Image
+                alt="avatar icon"
+                src={`${(files.length > 0 ? (files[0] as ModifiedFile).preview : profileInfo.profilePicture) ?? `/avatar_blue.svg`}`}
+                width={0}
+                height={0}
+                quality={10}
+                sizes="100vw"
+                style={{ objectFit: "cover" }}
+                className="h-20 w-20 rounded-full"
+              />
+            </div>
+          ) : null}
+          <div className="flex flex-col gap-2 font-medium">
             <p className="text-[20px]">
               {profileInfo?.firstName} {profileInfo?.lastName}
             </p>
@@ -88,6 +90,7 @@ export default function ProfileForm({
               files={files}
               setFiles={setFiles}
               profileInfo={profileInfo}
+              setEditMode={setEditMode}
             />
           </div>
         </div>

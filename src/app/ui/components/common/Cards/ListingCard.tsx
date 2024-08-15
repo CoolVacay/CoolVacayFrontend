@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import dayjs from "dayjs";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 import { IconGenerator } from "../IconGenerator";
 import type { ListingCardProps } from "~/app/(application)/definitions";
-import { truncateText, formatDateMMMDD } from "../../../../utils/helpers";
+import {
+  truncateText,
+  formatDateMMMDD,
+  formatDateMMM_DD_YYYY,
+} from "../../../../utils/helpers";
 
 export default function ListingCard({
   id,
@@ -16,6 +19,7 @@ export default function ListingCard({
   imageUrl,
   price,
   closeDates,
+  starRating,
 }: ListingCardProps) {
   const { searchParamsValues, searchParams } = useAppSearchParams();
   const startDate = searchParamsValues.fromDate?.format("MMM DD");
@@ -24,7 +28,7 @@ export default function ListingCard({
   searchParams.delete("pageNum");
   return (
     <div
-      className={`flex h-[${closeDates ? "440px" : "405px"}] w-[350px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1 sm:w-[280px] md:w-[350px]`}
+      className={`flex h-[400px] w-[350px] flex-col gap-4 overflow-hidden rounded-md p-1 sm:w-[280px] md:w-[350px]`}
     >
       <div className="relative">
         <Link
@@ -44,7 +48,7 @@ export default function ListingCard({
           />
         </Link>
       </div>
-      <div className="flex grow flex-col justify-between gap-3">
+      <div className="grow-1 flex h-full flex-col justify-between">
         <div className="flex flex-col gap-1">
           {!closeDates ? (
             <div className="flex items-center justify-between font-medium">
@@ -65,36 +69,55 @@ export default function ListingCard({
             </div>
             <p className="text-sm text-[#676D73]">{subtitle}</p>
           </div>
-          <div className="flex items-center gap-1">
-            <IconGenerator
-              src="/rating_star.svg"
-              alt="Rating start"
-              width="16px"
-              height={16}
-            />
-            <h2 className="text-sm">
-              4.5
-              <span className="text-sm font-medium text-primary-grey400">
-                {" "}
-                (293 review)
-              </span>
-            </h2>
-          </div>
+          {starRating ? (
+            <div className="flex items-center gap-1">
+              <IconGenerator
+                src="/rating_star.svg"
+                alt="Rating start"
+                width="16px"
+                height={16}
+              />
+              <h2 className="text-sm">
+                4.5
+                <span className="text-sm font-medium text-primary-grey400">
+                  {" "}
+                  (293 review)
+                </span>
+              </h2>
+            </div>
+          ) : null}
         </div>
         {closeDates ? (
-          <div className="mt-4 flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             <p className="flex items-center gap-2 text-xs text-[#FF6565]">
               <IconGenerator src="/notice.svg" alt="Notice icon" width="12px" />
               This property has no availability from {startDate} to {endDate}
             </p>
-            <div className="flex max-w-max flex-col items-center gap-2 rounded-lg border border-[#ADB5BD] p-3">
-              <p className="font-medium text-primary">
-                {formatDateMMMDD(closeDates[0])} -
-                {formatDateMMMDD(closeDates[1])}
-              </p>
-              <p className="text-sm text-[#858C93]">
-                {dayjs(closeDates[1]).diff(dayjs(closeDates[0]), "day")} nights
-              </p>
+            <div className="flex gap-2">
+              {closeDates.map((date, index) => {
+                if (index < 3) {
+                  return (
+                    <Link
+                      key={index}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      href={`listing/${source}/${id}?fromDate=${formatDateMMM_DD_YYYY(date.startDate)}&toDate=${formatDateMMM_DD_YYYY(date.endDate)}&numberOfGuests=${searchParams.get("numberOfGuests")}`}
+                    >
+                      <button className="flex max-w-max flex-col items-center gap-2 rounded-lg border border-[#ADB5BD] p-2 hover:opacity-75">
+                        <p className="text-xs font-medium text-primary">
+                          {formatDateMMMDD(date.startDate)} -
+                          {formatDateMMMDD(date.endDate)}
+                        </p>
+                        <p className="text-sm text-[#858C93]">
+                          {date.nrOfNights} nights
+                        </p>
+                      </button>
+                    </Link>
+                  );
+                } else {
+                  return null;
+                }
+              })}
             </div>
           </div>
         ) : (

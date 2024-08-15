@@ -63,7 +63,7 @@ export default function CitiesAutocomplete({
           const { key, ...optionProps } = props;
           return (
             <Box
-              key={key}
+              key={`${option.id} - ${key}`}
               component="li"
               sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
               {...optionProps}
