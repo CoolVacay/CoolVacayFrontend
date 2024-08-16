@@ -141,15 +141,11 @@ export default function Page() {
                 alt="Coolvacay about us, third image"
                 src="/about_us_3.jpeg"
                 className="rounded-2xl"
-                quality={90}
-                width={0}
-                height={0}
-                sizes="100vw"
+                width={542}
+                height={537}
                 priority={true}
                 style={{
                   objectFit: "cover",
-                  height: "100%",
-                  width: "100%",
                 }}
               />
             </div>

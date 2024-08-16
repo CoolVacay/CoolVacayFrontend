@@ -20,12 +20,11 @@ export default function MainCard({
       <div className="flex h-[210px] w-[278px]">
         <Image
           src={imageUrl ?? "/cardImage.png"}
-          width={0}
-          height={0}
-          sizes="100vw"
+          width={278}
+          height={210}
           alt="CoolVacay listing image"
+          className="h-auto w-auto"
           style={{
-            height: 210,
             width: isBlogCard ? "278px" : "auto",
             objectFit: "cover",
             borderRadius: isBlogCard ? 10 : 0,

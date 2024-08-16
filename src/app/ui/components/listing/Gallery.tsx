@@ -28,9 +28,9 @@ export default function Gallery({ listing }: { listing: IListingData }) {
                   setIsModalOpen(true);
                   handleClick();
                 }}
-                sizes="100vw"
                 width={640}
                 height={500}
+                priority={true}
                 quality={80}
                 className="cursor-pointer"
                 style={{
@@ -67,9 +67,9 @@ export default function Gallery({ listing }: { listing: IListingData }) {
                     setIsModalOpen(true);
                     handleClick();
                   }}
-                  sizes="100vw"
                   width={640}
                   height={500}
+                  priority={true}
                   quality={index > 0 ? 40 : 80}
                   className="cursor-pointer"
                   style={{

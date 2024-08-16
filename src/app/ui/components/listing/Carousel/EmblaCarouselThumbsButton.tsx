@@ -24,15 +24,12 @@ export const Thumb = ({ selected, image, onClick }: PropType) => {
         <Image
           src={image.url}
           alt={image.name}
-          sizes="100vw"
-          width={112}
-          height={75}
-          quality={30}
+          width={300}
+          height={195}
+          quality={100}
           placeholder="blur"
           blurDataURL={`data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mP8/OVbPQMRgHFUIX0VAgBWRiGjO2Ny1QAAAABJRU5ErkJggg==`}
           style={{
-            width: "100%",
-            height: "100%",
             borderRadius: "3px",
             objectFit: "fill",
           }}

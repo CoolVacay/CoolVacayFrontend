@@ -34,7 +34,6 @@ export default function AuthenticationLayout({
                   src="/authentication_image.jpeg"
                   fill
                   priority={true}
-                  sizes="100vw"
                   quality={90}
                   style={{
                     objectFit: "cover",

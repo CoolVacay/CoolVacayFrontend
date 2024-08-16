@@ -13,14 +13,10 @@ export async function DiscoverSection() {
         <Image
           src={`${featuredBlog?.thumbnailImageUrl ?? "/discover_photo.png"}`}
           alt="Discover more destinations"
-          width={0}
-          height={0}
-          sizes="100vw"
-          quality={30}
+          width={492}
+          height={460}
           style={{
             objectFit: "cover",
-            height: "460px",
-            width: "492px",
           }}
           className="rounded-[30px]"
         />

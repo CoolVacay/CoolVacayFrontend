@@ -88,9 +88,8 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
                                 src={image.url}
                                 alt={image.name}
                                 placeholder="blur"
-                                sizes="100vw"
-                                width={300}
-                                height={200}
+                                width={920}
+                                height={620}
                                 quality={90}
                                 className="h-full w-full md:rounded md:rounded-xl"
                                 blurDataURL={`data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mP8/OVbPQMRgHFUIX0VAgBWRiGjO2Ny1QAAAABJRU5ErkJggg==`}
