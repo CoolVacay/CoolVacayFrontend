@@ -152,11 +152,11 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
             </div>
           </div>
         ) : null}
-        <div className="embla-thumbs">
-          <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
-            <div className="embla-thumbs__container">
-              {type === "image" &&
-                (data as IListingData["images"]).map((image, index) => (
+        {type === "image" ? (
+          <div className="embla-thumbs">
+            <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
+              <div className="embla-thumbs__container">
+                {(data as IListingData["images"]).map((image, index) => (
                   <Thumb
                     key={index}
                     onClick={() => onThumbClick(index)}
@@ -164,9 +164,10 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
                     image={image}
                   />
                 ))}
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </div>
   );

@@ -65,7 +65,7 @@ export default function SignInForm() {
             onBlur={formik.handleBlur}
           />
           <div className="flex items-center justify-between py-[14px]">
-            {/* TODO:what will the remember me do ? */}
+            {/* TODO:remember me functionality? */}
             <FormikCheckBox
               error={
                 formik.touched.rememberMe && Boolean(formik.errors.rememberMe)
@@ -78,7 +78,7 @@ export default function SignInForm() {
             />
             <Link
               href="/forgotten-password"
-              className="hover:text-primary-dark cursor-pointer text-sm font-medium tracking-wider text-primary-grey300"
+              className="text-xs text-primary-grey300 hover:opacity-80 sm:text-sm sm:font-medium sm:tracking-wider"
             >
               Forgot your password?
             </Link>

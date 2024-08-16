@@ -16,7 +16,7 @@ export default function StaticPageWrapper({
 }) {
   return (
     <main className="flex flex-col">
-      <div className={`relative -mt-[96px] flex h-[588px]`}>
+      <div className={`relative -mt-24 flex h-[588px]`}>
         <div className={`absolute flex h-[588px] w-full`}>
           <Image
             alt={img.alt}
@@ -34,21 +34,23 @@ export default function StaticPageWrapper({
           />
         </div>
       </div>
-      <div className="my-16 flex justify-center">
-        <div className="flex max-w-[1220px] flex-col items-center justify-center">
-          <div className="absolute top-0 text-white">
-            <div className="flex max-w-[1220px] items-center justify-center py-56">
-              <div className="w-full">
-                <h1 className="mb-8 text-6xl md:text-[80px] font-medium leading-[80px] tracking-tight text-center">
-                  {title}
-                </h1>
-                <h6 className="text-center text-xl leading-[30px]">
-                  {subtitle}
-                </h6>
+      <div className="my-5 flex justify-center sm:my-16">
+        <div className="max-w-[calc(100vw_-_32px)] items-center justify-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
+          <div className="flex w-full items-center justify-center">
+            <div className="absolute top-32 text-white md:top-44">
+              <div className="flex w-full justify-center">
+                <div className="text-center">
+                  <h1 className="mb-8 text-center text-6xl font-medium leading-[80px] tracking-tight md:text-[80px]">
+                    {title}
+                  </h1>
+                  <h6 className="text-center text-xl leading-[30px]">
+                    {subtitle}
+                  </h6>
+                </div>
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-8 text-justify text-[#676D73] p-10">
+          <div className="flex flex-col gap-4 p-3 text-justify text-[#676D73] sm:gap-8 sm:p-0">
             {children}
           </div>
         </div>
