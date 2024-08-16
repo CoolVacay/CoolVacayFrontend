@@ -6,7 +6,7 @@ import type {
   AutocompleteChangeDetails,
 } from "@mui/material";
 import { IconGenerator } from "../IconGenerator";
-import type { ILocationsList, IPopularCategoriesData } from "~/app/(application)/definitions";
+import type { IPopularCategoriesData } from "~/app/(application)/definitions";
 
 export interface CustomHTMLAttributes
   extends React.HTMLAttributes<HTMLLIElement> {
@@ -60,7 +60,10 @@ export default function CategoriesAutocomplete({
         onInputChange={(event, newInputValue) => {
           setValue(newInputValue);
         }}
-        renderOption={(props: CustomHTMLAttributes, option: IPopularCategoriesData) => {
+        renderOption={(
+          props: CustomHTMLAttributes,
+          option: IPopularCategoriesData,
+        ) => {
           const { key, ...optionProps } = props;
           return (
             <Box

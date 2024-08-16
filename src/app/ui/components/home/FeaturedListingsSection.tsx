@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-import { getCurrentDates, truncateText } from "~/app/utils/helpers";
+import { truncateText } from "~/app/utils/helpers";
 import { getFeaturedListings } from "~/app/(application)/actions";
 import { IconGenerator, MainCard } from "../common";
 
 export async function FeaturedListingsSection() {
   const featuredListings = (await getFeaturedListings())!;
-  const { startDate, endDate } = getCurrentDates();
+
   return (
     <section className="no-scrollbar flex items-center gap-5 overflow-auto pb-10 will-change-scroll sm:flex-row sm:flex-wrap sm:justify-between">
       {featuredListings?.length > 0 ? (

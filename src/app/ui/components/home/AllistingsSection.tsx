@@ -1,12 +1,8 @@
 import Link from "next/link";
 import React from "react";
-import dayjs from "dayjs";
 import { MainCard } from "../common";
 import { truncateText } from "../../../utils/helpers";
 import { getFilteredListings } from "~/app/(application)/actions";
-
-const startDate = dayjs().format("YYYY-MM-DD");
-const endDate = dayjs().add(6, "day").format("YYYY-MM-DD");
 
 export async function AllistingsSection({ page }: { page: number }) {
   const listings = (await getFilteredListings(`pageSize=8&pageNum=${page}`))!;
