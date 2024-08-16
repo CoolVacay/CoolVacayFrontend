@@ -27,7 +27,7 @@ function FooterSection() {
       className="mt-auto flex flex-col p-4 sm:px-[72px] sm:pt-14"
       style={{ borderTop: "1px solid rgba(173, 181, 189, 0.5)" }}
     >
-      <div className="flex flex-col justify-between gap-10 md:flex-row">
+      <div className="flex flex-col gap-8 lg:flex-row lg:gap-28">
         <div className="flex flex-col gap-7">
           <div className="py-3">
             <IconGenerator
@@ -36,7 +36,7 @@ function FooterSection() {
               alt="Coolvacay logo"
             />
           </div>
-          <div className="flex flex-col gap-10 md:flex-row">
+          <div className="flex gap-10 max-[430px]:flex-col sm:w-[400px] sm:flex-row">
             <div className="flex flex-col gap-7">
               <div className="flex flex-col gap-1">
                 <h1 className="text-sm text-primary-grey400">
@@ -73,8 +73,8 @@ function FooterSection() {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-[50px] md:grid-cols-3 md:gap-[200px]">
-          <div className="flex flex-col gap-5">
+        <div className="grid grid-cols-2 gap-8 sm:w-full sm:grid-cols-3 sm:justify-between">
+          <div className="flex flex-col gap-5 lg:ml-auto">
             <h2 className="text-[15px] font-semibold">Popular Search</h2>
             {popularSearchLinks.map((link) => (
               <h2 key={link} className="text-sm text-primary-grey400">
@@ -82,7 +82,7 @@ function FooterSection() {
               </h2>
             ))}
           </div>
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 lg:ml-auto">
             <h2 className="text-[15px] font-semibold">Quick Links</h2>
             {quickLinks.map((link) => (
               <Link
@@ -94,7 +94,7 @@ function FooterSection() {
               </Link>
             ))}
           </div>
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 lg:ml-auto">
             <h2 className="text-[15px] font-semibold">Discover</h2>
             {discoverLinks.map((link) => (
               <h2 key={link} className="text-sm text-primary-grey400">
@@ -104,7 +104,7 @@ function FooterSection() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-between py-6 text-sm md:flex-row">
+      <div className="flex flex-col items-center justify-between py-6 text-sm sm:flex-row">
         <h2>
           © Coolvacay 2024
           <span className="text-primary-grey400"> - All rights reserved</span>

@@ -69,7 +69,7 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
                 {type === "image" ? (
                   <KeyboardArrowLeftIcon className="hover:text-primary md:h-[50px] md:w-full lg:h-[70px] lg:w-[70px]" />
                 ) : (
-                  <ArrowCircleLeftOutlinedIcon className="hidden size-[46px]" />
+                  <ArrowCircleLeftOutlinedIcon className="hidden md:block md:size-[32px] lg:size-[42px]" />
                 )}
               </button>
             </div>
@@ -105,7 +105,7 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
                           <Link
                             key={listing.id}
                             href={`/listing/${listing.source}/${listing.id}`}
-                            className="h-[420px] md:h-[215px]"
+                            className="h-[420px] md:h-[185px]"
                           >
                             <SimilarCard
                               key={index}
@@ -131,7 +131,7 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
                 {type === "image" ? (
                   <KeyboardArrowRightIcon className="h-[50px] w-full hover:text-primary lg:h-[70px] lg:w-[70px]" />
                 ) : (
-                  <ArrowCircleRightOutlinedIcon className="size-[46px]" />
+                  <ArrowCircleRightOutlinedIcon className="hidden md:block md:size-[32px] lg:size-[42px]" />
                 )}
               </button>
             </div>

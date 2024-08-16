@@ -29,7 +29,6 @@ export default function NavBar({
   //if the token managed by the client exists but the server token has expired then logout
   useEffect(() => {
     if (userData && !isTokenValid) {
-      console.log("runs here");
       const checkSync = async () => {
         await logOut();
       };
@@ -56,7 +55,7 @@ export default function NavBar({
             <IconGenerator
               src={`/cool_vacay_logo_${isWhiteVariant ? "white" : "blue"}.svg`}
               alt="CoolVacay Logo"
-              className="w-[108px] sm:w-[166px]"
+              className="w-[118px] sm:w-[166px]"
               priority={true}
             />
           </Link>

@@ -23,6 +23,8 @@ export default async function Page({
   };
 }) {
   const pageParams = params ?? "";
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+
   const listing = (await getListingData(pageParams))!;
   const query = new URLSearchParams(searchParams);
   const navigateHome = !(query.get("match") ?? query.get("category"));

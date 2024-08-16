@@ -1,6 +1,6 @@
-import React, { type Dispatch, type SetStateAction } from 'react';
-import { type DateRangeType } from '../home/SearchCard';
-import Image from 'next/image';
+import React, { type Dispatch, type SetStateAction } from "react";
+import { type DateRangeType } from "../home/SearchCard";
+import Image from "next/image";
 
 function GridMapToggle({
   isMapMode,
@@ -9,46 +9,49 @@ function GridMapToggle({
 }: {
   isMapMode: boolean;
   setIsMapMode: Dispatch<SetStateAction<boolean>>;
-  updateSearchParams: (params: string[], values: string[] | DateRangeType) => void;
+  updateSearchParams: (
+    params: string[],
+    values: string[] | DateRangeType,
+  ) => void;
 }) {
   return (
-    <div className='flex shadow-xl border-2 rounded-3xl bg-white overflow-hidden'>
+    <div className="flex overflow-hidden rounded-3xl border-2 bg-white shadow-xl">
       <button
-        className={`!text-primary flex-1 p-2 pl-3 transition-all duration-300 ease-in-out rounded-3xl ${
-          !isMapMode && 'bg-primary text-white'
+        className={`flex-1 rounded-3xl p-2 pl-3 !text-primary transition-all duration-300 ease-in-out ${
+          !isMapMode && "bg-primary text-white"
         }`}
         onClick={() => {
-            if(isMapMode !== false) {
+          if (isMapMode !== false) {
             setIsMapMode(false);
-            updateSearchParams(['isMapMode'], ['false']);
+            updateSearchParams(["isMapMode"], ["false"]);
           }
         }}
       >
         <Image
-          width='18'
-          height='18'
-          src='/grid_mode.svg'
-          alt='Grid mode'
-          className='transition-transform duration-300 ease-in-out transform hover:scale-110'
+          width={18}
+          height={18}
+          src="/grid_mode.svg"
+          alt="Grid mode"
+          className="transform transition-transform duration-300 ease-in-out hover:scale-110"
         />
       </button>
       <button
-        className={`!text-primary flex-1 p-2 pl-3 transition-all duration-300 ease-in-out rounded-3xl ${
-          isMapMode && 'bg-primary text-white'
+        className={`flex-1 rounded-3xl p-2 pl-3 !text-primary transition-all duration-300 ease-in-out ${
+          isMapMode && "bg-primary text-white"
         }`}
         onClick={() => {
-          if(isMapMode !== true) {
+          if (isMapMode !== true) {
             setIsMapMode(true);
-            updateSearchParams(['isMapMode'], ['true']);
+            updateSearchParams(["isMapMode"], ["true"]);
           }
         }}
       >
         <Image
-          width='18'
-          height='18'
-          src='/map_mode.svg'
-          alt='Map mode'
-          className='transition-transform duration-300 ease-in-out transform hover:scale-110'
+          width="18"
+          height="18"
+          src="/map_mode.svg"
+          alt="Map mode"
+          className="transform transition-transform duration-300 ease-in-out hover:scale-110"
         />
       </button>
     </div>

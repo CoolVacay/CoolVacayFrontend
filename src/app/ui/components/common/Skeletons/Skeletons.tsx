@@ -20,10 +20,10 @@ export function CardSkeleton() {
 export function FilteredListingSkeleton() {
   return (
     <div
-      className={`flex h-[400px] w-[350px] flex-col gap-4 overflow-hidden rounded-xl sm:w-[280px] md:w-[350px]`}
+      className={`flex h-[400px] w-[340px] flex-col gap-4 overflow-hidden rounded-xl sm:w-[280px] md:w-[350px]`}
     >
       <div
-        className={`h-[330px] w-[350px] rounded-lg  bg-gray-100 p-2 shadow-sm sm:w-[270px] md:w-[350px]`}
+        className={`h-[330px] w-[340px] rounded-lg  bg-gray-100 p-2 shadow-sm sm:w-[270px] md:w-[350px]`}
       >
         <div className="flex h-[210px] w-full items-center justify-center rounded-xl bg-white py-8" />
         <div className="flex flex-col">

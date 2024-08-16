@@ -39,7 +39,7 @@ export default function ListingCard({
           <Image
             src={imageUrl ?? "/listing_card.png"}
             width={350}
-            height={210}
+            height={0}
             alt="CoolVacay listing image"
             style={{
               height: 210,
