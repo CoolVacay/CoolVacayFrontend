@@ -69,7 +69,7 @@ export default function Filters({
   );
 
   return (
-    <div className="mb-5 mr-7 grid grid-cols-4 gap-4 xl:grid-cols-4">
+    <div className="mb-5 grid grid-cols-4 gap-4 xl:grid-cols-4">
       <div className="col-span-3 sm:col-span-2 xl:col-span-1">
         <CitiesAutocomplete
           locationsList={locationsList}

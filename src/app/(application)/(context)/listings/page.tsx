@@ -8,7 +8,13 @@ export default async function Page({
   const query = new URLSearchParams(searchParams);
   const locationsList = (await getLocationsList())!;
   const categories = (await getCategories())!;
+
   return (
-    <Body query={query} searchParams={searchParams} locationsList={locationsList} categories={categories}/>
+    <Body
+      query={query}
+      searchParams={searchParams}
+      locationsList={locationsList}
+      categories={categories}
+    />
   );
 }

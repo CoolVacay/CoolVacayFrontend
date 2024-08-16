@@ -20,6 +20,12 @@ export const formatDateMMM_DD_YYYY = (date: Date | string) => {
   return dayjs(date).format("YYYY-MM-DD");
 };
 
+export const getCurrentDates = () => {
+  const startDate = dayjs().format("YYYY-MM-DD");
+  const endDate = dayjs().add(6, "day").format("YYYY-MM-DD");
+  return { startDate, endDate };
+};
+
 export const removeEmptyValues = (
   obj: Record<string, string | number | null | undefined>,
 ) => {
@@ -41,12 +47,6 @@ export function toastNotifier(errorMessage: string | undefined) {
     });
   }
 }
-
-export const getCurrentDates = () => {
-  const startDate = dayjs().format("YYYY-MM-DD");
-  const endDate = dayjs().add(6, "day").format("YYYY-MM-DD");
-  return { startDate, endDate };
-};
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,

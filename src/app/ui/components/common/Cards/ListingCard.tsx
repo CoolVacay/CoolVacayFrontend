@@ -10,6 +10,7 @@ import {
   formatDateMMMDD,
   formatDateMMM_DD_YYYY,
 } from "../../../../utils/helpers";
+import { Tooltip } from "@mui/material";
 
 export default function ListingCard({
   id,
@@ -38,7 +39,7 @@ export default function ListingCard({
           <Image
             src={imageUrl ?? "/listing_card.png"}
             width={350}
-            height={240}
+            height={210}
             alt="CoolVacay listing image"
             style={{
               height: 210,
@@ -64,9 +65,16 @@ export default function ListingCard({
             </div>
           ) : null}
           <div>
-            <div className="mb-1 gap-3 text-base font-medium">
-              {truncateText(name, 40)}
-            </div>
+            <Tooltip
+              disableHoverListener={name.length < 39}
+              title={name}
+              enterDelay={800}
+              leaveDelay={200}
+            >
+              <div className="mb-1 gap-3 text-base font-medium">
+                {truncateText(name, 39)}
+              </div>
+            </Tooltip>
             <p className="text-sm text-[#676D73]">{subtitle}</p>
           </div>
           {starRating ? (

@@ -6,6 +6,7 @@ import {
   type IPopularCategoriesData,
   type ILocationsList,
 } from "~/app/(application)/definitions";
+import { CloseDatesListings } from "./CloseDatesListings";
 
 function Body({
   query,
@@ -26,13 +27,19 @@ function Body({
         >
           <Filters locationsList={locationsList} categories={categories} />
           <div
-            className={`${searchParams.isMapMode == "true" ? "hidden" : ""} sm:flex sm:flex-col sm:justify-between `}
+            className={`${searchParams.isMapMode == "true" ? "hidden" : ""} flex flex-col justify-between gap-4 `}
           >
             <Suspense
               fallback={<FilteredListingsSkeleton />}
               key={query.toString()}
             >
               <ListingSection query={query} />
+            </Suspense>
+            <Suspense
+              fallback={<FilteredListingsSkeleton />}
+              key={`closeDates-${query.toString()}`}
+            >
+              <CloseDatesListings query={query} />
             </Suspense>
           </div>
         </div>

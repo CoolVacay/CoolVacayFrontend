@@ -26,14 +26,14 @@ export default function NavBar({
   userData?: TUserData["profile"] | null;
   isTokenValid: boolean;
 }) {
+  //if the token managed by the client exists but the server token has expired then logout
   useEffect(() => {
-    if (!userData) {
-      const checkToken = async () => {
-        if (!isTokenValid) {
-          await logOut();
-        }
+    if (userData && !isTokenValid) {
+      console.log("runs here");
+      const checkSync = async () => {
+        await logOut();
       };
-      void checkToken();
+      void checkSync();
     }
   }, [isTokenValid, userData]);
 

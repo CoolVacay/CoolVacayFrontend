@@ -19,17 +19,19 @@ export function CardSkeleton() {
 
 export function FilteredListingSkeleton() {
   return (
-    <div className="flex w-[350px] grow-0 flex-col gap-4 overflow-hidden rounded-md p-1 sm:w-[270px] md:w-[350px]">
+    <div
+      className={`flex h-[400px] w-[350px] flex-col gap-4 overflow-hidden rounded-xl sm:w-[280px] md:w-[350px]`}
+    >
       <div
-        className={`h-[340px] w-[350px] grow-0 overflow-hidden rounded-xl  bg-gray-100 p-1 shadow-sm sm:w-[270px] md:w-[350px]`}
+        className={`h-[330px] w-[350px] rounded-lg  bg-gray-100 p-2 shadow-sm sm:w-[270px] md:w-[350px]`}
       >
-        <div className="flex h-[210px] items-center justify-center truncate rounded-xl bg-white px-14 py-8" />
+        <div className="flex h-[210px] w-full items-center justify-center rounded-xl bg-white py-8" />
         <div className="flex flex-col">
           <div className="mt-3 flex justify-between">
             <div className="m-1 h-6 w-32 rounded-md bg-gray-200 text-sm font-medium" />
             <div className="m-1 h-4 w-24 rounded-md bg-gray-200 text-sm font-medium sm:w-20" />
           </div>
-          <div className="mx-1 my-1 flex h-[72px] grow rounded-md bg-gray-200" />
+          <div className="mx-1 my-1 flex h-[52px] grow rounded-md bg-gray-200" />
         </div>
       </div>
       <div className="border-primary-gray-200 rounded-full border bg-gray-100 py-6 font-bold text-primary" />
@@ -51,7 +53,7 @@ export function FeaturedListingsSkeleton() {
 
 export function AllListingsSkeleton() {
   return (
-    <div className="grid grid-cols-3 gap-5 py-10 desktop:grid-cols-4">
+    <div className="desktop:grid-cols-4 grid grid-cols-3 gap-5 py-10">
       {Array.from({ length: 8 }, (_, i) => i + 1).map((skeleton) => {
         return <CardSkeleton key={skeleton} />;
       })}
@@ -61,11 +63,17 @@ export function AllListingsSkeleton() {
 
 export function FilteredListingsSkeleton() {
   return (
-    <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-      {Array.from({ length: 10 }, (_, i) => i + 1).map((skeleton) => {
-        return <FilteredListingSkeleton key={skeleton} />;
-      })}
-    </div>
+    <>
+      <div className="flex gap-6">
+        <div className="h-6 w-60 bg-gray-100" />
+        <div className="h-4 w-12 bg-gray-100" />
+      </div>
+      <div className="flex animate-pulse flex-wrap items-center justify-center gap-5 xl:justify-between">
+        {Array.from({ length: 10 }, (_, i) => i + 1).map((skeleton) => {
+          return <FilteredListingSkeleton key={skeleton} />;
+        })}
+      </div>
+    </>
   );
 }
 
