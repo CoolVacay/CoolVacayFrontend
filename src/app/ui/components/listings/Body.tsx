@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import Filters from "./Filters";
 import { FilteredListingsSkeleton, MapContainer, MapSkeleton } from "../common";
 import { ListingSection } from "./ListingsSection";
 import {
@@ -7,6 +6,7 @@ import {
   type ILocationsList,
 } from "~/app/(application)/definitions";
 import { CloseDatesListings } from "./CloseDatesListings";
+import { Filters } from "./Filters";
 
 function Body({
   query,

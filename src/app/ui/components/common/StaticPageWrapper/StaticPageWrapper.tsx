@@ -39,7 +39,7 @@ export default function StaticPageWrapper({
           <div className="flex w-full items-center justify-center">
             <div className="absolute top-32 text-white md:top-44">
               <div className="flex w-full justify-center">
-                <div className="text-center">
+                <div className="w-full text-center">
                   <h1 className="mb-8 text-center text-6xl font-medium leading-[80px] tracking-tight md:text-[80px]">
                     {title}
                   </h1>

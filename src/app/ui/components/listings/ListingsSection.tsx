@@ -4,7 +4,6 @@ import { ListingCard } from "../common";
 import Pagination from "./Pagination";
 
 export async function ListingSection({ query }: { query: URLSearchParams }) {
-  // await new Promise((resolve) => setTimeout(resolve, 10000));
   const listings = (await getFilteredListings(query.toString()))!;
 
   const title =
