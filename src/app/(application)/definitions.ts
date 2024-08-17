@@ -176,6 +176,7 @@ export interface ICountries {
 export interface ILocationsList {
   id: number;
   icon: string;
+  type: string;
   match: string;
   displayName: string;
 }
