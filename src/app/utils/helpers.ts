@@ -34,7 +34,7 @@ export const removeEmptyValues = (
   );
 };
 
-export function toastNotifier(errorMessage: string | undefined) {
+export function toastNotifier(errorMessage?: string | undefined) {
   if (!errorMessage) {
     toast.success("Success", {
       duration: 8000,

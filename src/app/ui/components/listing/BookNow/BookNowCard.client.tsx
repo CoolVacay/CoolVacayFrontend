@@ -12,6 +12,8 @@ export interface IPricingDetails {
   totalPrice: number;
   totalPriceStr: string;
   numberOfNights: number;
+  confirmationAmount: number;
+  confirmationAmountStr: string;
   pricePerNight: number;
   pricePerNightStr: string;
   components: {

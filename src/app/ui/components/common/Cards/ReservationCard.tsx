@@ -32,8 +32,8 @@ export default function ReservationCard({
               {details.listingType}
             </div>
           ) : null}
-          <p>Sleeps {reservation.adults}</p>
-          <p>{details.squareFeets} ft2</p>
+          <p>Guests: {reservation.adults}</p>
+          <p>{details.squareFeets} sqf</p>
         </div>
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
           <div className="flex gap-2 md:flex-row lg:flex-col xl:flex-row">
@@ -62,16 +62,16 @@ export default function ReservationCard({
           </div>
           <div className="hidden w-[1px] bg-[#EAEAEF] lg:mx-5 lg:block lg:h-full" />
           <div className="my-3 block h-[1px] w-full bg-[#EAEAEF] lg:hidden" />
-          <div className="flex flex-row justify-between text-sm lg:flex-col lg:gap-2 lg:text-base">
+          <div className="flex flex-row justify-between text-sm lg:flex-col lg:gap-2 lg:text-base lg:mr-5">
+            <p className="text-[#676D73]">Dates Booked:</p>
             <p className="text-sm font-medium">
               {`${dayjs(details.fromDate).format("MMM DD")} -
                 ${dayjs(details.toDate).format("MMM DD")}`}
             </p>
-            <p className="text-[#676D73]">Booked on</p>
           </div>
-          <div className="mt-1 flex flex-row justify-between text-sm lg:flex-col lg:gap-2 lg:text-base">
-            <p className="text-sm font-medium">{"$" + details.pricePerNight}</p>
-            <p className="text-[#676D73]">Total with fees</p>
+          <div className="flex flex-row justify-between text-sm lg:flex-col lg:gap-2 lg:text-base">
+            <p className="text-[#676D73]">Grand Total:</p>
+            <p className="text-sm font-medium">{"$" + details.totalPrice}</p>
           </div>
         </div>
       </div>

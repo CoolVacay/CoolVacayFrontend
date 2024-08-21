@@ -71,28 +71,37 @@ export default function NavBar({
           <div
             className={`flex gap-5 ${isWhiteVariant ? "text-white" : "text-black"}`}
           >
-            <Link
-              className="text-center text-sm"
-              href={`/listings?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1&pageNum=1`}
-            >
-              Listed places
-            </Link>
+          <Link
+            className="text-center text-sm"
+            href={`/listings?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1&pageNum=1`}
+          >
+            Listed places
+          </Link>
           </div>
-          <div className="flex items-center gap-5">
+          <div className={`flex items-center gap-5  ${isWhiteVariant ? "text-white" : "text-black"}`}>
+            <Link
+              className={`text-center text-sm`}
+              href={`/contact-us`}
+            >
+              Contact Us
+            </Link>
+            <span className="hidden text-center lg:inline-block">
+              •
+            </span>{" "}
             <Link
               href="/rental-income-estimator"
-              className={`min-w-32 text-center text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
+              className={`text-center text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
             >
               Vacation Rental Management
             </Link>
+            <span className="hidden  text-center lg:inline-block">
+              •
+            </span>{" "}
             {userData ? (
               <Link href="/profile/reservations" className="hidden sm:block">
                 <p
                   className={`text-center text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
                 >
-                  <span className="mr-[14px] hidden  text-center lg:inline-block">
-                    •
-                  </span>{" "}
                   My bookings
                 </p>
               </Link>

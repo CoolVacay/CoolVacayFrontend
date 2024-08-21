@@ -86,7 +86,7 @@ export function Filters({
           }}
         />
       </div>
-      <div className="col-span-1 sm:hidden">
+      <div className="col-span-1 xl:hidden">
         <GridMapToggle
           isMapMode={isMapMode}
           setIsMapMode={setIsMapMode}
@@ -167,7 +167,7 @@ export function Filters({
           />
         </LocalizationProvider>
       </div>
-      <div className="col-span-1 sm:col-span-2 xl:col-span-1">
+      <div className="col-span-1 sm:col-span-1 xl:col-span-1">
         <SimpleSelectInput
           value={
             searchParamsValues.numberOfGuests !== ""

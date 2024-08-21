@@ -221,3 +221,150 @@ export function ReservationCardsSkeleton() {
     </div>
   );
 }
+
+export function BlogSidebarSkeleton() {
+  return (
+    <div className="-m-3 w-[25vw] h-[45vh] flex-col gap-5 md:mt-24 animate-pulse">
+      <div className="flex h-min flex-col items-center justify-center gap-5 rounded-[10px] bg-gray-100 p-6">
+        <div className="h-8 w-[200px] bg-gray-200" /> {/* Title Placeholder */}
+        <div className="w-full h-[300px] bg-gray-200" /> {/* SearchCard Placeholder */}
+      </div>
+      <div className="mt-5 flex h-min flex-col gap-5 rounded-[10px] bg-gray-100 p-6">
+        <div className="h-[60px] w-full bg-gray-200" /> {/* NewsletterForm Placeholder */}
+        <div className="flex h-[190px] w-full bg-gray-200 rounded-sm" /> {/* Image Placeholder */}
+      </div>
+    </div>
+  );
+}
+
+export function BlogContentSkeleton() {
+  return (
+    <div className="flex flex-col w-[30vw] gap-10 animate-pulse">
+      <div className="flex flex-col gap-5">
+        {/* Featured Tag */}
+        <div className="flex h-[33px] w-[80px] shrink-0 rounded-[64px] bg-gray-200" />
+
+        {/* Title and Date */}
+        <div className="flex flex-col gap-3">
+          <div className="h-[32px] w-full bg-gray-200" />
+          <div className="h-[20px] w-[150px] bg-gray-200" />
+        </div>
+
+        {/* First Image */}
+        <div className="h-[200px] w-full bg-gray-200" />
+
+        {/* Paragraphs and Subheadings */}
+        <div className="flex flex-col gap-3">
+          <div className="h-[20px] w-[90%] bg-gray-200" />
+          <div className="h-[40px] w-[200px] bg-gray-200" />
+          <div className="h-[20px] w-[85%] bg-gray-200" />
+        </div>
+
+        {/* List Items */}
+        <div className="px-16 flex flex-col gap-3">
+          <div className="h-[24px] w-[200px] bg-gray-200" />
+          <div className="h-[20px] w-full bg-gray-200" />
+          <div className="h-[20px] w-[90%] bg-gray-200" />
+
+          <div className="h-[24px] w-[200px] bg-gray-200" />
+          <div className="h-[20px] w-full bg-gray-200" />
+          <div className="h-[20px] w-[90%] bg-gray-200" />
+        </div>
+
+        {/* Second Image */}
+        <div className="h-[200px] w-full bg-gray-200" />
+
+        {/* More Subheadings and Paragraphs */}
+        <div className="flex flex-col gap-3">
+          <div className="h-[40px] w-[200px] bg-gray-200" />
+          <div className="h-[20px] w-[90%] bg-gray-200" />
+        </div>
+
+        {/* Additional List Items */}
+        <div className="px-16 flex flex-col gap-3">
+          <div className="h-[24px] w-[200px] bg-gray-200" />
+          <div className="h-[20px] w-full bg-gray-200" />
+          <div className="h-[20px] w-[90%] bg-gray-200" />
+
+          <div className="h-[24px] w-[200px] bg-gray-200" />
+          <div className="h-[20px] w-full bg-gray-200" />
+          <div className="h-[20px] w-[90%] bg-gray-200" />
+        </div>
+
+        {/* Third Image */}
+        <div className="h-[200px] w-full bg-gray-200" />
+
+        {/* Final Paragraphs */}
+        <div className="flex flex-col gap-3">
+          <div className="h-[20px] w-[90%] bg-gray-200" />
+          <div className="h-[20px] w-[85%] bg-gray-200" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function StaticPageWrapperSkeleton() {
+  return (
+    <main className="flex flex-col">
+      <div className="relative -mt-24 flex h-[588px]">
+        <div className="absolute flex h-[588px] w-full bg-gray-100 animate-pulse" />
+      </div>
+      <div className="my-5 flex justify-center sm:my-16">
+        <div className="max-w-[calc(100vw_-_32px)] items-center justify-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
+          <div className="flex w-full items-center justify-center">
+            <div className="absolute top-32 md:top-44 text-white animate-pulse">
+              <div className="flex w-full justify-center">
+                <div className="w-full text-center">
+                  <div className="mb-8 h-[80px] bg-gray-300 rounded-full" />
+                  <div className="h-[30px] bg-gray-300 rounded-full" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-4 p-3 text-justify text-[#676D73] sm:gap-8 sm:p-0 animate-pulse">
+            <div className="h-[30px] bg-gray-200 rounded-full" />
+            <div className="space-y-4">
+              <div className="h-[20px] bg-gray-200 rounded-full" />
+              <div className="h-[20px] bg-gray-200 rounded-full" />
+              <div className="h-[20px] bg-gray-200 rounded-full" />
+            </div>
+            <div className="h-[20px] bg-gray-200 rounded-full" />
+            <div className="h-[20px] bg-gray-200 rounded-full" />
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+export function AllBlogsSkeleton() {
+  return (
+    <div className="flex w-full max-w-[1220px] flex-col items-center justify-center animate-pulse">
+      {/* Featured Blog Skeleton */}
+      <div className="flex flex-col items-center gap-6 md:flex-row md:gap-20">
+        <div className="flex max-w-full flex-col gap-5 md:max-w-[50%]">
+          <div className="h-6 w-[80px] rounded bg-gray-100" /> {/* CustomChip Skeleton */}
+          <div className="flex flex-col gap-3">
+            <div className="h-10 w-[200px] rounded bg-gray-100 md:h-[67px] md:w-[300px]" /> {/* Title Skeleton */}
+            <div className="h-4 w-full rounded bg-gray-100 md:h-[30px]" /> {/* Description Skeleton */}
+            <div className="h-4 w-[160px] rounded bg-gray-100" /> {/* Button Skeleton */}
+          </div>
+        </div>
+        <div className="flex w-full md:w-auto">
+          <div className="hidden h-[370px] w-[530px] rounded-2xl bg-gray-100 md:inline-block" /> {/* Image Skeleton */}
+        </div>
+      </div>
+
+      {/* Blogs Grid Skeleton */}
+      <div className="mt-10 grid grid-cols-1 gap-6 py-10 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 xl:grid-cols-4 w-full">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <div key={index} className="flex flex-col gap-3 p-4 border border-[#EAEAEF] rounded-lg">
+            <div className="h-[200px] w-full rounded bg-gray-100" /> {/* Image Skeleton */}
+            <div className="h-6 w-[70%] rounded bg-gray-100" /> {/* Title Skeleton */}
+            <div className="h-4 w-[50%] rounded bg-gray-100" /> {/* Subtitle Skeleton */}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

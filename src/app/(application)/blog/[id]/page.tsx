@@ -5,6 +5,8 @@ import { SearchCard } from "../../../ui/components/home/SearchCard";
 import NewsletterForm from "~/app/ui/components/common/Newsletter/NewsletterForm";
 import { getBlogContent, getLocationsList } from "../../actions";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import { BlogContentSkeleton, BlogSidebarSkeleton } from "~/app/ui/components/common";
 
 const BlogSidebar = async () => {
   const locationsList = (await getLocationsList())!;
@@ -34,20 +36,31 @@ const BlogSidebar = async () => {
   );
 };
 
-export default async function Blogpage({ params }: { params: { id: string } }) {
+const BlogContent = async ({ params }: { params: { id: string } }) => {  
+  
   const currentBlogsHTML = await getBlogContent(params.id);
 
   if (!currentBlogsHTML) {
     return redirect("/404");
   }
 
+
+  return <>
+  {parse(currentBlogsHTML)}
+  </>
+}
+
+export default async function Blogpage({ params }: { params: { id: string } }) {
+
   return (
     <main className="flex flex-col">
       <div className="flex justify-center">
         <div className="flex max-w-[1220px] flex-col items-center justify-center">
           <div className="flex-col gap-10 p-10 md:flex lg:flex-row">
-            {parse(currentBlogsHTML)}
+          <Suspense fallback={<><BlogContentSkeleton/><BlogSidebarSkeleton/></>}>
+            <BlogContent params={params} />
             <BlogSidebar />
+            </Suspense>
           </div>
         </div>
       </div>

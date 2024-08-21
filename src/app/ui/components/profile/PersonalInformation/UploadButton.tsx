@@ -3,25 +3,15 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
 import { Toaster } from "react-hot-toast";
-import {
-  deleteProfilePicture,
-  uploadProfilePicture,
-} from "~/app/(application)/actions";
-import { toastNotifier } from "~/app/utils/helpers";
-import type { TUserData } from "~/app/(application)/definitions";
 
 export default function UploadButton({
-  profileInfo,
   editMode,
-  files,
+  setIsImageAttached,
   setFiles,
-  setEditMode,
 }: {
-  profileInfo: TUserData["profile"];
   editMode: boolean;
-  files: File[];
+  setIsImageAttached: React.Dispatch<React.SetStateAction<boolean>>;
   setFiles: (value: React.SetStateAction<File[]>) => void;
-  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const { getRootProps, getInputProps } = useDropzone({
     noDrag: true,
@@ -40,6 +30,7 @@ export default function UploadButton({
           }),
         ),
       );
+      setIsImageAttached(true);
     },
   });
 
@@ -53,27 +44,6 @@ export default function UploadButton({
           <p>Change Photo</p>
         </div>
       </div>
-      {files.length > 0 ? (
-        <button
-          onClick={async () => {
-            const formData = new FormData();
-            files.forEach((file) => formData.append(`[${file.name}]`, file));
-            if (profileInfo.profilePicture) {
-              await deleteProfilePicture(profileInfo.id.toString());
-            }
-            const res = await uploadProfilePicture({
-              userId: profileInfo.id.toString(),
-              formData: formData,
-            });
-            toastNotifier(res);
-            setFiles([]);
-            setEditMode(false);
-          }}
-          className={`w-[152px] rounded-full border border-[#29ABE2] bg-primary px-5 py-3 text-white`}
-        >
-          Save Photo
-        </button>
-      ) : null}
       <Toaster />
     </section>
   );

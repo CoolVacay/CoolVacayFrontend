@@ -1,5 +1,8 @@
 "use client";
 
+import {
+  uploadProfilePicture,
+} from "~/app/(application)/actions";
 import { useState, useMemo } from "react";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -10,7 +13,6 @@ import { MenuItem } from "@mui/material";
 import { Toaster } from "react-hot-toast";
 import UploadButton from "./UploadButton";
 import { toastNotifier } from "~/app/utils/helpers";
-import { IconGenerator } from "../../common";
 import { updateProfile } from "~/app/(application)/actions";
 import { ActionButton } from "../../authentication";
 import { SimpleInput, SimpleSelectInput } from "../../common";
@@ -32,6 +34,7 @@ export default function ProfileForm({
   countries: ICountries[];
 }) {
   const [editMode, setEditMode] = useState(false);
+  const [isImageAttached, setIsImageAttached] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
   const [errorMessage, setErrorMessage] = useState<undefined | string>(
     undefined,
@@ -55,6 +58,7 @@ export default function ProfileForm({
       firstName: profileInfo?.firstName ?? "",
       lastName: profileInfo?.lastName ?? "",
       phone: profileInfo?.phone ?? "",
+      isImageAttached: isImageAttached ?? false,
       nationality: profileInfo?.nationality ?? "",
       dateOfBirth: profileInfo?.dateOfBirth ?? "",
       gender: profileInfo?.gender ?? "",
@@ -65,7 +69,48 @@ export default function ProfileForm({
 
   return (
     <>
-      <div className="flex justify-between">
+      <form
+        action={async () => {
+          try {
+            const modifiedValues = Object.fromEntries(
+              Object.entries(formik.values).filter(([_, v]) => v != ""),
+            );
+
+            if(modifiedValues?.dateOfBirth) {
+              modifiedValues.dateOfBirth = dayjs(modifiedValues.dateOfBirth.toString())?.format('YYYY-MM-DD').toString();
+            } 
+
+            const response = await updateProfile(
+              modifiedValues as IProfileDetails,
+            );
+            
+            if(typeof response === "string") {
+              throw Error(response);
+            }
+
+            if(files) {
+              const formData = new FormData();
+                files.forEach((file) => formData.append(`[${file.name}]`, file));
+                await uploadProfilePicture({
+                  userId: profileInfo.id.toString(),
+                  formData: formData,
+                });
+            }
+            
+            toastNotifier();
+          } catch (error) {
+            console.log(error)
+            formik.resetForm();
+            toastNotifier('Something went wrong, please try again later.');
+          }
+            await formik.setFieldValue('isImageAttached', false);
+            setFiles([]);
+            setIsImageAttached(false);
+            setEditMode(false);
+          }
+        }
+      >
+        <div className="flex justify-between">
         <div className="flex gap-10">
           {files.length > 0 ? (
             <div className="h-20 w-20">
@@ -87,27 +132,15 @@ export default function ProfileForm({
             </p>
             <UploadButton
               editMode={editMode}
-              files={files}
+              setIsImageAttached={async () => {
+                await formik.setFieldValue("isImageAttached", true)
+                setIsImageAttached(!true);
+              }}
               setFiles={setFiles}
-              profileInfo={profileInfo}
-              setEditMode={setEditMode}
             />
           </div>
         </div>
       </div>
-      <form
-        action={async () => {
-          const modifiedValues = Object.fromEntries(
-            Object.entries(formik.values).filter(([_, v]) => v != ""),
-          );
-          const response = await updateProfile(
-            modifiedValues as IProfileDetails,
-          );
-          toastNotifier(response);
-          setErrorMessage(typeof response === "string" ? response : undefined);
-          setEditMode(false);
-        }}
-      >
         <div className="mb-8 flex flex-col">
           <div className="my-10 flex flex-col gap-5">
             <div className="flex flex-col gap-5 lg:w-full lg:flex-row">
@@ -217,35 +250,14 @@ export default function ProfileForm({
                     sx={{
                       height: "40px",
                       display: "flex",
-                      px: "0px",
+                      pl: "9px",
                       justifyContent: "center",
                       width: "100%",
                       backgroundColor: !editMode ? "#E7E7E7" : "#fff",
                       border: "1px solid #EAEAEF !important",
                       borderRadius: "8px",
                     }}
-                    disabled={!editMode && true}
-                    slotProps={{
-                      textField: {
-                        InputProps: {
-                          sx: {
-                            fontSize: "16px",
-                            "& .Mui-disabled": {
-                              WebkitTextFillColor: "#676D73",
-                            },
-                          },
-                          startAdornment: (
-                            <IconGenerator
-                              alt="Calendar icon"
-                              src={`/calendar_icon.svg`}
-                              width="22px"
-                              className="mr-2"
-                            />
-                          ),
-                          endAdornment: null,
-                        },
-                      },
-                    }}
+                    disabled={!editMode}
                     value={dayjs(formik.values.dateOfBirth)}
                     onChange={(newValue) =>
                       formik.setFieldValue("dateOfBirth", newValue)
@@ -262,7 +274,12 @@ export default function ProfileForm({
             <div className="flex gap-5">
               <button
                 className="w-[200px] rounded-full border border-[#676D73] px-12 py-2 text-[#676D73]"
-                onClick={() => setEditMode(false)}
+                onClick={() => {
+                  formik.resetForm();
+                  setEditMode(false)
+                  setIsImageAttached(false)
+                  setFiles([])
+                }}
               >
                 Cancel
               </button>

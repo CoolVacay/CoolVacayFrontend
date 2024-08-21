@@ -66,7 +66,7 @@ export function PricingDetails({
               className="flex justify-between text-lg text-[#858C93]"
             >
               {fee.name}
-              <span className="text-black">{fee.totalStr}</span>
+              <span className="text-black">{fee.name === "Discount" ? '-'+fee.totalStr : fee.totalStr}</span>
             </p>
           );
         } else {
@@ -77,6 +77,10 @@ export function PricingDetails({
         Total
         <span>{pricingDetails?.totalPriceStr}</span>
       </h5>
+      <h4 className="flex justify-between text-xl">
+        Due Now
+        <span>{pricingDetails?.confirmationAmountStr}</span>
+      </h4>
     </div>
   );
 }

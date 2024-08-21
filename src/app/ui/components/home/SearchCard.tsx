@@ -29,8 +29,7 @@ export function SearchCard({
 
   const [numberOfGuests, setNumberOfGuests] = useState("1");
   const [dates, setDates] = useState<DateRangeType>([
-    dayjs(),
-    dayjs().add(6, "day"),
+    null, null
   ]);
   const [fromDate, toDate] = dates;
 

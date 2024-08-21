@@ -52,7 +52,7 @@ export default async function HomePage() {
               <FeaturedListingsSection />
             </Suspense>
           </div>
-          <DiscoverSection />
+            <DiscoverSection />
           <section className="w-full">
             <div className="flex items-center justify-between">
               <h1 className="text-[28px]">All listings</h1>

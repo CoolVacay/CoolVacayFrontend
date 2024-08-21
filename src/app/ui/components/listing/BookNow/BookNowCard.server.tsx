@@ -15,7 +15,7 @@ export default async function BookNow({ params }: { params: IParams }) {
   const listingInfo = (await getListingData(params))!;
 
   const availabilityDate =
-    listingInfo.source === "Lodgix"
+    listingInfo.source === "Lodgix" || listingInfo.source === "Rhea"
       ? await getAvailabilityDates(
           listingInfo.source,
           listingInfo.id,

@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { Suspense } from "react";
+import { StaticPageWrapperSkeleton } from "../Skeletons/Skeletons";
 
 export default function StaticPageWrapper({
   children,
@@ -16,6 +18,7 @@ export default function StaticPageWrapper({
 }) {
   return (
     <main className="flex flex-col">
+      <Suspense fallback={<StaticPageWrapperSkeleton/>}>
       <div className={`relative -mt-24 flex h-[588px]`}>
         <div className={`absolute flex h-[588px] w-full`}>
           <Image
@@ -54,6 +57,7 @@ export default function StaticPageWrapper({
           </div>
         </div>
       </div>
+      </Suspense>
     </main>
   );
 }

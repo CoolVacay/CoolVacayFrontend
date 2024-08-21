@@ -6,7 +6,7 @@ import {
   type ILocationsList,
 } from "~/app/(application)/definitions";
 import { CloseDatesListings } from "./CloseDatesListings";
-import { Filters } from "./FIlters";
+import { Filters } from "./Filters";
 
 function Body({
   query,
@@ -20,14 +20,14 @@ function Body({
   categories: IPopularCategoriesData[];
 }) {
   return (
-    <main className="static w-full p-4 sm:py-0 sm:pl-20 sm:pr-0">
-      <div className="relative w-full gap-4 sm:flex">
+    <main className="static w-full p-4 xl:py-0 xl:pl-20 xl:pr-0">
+      <div className="relative w-full gap-4 xl:flex">
         <div
-          className={`flex w-full shrink-0 flex-col pb-6 sm:max-w-[300px] md:max-w-[380px] lg:max-w-[480px] xl:max-w-[740px]`}
+          className={`flex w-full shrink-0 flex-col pb-6 xl:max-w-[1100px]`}
         >
           <Filters locationsList={locationsList} categories={categories} />
           <div
-            className={`${searchParams.isMapMode == "true" ? "hidden" : ""} flex flex-col justify-between gap-4 `}
+            className={`${searchParams.isMapMode == "true" ? "hidden" : ""} flex flex-col justify-between gap-4`}
           >
             <Suspense
               fallback={<FilteredListingsSkeleton />}
