@@ -38,7 +38,7 @@ export async function PopularCategories() {
               <button className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F7F7F7] p-3">
                 <span className="flex">
                   <IconGenerator
-                    src={category.iconUrl}
+                    src={category.iconUrl.startsWith('http:') ? category.iconUrl.replace("http:", "https:") : category.iconUrl}
                     width={category.width}
                     alt={category.alt}
                   />
