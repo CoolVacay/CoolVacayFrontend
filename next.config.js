@@ -50,6 +50,12 @@ const config = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "http",
+        hostname: "azureblobimg.blob.core.windows.net",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

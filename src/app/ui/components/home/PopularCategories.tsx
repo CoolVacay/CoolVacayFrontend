@@ -20,7 +20,7 @@ export async function PopularCategories() {
             <Link href={category.page} className="flex items-center">
               <span className="mr-2 flex lg:mr-4">
                 <IconGenerator
-                  src={category.iconUrl}
+                  src={category.iconUrl.startsWith('http:') ? category.iconUrl.replace("http:", "https:") : category.iconUrl}
                   width={category.width}
                   alt={category.alt}
                 />
