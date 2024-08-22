@@ -33,6 +33,7 @@ export default async function HomePage() {
             src="/landing_background.png"
             quality={20}
             fill
+            priority={true}
             style={{
               position: "absolute",
               objectFit: "cover",
