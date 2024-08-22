@@ -6,7 +6,7 @@ import {
   type ILocationsList,
 } from "~/app/(application)/definitions";
 import { CloseDatesListings } from "./CloseDatesListings";
-import { Filters } from "./FIlters";
+import { Filters } from "./Filters";
 
 function Body({
   query,
