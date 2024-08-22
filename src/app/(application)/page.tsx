@@ -31,13 +31,12 @@ export default async function HomePage() {
           <Image
             alt="Coolvacay background image"
             src="/landing_background.png"
-            quality={80}
+            quality={20}
             fill
-            priority={true}
             style={{
               position: "absolute",
               objectFit: "cover",
-              filter: "brightness(60%)",
+              filter: "brightness(50%)",
               zIndex: -1,
             }}
           />
