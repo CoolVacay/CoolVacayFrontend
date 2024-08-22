@@ -39,9 +39,9 @@ export async function FeaturedListingsSection() {
           );
         })
       ) : (
-        <h1 className="text-[16px]">
+        <p className="text-[16px]">
           There are no featured listings at this moment
-        </h1>
+        </p>
       )}
     </section>
   );

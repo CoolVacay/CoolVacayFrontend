@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.coolvacay.pp.ua/</loc>
+    <lastmod>2024-08-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- About Page -->
+  <url>
+    <loc>https://www.coolvacay.pp.ua/about</loc>
+    <lastmod>2024-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Contact Page -->
+  <url>
+    <loc>https://www.coolvacay.pp.ua/contact-us</loc>
+    <lastmod>2024-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blogs -->
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog</loc>
+    <lastmod>2024-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog/1</loc>
+    <lastmod>2024-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog/2</loc>
+    <lastmod>2024-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog/3</loc>
+    <lastmod>2024-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog/4</loc>
+    <lastmod>2024-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog/4</loc>
+    <lastmod>2024-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog/5</loc>
+    <lastmod>2024-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog/6</loc>
+    <lastmod>2024-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog/7</loc>
+    <lastmod>2024-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog/8</loc>
+    <lastmod>2024-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog/9</loc>
+    <lastmod>2024-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coolvacay.pp.ua/blog/10</loc>
+    <lastmod>2024-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

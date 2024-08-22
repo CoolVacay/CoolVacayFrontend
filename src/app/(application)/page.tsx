@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from 'next';
 
 import {
   AllListingsSkeleton,
@@ -16,6 +17,11 @@ import {
   DiscoverSection,
 } from "../ui/components/home/index";
 import { Newsletter, IconGenerator } from "../ui/components/common";
+
+export const metadata: Metadata = {
+  title: 'CoolVacay | Find Your Dream Vacation Rentals & Travel Deals',
+  description: 'Discover unbeatable vacation rentals and travel deals with CoolVacay. Book your next getaway effortlessly with our easy-to-use booking engine. From luxury stays to budget-friendly options, CoolVacay connects you with top-rated destinations worldwide. Start your adventure today!',
+};
 
 export default async function HomePage() {
   return (
@@ -43,11 +49,11 @@ export default async function HomePage() {
             <HeroSection />
           </div>
           <div className="w-full">
-            <h1 className="p-1 text-[28px] sm:py-7">Popular Categories</h1>
+            <h2 className="p-1 text-[28px] sm:py-7">Popular Categories</h2>
             <Suspense fallback={<PopularCategoriesSkeleton />}>
               <PopularCategories />
             </Suspense>
-            <h1 className="py-9 text-left text-[28px]">Featured Listings</h1>
+            <h2 className="py-9 text-left text-[28px]">Featured Listings</h2>
             <Suspense fallback={<FeaturedListingsSkeleton />}>
               <FeaturedListingsSection />
             </Suspense>
@@ -55,7 +61,7 @@ export default async function HomePage() {
             <DiscoverSection />
           <section className="w-full">
             <div className="flex items-center justify-between">
-              <h1 className="text-[28px]">All listings</h1>
+              <h2 className="text-[28px]">All listings</h2>
               <Link href="/listings" className="flex items-center text-primary">
                 See all listings
                 <span className="ml-2">

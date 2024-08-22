@@ -24,12 +24,12 @@ export async function DiscoverSection() {
         <div className="flex justify-center lg:justify-start">
           <CustomChip label="Discover" width={90} />
         </div>
-        <h1 className="md:leading-80 desktop:text-[46px] text-center text-[32px] leading-[47px] sm:text-left sm:font-medium sm:font-semibold">
+        <h2 className="md:leading-80 desktop:text-[46px] text-center text-[32px] leading-[47px] sm:text-left sm:font-semibold">
           {featuredBlog?.title ?? `Explore vacation rentals with beach access`}
-        </h1>
-        <h2 className="lg:text-lg font-400 text-justify text-sm leading-6 text-[#020101]/[.60]">
-          {featuredBlog?.description}
         </h2>
+        <p className="lg:text-lg font-400 text-justify text-sm leading-6 text-[#020101]/[.60]">
+          {featuredBlog?.description}
+        </p>
         <div className="flex justify-center lg:justify-start">
           <Link
             href={`/blog`}

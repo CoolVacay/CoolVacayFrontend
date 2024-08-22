@@ -46,7 +46,7 @@ export default function MainCard({
                 alt="Cabin icon"
                 width="16px"
               />
-              <h6 className="text-sm">{propertyType ?? "House"}</h6>
+              <p className="text-sm">{propertyType ?? "House"}</p>
             </div>
             {squareFeets ? (
               <div className="flex gap-2">
@@ -55,7 +55,7 @@ export default function MainCard({
                   alt="Square foot"
                   width="16px"
                 />
-                <h6 className="text-sm">{`${Math.floor(squareFeets ?? 0)} sqft`}</h6>
+                <p className="text-sm">{`${Math.floor(squareFeets ?? 0)} sqft`}</p>
               </div>
             ) : null}
           </div>

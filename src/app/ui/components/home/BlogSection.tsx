@@ -12,9 +12,9 @@ export async function BlogSection() {
         <div className="flex h-[33px] w-[62px] shrink-0 items-center justify-center rounded-[64px] bg-[#29ABE2]/[.10] p-5 text-sm text-primary">
           Blog
         </div>
-        <h1 className="py-4 text-center text-[56px] leading-[67px]">
+        <h2 className="py-4 text-center text-[56px] leading-[67px]">
           Latest Insights & Travel Tips from Our Blog
-        </h1>
+        </h2>
       </div>
       <div className="no-scrollbar flex items-center gap-5 overflow-auto pb-10 sm:flex-row sm:flex-wrap sm:justify-between">
         {blogs.length > 0 ? (
