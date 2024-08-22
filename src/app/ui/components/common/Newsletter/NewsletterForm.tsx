@@ -40,14 +40,14 @@ export default function NewsletterForm({
         className={`w-full flex-col items-center justify-center ${isTextBlack ? "text-black" : "text-white"} gap-4"} lg:flex-row lg:justify-center`}
       >
         <div className="flex flex-col gap-2 text-center">
-          <h1
+          <h2
             className={`text-2xl font-medium lg:text-[36px] lg:leading-[40px]`}
           >
             Stay up-to-date on our deals.
-          </h1>
-          <h5 className={`text-xs lg:text-base`}>
+          </h2>
+          <p className={`text-xs lg:text-base`}>
             Curated tips, inspiration, and discounts for your next vacation.
-          </h5>
+          </p>
         </div>
         <div
           className={`flex w-full items-center justify-center gap-2 pt-4 lg:gap-6`}

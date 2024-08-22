@@ -39,37 +39,43 @@ function FooterSection() {
           <div className="flex gap-10 max-[430px]:flex-col sm:w-[400px] sm:flex-row">
             <div className="flex flex-col gap-7">
               <div className="flex flex-col gap-1">
-                <h1 className="text-sm text-primary-grey400">
+                <h2 className="text-sm text-primary-grey400">
                   Total Free Customer Care
-                </h1>
-                <h1 className="text-[15px] font-semibold">302-581-9342</h1>
+                </h2>
+                <p className="text-[15px] font-semibold">302-581-9342</p>
               </div>
-              <h1 className="text-[15px] font-semibold">
+              <p className="text-[15px] font-semibold">
                 Follow us on social media
-              </h1>
+              </p>
               <div className="flex items-center gap-7">
-                <IconGenerator
-                  src="/facebook_icon.svg"
-                  width="10px"
-                  alt="CoolVacay Facebook page"
-                />
-                <IconGenerator
-                  src="/instagram_icon.svg"
-                  width="13px"
-                  alt="CoolVacay Instagram page"
-                />
-                <IconGenerator
-                  src="/linkedin_icon.svg"
-                  width="13px"
-                  alt="CoolVacay Linkedin page"
-                />
+                <Link href={'#'}>
+                  <IconGenerator
+                    src="/facebook_icon.svg"
+                    width="10px"
+                    alt="CoolVacay Facebook page"
+                  />
+                </Link>
+                <Link href={'https://www.facebook.com/CoolVacay'}>
+                  <IconGenerator
+                    src="/instagram_icon.svg"
+                    width="13px"
+                    alt="CoolVacay Instagram page"
+                  />
+                </Link>
+                <Link href={'https://www.instagram.com/coolvacaynow'}>
+                  <IconGenerator
+                    src="/linkedin_icon.svg"
+                    width="13px"
+                    alt="CoolVacay Linkedin page"
+                  />
+                </Link>
               </div>
             </div>
             <div className="flex flex-col gap-1">
-              <h1 className="text-sm text-primary-grey400">
+              <h2 className="text-sm text-primary-grey400">
                 Need Live Support?
-              </h1>
-              <h1 className="text-[15px] font-semibold">vacay@coolvacay.com</h1>
+              </h2>
+              <p className="text-[15px] font-semibold">vacay@coolvacay.com</p>
             </div>
           </div>
         </div>

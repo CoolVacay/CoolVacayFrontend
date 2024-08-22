@@ -20,7 +20,7 @@ import { Newsletter, IconGenerator } from "../ui/components/common";
 
 export const metadata: Metadata = {
   title: 'CoolVacay | Find Your Dream Vacation Rentals & Travel Deals',
-  description: 'Discover unbeatable vacation rentals and travel deals with CoolVacay. Book your next getaway effortlessly with our easy-to-use booking engine. From luxury stays to budget-friendly options, CoolVacay connects you with top-rated destinations worldwide. Start your adventure today!',
+  description: 'Discover unbeatable vacation rentals and travel deals with CoolVacay. From luxury stays to budget-friendly options, book your next getaway effortlessly with our new booking engine.',
 };
 
 export default async function HomePage() {
