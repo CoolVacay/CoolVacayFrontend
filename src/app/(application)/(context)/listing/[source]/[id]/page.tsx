@@ -23,7 +23,6 @@ export default async function Page({
   };
 }) {
   const pageParams = params ?? "";
-  await new Promise((resolve) => setTimeout(resolve, 5000));
 
   const listing = (await getListingData(pageParams))!;
   const query = new URLSearchParams(searchParams);
@@ -88,7 +87,7 @@ export default async function Page({
         <h5 className="mb-10 text-xl font-bold md:text-2xl">
           View similar homes in this area
         </h5>
-        <div className="no-scrollbar mb-10 flex flex  snap-x gap-5 overflow-auto will-change-scroll">
+        <div className="no-scrollbar mb-10 flex snap-x gap-5 overflow-auto will-change-scroll">
           <SimilarCards pageParams={pageParams} />
         </div>
       </div>
