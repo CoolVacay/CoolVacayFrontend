@@ -75,7 +75,7 @@ export default function NavBar({
             className="text-center text-sm"
             href={`/listings?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1&pageNum=1`}
           >
-            Listed places
+            Snowbird Places
           </Link>
           </div>
           <div className={`flex items-center gap-5  ${isWhiteVariant ? "text-white" : "text-black"}`}>

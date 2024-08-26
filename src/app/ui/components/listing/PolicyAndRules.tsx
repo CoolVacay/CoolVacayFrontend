@@ -15,7 +15,7 @@ export default function PolicyAndRules({ listing }: { listing: IListingData }) {
       ) : null}
       {listing.houseRules ? (
         <div className="flex flex-col gap-5">
-          <h5 className="text-2xl font-bold">Ground roules</h5>
+          <h5 className="text-2xl font-bold">Resort Rules</h5>
           <p className="text-justify">{listing.houseRules}</p>
         </div>
       ) : null}

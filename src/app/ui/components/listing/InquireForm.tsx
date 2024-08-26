@@ -41,6 +41,7 @@ export default function InquireForm({
       ? {
           propertyId: listing.id,
           propertySource: listing.source,
+          propertyName: listing.name,
           name: "",
           email: "",
           phone: "",
@@ -72,9 +73,9 @@ export default function InquireForm({
         {listing ? (
           <div>
             <SimpleInput
-              name="propertyId"
+              name="propertyName"
               disabled={true}
-              defaultValue={`Property ID: ${listing.id}`}
+              defaultValue={`Property: ${listing.name}`}
             />
           </div>
         ) : null}
