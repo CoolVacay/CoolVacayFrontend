@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Metadata } from 'next';
+import { type Metadata } from 'next';
 
 import {
   AllListingsSkeleton,

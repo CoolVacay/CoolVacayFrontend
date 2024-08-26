@@ -368,3 +368,17 @@ export function AllBlogsSkeleton() {
     </div>
   );
 }
+
+export function SimilarCardsSkeleton() {
+  return (
+    <div className="flex w-full flex-col items-center justify-center ">
+      {Array.from({ length: 8 }).map((_, index) => (
+          <div key={index} className="flex flex-col gap-3 p-4 border animate-pulse border-[#EAEAEF] rounded-lg">
+            <div className="h-[200px] w-full rounded bg-gray-100" /> {/* Image Skeleton */}
+            <div className="h-6 w-[70%] rounded bg-gray-100" /> {/* Title Skeleton */}
+            <div className="h-4 w-[50%] rounded bg-gray-100" /> {/* Subtitle Skeleton */}
+          </div>
+        ))}
+    </div>
+  );
+}

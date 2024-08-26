@@ -4,10 +4,11 @@ import { capitalize } from "~/app/utils/helpers";
 import Gallery from "~/app/ui/components/listing/Gallery";
 import Overview from "~/app/ui/components/listing/OverviewSection";
 import BookNow from "~/app/ui/components/listing/BookNow/BookNowCard.server";
-import { Breadcrumbs, MapContainer } from "~/app/ui/components/common";
+import { Breadcrumbs, SimilarCardsSkeleton, MapContainer } from "~/app/ui/components/common";
 import SimilarCards from "~/app/ui/components/listing/SimilarCards/SimilarCards";
 import PolicyAndRules from "~/app/ui/components/listing/PolicyAndRules";
 import { Divider } from "@mui/material";
+import { Suspense } from "react";
 
 export default async function Page({
   params,
@@ -88,7 +89,9 @@ export default async function Page({
           View similar homes in this area
         </h5>
         <div className="no-scrollbar mb-10 flex snap-x gap-5 overflow-auto will-change-scroll">
-          <SimilarCards pageParams={pageParams} />
+        <Suspense fallback={<SimilarCardsSkeleton />}>
+            <SimilarCards pageParams={pageParams} />
+        </Suspense>
         </div>
       </div>
     </main>
