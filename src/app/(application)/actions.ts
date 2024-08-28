@@ -46,11 +46,12 @@ export const getListingData = ({ source, id }: IParams) =>
     "Failed to fetch listing data",
   );
 
-export const getFilteredListings = (query: string) =>
-  getData<IAllListings>(
-    `/Listings?${query}`,
+export const getFilteredListings = (query: string) =>{
+  const PAGE_SIZE = 12
+  return getData<IAllListings>(
+    `/Listings?${query}&pageSize=${PAGE_SIZE}`,
     "Failed to fetch filtered listings",
-  );
+  );}
 
 export const getProfileInfo = (email: string) =>
   getData<TUserData["profile"]>(

@@ -73,7 +73,7 @@ export default function Page() {
                     <CustomChip label="Know more" width={100} />
                   </div>
 
-                  <h2 className="md:leading-80 text-center text-center text-[32px]  leading-[47px] sm:font-medium sm:font-semibold md:text-[46px] lg:text-left">
+                  <h2 className="md:leading-80 text-center text-[32px] leading-[47px] sm:font-semibold md:text-[46px] lg:text-left">
                     Join the CoolVacay Family
                   </h2>
                   <p className="text-center text-base leading-6 text-[#676D73] sm:leading-7 lg:text-left lg:text-lg">

@@ -12,6 +12,10 @@ export const capitalize = (word: string) => {
   return `${word.at(0)?.toUpperCase()}${word.substring(1).toLowerCase()}`;
 };
 
+export const capitalizeAllWords = (word: string) => {
+  return word.split(" ").map(word => capitalize(word)).join(" ");
+};
+
 export const formatDateMMMDD = (date: Date | string) => {
   return dayjs(date).format("MMM DD");
 };

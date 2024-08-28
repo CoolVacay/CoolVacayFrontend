@@ -1,5 +1,5 @@
 import { getFilteredListings } from "~/app/(application)/actions";
-import { capitalize } from "~/app/utils/helpers";
+import { capitalize, capitalizeAllWords } from "~/app/utils/helpers";
 import { ListingCard } from "../common";
 import Pagination from "./Pagination";
 
@@ -8,16 +8,16 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
 
   const title =
     query.get("category") ??
-    (query.get("match") && capitalize(query.get("match")!));
+    (query.get("match") && capitalizeAllWords(query.get("match")!));
 
   return listings?.totalItems > 0 ? (
     <>
       <div className="flex flex-col gap-2 xl:flex-row xl:place-items-baseline xl:gap-8">
         <h1 className="text-3xl">
-          {`${title ? `${title} available properties` : "Available properties"}`}{" "}
+          {`${title ? `${title} Available Properties` : "Available Properties"}`}{" "}
         </h1>
         <p className="text-sm text-primary-grey300">
-          {listings?.totalItems} properties
+          {listings?.totalItems} Properties
         </p>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-5 xl:justify-between">

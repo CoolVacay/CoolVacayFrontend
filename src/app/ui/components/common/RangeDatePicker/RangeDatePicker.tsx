@@ -55,7 +55,7 @@ const RangeDatePicker = ({
             },
             InputProps: {
               className: `${bigFont ? "sm:text-xl sm:font-medium" : mediumFont ? "text-base" : "text-xs "} ${matches ? "font-medium" : ""}`,
-              startAdornment: matches ? (
+              startAdornment: (matches && dates[0]) ? (
                 <IconGenerator
                   alt="Calendar icon"
                   src={`/calendar_icon.svg`}

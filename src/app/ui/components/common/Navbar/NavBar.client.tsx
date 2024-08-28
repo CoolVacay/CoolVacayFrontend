@@ -26,7 +26,8 @@ export default function NavBar({
   userData?: TUserData["profile"] | null;
   isTokenValid: boolean;
 }) {
-  //if the token managed by the client exists but the server token has expired then logout
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     if (userData && !isTokenValid) {
       const checkSync = async () => {
@@ -35,6 +36,21 @@ export default function NavBar({
       void checkSync();
     }
   }, [isTokenValid, userData]);
+
+
+  // Handle scroll event
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 1) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const pathname = usePathname();
   const isWhiteVariant = whiteVariantPaths.includes(pathname);
@@ -46,9 +62,9 @@ export default function NavBar({
   const toggleMenu = () => setOpenMenu(!openMenu);
 
   return (
-    <nav className="z-10 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-24 sm:py-6">
+    <nav className={`sticky top-0 z-50 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-24 sm:py-6 ${ isWhiteVariant ? 'bg-black' : 'bg-white'} transition-all duration-700 ${scrolled ? 'bg-opacity-60' : 'bg-opacity-0'}`}>
       <div
-        className={`flex w-full ${isWhiteVariant || !noMaxWidth ? "sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : "sm:pl-16"} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
+        className={`flex items-center w-full ${isWhiteVariant || !noMaxWidth ? "sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : "sm:pl-16"} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
       >
         <div className="flex w-full items-center justify-between sm:w-auto md:flex-grow">
           <Link href="/">
@@ -67,20 +83,21 @@ export default function NavBar({
             />
           </button>
         </div>
-        <div className="hidden sm:flex sm:flex-grow sm:items-center sm:justify-between">
-          <div
+        <div className="hidden sm:flex sm:flex-grow sm:items-center sm:justify-between text-md">
+          {/* <div
             className={`flex gap-5 ${isWhiteVariant ? "text-white" : "text-black"}`}
           >
           <Link
-            className="text-center text-sm"
+            className="text-center"
             href={`/listings?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1&pageNum=1`}
           >
             Snowbird Places
           </Link>
-          </div>
+          </div> */}
+          <div></div>
           <div className={`flex items-center gap-5  ${isWhiteVariant ? "text-white" : "text-black"}`}>
             <Link
-              className={`text-center text-sm`}
+              className={`text-center`}
               href={`/contact-us`}
             >
               Contact Us
@@ -89,18 +106,18 @@ export default function NavBar({
               •
             </span>{" "}
             <Link
-              href="/rental-income-estimator"
-              className={`text-center text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
+              href="/about-us"
+              className={`text-center ${isWhiteVariant ? "text-white" : "text-black"}`}
             >
-              Vacation Rental Management
+              About Us
             </Link>
-            <span className="hidden  text-center lg:inline-block">
+            <span className="hidden text-center lg:inline-block">
               •
             </span>{" "}
             {userData ? (
               <Link href="/profile/reservations" className="hidden sm:block">
                 <p
-                  className={`text-center text-sm ${isWhiteVariant ? "text-white" : "text-black"}`}
+                  className={`text-center ${isWhiteVariant ? "text-white" : "text-black"}`}
                 >
                   My bookings
                 </p>
@@ -109,7 +126,7 @@ export default function NavBar({
             {!userData ? (
               <Link href="/signin">
                 <button
-                  className={`flex w-[190px] items-center rounded-full px-4 py-2 text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
+                  className={`flex w-[190px] items-center text-sm rounded-full px-4 py-2 font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
                 >
                   Log In or Sign Up
                   <span className="ml-2">

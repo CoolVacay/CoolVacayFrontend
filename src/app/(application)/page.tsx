@@ -61,7 +61,7 @@ export default async function HomePage() {
             <DiscoverSection />
           <section className="w-full">
             <div className="flex items-center justify-between">
-              <h2 className="text-[28px]">All listings</h2>
+              <h2 className="text-[28px]">All Listings</h2>
               <Link href="/listings" className="flex items-center text-primary">
                 See all listings
                 <span className="ml-2">

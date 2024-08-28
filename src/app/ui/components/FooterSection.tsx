@@ -29,10 +29,10 @@ function FooterSection() {
     >
       <div className="flex flex-col gap-8 lg:flex-row lg:gap-28">
         <div className="flex flex-col gap-7">
-          <div className="py-3">
+          <div className="py-3 -mt-6">
             <IconGenerator
               src="/cool_vacay_logo_blue.svg"
-              width="129px"
+              width="180px"
               alt="Coolvacay logo"
             />
           </div>

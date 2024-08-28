@@ -224,7 +224,7 @@ export function ReservationCardsSkeleton() {
 
 export function BlogSidebarSkeleton() {
   return (
-    <div className="-m-3 w-[25vw] h-[45vh] flex-col gap-5 md:mt-24 animate-pulse">
+    <div className="-m-3 w-[17vw] h-[45vh] flex-col gap-5 md:mt-24 animate-pulse">
       <div className="flex h-min flex-col items-center justify-center gap-5 rounded-[10px] bg-gray-100 p-6">
         <div className="h-8 w-[200px] bg-gray-200" /> {/* Title Placeholder */}
         <div className="w-full h-[300px] bg-gray-200" /> {/* SearchCard Placeholder */}

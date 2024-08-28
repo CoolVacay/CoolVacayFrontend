@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} w-full flex h-screen flex-col`}>
+      <body className={`${inter.className} w-full flex h-full flex-col`}>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <NavBarWrapper />

@@ -23,7 +23,7 @@ export default function AuthenticationLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <div className="flex w-full sm:h-screen sm:items-center sm:justify-center xl:items-start">
-              <div className="flex w-full justify-center p-5 sm:px-4 sm:px-6 sm:py-10 lg:w-1/2 lg:px-8 lg:py-20">
+              <div className="flex w-full justify-center p-5 sm:px-6 sm:py-10 lg:w-1/2 lg:px-8 lg:py-20">
                 <div className="flex w-full max-w-[510px] justify-center">
                   {children}
                 </div>

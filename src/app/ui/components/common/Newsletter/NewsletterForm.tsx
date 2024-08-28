@@ -1,6 +1,7 @@
 "use client";
 
 import * as Yup from "yup";
+import { usePathname } from 'next/navigation'
 import { useFormik } from "formik";
 import { registerFollower } from "~/app/(application)/actions";
 import { ActionButton } from "../../authentication";
@@ -17,6 +18,7 @@ export default function NewsletterForm({
 }: {
   isTextBlack: boolean;
 }) {
+  const pathname = usePathname();
   const [errorMessage, setErrorMessage] = useState<undefined | string>(
     undefined,
   );
@@ -41,7 +43,7 @@ export default function NewsletterForm({
       >
         <div className="flex flex-col gap-2 text-center">
           <h2
-            className={`text-2xl font-medium lg:text-[36px] lg:leading-[40px]`}
+            className={`text-2xl font-medium lg:text-3xl lg:leading-[40px]`}
           >
             Stay up-to-date on our deals.
           </h2>
@@ -50,7 +52,7 @@ export default function NewsletterForm({
           </p>
         </div>
         <div
-          className={`flex w-full items-center justify-center gap-2 pt-4 lg:gap-6`}
+          className={`flex  ${pathname.startsWith('/blog/') &&  'lg:flex-col'} w-full items-center justify-center gap-2 pt-4 lg:gap-6`}
         >
           <input
             id="email"
@@ -59,13 +61,13 @@ export default function NewsletterForm({
             onBlur={formik.handleBlur}
             value={formik.values.email}
             placeholder="Enter your email"
-            className={`focus:shadow-outline appearance-none rounded-lg border px-4 py-2 leading-tight text-gray-700 shadow focus:outline-none w-[150px] lg:w-[285px]`}
+            className={`focus:shadow-outline appearance-none rounded-lg border px-4 py-2 leading-tight text-gray-700 shadow focus:outline-none w-[150px] lg:w-[265px]`}
           />
           <ActionButton
             text={isTextBlack ? "Subscribe now" : "Go"}
             disabled={!formik.isValid || !formik.dirty}
             borderRadius="rounded"
-            className={`w-[130px] sm:w-[150px] rounded-lg bg-primary py-2 text-center text-white ${
+            className={`w-[130px] sm:w-[150px] ${pathname.startsWith('/blog/') &&  'lg:w-[265px]'} rounded-lg bg-primary py-2 text-center text-white ${
               !formik.isValid || !formik.dirty ? "disabled:bg-gray-500" : ""
             }`}
           />

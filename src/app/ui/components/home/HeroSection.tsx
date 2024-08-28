@@ -10,10 +10,10 @@ export async function HeroSection() {
         <div className="flex items-end justify-end font-medium">
           <div className="flex flex-col justify-center gap-5 lg:items-start">
             <div className="hidden h-[40px] w-[248px] items-center justify-center rounded-full bg-white/[.28] px-[20px] py-[10px] backdrop-blur-sm md:flex">
-              <p className="text-white">Making dreams a reality</p>
+              <p className="text-white">Making Dreams a Reality</p>
             </div>
             <h1 className="text-center text-[36px] leading-[43px] sm:text-left md:text-[80px] md:leading-[80px]">
-              Find your perfect place now
+              Find Your Perfect Vacation
             </h1>
             <div className="hidden text-xl leading-[30px] tracking-[0.16px] lg:block">
               <p className="text-[16px]">
