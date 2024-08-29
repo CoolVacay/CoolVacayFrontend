@@ -80,9 +80,8 @@ export function Filters({
           value={selectedLocation}
           setValue={setLocation}
           onChange={(event, newValue) => {
-            if (!newValue) searchParams.delete("category");
+            if (!newValue) searchParams.delete("match");
             updateSearchParams(["match"], [newValue?.match ?? ""]);
-            updateSearchParams(["category"], [""]);
           }}
         />
       </div>

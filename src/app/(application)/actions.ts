@@ -88,9 +88,10 @@ export const getCloseDatesListings = (
   match: string,
   startDate: string,
   endDate: string,
+  category: string,
 ) =>
   getData<ICloseDatesListings[]>(
-    `/Listings/close_dates?PageSize=${pageSize}&Match=${match}&FromDate=${startDate}&ToDate=${endDate}`,
+    `/Listings/close_dates?PageSize=${pageSize}&Match=${match}&FromDate=${startDate}&ToDate=${endDate}&category=${category}`,
     "Failed to fetch close dates listings",
   );
 

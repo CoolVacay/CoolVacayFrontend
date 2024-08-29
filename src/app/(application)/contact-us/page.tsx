@@ -21,7 +21,7 @@ export default function Page() {
             <div className="relative mt-6 hidden h-full w-full shrink-0 md:flex lg:mt-0 lg:w-[592px]">
               <Image
                 alt="Coolvacay about us, second image"
-                src="/contact-us.jpeg"
+                src="/contact-us.png"
                 width={592}
                 height={792}
                 className="h-auto w-auto"
@@ -31,13 +31,13 @@ export default function Page() {
                   filter: "brightness(50%)",
                 }}
               />
-              <div className="absolute bottom-8 left-4 flex w-11/12 flex-col gap-2 text-lg text-white sm:left-6">
+              {/* <div className="absolute bottom-8 left-4 flex w-11/12 flex-col gap-2 text-lg text-white sm:left-6">
                 <p className="text-[20px] sm:text-[28px]">
                   {`The team's exceptional service and proactive advice have been instrumental in optimizing our financial processes.`}
                 </p>
                 <p>Chiara Doe</p>
                 <p>Founder & CEO</p>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="mt-10 flex w-full flex-col gap-5 px-4 sm:flex-row sm:px-0">

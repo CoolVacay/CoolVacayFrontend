@@ -44,7 +44,7 @@ function Body({
           </div>
         </div>
         <div
-          className={`${searchParams.isMapMode == "false" || !searchParams.isMapMode ? "hidden" : ""} relative right-0 top-0 h-[100vh] sm:sticky sm:block sm:h-full sm:w-full`}
+          className={`${searchParams.isMapMode == "false" || !searchParams.isMapMode ? "hidden xl:block" : ""} relative right-0 top-0 h-[100vh] xl:sticky xl:h-full xl:w-full`}
         >
           <Suspense fallback={<MapSkeleton />} key={query.toString()}>
             <MapContainer query={query} listing={[]} />

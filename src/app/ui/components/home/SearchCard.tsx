@@ -15,7 +15,6 @@ import type { ILocationsList } from "~/app/(application)/definitions";
 export type DateRangeType = [Dayjs | null, Dayjs | null];
 
 //TODO: re-style/refactor when you add functionality
-
 export function SearchCard({
   size,
   locationsList,
@@ -24,7 +23,7 @@ export function SearchCard({
   locationsList: ILocationsList[];
 }) {
   const router = useRouter();
-  const [autocompleteValue, setAutocompleteValue] = useState("");
+  const [autocompleteValue, setAutocompleteValue] = useState<ILocationsList | null>(null);
   const [location, setLocation] = useState("");
 
   const [numberOfGuests, setNumberOfGuests] = useState("1");
@@ -36,8 +35,15 @@ export function SearchCard({
   const isSmallSize = size === "small";
 
   const handleSearch = () => {
+    if(autocompleteValue?.type === "listing") {
+      const params = new URLSearchParams();
+      if (fromDate) params.append("fromDate", fromDate.format("YYYY-MM-DD"));
+      if (toDate) params.append("toDate", toDate.format("YYYY-MM-DD"));
+      params.append("numberOfGuests", numberOfGuests);
+      return `${autocompleteValue.page.replace('/listings/', '/listing/')}?${params.toString()}`
+    }
     const params = new URLSearchParams();
-    if (autocompleteValue) params.append("match", autocompleteValue);
+    if (autocompleteValue) params.append("match", autocompleteValue?.match);
     if (fromDate) params.append("fromDate", fromDate.format("YYYY-MM-DD"));
     if (toDate) params.append("toDate", toDate.format("YYYY-MM-DD"));
     params.append("numberOfGuests", numberOfGuests);
@@ -65,7 +71,7 @@ export function SearchCard({
                 isSmallSize={isSmallSize}
                 variant="white"
                 onChange={(event, newValue) => {
-                  setAutocompleteValue(newValue ? newValue.match : "");
+                  setAutocompleteValue(newValue);
                 }}
                 setValue={setLocation}
                 inputValue={location}

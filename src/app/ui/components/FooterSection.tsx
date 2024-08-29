@@ -3,10 +3,10 @@ import Link from "next/link";
 import { IconGenerator } from "./common";
 
 const popularSearchLinks = [
-  "Cabins for Rent",
-  "Apartment for Rent",
-  "Lodge for Rent",
-  "Rooms for Rent",
+  { name: "Beach Properties", href: "/listings?category=Beach&numberOfGuests=1&pageNum=1" },
+  { name: "Beachfront Properties", href: "/listings?category=Beachfront&numberOfGuests=1&pageNum=1" },
+  { name: "Mountain Properties", href: "/listings?category=Mountain&numberOfGuests=1&pageNum=1" },
+  { name: "Pool Properties", href: "/listings?category=Pool&numberOfGuests=1&pageNum=1" }
 ];
 const quickLinks = [
   { name: "About Company", href: "/about-us" },
@@ -19,7 +19,12 @@ const staticPages = [
   { name: "Terms", href: "/terms-and-conditions" },
   { name: "Accessibility", href: "/accessibility-statement" },
 ];
-const discoverLinks = ["Miami", "Los Angeles", "Chicago", "New York"];
+const discoverLinks = [
+  { name: "Florida Listings", href: "/listings?numberOfGuests=1&pageNum=1&match=Florida" },
+  { name: "North Carolina Listings", href: "/listings?numberOfGuests=1&pageNum=1&match=North Carolina" },
+  { name: "Maryland Listings", href: "/listings?numberOfGuests=1&pageNum=1&match=Maryland" },
+  { name: "Virginia Listings", href: "/listings?numberOfGuests=1&pageNum=1&match=Virginia" }
+];
 
 function FooterSection() {
   return (
@@ -42,7 +47,7 @@ function FooterSection() {
                 <h2 className="text-sm text-primary-grey400">
                   Total Free Customer Care
                 </h2>
-                <p className="text-[15px] font-semibold">302-581-9342</p>
+                <p className="text-[15px] font-semibold"><a href="tel:315-434-2324">(315) 434-2324</a></p>
               </div>
               <p className="text-[15px] font-semibold">
                 Follow us on social media
@@ -83,9 +88,13 @@ function FooterSection() {
           <div className="flex flex-col gap-5 lg:ml-auto">
             <h2 className="text-[15px] font-semibold">Popular Search</h2>
             {popularSearchLinks.map((link) => (
-              <h2 key={link} className="text-sm text-primary-grey400">
-                {link}
-              </h2>
+              <Link
+                href={link.href}
+                key={link.name}
+                className="text-sm text-primary-grey400"
+              >
+                {link.name}
+              </Link>
             ))}
           </div>
           <div className="flex flex-col gap-5 lg:ml-auto">
@@ -103,9 +112,13 @@ function FooterSection() {
           <div className="flex flex-col gap-5 lg:ml-auto">
             <h2 className="text-[15px] font-semibold">Discover</h2>
             {discoverLinks.map((link) => (
-              <h2 key={link} className="text-sm text-primary-grey400">
-                {link}
-              </h2>
+              <Link
+                href={link.href}
+                key={link.name}
+                className="text-sm text-primary-grey400"
+              >
+                {link.name}
+              </Link>
             ))}
           </div>
         </div>

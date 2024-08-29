@@ -54,9 +54,9 @@ export default async function Page({
           <h1 className="text-2xl leading-tight md:w-2/3 md:text-3xl">
             {listing.name}, {listing.city}, {listing.state}
           </h1>
-          <div className="mt-4 flex max-h-[50px] w-full shrink-0 items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2 md:mt-0 md:w-[300px] md:py-2">
-            Call us for more info:
-            <span className="ml-1 font-medium">(315) 434-2324</span>
+          <div className="mt-4 flex max-h-[50px] w-full shrink-0 items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2 md:mt-0 md:w-[240px] md:py-2">
+             Call Now:
+            <span className="ml-1 font-medium"><a href="tel:315-434-2324">(315) 434-2324</a></span>
           </div>
         </div>
         <Gallery listing={listing} />

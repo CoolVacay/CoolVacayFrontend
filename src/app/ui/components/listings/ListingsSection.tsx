@@ -1,5 +1,5 @@
 import { getFilteredListings } from "~/app/(application)/actions";
-import { capitalize, capitalizeAllWords } from "~/app/utils/helpers";
+import { capitalizeAllWords } from "~/app/utils/helpers";
 import { ListingCard } from "../common";
 import Pagination from "./Pagination";
 
@@ -20,7 +20,7 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
           {listings?.totalItems} Properties
         </p>
       </div>
-      <div className="flex flex-wrap items-center justify-center gap-5 xl:justify-between">
+      <div className="flex flex-wrap items-center justify-center gap-5 xl:justify-start">
         {listings?.items?.map((listing) => {
           return (
             <ListingCard

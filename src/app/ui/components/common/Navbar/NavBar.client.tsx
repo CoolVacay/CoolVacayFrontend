@@ -71,7 +71,7 @@ export default function NavBar({
             <IconGenerator
               src={`/cool_vacay_logo_${isWhiteVariant ? "white" : "blue"}.svg`}
               alt="CoolVacay Logo"
-              className="w-[118px] sm:w-[166px]"
+              className="w-[118px] sm:w-[230px]"
               priority={true}
             />
           </Link>
@@ -83,7 +83,7 @@ export default function NavBar({
             />
           </button>
         </div>
-        <div className="hidden sm:flex sm:flex-grow sm:items-center sm:justify-between text-md">
+        <div className="hidden sm:flex sm:flex-grow sm:items-center sm:justify-between text-lg">
           {/* <div
             className={`flex gap-5 ${isWhiteVariant ? "text-white" : "text-black"}`}
           >

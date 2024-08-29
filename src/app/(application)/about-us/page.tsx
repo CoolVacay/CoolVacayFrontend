@@ -160,8 +160,10 @@ export default function Page() {
           <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <ReviewCard
               title="Best vacation of my life"
-              description=""
+              description="We booked last minute & the host made us feel very welcome! The view from the property was phenomenal and exceeded our expectations. Our host was very responsive and got back to us quickly. Would definitely stay here again!"
               size="small"
+              name="Nadia Luciano"
+              date="July 2024"
               iconSrc="/avatar_1.svg"
               iconDescription={{
                 name: "John Doe",
@@ -170,8 +172,10 @@ export default function Page() {
             />
             <ReviewCard
               title="It was a very good experience"
-              description=""
+              description="Our stay in Jackman, Maine was a great experience it's exactly what you would expect staying in a cabin. Beautiful scenic views and all the amenities were so convenient especially if staying with kids in the summer they loved both pools."
               size="medium"
+              name="Anthony Laughman"
+              date="June, 2024"
               iconSrc="/avatar_2.svg"
               iconDescription={{
                 name: "Jerry Narrow",
@@ -180,8 +184,10 @@ export default function Page() {
             />
             <ReviewCard
               title="Smoothest experience ever"
-              description=""
+              description="Very nice clean condo. Location is great. Short easy walk to the beach. Plenty of restaurants, convenience stores, ice cream etc. within walking distance. Very responsive when you message. Had a great time! Would definitely rent again if we go back to OC."
               size="small"
+              name="Heather Sincavage"
+              date="June, 2024"
               iconSrc="/avatar_3.svg"
               iconDescription={{
                 name: "Liam Meri",

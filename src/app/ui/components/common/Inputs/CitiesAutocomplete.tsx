@@ -70,7 +70,7 @@ export default function CitiesAutocomplete({
             >
               <IconGenerator
                 className={whiteVariant ? "w-4 sm:w-5" : "w-4"}
-                src={option.type === 'city' ? "/location-pin.svg" : '/home-icon-locations.svg'}
+                src={option.icon}
                 alt={option.displayName}
               />
               {option.displayName}

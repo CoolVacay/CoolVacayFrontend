@@ -19,6 +19,7 @@ export async function CloseDatesListings({
           query.get("match")!,
           query.get("fromDate")!,
           query.get("toDate")!,
+          query.get("category") ?? ""
         ))!
       : [];
 

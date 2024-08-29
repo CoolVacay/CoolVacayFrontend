@@ -178,6 +178,7 @@ export interface ILocationsList {
   icon: string;
   type: string;
   match: string;
+  page: string;
   displayName: string;
 }
 
