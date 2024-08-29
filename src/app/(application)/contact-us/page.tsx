@@ -101,7 +101,7 @@ export default function Page() {
             <p className="text-primary">
               Address:{" "}
               <span className="text-[#676D73]">
-                7380 Sand Lake Rd., Suite 130, Orlando, FL 32819
+                7380 W Sand Lake Rd Ste 130, Orlando, FL 32819
               </span>
             </p>
             <p className="text-primary">
@@ -122,13 +122,13 @@ export default function Page() {
             </p>
             <Divider />
             <p className="flex text-primary">
-              Saturday:{" "}
-              <span className="ml-auto text-[#676D73]">09.00 AM - 2.00 PM</span>
+              Saturday - Sunday:{" "}
+              <span className="ml-auto text-[#676D73]">10.00 AM - 6.00 PM</span>
             </p>
-            <Divider />
+            {/* <Divider />
             <p className="flex text-primary">
               Sunday: <span className="ml-auto text-[#676D73]">Closed</span>
-            </p>
+            </p> */}
           </div>
         </div>
       </div>

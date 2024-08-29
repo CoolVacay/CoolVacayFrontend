@@ -7,8 +7,9 @@ import {
 } from "~/app/(application)/definitions";
 import { CloseDatesListings } from "./CloseDatesListings";
 import { Filters } from "./FIlters";
+import { getFilteredListings } from "~/app/(application)/actions";
 
-function Body({
+async function Body({
   query,
   locationsList,
   searchParams,
@@ -19,6 +20,8 @@ function Body({
   searchParams: Record<string, string>;
   categories: IPopularCategoriesData[];
 }) {
+  const listings = (await getFilteredListings(query.toString()))!;
+
   return (
     <main className="static w-full p-4 xl:py-0 xl:pl-20 xl:pr-0">
       <div className="relative w-full gap-4 xl:flex">
@@ -33,14 +36,14 @@ function Body({
               fallback={<FilteredListingsSkeleton />}
               key={query.toString()}
             >
-              <ListingSection query={query} />
+              <ListingSection query={query} listings={listings}/>
             </Suspense>
-            <Suspense
+            {listings.totalItems < 3 && <Suspense
               fallback={<FilteredListingsSkeleton />}
               key={`closeDates-${query.toString()}`}
             >
-              <CloseDatesListings query={query} />
-            </Suspense>
+              <CloseDatesListings query={query} listings={listings}/>
+            </Suspense>}
           </div>
         </div>
         <div

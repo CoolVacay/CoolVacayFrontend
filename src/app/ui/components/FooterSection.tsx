@@ -41,11 +41,11 @@ function FooterSection() {
               alt="Coolvacay logo"
             />
           </div>
-          <div className="flex gap-10 max-[430px]:flex-col sm:w-[400px] sm:flex-row">
+          <div className="flex gap-10 max-[430px]:flex-col sm:w-[430px] sm:flex-row">
             <div className="flex flex-col gap-7">
               <div className="flex flex-col gap-1">
                 <h2 className="text-sm text-primary-grey400">
-                  Total Free Customer Care
+                  Call Customer Experience
                 </h2>
                 <p className="text-[15px] font-semibold"><a href="tel:302-581-9342">(302) 581-9342</a></p>
               </div>
@@ -78,7 +78,7 @@ function FooterSection() {
             </div>
             <div className="flex flex-col gap-1">
               <h2 className="text-sm text-primary-grey400">
-                Need Live Support?
+                Email Customer Experience
               </h2>
               <p className="text-[15px] font-semibold"><a href="mailto:vacay@coolvacay.com">vacay@coolvacay.com</a></p>
             </div>

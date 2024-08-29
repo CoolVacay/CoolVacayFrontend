@@ -1,27 +1,31 @@
 import {
   getCloseDatesListings,
-  getFilteredListings,
 } from "~/app/(application)/actions";
 import { ListingCard } from "../common";
 import Pagination from "./Pagination";
+import type { IAllListings } from "~/app/(application)/definitions";
+import dayjs from "dayjs";
 const PAGESIZE = "4";
 
-export async function CloseDatesListings({
-  query,
-}: {
-  query: URLSearchParams;
-}) {
-  const listings = (await getFilteredListings(query.toString()))!;
-  const closeAvailabilityListings =
-    listings?.totalItems < 4
-      ? (await getCloseDatesListings(
-          PAGESIZE,
-          query.get("match")!,
-          query.get("fromDate")!,
-          query.get("toDate")!,
-          query.get("category") ?? ""
-        ))!
-      : [];
+export async function CloseDatesListings({ query, listings }: { query: URLSearchParams, listings: IAllListings }) {
+
+  let closeAvailabilityListings = (await getCloseDatesListings(
+    PAGESIZE,
+    query.get("match") ?? "",
+    query.get("fromDate") ?? dayjs().format("YYYY-MM-DD"),
+    query.get("toDate") ?? dayjs().add(5, "days").format("YYYY-MM-DD"),
+    query.get("category") ?? ""
+  ))!
+    
+  if(closeAvailabilityListings?.length < 4){
+    closeAvailabilityListings = (await getCloseDatesListings(
+      PAGESIZE,
+      query.get("match") ?? "",
+      query.get("fromDate") ?? dayjs().format("YYYY-MM-DD"),
+      query.get("toDate") ?? dayjs().add(5, "days").format("YYYY-MM-DD"),
+      ""
+    ))!
+  }
 
   return closeAvailabilityListings?.length > 0 ? (
     <>
@@ -33,7 +37,7 @@ export async function CloseDatesListings({
           {closeAvailabilityListings?.length} properties
         </p>
       </div>
-      <div className="flex flex-wrap items-center justify-center gap-5 xl:justify-between">
+      <div className="flex flex-wrap items-center justify-center gap-5 xl:justify-start">
         {closeAvailabilityListings?.map((item) => {
           return (
             <ListingCard
@@ -54,7 +58,9 @@ export async function CloseDatesListings({
         <div className="my-8 flex justify-center">
           <Pagination totalPages={listings.totalPages} />
         </div>
-      ) : null}
+      ) : <div>
+          No close listings found
+        </div>}
     </>
   ) : null;
 }

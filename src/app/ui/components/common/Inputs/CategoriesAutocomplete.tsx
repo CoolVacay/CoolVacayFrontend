@@ -7,6 +7,7 @@ import type {
 } from "@mui/material";
 import { IconGenerator } from "../IconGenerator";
 import type { IPopularCategoriesData } from "~/app/(application)/definitions";
+import { Popper } from "@mui/base";
 
 export interface CustomHTMLAttributes
   extends React.HTMLAttributes<HTMLLIElement> {
@@ -86,6 +87,13 @@ export default function CategoriesAutocomplete({
             fontSize: whiteVariant ? "16px" : "14px",
           },
         }}
+        PopperComponent={(props) => <Popper
+          {...props}
+          placement="bottom-start"
+          className={`
+            !w-[40vw] sm:!w-[250px]
+          `}
+        />}
         renderInput={(params) => (
           <TextField
             {...params}

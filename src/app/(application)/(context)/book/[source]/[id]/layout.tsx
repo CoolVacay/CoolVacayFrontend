@@ -39,7 +39,7 @@ export default async function Layout({
               <div className="flex w-full flex-col gap-5">
                 <div className="md:hidden lg:flex lg:flex-col lg:gap-4">
                   <h1 className="text-xl font-bold sm:text-2xl">
-                    Reserve Information
+                    Reservation Information
                   </h1>
                   <Suspense fallback={<BookedListingCardSkeleton />}>
                     <BookedListingCard params={params} />
@@ -50,7 +50,7 @@ export default async function Layout({
               <div className="flex shrink-0 flex-row gap-4">
                 <div className="hidden gap-4 md:flex md:flex-col lg:hidden">
                   <h1 className="text-xl font-bold sm:text-2xl">
-                    Reserve Information
+                    Reservation Information
                   </h1>
                   <Suspense fallback={<BookedListingCardSkeleton />}>
                     <BookedListingCard params={params} />

@@ -1,10 +1,9 @@
-import { getFilteredListings } from "~/app/(application)/actions";
 import { capitalizeAllWords } from "~/app/utils/helpers";
 import { ListingCard } from "../common";
 import Pagination from "./Pagination";
+import { type IAllListings } from "~/app/(application)/definitions";
 
-export async function ListingSection({ query }: { query: URLSearchParams }) {
-  const listings = (await getFilteredListings(query.toString()))!;
+export async function ListingSection({ query, listings }: { query: URLSearchParams, listings: IAllListings }) {
 
   const title =
     query.get("category") ??
@@ -43,6 +42,6 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
       ) : null}
     </>
   ) : (
-    <h6>No listings available for the selected dates</h6>
+    <h6>No listings available for the selected filters</h6>
   );
 }

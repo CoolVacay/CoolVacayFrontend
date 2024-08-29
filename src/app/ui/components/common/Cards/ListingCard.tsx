@@ -29,7 +29,7 @@ export default function ListingCard({
   searchParams.delete("pageNum");
   return (
     <div
-      className={`flex h-[400px] w-[350px] flex-col gap-4 overflow-hidden rounded-md p-1 sm:w-[280px] md:w-[350px]`}
+      className={`flex h-[410px] w-[350px] flex-col gap-4 overflow-hidden rounded-md p-1 sm:w-[280px] md:w-[350px]`}
     >
       <div className="relative">
         <Link
@@ -111,9 +111,9 @@ export default function ListingCard({
                       target="_blank"
                       href={`listing/${source}/${id}?fromDate=${formatDateMMM_DD_YYYY(date.startDate)}&toDate=${formatDateMMM_DD_YYYY(date.endDate)}&numberOfGuests=${searchParams.get("numberOfGuests")}`}
                     >
-                      <button className="flex max-w-max flex-col items-center gap-2 rounded-lg border border-[#ADB5BD] p-2 hover:opacity-75">
+                      <button className="flex max-w-[130px] flex-col items-center gap-2 rounded-lg border border-[#ADB5BD] p-2 hover:opacity-75">
                         <p className="text-xs font-medium text-primary">
-                          {formatDateMMMDD(date.startDate)} -
+                          {formatDateMMMDD(date.startDate)} -{" "}
                           {formatDateMMMDD(date.endDate)}
                         </p>
                         <p className="text-sm text-[#858C93]">
