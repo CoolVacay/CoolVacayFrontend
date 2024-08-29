@@ -105,7 +105,7 @@ export default function Page() {
               </span>
             </p>
             <p className="text-primary">
-              Phone: <span className=" text-[#676D73]">+1 302-581-9342</span>
+              Phone: <span className=" text-[#676D73]"><a href="tel:302-581-9342">(302) 581-9342</a></span>
             </p>
             <p className="text-primary">
               Email:{" "}

@@ -56,7 +56,7 @@ export default async function Page({
           </h1>
           <div className="mt-4 flex max-h-[50px] w-full shrink-0 items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2 md:mt-0 md:w-[240px] md:py-2">
              Call Now:
-            <span className="ml-1 font-medium"><a href="tel:315-434-2324">(315) 434-2324</a></span>
+            <span className="ml-1 font-medium"><a href="tel:302-581-9342">(302) 581-9342</a></span>
           </div>
         </div>
         <Gallery listing={listing} />

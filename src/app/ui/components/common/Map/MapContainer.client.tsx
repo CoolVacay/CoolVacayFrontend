@@ -182,7 +182,7 @@ export default function MapContent({
               <p className="text-sm font-medium leading-[14px] text-[#676D73]">{`${selectedMarker.city}, ${selectedMarker.state}`}</p>
               <div className="flex justify-between">
                 <p className="text-sm  font-medium">
-                  ${selectedMarker.price}
+                  From: ${selectedMarker.price}
                   <span className="text-primary-grey400"> night</span>
                 </p>
                 <p className="text-sm font-medium text-primary-grey400">

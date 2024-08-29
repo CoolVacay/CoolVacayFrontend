@@ -47,33 +47,33 @@ function FooterSection() {
                 <h2 className="text-sm text-primary-grey400">
                   Total Free Customer Care
                 </h2>
-                <p className="text-[15px] font-semibold"><a href="tel:315-434-2324">(315) 434-2324</a></p>
+                <p className="text-[15px] font-semibold"><a href="tel:302-581-9342">(302) 581-9342</a></p>
               </div>
               <p className="text-[15px] font-semibold">
                 Follow us on social media
               </p>
               <div className="flex items-center gap-7">
-                <Link href={'#'}>
+                <Link href={'https://www.facebook.com/CoolVacay'}>
                   <IconGenerator
                     src="/facebook_icon.svg"
                     width="10px"
                     alt="CoolVacay Facebook page"
                   />
                 </Link>
-                <Link href={'https://www.facebook.com/CoolVacay'}>
+                <Link href={'https://www.instagram.com/coolvacaynow'}>
                   <IconGenerator
                     src="/instagram_icon.svg"
                     width="13px"
                     alt="CoolVacay Instagram page"
                   />
                 </Link>
-                <Link href={'https://www.instagram.com/coolvacaynow'}>
+                {/* <Link href={'#'}>
                   <IconGenerator
                     src="/linkedin_icon.svg"
                     width="13px"
                     alt="CoolVacay Linkedin page"
                   />
-                </Link>
+                </Link> */}
               </div>
             </div>
             <div className="flex flex-col gap-1">

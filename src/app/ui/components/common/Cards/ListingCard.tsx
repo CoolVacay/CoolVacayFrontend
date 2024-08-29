@@ -54,7 +54,7 @@ export default function ListingCard({
           {!closeDates ? (
             <div className="flex items-center justify-between font-medium">
               <h2 className="text-lg">
-                ${price}
+                <span className="text-base">From:</span> ${price}
                 <span className="text-sm text-primary-grey400"> night</span>
               </h2>
               {startDate && endDate ? (
