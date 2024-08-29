@@ -80,7 +80,7 @@ function FooterSection() {
               <h2 className="text-sm text-primary-grey400">
                 Need Live Support?
               </h2>
-              <p className="text-[15px] font-semibold">vacay@coolvacay.com</p>
+              <p className="text-[15px] font-semibold"><a href="mailto:vacay@coolvacay.com">vacay@coolvacay.com</a></p>
             </div>
           </div>
         </div>
