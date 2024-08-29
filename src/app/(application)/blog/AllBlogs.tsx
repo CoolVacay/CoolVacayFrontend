@@ -52,7 +52,7 @@ async function AllBlogs() {
                     <MainCard
                       imageUrl={card.thumbnailImageUrl}
                       name={card.title}
-                      subtitle={`${dayjs(card.createdOn).format("MMMM d, YYYY")}  •  ${card.readTime} min`}
+                      subtitle={`${dayjs(card.createdOn).format("MMMM DD, YYYY")}  •  ${card.readTime} min`}
                       key={card.id}
                       isBlogCard
                     />

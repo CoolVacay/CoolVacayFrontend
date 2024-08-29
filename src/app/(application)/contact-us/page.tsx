@@ -28,7 +28,7 @@ export default function Page() {
                 priority={true}
                 style={{
                   objectFit: "cover",
-                  filter: "brightness(50%)",
+                  filter: "brightness(80%)",
                 }}
               />
               {/* <div className="absolute bottom-8 left-4 flex w-11/12 flex-col gap-2 text-lg text-white sm:left-6">

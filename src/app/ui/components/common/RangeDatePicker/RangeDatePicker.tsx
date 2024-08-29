@@ -38,7 +38,7 @@ const RangeDatePicker = ({
           position: "relative",
         }}
         slots={{ day: StyledDatePicker }}
-        format="MMM DD, YYYY"
+        format="MM/DD/YYYY"
         slotProps={{
           fieldSeparator: {
             sx: { color: "transparent" },
