@@ -183,7 +183,7 @@ export default function MapContent({
               <div className="flex justify-between">
                 <p className="text-sm  font-medium">
                   From: ${selectedMarker.price}
-                  <span className="text-primary-grey400"> night</span>
+                  <span className="text-primary-grey400"> /night</span>
                 </p>
                 <p className="text-sm font-medium text-primary-grey400">
                   {startDate} - {endDate}

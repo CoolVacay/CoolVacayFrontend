@@ -18,13 +18,15 @@ export type DateRangeType = [Dayjs | null, Dayjs | null];
 export function SearchCard({
   size,
   locationsList,
+  defaultLocation
 }: {
   size: "small" | "big";
   locationsList: ILocationsList[];
+  defaultLocation?: string;
 }) {
   const router = useRouter();
   const [autocompleteValue, setAutocompleteValue] = useState<ILocationsList | null>(null);
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(defaultLocation ?? "");
 
   const [numberOfGuests, setNumberOfGuests] = useState("1");
   const [dates, setDates] = useState<DateRangeType>([

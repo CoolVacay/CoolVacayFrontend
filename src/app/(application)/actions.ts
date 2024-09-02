@@ -120,6 +120,12 @@ export const getReservationsDetails = (userId: string) =>
     "Failed to fetch reservations",
   );
 
+export const getBlogById = (id: string) => 
+  getData<IBlog>(
+    `/Blogs/${id}`,
+    "Failed to fetch blog by id",
+  );  
+
 export async function getBlogContent(id: string) {
   try {
     const res = await getHTMLFetch(`/Blogs/${id}/content`);

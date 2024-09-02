@@ -10,7 +10,7 @@ import {
 } from "../ui/components/common/Skeletons/Skeletons";
 import {
   BlogSection,
-  AllistingsSection,
+  AllListingsSection,
   HeroSection,
   PopularCategories,
   FeaturedListingsSection,
@@ -70,11 +70,11 @@ export default async function HomePage() {
               </Link>
             </div>
             <Suspense fallback={<AllListingsSkeleton />}>
-              <AllistingsSection page={1} />
+              <AllListingsSection page={1} />
             </Suspense>
             <Newsletter />
             <Suspense fallback={<AllListingsSkeleton />}>
-              <AllistingsSection page={2} />
+              <AllListingsSection page={2} />
             </Suspense>
           </section>
           <Suspense fallback={<FeaturedListingsSection />}>

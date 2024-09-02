@@ -55,7 +55,7 @@ export default function ListingCard({
             <div className="flex items-center justify-between font-medium">
               <h2 className="text-lg">
                 <span className="text-base">From:</span> ${price}
-                <span className="text-sm text-primary-grey400"> night</span>
+                <span className="text-sm text-primary-grey400"> /night</span>
               </h2>
               {startDate && endDate ? (
                 <h2 className="text-sm text-primary-grey400">

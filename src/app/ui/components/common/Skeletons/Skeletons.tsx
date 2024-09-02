@@ -65,7 +65,7 @@ export function FilteredListingsSkeleton() {
   return (
     <>
       Searching for listings close to your filters...
-      <div className="flex gap-6">
+      <div className="flex gap-6 py-5 animate-pulse">
         <div className="h-6 w-60 bg-gray-100" />
         <div className="h-4 w-12 bg-gray-100" />
       </div>
