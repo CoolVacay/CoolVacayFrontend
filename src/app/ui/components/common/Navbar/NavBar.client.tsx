@@ -37,7 +37,6 @@ export default function NavBar({
     }
   }, [isTokenValid, userData]);
 
-
   // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
@@ -54,7 +53,9 @@ export default function NavBar({
 
   const pathname = usePathname();
   const isWhiteVariant = whiteVariantPaths.includes(pathname);
-  const noMaxWidth = pathname.startsWith("/listings");
+  const noMaxWidth =
+    pathname.startsWith("/listings") ||
+    pathname.startsWith("/vacation-rental-management");
 
   const [openMenu, setOpenMenu] = useState(false);
   const { startDate, endDate } = getCurrentDates();
@@ -62,9 +63,11 @@ export default function NavBar({
   const toggleMenu = () => setOpenMenu(!openMenu);
 
   return (
-    <nav className={`sticky top-0 z-50 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-24 sm:py-6 ${ isWhiteVariant ? 'bg-black' : 'bg-white'} transition-all duration-700 ${scrolled ? 'bg-opacity-60' : 'bg-opacity-0'}`}>
+    <nav
+      className={`sticky top-0 z-50 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-24 sm:py-6 ${isWhiteVariant ? "bg-black" : "bg-white"} transition-all duration-700 ${scrolled ? "bg-opacity-60" : "bg-opacity-0"}`}
+    >
       <div
-        className={`flex items-center w-full ${isWhiteVariant || !noMaxWidth ? "sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : "sm:pl-16"} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
+        className={`flex w-full items-center ${isWhiteVariant || !noMaxWidth ? "sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : "sm:pl-16"} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
       >
         <div className="flex w-full items-center justify-between sm:w-auto md:flex-grow">
           <Link href="/">
@@ -83,7 +86,7 @@ export default function NavBar({
             />
           </button>
         </div>
-        <div className="hidden sm:flex sm:flex-grow sm:items-center sm:justify-between text-lg">
+        <div className="hidden text-lg sm:flex sm:flex-grow sm:items-center sm:justify-between">
           {/* <div
             className={`flex gap-5 ${isWhiteVariant ? "text-white" : "text-black"}`}
           >
@@ -95,25 +98,20 @@ export default function NavBar({
           </Link>
           </div> */}
           <div></div>
-          <div className={`flex items-center gap-5  ${isWhiteVariant ? "text-white" : "text-black"}`}>
-            <Link
-              className={`text-center`}
-              href={`/contact-us`}
-            >
+          <div
+            className={`flex items-center gap-5  ${isWhiteVariant ? "text-white" : "text-black"}`}
+          >
+            <Link className={`text-center`} href={`/contact-us`}>
               Contact Us
             </Link>
-            <span className="hidden text-center lg:inline-block">
-              •
-            </span>{" "}
+            <span className="hidden text-center lg:inline-block">•</span>{" "}
             <Link
               href="/about-us"
               className={`text-center ${isWhiteVariant ? "text-white" : "text-black"}`}
             >
               About Us
             </Link>
-            <span className="hidden text-center lg:inline-block">
-              •
-            </span>{" "}
+            <span className="hidden text-center lg:inline-block">•</span>{" "}
             {userData ? (
               <Link href="/profile/reservations" className="hidden sm:block">
                 <p
@@ -126,7 +124,7 @@ export default function NavBar({
             {!userData ? (
               <Link href="/signin">
                 <button
-                  className={`flex w-[190px] items-center text-sm rounded-full px-4 py-2 font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
+                  className={`flex w-[190px] items-center rounded-full px-4 py-2 text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
                 >
                   Log In or Sign Up
                   <span className="ml-2">

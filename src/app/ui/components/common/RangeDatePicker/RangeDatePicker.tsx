@@ -55,19 +55,20 @@ const RangeDatePicker = ({
             },
             InputProps: {
               className: `${bigFont ? "sm:text-xl sm:font-medium" : mediumFont ? "text-base" : "text-xs "} ${matches ? "font-medium" : ""}`,
-              startAdornment: (matches && dates[0]) ? (
-                <IconGenerator
-                  alt="Calendar icon"
-                  src={`/calendar_icon.svg`}
-                  className={
-                    bigFont
-                      ? "mr-3 w-4 sm:w-8"
-                      : mediumFont
-                        ? "mr-2 w-5"
-                        : "mr-2 w-4"
-                  }
-                />
-              ) : null,
+              startAdornment:
+                matches && dates[0] ? (
+                  <IconGenerator
+                    alt="Calendar icon"
+                    src={`/calendar_icon.svg`}
+                    className={
+                      bigFont
+                        ? "mr-3 w-4 sm:w-8"
+                        : mediumFont
+                          ? "mr-2 w-5"
+                          : "mr-2 w-4"
+                    }
+                  />
+                ) : null,
             },
           },
         }}

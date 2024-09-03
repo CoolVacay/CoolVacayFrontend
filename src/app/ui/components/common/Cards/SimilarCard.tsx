@@ -16,12 +16,12 @@ export default function SimilarCard({
       className={`flex h-[360px] grow-0  flex-col rounded-xl p-2 shadow-cardShadow md:h-[185px] md:w-[470px] md:flex-row ${className}`}
       style={{ border: "1px solid rgba(173, 181, 189, 0.70)" }}
     >
-      <div className="h-[195px] w-[250px] md:flex md:h-[165px] md:w-[189px]">
+      <div className="h-[195px] w-[250px] shrink-0 md:flex md:h-[165px] md:w-[169px]">
         <Image
           src={imageUrl ?? "/cardImage.png"}
           width={0}
           height={0}
-          sizes="100vw"
+          sizes="20vw"
           alt="CoolVacay listing image"
           className="h-[195px] w-auto md:h-[165px]"
           style={{
@@ -32,7 +32,7 @@ export default function SimilarCard({
       </div>
       <div className={`flex grow flex-col justify-between gap-3 pl-2`}>
         <div className="pt-2">
-          <div className="mb-1 text-base font-medium">{name}</div>
+          <div className="mb-1 line-clamp-2 text-base font-medium	">{name}</div>
           <p className="text-sm text-[#676D73]">{subtitle}</p>
         </div>
         <h6 className="text-xs text-[#676D73]">

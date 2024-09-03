@@ -50,7 +50,6 @@ export default function CategoriesAutocomplete({
           <IconGenerator
             alt="avatar icon"
             src={`/down-arrow.svg`}
-            // width={}
             className={`${!whiteVariant ? "mr-2" : ""} ${!isSmallSize ? "w-6 sm:w-8" : "w-[18px]"}`}
           />
         }
@@ -87,13 +86,15 @@ export default function CategoriesAutocomplete({
             fontSize: whiteVariant ? "16px" : "14px",
           },
         }}
-        PopperComponent={(props) => <Popper
-          {...props}
-          placement="bottom-start"
-          className={`
+        PopperComponent={(props) => (
+          <Popper
+            {...props}
+            placement="bottom-start"
+            className={`
             !w-[40vw] sm:!w-[250px]
           `}
-        />}
+          />
+        )}
         renderInput={(params) => (
           <TextField
             {...params}

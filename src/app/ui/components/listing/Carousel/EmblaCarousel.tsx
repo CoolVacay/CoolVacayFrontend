@@ -63,7 +63,7 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
         <div className="flex h-full items-center">
           <div className="grid grid-cols-24">
             <div
-              className={`grid ${type === "image" ? "hidden md:col-span-1 md:grid lg:col-span-2" : "col-span-1"}`}
+              className={`grid ${type === "image" ? "hidden md:col-span-1 md:grid lg:col-span-2" : "hidden sm:col-span-1 sm:grid"}`}
             >
               <button aria-label="back arrow button" onClick={scrollPrev}>
                 {type === "image" ? (
@@ -74,7 +74,7 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
               </button>
             </div>
             <div
-              className={`grid ${type === "image" ? "col-span-24 md:col-span-22 lg:col-span-20" : "col-span-22 ml-3"}`}
+              className={`grid ${type === "image" ? "col-span-24 md:col-span-22 lg:col-span-20" : "col-span-24 sm:col-span-22 sm:ml-1"}`}
             >
               <div className="embla__viewport" ref={emblaMainRef}>
                 <div className="embla__container">
@@ -124,7 +124,7 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
               </div>
             </div>
             <div
-              className={`grid content-center justify-items-end ${type === "image" ? "hidden md:col-span-1 md:grid lg:col-span-2" : "col-span-1"}`}
+              className={`grid content-center justify-items-end ${type === "image" ? "hidden md:col-span-1 md:grid lg:col-span-2" : "hidden sm:col-span-1 sm:grid"}`}
             >
               <button aria-label="back arrow button" onClick={scrollNext}>
                 {type === "image" ? (
