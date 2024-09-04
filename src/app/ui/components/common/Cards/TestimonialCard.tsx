@@ -1,6 +1,16 @@
 import Image from "next/image";
 
-export default function TestimonialCard() {
+export default function TestimonialCard({
+  guest,
+  summary,
+  description,
+  imgSrc,
+}: {
+  guest: string;
+  summary: string;
+  description: string;
+  imgSrc: string;
+}) {
   return (
     <div className="flex w-full shrink-0 justify-center">
       <div className="flex flex flex-col items-center justify-center gap-12 lg:flex-row">
@@ -14,34 +24,26 @@ export default function TestimonialCard() {
           />
           <Image
             alt="Testimonials sample photo"
-            src="/testimonials_photo.jpeg"
+            src={imgSrc ? imgSrc : "/testimonials_photo.jpeg"}
             className="h-[320px] w-full rounded-lg sm:h-[480px] sm:w-auto"
             width={0}
             height={0}
-            sizes="60vw"
+            sizes="40vw"
             priority={true}
             style={{
               objectFit: "cover",
             }}
           />
           <p className="font-base absolute left-4 top-4 text-xl text-white sm:text-2xl">
-            Cunningham Management
-          </p>
-          <p className="font-base absolute bottom-4 left-4 text-xl text-white sm:text-2xl">
-            Richard Cunningham
+            {guest}
           </p>
         </div>
         <div className="flex flex-col gap-4">
           <p className="text-center text-4xl font-semibold sm:text-[48px] sm:leading-[57px] lg:text-left">
-            “Working with this team has been a game-changer”
+            {summary}
           </p>
           <p className="font-base text-center text-[#676D73] sm:text-lg lg:text-left">
-            Working with this team has been a game-changer for Cunningham
-            Management. They increased our overall performance, alleviated
-            stress on our onsite team by handling all guest communication, and
-            expertly managed our pricing and inventory. Their dedication and
-            professionalism have made a significant positive impact on our
-            operations. Highly recommend!
+            {description}
           </p>
         </div>
       </div>
