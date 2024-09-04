@@ -4,11 +4,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Thumb } from "./EmblaCarouselThumbsButton";
+
+import { Thumb } from "./GalleryCarouselThumbsButton";
 import type { IListingData } from "~/app/(application)/definitions";
+import { SimilarCard } from "../../common";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { SimilarCard } from "../../common";
 import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 
@@ -17,7 +18,7 @@ type CarouselType = {
   type: "image" | "card";
 };
 
-const EmblaCarousel = ({ data, type }: CarouselType) => {
+const GalleryCarousel = ({ data, type }: CarouselType) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel();
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
@@ -58,9 +59,11 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
   }, [emblaMainApi, selectedIndex]);
 
   return (
-    <div className="embla">
-      <div className="no-scrollbar flex h-full flex-col overflow-hidden lg:items-center lg:justify-between">
-        <div className="flex h-full items-center">
+    <div
+      className={`flex ${type === "image" ? "h-[calc(100vh_-_236px)]" : "h-full"} w-full`}
+    >
+      <div className="no-scrollbar flex h-full flex-col overflow-hidden sm:justify-between lg:items-center">
+        <div className="flex shrink-0 grow-0 items-center">
           <div className="grid grid-cols-24">
             <div
               className={`grid ${type === "image" ? "hidden md:col-span-1 md:grid lg:col-span-2" : "hidden sm:col-span-1 sm:grid"}`}
@@ -76,27 +79,26 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
             <div
               className={`grid ${type === "image" ? "col-span-24 md:col-span-22 lg:col-span-20" : "col-span-24 sm:col-span-22 sm:ml-1"}`}
             >
-              <div className="embla__viewport" ref={emblaMainRef}>
-                <div className="embla__container">
+              <div className="overflow-hidden" ref={emblaMainRef}>
+                <div className="flex max-h-[600px] w-full shrink-0 touch-pan-y touch-pinch-zoom gap-5">
                   {type === "image"
                     ? (data as IListingData["images"]).map((image, index) => (
-                        <div className="embla__slide" key={index + 1}>
-                          <div className="embla__slide__number">
-                            {
-                              <Image
-                                key={index + 1}
-                                src={image.url}
-                                alt={image.name}
-                                placeholder="blur"
-                                width={920}
-                                height={620}
-                                quality={90}
-                                className="h-full w-full md:rounded md:rounded-xl"
-                                blurDataURL={`data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mP8/OVbPQMRgHFUIX0VAgBWRiGjO2Ny1QAAAABJRU5ErkJggg==`}
-                                style={{ objectFit: "cover" }}
-                              />
-                            }
-                          </div>
+                        <div className="flex w-full shrink-0" key={index + 1}>
+                          {
+                            <Image
+                              key={index + 1}
+                              src={image.url}
+                              alt={image.name}
+                              priority={index < 4 ? true : false}
+                              placeholder="blur"
+                              width={1080}
+                              height={720}
+                              quality={65}
+                              className="w-full md:rounded md:rounded-xl"
+                              blurDataURL={`data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mP8/OVbPQMRgHFUIX0VAgBWRiGjO2Ny1QAAAABJRU5ErkJggg==`}
+                              style={{ objectFit: "cover" }}
+                            />
+                          }
                         </div>
                       ))
                     : (data as IListingData[]).map((listing, index) => {
@@ -137,13 +139,13 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
           </div>
         </div>
         {type === "image" ? (
-          <div className="flex w-full items-center justify-center gap-5 md:hidden">
+          <div className="flex h-[50px] w-full items-center justify-center gap-5 md:hidden">
             <div className="flex items-center">
               <button aria-label="back arrow button" onClick={scrollPrev}>
                 <KeyboardArrowLeftIcon className="h-[50px] w-full hover:text-primary lg:h-[70px] lg:w-[70px]" />
               </button>
             </div>
-            <p className="flex w-[100px] justify-center gap-5">{`${selectedIndex} / ${data.length}`}</p>
+            <p className="flex w-[100px] justify-center gap-5">{`${selectedIndex + 1} / ${data.length}`}</p>
             <div className="flex items-center">
               <button aria-label="forward arrow button" onClick={scrollNext}>
                 <KeyboardArrowRightIcon className="h-[50px] w-full hover:text-primary lg:h-[70px] lg:w-[70px]" />
@@ -153,8 +155,8 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
         ) : null}
         {type === "image" ? (
           <div className="embla-thumbs">
-            <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
-              <div className="embla-thumbs__container">
+            <div className="overflow-hidden" ref={emblaThumbsRef}>
+              <div className="-ml-3 flex h-[110px]">
                 {(data as IListingData["images"]).map((image, index) => (
                   <Thumb
                     key={index}
@@ -172,4 +174,4 @@ const EmblaCarousel = ({ data, type }: CarouselType) => {
   );
 };
 
-export default EmblaCarousel;
+export default GalleryCarousel;

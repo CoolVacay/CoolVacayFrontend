@@ -6,9 +6,8 @@ import { Dialog, DialogContent, Divider } from "@mui/material";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 
 import type { IListingData } from "~/app/(application)/definitions";
-import EmblaCarousel from "../../listing/Carousel/EmblaCarousel";
+import GalleryCarousel from "../../listing/Carousel/GalleryCarousel";
 import CloseIcon from "@mui/icons-material/Close";
-import "../../listing/Carousel/embla.css";
 import { useMediaQuery } from "@mui/material";
 
 export default function FullScreenDialog({
@@ -51,8 +50,8 @@ export default function FullScreenDialog({
         </button>
       </div>
       <Divider className="text-[#EAEAEF]" />
-      <DialogContent className="px-0 md:mx-6 md:pb-6 md:pt-2">
-        <EmblaCarousel data={listing.images} type="image" />
+      <DialogContent className="px-0 md:pb-6 md:pt-2 lg:mx-6">
+        <GalleryCarousel data={listing.images} type="image" />
       </DialogContent>
     </Dialog>
   );

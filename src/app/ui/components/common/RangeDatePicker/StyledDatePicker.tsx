@@ -62,14 +62,14 @@ const StyledDatePicker = styled(DateRangePickerDay, {
               ? {
                   borderTopLeftRadius: "50%",
                   borderBottomLeftRadius: "50%",
-                  backgroundColor: theme.palette.primary.dark
+                  backgroundColor: theme.palette.primary.dark,
                 }
               : {}),
             ...(isEndOfHighlighting || isEndOfPreviewing
               ? {
                   borderTopRightRadius: "50%",
                   borderBottomRightRadius: "50%",
-                  backgroundColor: theme.palette.primary.dark
+                  backgroundColor: theme.palette.primary.dark,
                 }
               : {}),
             ...((isDisabled || !isAvailable) && {

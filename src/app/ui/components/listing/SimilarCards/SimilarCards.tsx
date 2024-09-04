@@ -1,5 +1,5 @@
 import { getSimilarListings } from "~/app/(application)/actions";
-import EmblaCarousel from "../Carousel/EmblaCarousel";
+import GalleryCarousel from "../Carousel/GalleryCarousel";
 
 export default async function SimilarCards({
   pageParams,
@@ -12,7 +12,7 @@ export default async function SimilarCards({
   const similarListings = (await getSimilarListings(pageParams))!;
 
   return similarListings ? (
-    <EmblaCarousel data={similarListings} type="card" />
+    <GalleryCarousel data={similarListings} type="card" />
   ) : (
     "Cannot find similar homes at this moment"
   );
