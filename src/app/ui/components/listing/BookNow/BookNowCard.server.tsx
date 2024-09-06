@@ -14,7 +14,7 @@ export default async function BookNow({ params }: { params: IParams }) {
   const endDate = dayjs().add(1, "year").format("YYYY-MM-DD");
   const listingInfo = (await getListingData(params))!;
 
-  const availabilityDate =
+  const availabilityData =
     listingInfo.source === "Lodgix" || listingInfo.source === "Rhea"
       ? await getAvailabilityDates(
           listingInfo.source,
@@ -30,7 +30,7 @@ export default async function BookNow({ params }: { params: IParams }) {
       <BookNowContent
         listingInfo={listingInfo}
         params={params}
-        availableDates={availabilityDate}
+        availabilityData={availabilityData}
       />
     </div>
   );

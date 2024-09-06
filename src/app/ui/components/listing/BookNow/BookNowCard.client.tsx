@@ -29,19 +29,26 @@ export interface IPricingDetails {
 export default function BookNowContent({
   listingInfo,
   params,
-  availableDates,
+  availabilityData,
 }: {
   listingInfo: IListingData;
   params: IParams;
-  availableDates?: IPropertyAvailability | undefined;
+  availabilityData?: IPropertyAvailability | undefined;
 }) {
   const { searchParams, searchParamsValues, updateSearchParams } =
     useAppSearchParams();
 
-  const originalDates = availableDates?.availabilityArray.filter(item => item.isAvailable).map(item => dayjs(item.date).format('YYYY-MM-DD'));
-  const dates = [searchParamsValues.fromDate, searchParamsValues.toDate];
-  const bookButtonDisabled = dates[0] === null || dates[1] === null;
-  const [availableDatesArray, setAvailableDatesArray] = useState(originalDates ?? [])
+  const availableDates = availabilityData?.availabilityArray
+    .filter((item) => item.isAvailable)
+    .map((item) => dayjs(item.date).format("YYYY-MM-DD"));
+
+  const selectedDates = [
+    searchParamsValues.fromDate,
+    searchParamsValues.toDate,
+  ];
+  const bookButtonDisabled =
+    selectedDates[0] === null || selectedDates[1] === null;
+
   return (
     <div
       className={`flex flex-col gap-6 rounded-[11px] border border-[#EAEAEF] px-6 py-5`}
@@ -53,11 +60,9 @@ export default function BookNowContent({
         >
           <RangeDatePicker
             size="medium"
-            availableDates={availableDatesArray}
-            setAvailableDates={setAvailableDatesArray}
-            originalDates={originalDates}
-            dates={dates as DateRangeType}
-            setDates={(values: DateRangeType) =>
+            availableDates={availableDates}
+            selectedDates={selectedDates as DateRangeType}
+            setDates={(values: DateRangeType | ["", ""]) =>
               updateSearchParams(["fromDate", "toDate"], values)
             }
             listingInfo={listingInfo}
