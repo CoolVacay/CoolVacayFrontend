@@ -34,7 +34,7 @@ export default function TestimonialCard({
               objectFit: "cover",
             }}
           />
-          <p className="font-base absolute left-4 top-4 text-xl text-white sm:text-2xl">
+          <p className="font-base absolute left-4 bottom-4 text-xl text-white sm:text-2xl">
             {guest}
           </p>
         </div>

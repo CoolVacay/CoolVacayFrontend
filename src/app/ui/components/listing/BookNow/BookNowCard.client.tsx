@@ -8,6 +8,9 @@ import type { SelectChangeEvent } from "@mui/material";
 import type { DateRangeType } from "../../home/SearchCard";
 import type { IParams, IListingData } from "~/app/(application)/definitions";
 import type { IPropertyAvailability } from "~/app/(application)/definitions";
+import { useState } from "react";
+import dayjs from "dayjs";
+
 export interface IPricingDetails {
   totalPrice: number;
   totalPriceStr: string;
@@ -35,9 +38,10 @@ export default function BookNowContent({
   const { searchParams, searchParamsValues, updateSearchParams } =
     useAppSearchParams();
 
+  const originalDates = availableDates?.availabilityArray.filter(item => item.isAvailable).map(item => dayjs(item.date).format('YYYY-MM-DD'));
   const dates = [searchParamsValues.fromDate, searchParamsValues.toDate];
   const bookButtonDisabled = dates[0] === null || dates[1] === null;
-
+  const [availableDatesArray, setAvailableDatesArray] = useState(originalDates ?? [])
   return (
     <div
       className={`flex flex-col gap-6 rounded-[11px] border border-[#EAEAEF] px-6 py-5`}
@@ -49,11 +53,14 @@ export default function BookNowContent({
         >
           <RangeDatePicker
             size="medium"
-            availableDates={availableDates}
+            availableDates={availableDatesArray}
+            setAvailableDates={setAvailableDatesArray}
+            originalDates={originalDates}
             dates={dates as DateRangeType}
             setDates={(values: DateRangeType) =>
               updateSearchParams(["fromDate", "toDate"], values)
             }
+            listingInfo={listingInfo}
           />
         </div>
         <div className="px-6 py-5">

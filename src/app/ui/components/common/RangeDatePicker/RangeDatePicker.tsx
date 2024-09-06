@@ -7,26 +7,56 @@ import { IconGenerator } from "../IconGenerator";
 import type { DateRangeType } from "../../home/SearchCard";
 import type { Dayjs } from "dayjs";
 import StyledDatePicker from "./StyledDatePicker";
-import type { IPropertyAvailability } from "~/app/(application)/definitions";
+import type { IListingData } from "~/app/(application)/definitions";
 import { useMediaQuery } from "@mui/material";
+import { getAvailabilityPeriods } from "~/app/(application)/actions";
+import dayjs from "dayjs";
+import { useState } from "react";
+import Loading from "~/app/(authentication)/signup/loading";
 
 const RangeDatePicker = ({
   size,
   dates,
   setDates,
   availableDates,
+  setAvailableDates,
+  originalDates,
+  listingInfo
 }: {
   size: "small" | "medium" | "big";
   dates: DateRangeType;
   setDates:
     | React.Dispatch<React.SetStateAction<DateRangeType>>
     | ((values: DateRangeType) => void);
-  availableDates?: IPropertyAvailability;
+  availableDates?: string[];
+  originalDates?: string[];
+  setAvailableDates?: React.Dispatch<React.SetStateAction<string[]>>;
+  listingInfo?: IListingData;
 }) => {
   const bigFont = size === "big";
   const mediumFont = size === "medium";
+  const [loading, setLoading] = useState(false);
 
   const matches = useMediaQuery("@media (pointer: fine)");
+
+  const handleDateChange = async (newValue: DateRangeType) => {
+    if (availableDates && setAvailableDates && originalDates) {
+      setDates(newValue as [Dayjs, Dayjs]);
+      if (newValue[0] && !newValue[1]) {
+        setLoading(true);
+        const availabilityPeriods = await getAvailabilityPeriods(
+          "Rhea",
+          listingInfo?.id ?? "",
+          dayjs(newValue[0]).format("YYYY-MM-DD")
+        );
+        setAvailableDates(availabilityPeriods ?? []);
+        setLoading(false);
+      } else {
+        if (originalDates.length !== availableDates.length)
+          setAvailableDates(originalDates ?? []);
+      }
+    }
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -37,35 +67,54 @@ const RangeDatePicker = ({
           alignItems: "center",
           position: "relative",
         }}
+        loading={loading}
+        renderLoading={() => (
+          <div
+            className="absolute inset-0 flex items-center justify-center bg-white"
+            style={{ height: "100%", width: "auto" }}
+          >
+            <Loading />
+          </div>
+        )}
         slots={{ day: StyledDatePicker }}
         format="MM/DD/YYYY"
         slotProps={{
           fieldSeparator: {
             sx: { color: "transparent" },
-            className: `${bigFont || mediumFont ? "sm:h-16 h-14" : "h-11"} w-[1px] absolute bg-primary-grey100 inset-x-2/4`,
+            className: `${
+              bigFont || mediumFont ? "sm:h-16 h-14" : "h-11"
+            } w-[1px] absolute bg-primary-grey100 inset-x-2/4`,
           },
           day: {
-            // @ts-expect-error MUI doesnt recognize forwardProp
+            // @ts-expect-error MUI doesn't recognize forwardProp
             availableDates: availableDates,
           },
           textField: {
             variant: "standard",
             InputLabelProps: {
-              className: `${bigFont ? "sm:text-2xl text-xl sm:-top-3 -top-2" : mediumFont ? "text-xl -top-2" : "text-base -top-1"} font-medium absolute`,
+              className: `${
+                bigFont
+                  ? "sm:text-2xl text-xl sm:-top-3 -top-2"
+                  : mediumFont
+                  ? "text-xl -top-2"
+                  : "text-base -top-1"
+              } font-medium absolute`,
             },
             InputProps: {
-              className: `${bigFont ? "sm:text-xl sm:font-medium" : mediumFont ? "text-base" : "text-xs "} ${matches ? "font-medium" : ""}`,
+              className: `${
+                bigFont ? "sm:text-xl sm:font-medium" : mediumFont ? "text-base" : "text-xs "
+              } ${matches ? "font-medium" : ""}`,
               startAdornment:
                 matches && dates[0] ? (
                   <IconGenerator
                     alt="Calendar icon"
-                    src={`/calendar_icon.svg`}
+                    src={"/calendar_icon.svg"}
                     className={
                       bigFont
                         ? "mr-3 w-4 sm:w-8"
                         : mediumFont
-                          ? "mr-2 w-5"
-                          : "mr-2 w-4"
+                        ? "mr-2 w-5"
+                        : "mr-2 w-4"
                     }
                   />
                 ) : null,
@@ -73,9 +122,7 @@ const RangeDatePicker = ({
           },
         }}
         value={dates}
-        onAccept={(newValue) => {
-          setDates(newValue as [Dayjs, Dayjs]);
-        }}
+        onChange={handleDateChange}
         localeText={{ start: "Check-in", end: "Check-out" }}
       />
     </LocalizationProvider>

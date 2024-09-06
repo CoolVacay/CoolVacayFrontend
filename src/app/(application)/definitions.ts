@@ -225,10 +225,12 @@ export interface IBlog {
 export interface IPropertyAvailability {
   from: string;
   to: string;
-  availabilityArray: {
-    date: string;
-    isAvailable: boolean;
-  }[];
+  availabilityArray: IAvailabilityArray[];
+}
+
+export interface IAvailabilityArray {
+  date: string;
+  isAvailable: boolean;
 }
 
 export interface ICloseDatesListings {
