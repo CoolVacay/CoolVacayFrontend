@@ -5,6 +5,12 @@ import {
   CustomChip,
 } from "~/app/ui/components/common";
 import TestimonialsCarousel from "./TestimonialsCarousel";
+import CampaignIcon from "@mui/icons-material/Campaign";
+import SupportIcon from "@mui/icons-material/Support";
+import HandshakeIcon from "@mui/icons-material/Handshake";
+import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
+import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
+import InsightsIcon from "@mui/icons-material/Insights";
 
 const coolVacayFeatures = [
   {
@@ -36,6 +42,45 @@ const coolVacayFeatures = [
       "Payment processing",
       "Guest screening and damage coverage",
     ],
+  },
+];
+
+const coolVacayInspiringFeatures = [
+  {
+    title: "Marketing",
+    subtitle:
+      "CoolVacay employs a sophisticated technology platform to integrate with all major Online Travel Agents (OTAs), ensuring broad exposure for your property.",
+    icon: <CampaignIcon />,
+  },
+  {
+    title: "Permit, Licensing & Tax Support",
+    subtitle:
+      "Our experienced team manages all the details of permits, licensing, and taxes, making the rental of excess timeshare inventory a smooth and profitable experience.",
+    icon: <SupportIcon />,
+  },
+  {
+    title: "Prestigious Partnerships",
+    subtitle:
+      "As a “Preferred Partner,” CoolVacay features properties on major platforms like Airbnb, VRBO, TripAdvisor, Booking.com, and Expedia at no cost to homeowners and association partners.",
+    icon: <HandshakeIcon />,
+  },
+  {
+    title: "Dynamic Strategies",
+    subtitle:
+      "Implementing strategies that adapt to fast-changing market data, we ensure you stay competitive without the hassle.",
+    icon: <TipsAndUpdatesIcon />,
+  },
+  {
+    title: "Guest Communication",
+    subtitle:
+      "Handling daily tasks like pre- and post-stay guest communications, we save you valuable time and enhance the guest experience.",
+    icon: <ConnectWithoutContactIcon />,
+  },
+  {
+    title: "Commitment to Success",
+    subtitle:
+      "Owners experience over a 50% increase in rental performance, showcasing CoolVacay’s dedication to achieving outstanding results.",
+    icon: <InsightsIcon />,
   },
 ];
 const partners = ["airbnb", "booking", "vrbo", "expedia"];
@@ -95,22 +140,17 @@ export default function Page() {
           </h3>
 
           <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 6 }, (_, i) => i + 1).map((index) => {
+            {coolVacayInspiringFeatures.map((inspiringFeature, index) => {
               return (
                 <div key={index} className="flex flex-col gap-5">
-                  <div className="h-min w-max rounded-full bg-primary/[0.10] p-2 sm:p-3">
-                    <IconGenerator
-                      src="/heart.svg"
-                      alt="About us folder icon"
-                      className="h-6 w-6"
-                    />
+                  <div className="h-min w-max rounded-full bg-primary/[0.10] p-2 text-primary sm:p-3">
+                    {inspiringFeature.icon}
                   </div>
                   <p className="text-xl font-semibold">
-                    The most inspiring feature
+                    {inspiringFeature.title}
                   </p>
-                  <p className="line-clamp-2 text-[#737373]">
-                    Tortor interdum condimentum nunc molestie quam lectus
-                    euismod pulvinar risus. Cursus in odio.
+                  <p className="line-clamp-4 text-[#737373]">
+                    {inspiringFeature.subtitle}
                   </p>
                 </div>
               );
