@@ -19,7 +19,7 @@ export async function ListingSection({ query, listings }: { query: URLSearchPara
           {listings?.totalItems} Properties
         </p>
       </div>
-      <div className="flex flex-wrap items-center justify-center gap-5 xl:justify-start">
+      <div className="flex flex-wrap items-start justify-center gap-5 xl:justify-start">
         {listings?.items?.map((listing) => {
           return (
             <ListingCard

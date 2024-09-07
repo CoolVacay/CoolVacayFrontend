@@ -6,8 +6,6 @@ import { usePathname } from "next/navigation";
 import { IconGenerator } from "../IconGenerator";
 import NavBarLoginButton from "./NavBarLoginButton";
 import type { TUserData } from "~/app/(application)/definitions";
-
-import { getCurrentDates } from "~/app/utils/helpers";
 import NavBardDialog from "./NavBarDialog";
 import { logOut } from "~/app/(authentication)/actions";
 
@@ -58,13 +56,12 @@ export default function NavBar({
     pathname.startsWith("/vacation-rental-management");
 
   const [openMenu, setOpenMenu] = useState(false);
-  const { startDate, endDate } = getCurrentDates();
 
   const toggleMenu = () => setOpenMenu(!openMenu);
 
   return (
     <nav
-      className={`sticky top-0 z-50 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-24 sm:py-6 ${isWhiteVariant ? "bg-black" : "bg-white"} transition-all duration-700 ${scrolled ? "bg-opacity-60" : "bg-opacity-0"}`}
+      className={`sticky top-0 z-50 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-20 sm:py-6 ${scrolled ? `${isWhiteVariant ? "bg-black transition-all duration-700 bg-opacity-60" : "bg-white"}` : "bg-opacity-0 transition-all duration-700"}`}
     >
       <div
         className={`flex w-full items-center ${isWhiteVariant || !noMaxWidth ? "sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : "sm:pl-16"} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
@@ -74,7 +71,7 @@ export default function NavBar({
             <IconGenerator
               src={`/cool_vacay_logo_${isWhiteVariant ? "white" : "blue"}.svg`}
               alt="CoolVacay Logo"
-              className="w-[118px] sm:w-[230px]"
+              className="w-[118px] sm:w-[200px]"
               priority={true}
             />
           </Link>
@@ -86,7 +83,7 @@ export default function NavBar({
             />
           </button>
         </div>
-        <div className="hidden text-lg sm:flex sm:flex-grow sm:items-center sm:justify-between">
+        <div className="hidden text-md sm:flex sm:flex-grow sm:items-center sm:justify-between">
           {/* <div
             className={`flex gap-5 ${isWhiteVariant ? "text-white" : "text-black"}`}
           >
@@ -112,6 +109,13 @@ export default function NavBar({
               About Us
             </Link>
             <span className="hidden text-center lg:inline-block">•</span>{" "}
+            <Link
+              href="/vacation-rental-management"
+              className={`text-center ${isWhiteVariant ? "text-white" : "text-black"}`}
+            >
+              Rental Management
+            </Link>
+            <span className="hidden text-center lg:inline-block">•</span>{" "}
             {userData ? (
               <Link href="/profile/reservations" className="hidden sm:block">
                 <p
@@ -124,7 +128,7 @@ export default function NavBar({
             {!userData ? (
               <Link href="/signin">
                 <button
-                  className={`flex w-[190px] items-center rounded-full px-4 py-2 text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
+                  className={`flex w-[190px] items-center rounded-full px-[14px] py-[6px] text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
                 >
                   Log In or Sign Up
                   <span className="ml-2">
