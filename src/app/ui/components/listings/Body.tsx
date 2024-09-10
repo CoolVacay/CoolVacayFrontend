@@ -6,8 +6,8 @@ import {
   type ILocationsList,
 } from "~/app/(application)/definitions";
 import { CloseDatesListings } from "./CloseDatesListings";
-import { Filters } from "./Filters";
 import { getFilteredListings } from "~/app/(application)/actions";
+import { Filters } from "./Filters";
 
 async function Body({
   query,
