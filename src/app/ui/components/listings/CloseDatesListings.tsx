@@ -4,28 +4,16 @@ import {
 import { ListingCard } from "../common";
 import Pagination from "./Pagination";
 import type { IAllListings } from "~/app/(application)/definitions";
-import dayjs from "dayjs";
 const PAGESIZE = "4";
 
 export async function CloseDatesListings({ query, listings }: { query: URLSearchParams, listings: IAllListings }) {
-
-  let closeAvailabilityListings = (await getCloseDatesListings(
+  const closeAvailabilityListings = (await getCloseDatesListings(
     PAGESIZE,
     query.get("match") ?? "",
-    query.get("fromDate") ?? dayjs().format("YYYY-MM-DD"),
-    query.get("toDate") ?? dayjs().add(5, "days").format("YYYY-MM-DD"),
+    query.get("fromDate") ?? "",
+    query.get("toDate") ?? "",
     query.get("category") ?? ""
   ))!
-    
-  if(closeAvailabilityListings?.length < 4){
-    closeAvailabilityListings = (await getCloseDatesListings(
-      PAGESIZE,
-      query.get("match") ?? "",
-      query.get("fromDate") ?? dayjs().format("YYYY-MM-DD"),
-      query.get("toDate") ?? dayjs().add(5, "days").format("YYYY-MM-DD"),
-      ""
-    ))!
-  }
 
   return closeAvailabilityListings?.length > 0 ? (
     <>
@@ -48,7 +36,7 @@ export async function CloseDatesListings({ query, listings }: { query: URLSearch
               subtitle={`${item.listing.city}, ${item.listing.state}`}
               imageUrl={item.listing.imageUrl}
               price={item.listing.price}
-              closeDates={item.availableDates}
+              closeDates={item.availableDates.length !== 0 ? item.availableDates : undefined}
               starRating={item.listing.starRating}
             />
           );

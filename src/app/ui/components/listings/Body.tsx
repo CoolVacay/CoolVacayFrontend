@@ -6,7 +6,7 @@ import {
   type ILocationsList,
 } from "~/app/(application)/definitions";
 import { CloseDatesListings } from "./CloseDatesListings";
-import { Filters } from "./FIlters";
+import { Filters } from "./Filters";
 import { getFilteredListings } from "~/app/(application)/actions";
 
 async function Body({
@@ -38,12 +38,14 @@ async function Body({
             >
               <ListingSection query={query} listings={listings}/>
             </Suspense>
-            {listings.totalItems < 3 && <Suspense
-              fallback={<FilteredListingsSkeleton />}
-              key={`closeDates-${query.toString()}`}
-            >
-              <CloseDatesListings query={query} listings={listings}/>
-            </Suspense>}
+            <div className="pt-5">
+              {listings.totalItems < 3 && <Suspense
+                fallback={<FilteredListingsSkeleton />}
+                key={`closeDates-${query.toString()}`}
+              >
+                <CloseDatesListings query={query} listings={listings}/>
+              </Suspense>}
+            </div>
           </div>
         </div>
         <div

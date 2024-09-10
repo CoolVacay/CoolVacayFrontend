@@ -83,6 +83,16 @@ export const getAvailabilityDates = (
     "Failed to fetch available dates",
   );
 
+export const getAvailabilityPeriods = (
+  source: string,
+  id: string,
+  startDate: string,
+) =>
+  getData<string[]>(
+    `/Listings/availability_periods?FromDate=${startDate}&source=${source}&ListingId=${id}`,
+    "Failed to fetch availablility periods",
+  );
+
 export const getCloseDatesListings = (
   pageSize: string,
   match: string,
