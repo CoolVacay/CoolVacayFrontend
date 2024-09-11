@@ -6,29 +6,37 @@ import useEmblaCarousel from "embla-carousel-react";
 
 const testimonials = [
   {
-    guest: "Summer Abrams",
-    summary: `Great experience! Amazing stay near the beach.`,
+    guest: "Kim D.",
+    summary: `Great experience! Kudos!`,
     description:
-      "Exactly as described. Check in process was easy with instructions. The front desk couldn’t find my reservation at first, she had to check around and then found it. Had everything I needed for my stay. Comfortable bed, clean, steps from the beach, parking pass. The host response time is amazing.",
+      "I had so much fun that I did not want to return home. You will fall in love with the staff…the management team was on point. All I can say is “Kudos” to the entire team…you all ROCK!!!!",
     imgSrc:
       "https://azureblobimg.blob.core.windows.net/coolvacay/46_Virginia_Beach.png",
   },
   {
-    guest: "Anthony Laughman",
+    guest: "Evelin G.",
     summary:
-      "Had an amazing time! Scenic cabin stay in Maine with convenient amenities.",
+      "Beautiful place and friendly staff",
     description:
-      "Our stay in Jackman, Maine was a great experience it's exactly what you would expect staying in a cabin. Beautiful scenic views and all the amenities were so convenient especially if staying with kids in the summer they loved both pools.",
+      "It is a very beautiful place. Really quiet and enjoyable. Friendly staff, rooms are very well equipped and clean. The pool area was very clean as well. Nice view from pool and from the rooms.",
     imgSrc: "https://azureblobimg.blob.core.windows.net/coolvacay/4.png",
   },
   {
-    guest: "Heather Sincavage",
-    summary: "All you need to know is: I will come back.",
+    guest: "Christina M.",
+    summary: "Great location and clean rooms",
     description:
-      "Very nice clean condo. Location is great. Short easy walk to the beach. Plenty of restaurants, convenience stores, ice cream etc. within walking distance. Very responsive when you message. Had a great time! Would definitely rent again if we go back to OC.",
+      "Location of property is very convenient. You can walk to the beach and restaurants within minutes. Rooms are well kept. Staff are very friendly. The views of the water are amazing too!",
     imgSrc:
       "https://azureblobimg.blob.core.windows.net/coolvacay/3_Ocean_City.png",
   },
+  {
+    guest: "Nathan H.",
+    summary: "Great staff, well equiped rooms",
+    description:
+      "I love Caloosa Cove!! We have stayed several times and it just gets better. Very clean, well equipped, great staff.",
+    imgSrc:
+      "https://azureblobimg.blob.core.windows.net/coolvacay/49.png",
+  }
 ];
 
 export default function TestimonialsCarousel() {

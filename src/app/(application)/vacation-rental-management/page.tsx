@@ -145,7 +145,7 @@ export default function Page() {
             guidance, innovative solutions, and client-centric focus.
           </h3>
 
-          <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
             {coolVacayInspiringFeatures.map((inspiringFeature, index) => {
               return (
                 <div key={index} className="flex flex-col gap-5">
@@ -155,7 +155,7 @@ export default function Page() {
                   <p className="text-xl font-semibold">
                     {inspiringFeature.title}
                   </p>
-                  <p className="line-clamp-4 text-[#737373]">
+                  <p className="text-[#737373]">
                     {inspiringFeature.subtitle}
                   </p>
                 </div>
