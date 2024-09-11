@@ -7,6 +7,7 @@ import MuiXLicense from "../MuiXLicense";
 import theme from "../../theme";
 import { ThemeProvider } from "@mui/material/styles";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <GoogleAnalytics gaId="G-XXZJL9XNQC" />
       <body className={`${inter.className} w-full flex h-full flex-col`}>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
