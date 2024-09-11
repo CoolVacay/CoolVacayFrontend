@@ -6,7 +6,7 @@ function ForgottenPassword() {
   return (
     <div className="flex flex-col gap-20">
       <Link href="/" className="w-[200px]">
-        <Image
+        <Image unoptimized
           src="/cool_vacay_logo_blue.svg"
           alt="CoolVacay Logo"
           width={200}

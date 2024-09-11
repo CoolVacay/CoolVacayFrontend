@@ -22,7 +22,7 @@ export default function TestimonialCard({
                 "linear-gradient(180deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.00) 100%)",
             }}
           />
-          <Image
+          <Image unoptimized
             alt="Testimonials sample photo"
             src={imgSrc ? imgSrc : "/testimonials_photo.jpeg"}
             className="h-[320px] w-full rounded-lg sm:h-[480px] sm:w-auto"

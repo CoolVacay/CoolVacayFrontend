@@ -18,7 +18,7 @@ export default function MainCard({
       }}
     >
       <div className="flex h-[210px] w-[278px]">
-        <Image
+        <Image unoptimized
           src={imageUrl ?? "/cardImage.png"}
           width={278}
           height={210}

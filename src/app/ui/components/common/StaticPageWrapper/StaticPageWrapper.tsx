@@ -21,7 +21,7 @@ export default function StaticPageWrapper({
       <Suspense fallback={<StaticPageWrapperSkeleton/>}>
       <div className={`relative -mt-24 flex h-[588px]`}>
         <div className={`absolute flex h-[588px] w-full`}>
-          <Image
+          <Image unoptimized
             alt={img.alt}
             src={img.src}
             quality={90}

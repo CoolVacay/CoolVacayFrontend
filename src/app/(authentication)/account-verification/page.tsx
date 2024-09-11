@@ -7,7 +7,7 @@ export default function AccountCreationCode() {
     <div className="flex w-full flex-col gap-[170px]">
       <div className="w-full">
         <Link href="/" className="text-left">
-          <Image
+          <Image unoptimized
             src="/cool_vacay_logo_blue.svg"
             alt="CoolVacay Logo"
             width={200}

@@ -27,7 +27,7 @@ const BlogSidebar = async ({id}: {id: string}) => {
       <div className="mt-5 flex h-min flex-col gap-5 rounded-[10px] bg-[#F7F7F7] p-6">
         <NewsletterForm isTextBlack={true} />
         <div className="flex h-[190px] w-full shrink-0 lg:hidden">
-          <Image
+          <Image unoptimized
             alt="Blog image"
             src="/newsletter_img.jpeg"
             className="rounded-sm"

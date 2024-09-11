@@ -21,7 +21,7 @@ export default function Gallery({ listing }: { listing: IListingData }) {
           {/* Mobile view: Show only one image */}
           <div className="block md:hidden">
             <div className="h-[300px] w-full overflow-hidden rounded-[8px]">
-              <Image
+              <Image unoptimized
                 src={listing.images[0]?.url ?? ""}
                 alt={listing.images[0]?.name ?? "Image name"}
                 onClick={() => {
@@ -60,7 +60,7 @@ export default function Gallery({ listing }: { listing: IListingData }) {
                 key={index}
                 className={`${index === 0 ? "col-span-2 row-span-2" : "col-span-1 row-span-1"} rounded-[8px]`}
               >
-                <Image
+                <Image unoptimized
                   src={image.url}
                   alt={image.name}
                   onClick={() => {

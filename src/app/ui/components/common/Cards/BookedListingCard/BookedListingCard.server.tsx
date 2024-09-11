@@ -17,7 +17,7 @@ export default async function BookedListingCard({
       className={`flex h-min w-full gap-6 rounded-xl border border-[#EAEAEF] p-3 md:flex-col lg:flex lg:w-full lg:flex-row lg:items-center`}
     >
       <div className="flex h-[186px] w-full lg:h-[112px] lg:w-[138px]">
-        <Image
+        <Image unoptimized
           src={listing?.imageUrl ?? "/cardImage.png"}
           width={0}
           height={0}

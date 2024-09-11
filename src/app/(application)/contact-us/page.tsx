@@ -25,7 +25,7 @@ export default function Page() {
               <InquireForm />
             </div>
             <div className="relative mt-6 hidden h-full w-full shrink-0 md:flex lg:mt-0 lg:w-[592px]">
-              <Image
+              <Image unoptimized
                 alt="Coolvacay about us, second image"
                 src="/contact-us.png"
                 width={592}
@@ -87,7 +87,7 @@ export default function Page() {
         </div>
       </div>
       <div className="relative mt-10 flex w-full sm:mt-16">
-        <Image
+        <Image unoptimized
           alt="Coolvacay about us, second image"
           src="/location.png"
           quality={100}

@@ -7,7 +7,7 @@ export default function Newsletter() {
   return (
     <div className="relative flex w-full shrink-0 flex-col rounded-xl sm:flex-row">
       <div className="flex h-[250px] w-full shrink-0">
-        <Image
+        <Image unoptimized
           alt="Coolvacay newsletter image"
           src="/newsletter_img.jpeg"
           className="rounded-xl"

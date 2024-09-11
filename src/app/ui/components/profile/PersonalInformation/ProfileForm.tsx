@@ -114,7 +114,7 @@ export default function ProfileForm({
         <div className="flex gap-10">
           {files.length > 0 ? (
             <div className="h-20 w-20">
-              <Image
+              <Image unoptimized
                 alt="avatar icon"
                 src={`${(files.length > 0 ? (files[0] as ModifiedFile).preview : profileInfo.profilePicture) ?? `/avatar_blue.svg`}`}
                 width={0}

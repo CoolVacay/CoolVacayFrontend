@@ -17,7 +17,7 @@ export default function SimilarCard({
       style={{ border: "1px solid rgba(173, 181, 189, 0.70)" }}
     >
       <div className="h-[195px] w-[250px] shrink-0 md:flex md:h-[165px] md:w-[169px]">
-        <Image
+        <Image unoptimized
           src={imageUrl ?? "/cardImage.png"}
           width={0}
           height={0}

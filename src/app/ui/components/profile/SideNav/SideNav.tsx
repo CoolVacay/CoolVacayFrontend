@@ -14,7 +14,7 @@ export default async function SideNav() {
     <div className="flex w-full flex-col rounded-[8px] border border-[#EAEAEF] md:max-w-[280px]">
       <div className="flex items-center gap-4 p-5">
         <div className="flex w-[50px]">
-          <Image
+          <Image unoptimized
             alt="avatar icon"
             src={`${profileInfo?.profilePicture ?? `/avatar_blue.svg`}`}
             width={50}

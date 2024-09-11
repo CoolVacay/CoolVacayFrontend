@@ -119,7 +119,7 @@ export default function Page() {
               </div>
             </div>
             <div className="flex h-[320px] w-full shrink-0 justify-center sm:h-[610px] lg:w-[530px] xl:w-[730px]">
-              <Image
+              <Image unoptimized
                 alt="Coolvacay about us, third image"
                 src="/vacation-rental-management.jpeg"
                 className="md:rounded-tl-[40px]"
