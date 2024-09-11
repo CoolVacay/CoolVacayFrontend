@@ -19,7 +19,7 @@ const testimonials = [
       "Beautiful place and friendly staff",
     description:
       "It is a very beautiful place. Really quiet and enjoyable. Friendly staff, rooms are very well equipped and clean. The pool area was very clean as well. Nice view from pool and from the rooms.",
-    imgSrc: "https://azureblobimg.blob.core.windows.net/coolvacay/4.png",
+    imgSrc: "https://azureblobimg.blob.core.windows.net/coolvacay/7.png",
   },
   {
     guest: "Christina M.",
@@ -35,7 +35,7 @@ const testimonials = [
     description:
       "I love Caloosa Cove!! We have stayed several times and it just gets better. Very clean, well equipped, great staff.",
     imgSrc:
-      "https://azureblobimg.blob.core.windows.net/coolvacay/49.png",
+      "https://azureblobimg.blob.core.windows.net/coolvacay/8.png",
   }
 ];
 
