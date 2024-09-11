@@ -9,6 +9,12 @@ import SimilarCards from "~/app/ui/components/listing/SimilarCards/SimilarCards"
 import PolicyAndRules from "~/app/ui/components/listing/PolicyAndRules";
 import { Divider } from "@mui/material";
 import { Suspense } from "react";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'CoolVacay | Listings by ID page',
+  description: 'View details about our listings here',
+};
 
 export default async function Page({
   params,

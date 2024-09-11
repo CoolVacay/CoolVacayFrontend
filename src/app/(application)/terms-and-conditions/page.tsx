@@ -1,7 +1,12 @@
 import { StaticPageWrapper } from "~/app/ui/components/common";
 import { getStaticPage } from "../actions";
 import parse from "html-react-parser";
+import { type Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: 'CoolVacay | Terms and Conditions',
+  description: 'Terms and Conditions page',
+};
 export default async function Page() {
   const termsAndConditionsHTML = await getStaticPage("terms_and_conditions");
 

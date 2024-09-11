@@ -7,6 +7,12 @@ import { getBlogById, getBlogContent, getLocationsList } from "../../actions";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { BlogContentSkeleton, BlogSidebarSkeleton } from "~/app/ui/components/common";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'CoolVacay | Blog by ID page',
+  description: 'Read our Blogs here',
+};
 
 const BlogSidebar = async ({id}: {id: string}) => {
   const locationsList = (await getLocationsList())!;

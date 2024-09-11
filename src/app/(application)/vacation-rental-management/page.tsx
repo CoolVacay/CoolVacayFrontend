@@ -11,6 +11,12 @@ import HandshakeIcon from "@mui/icons-material/Handshake";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import InsightsIcon from "@mui/icons-material/Insights";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'CoolVacay | Vacation Rental Management',
+  description: 'Welcome to CoolVacay, your trusted partner for vacation rental management. We specialize in sustainable solutions that integrate seamlessly with top third-party APIs, ensuring your property management is efficient and future-proof. Our innovative approach guarantees reliable, personalized service with a focus on accuracy and client satisfaction.',
+};
 
 const coolVacayFeatures = [
   {

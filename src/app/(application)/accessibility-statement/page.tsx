@@ -1,6 +1,12 @@
 import { StaticPageWrapper } from "~/app/ui/components/common";
 import { getStaticPage } from "../actions";
 import parse from "html-react-parser";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'CoolVacay | Accessibility Statement',
+  description: 'Accessibility Statement Page',
+};
 
 export default async function Page() {
   const accessibilityHTML = await getStaticPage("accessibility_statement");

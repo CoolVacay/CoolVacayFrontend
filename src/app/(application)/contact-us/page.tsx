@@ -2,6 +2,12 @@ import InquireForm from "~/app/ui/components/listing/InquireForm";
 import Image from "next/image";
 import { IconGenerator } from "~/app/ui/components/common";
 import { Divider } from "@mui/material";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'CoolVacay | Contact Us',
+  description: 'Contact Us Page',
+};
 
 export default function Page() {
   return (

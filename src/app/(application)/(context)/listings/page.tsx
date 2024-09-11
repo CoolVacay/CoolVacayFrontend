@@ -1,5 +1,11 @@
 import { getCategories, getLocationsList } from "../../actions";
 import Body from "~/app/ui/components/listings/Body";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'CoolVacay | Listings Page',
+  description: 'View all our listings here',
+};
 export default async function Page({
   searchParams,
 }: {

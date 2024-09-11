@@ -6,6 +6,12 @@ import {
   ReviewCard,
   CustomChip,
 } from "~/app/ui/components/common";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'CoolVacay | About Us',
+  description: 'About Us Page',
+};
 
 export default function Page() {
   const partners = [

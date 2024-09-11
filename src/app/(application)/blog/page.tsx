@@ -1,7 +1,12 @@
 import { Suspense } from "react";
 import AllBlogs from "./AllBlogs";
 import { AllBlogsSkeleton } from "~/app/ui/components/common";
+import { type Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: 'CoolVacay | All Blogs',
+  description: 'All Blogs Page',
+};
 
 async function Page() {
 
