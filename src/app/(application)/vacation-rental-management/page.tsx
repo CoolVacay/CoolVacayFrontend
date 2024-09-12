@@ -55,7 +55,7 @@ const coolVacayInspiringFeatures = [
   {
     title: "Marketing",
     subtitle:
-      "CoolVacay employs a sophisticated technology platform to integrate with all major Online Travel Agents (OTAs), ensuring broad exposure for your property.",
+      "As a “Preferred Partner,” CoolVacay integrates with major Online Travel Agents (OTAs) like Airbnb, VRBO, TripAdvisor, Booking.com, and Expedia, ensuring broad exposure for your property.",
     icon: <CampaignIcon />,
   },
   {
