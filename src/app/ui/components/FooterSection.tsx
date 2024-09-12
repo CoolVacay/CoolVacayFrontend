@@ -50,7 +50,7 @@ function FooterSection() {
                 <p className="text-[15px] font-semibold"><a href="tel:302-581-9342">(302) 581-9342</a></p>
               </div>
               <p className="text-[15px] font-semibold">
-                Follow us on social media
+                Follow Us On Social Media
               </p>
               <div className="flex items-center gap-7">
                 <Link href={'https://www.facebook.com/CoolVacay'}>
