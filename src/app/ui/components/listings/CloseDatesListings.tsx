@@ -19,7 +19,7 @@ export async function CloseDatesListings({ query, listings }: { query: URLSearch
     <>
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl sm:text-3xl">
-          {"Flexible travel dates? Check out these properties"}
+          {`${query.get("fromDate") && query.get("toDate") ? "Flexible travel dates? Check out these properties" : "Flexible travel requirements? Check out these properties"}`}
         </h1>
         <p className="text-sm text-primary-grey300">
           {closeAvailabilityListings?.length} properties

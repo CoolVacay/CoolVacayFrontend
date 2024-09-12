@@ -40,8 +40,8 @@ const RangeDatePicker = ({
   const matches = useMediaQuery("@media (pointer: fine)");
 
   const handleDateChange = async (newValue: DateRangeType) => {
+    setDates(newValue as [Dayjs, Dayjs]);
     if (availableDates && setAvailableDates && originalDates) {
-      setDates(newValue as [Dayjs, Dayjs]);
       if (newValue[0] && !newValue[1]) {
         setLoading(true);
         const availabilityPeriods = await getAvailabilityPeriods(

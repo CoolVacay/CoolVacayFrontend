@@ -32,24 +32,19 @@ export function SearchCard({
   const [dates, setDates] = useState<DateRangeType>([
     null, null
   ]);
-  const [fromDate, toDate] = dates;
 
   const isSmallSize = size === "small";
 
   const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (dates[0]) params.append("fromDate", dates[0].format("YYYY-MM-DD"));
+    if (dates[1]) params.append("toDate", dates[1].format("YYYY-MM-DD"));
+    params.append("numberOfGuests", numberOfGuests);
+
     if(autocompleteValue?.type === "listing") {
-      const params = new URLSearchParams();
-      if (fromDate) params.append("fromDate", fromDate.format("YYYY-MM-DD"));
-      if (toDate) params.append("toDate", toDate.format("YYYY-MM-DD"));
-      params.append("numberOfGuests", numberOfGuests);
       return `${autocompleteValue.page.replace('/listings/', '/listing/')}?${params.toString()}`
     }
-    const params = new URLSearchParams();
     if (autocompleteValue) params.append("match", autocompleteValue?.match);
-    if (fromDate) params.append("fromDate", fromDate.format("YYYY-MM-DD"));
-    if (toDate) params.append("toDate", toDate.format("YYYY-MM-DD"));
-    params.append("numberOfGuests", numberOfGuests);
-    params.append("pageNum", "1");
     return `/listings?${params.toString()}`;
   };
 

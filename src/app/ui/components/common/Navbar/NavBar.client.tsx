@@ -45,6 +45,10 @@ export default function NavBar({
       }
     };
 
+    if(window.scrollY > 1) {
+      setScrolled(true);
+    }
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);

@@ -8,7 +8,6 @@ import {
 import dayjs from "dayjs";
 
 import type { Dayjs } from "dayjs";
-import type { IPropertyAvailability } from "~/app/(application)/definitions";
 
 interface CustomDateRangePickerDayProps extends DateRangePickerDayProps<Dayjs> {
   availableDates?: string[];
@@ -31,11 +30,9 @@ const StyledDatePicker = styled(DateRangePickerDay, {
   }) => {
     const today = dayjs();
     const isDisabled = day.isBefore(today, "day");
-    const isAvailable:boolean = availableDates
-      ? !!availableDates.find((item) =>
-          dayjs(item).isSame(day, "day"),
-        )
-      : false;
+    const isAvailable: boolean = availableDates
+      ? !!availableDates.find((item) => dayjs(item).isSame(day, "day"))
+      : true;
     return {
       ...(outsideCurrentMonth
         ? {
