@@ -65,9 +65,9 @@ const coolVacayInspiringFeatures = [
     icon: <SupportIcon />,
   },
   {
-    title: "Prestigious Partnerships",
+    title: "Purposeful Partnerships",
     subtitle:
-      "As a “Preferred Partner,” CoolVacay features properties on major platforms like Airbnb, VRBO, TripAdvisor, Booking.com, and Expedia at no cost to homeowners and association partners.",
+      "CoolVacay proactively pursues a team environment with every resort partner. Essential roles are supported, defined and trained to promote success.",
     icon: <HandshakeIcon />,
   },
   {
