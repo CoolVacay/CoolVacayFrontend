@@ -58,7 +58,7 @@ export const SearchParamsProvider = ({
     category: searchParams.get("category") ?? "",
     modal: searchParams.get("modal") ?? "",
     pageNum: searchParams.get("pageNum") ?? "",
-    isMapMode: searchParams.get("isMapMode") ?? ""
+    isMapMode: searchParams.get("isMapMode") ?? "",
   });
 
   const updateSearchParams = useCallback(

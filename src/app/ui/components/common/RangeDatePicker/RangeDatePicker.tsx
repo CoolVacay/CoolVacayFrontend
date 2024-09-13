@@ -16,45 +16,38 @@ import Loading from "~/app/(authentication)/signup/loading";
 
 const RangeDatePicker = ({
   size,
-  dates,
+  selectedDates,
   setDates,
   availableDates,
-  setAvailableDates,
-  originalDates,
-  listingInfo
+  listingInfo,
 }: {
   size: "small" | "medium" | "big";
-  dates: DateRangeType;
+  selectedDates: DateRangeType;
   setDates:
-    | React.Dispatch<React.SetStateAction<DateRangeType>>
-    | ((values: DateRangeType) => void);
+    | React.Dispatch<React.SetStateAction<DateRangeType | ["", ""]>>
+    | ((values: DateRangeType | ["", ""]) => void);
   availableDates?: string[];
-  originalDates?: string[];
-  setAvailableDates?: React.Dispatch<React.SetStateAction<string[]>>;
   listingInfo?: IListingData;
 }) => {
   const bigFont = size === "big";
   const mediumFont = size === "medium";
   const [loading, setLoading] = useState(false);
-
+  const [rangeDatesAvailable, setRangeDatesAvailable] = useState<string[]>();
   const matches = useMediaQuery("@media (pointer: fine)");
 
-  const handleDateChange = async (newValue: DateRangeType) => {
-    setDates(newValue as [Dayjs, Dayjs]);
-    if (availableDates && setAvailableDates && originalDates) {
-      if (newValue[0] && !newValue[1]) {
+  const handleDateChange = async (newValue: [Dayjs, Dayjs]) => {
+    if (availableDates) {
+      if (newValue[0] !== selectedDates[0] && !newValue[1]) {
         setLoading(true);
         const availabilityPeriods = await getAvailabilityPeriods(
-          "Rhea",
+          listingInfo?.source ?? "",
           listingInfo?.id ?? "",
-          dayjs(newValue[0]).format("YYYY-MM-DD")
+          dayjs(newValue[0]).format("YYYY-MM-DD"),
         );
-        setAvailableDates(availabilityPeriods ?? []);
+        setRangeDatesAvailable(availabilityPeriods);
         setLoading(false);
-      } else {
-        if (originalDates.length !== availableDates.length)
-          setAvailableDates(originalDates ?? []);
       }
+      setDates(newValue);
     }
   };
 
@@ -78,6 +71,7 @@ const RangeDatePicker = ({
         )}
         slots={{ day: StyledDatePicker }}
         format="MM/DD/YYYY"
+        disablePast
         slotProps={{
           fieldSeparator: {
             sx: { color: "transparent" },
@@ -87,7 +81,9 @@ const RangeDatePicker = ({
           },
           day: {
             // @ts-expect-error MUI doesn't recognize forwardProp
+            selectedDates: selectedDates,
             availableDates: availableDates,
+            rangeDatesAvailable: rangeDatesAvailable,
           },
           textField: {
             variant: "standard",
@@ -96,16 +92,20 @@ const RangeDatePicker = ({
                 bigFont
                   ? "sm:text-2xl text-xl sm:-top-3 -top-2"
                   : mediumFont
-                  ? "text-xl -top-2"
-                  : "text-base -top-1"
+                    ? "text-xl -top-2"
+                    : "text-base -top-1"
               } font-medium absolute`,
             },
             InputProps: {
               className: `${
-                bigFont ? "sm:text-xl sm:font-medium" : mediumFont ? "text-base" : "text-xs "
+                bigFont
+                  ? "sm:text-xl sm:font-medium"
+                  : mediumFont
+                    ? "text-base"
+                    : "text-xs "
               } ${matches ? "font-medium" : ""}`,
               startAdornment:
-                matches && dates[0] ? (
+                matches && selectedDates?.[0] ? (
                   <IconGenerator
                     alt="Calendar icon"
                     src={"/calendar_icon.svg"}
@@ -113,16 +113,27 @@ const RangeDatePicker = ({
                       bigFont
                         ? "mr-3 w-4 sm:w-8"
                         : mediumFont
-                        ? "mr-2 w-5"
-                        : "mr-2 w-4"
+                          ? "mr-2 w-5"
+                          : "mr-2 w-4"
                     }
                   />
                 ) : null,
             },
           },
         }}
-        value={dates}
-        onChange={handleDateChange}
+        onOpen={() => {
+          setRangeDatesAvailable(undefined);
+          setDates([null, null]);
+        }}
+        value={selectedDates}
+        onAccept={(newValue) => {
+          !availableDates ? setDates(newValue as [Dayjs, Dayjs]) : undefined;
+        }}
+        onChange={async (newValue) => {
+          if (availableDates) {
+            await handleDateChange(newValue as [Dayjs, Dayjs]);
+          }
+        }}
         localeText={{ start: "Check-in", end: "Check-out" }}
       />
     </LocalizationProvider>
