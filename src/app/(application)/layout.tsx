@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <GoogleAnalytics gaId="G-XXZJL9XNQC" />
+      <GoogleAnalytics gaId="G-GT7N6G5LGF"/>
       <body className={`${inter.className} w-full flex h-full flex-col`}>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
