@@ -66,7 +66,7 @@ async function getUserFromDb(email: string, password: string) {
 
 const providers: Provider[] = [
   Google,
-  facebook,
+  // facebook,
   Credentials({
     name: "credentials",
     credentials: {
