@@ -27,6 +27,7 @@ export async function ListingSection({ query, listings }: { query: URLSearchPara
               source={listing.source}
               key={listing.id}
               name={listing.name}
+              propertyName={listing.propertyName}
               subtitle={`${listing.city}, ${listing.state}`}
               imageUrl={listing.imageUrl}
               price={listing.price}

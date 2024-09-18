@@ -2,6 +2,7 @@ export interface IListingData {
   id: string;
   source: string;
   name: string;
+  propertyName: string;
   description: string;
   address: string;
   city: string;
@@ -37,7 +38,7 @@ export interface IAllListings {
 
 export type ListingCardProps = Pick<
   IListingData,
-  "name" | "imageUrl" | "price" | "id" | "source"
+  "name" | "propertyName" | "imageUrl" | "price" | "id" | "source"
 > & {
   subtitle: string;
   starRating?: number | null;
