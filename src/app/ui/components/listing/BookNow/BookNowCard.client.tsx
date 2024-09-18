@@ -8,7 +8,6 @@ import type { SelectChangeEvent } from "@mui/material";
 import type { DateRangeType } from "../../home/SearchCard";
 import type { IParams, IListingData } from "~/app/(application)/definitions";
 import type { IPropertyAvailability } from "~/app/(application)/definitions";
-import { useState } from "react";
 import dayjs from "dayjs";
 
 export interface IPricingDetails {
@@ -61,8 +60,8 @@ export default function BookNowContent({
           <RangeDatePicker
             size="medium"
             availableDates={availableDates}
-            selectedDates={selectedDates as DateRangeType}
-            setDates={(values: DateRangeType | ["", ""]) =>
+            dates={selectedDates as DateRangeType}
+            setDates={(values: DateRangeType | [null, null]) =>
               updateSearchParams(["fromDate", "toDate"], values)
             }
             listingInfo={listingInfo}

@@ -2,7 +2,7 @@ export interface IListingData {
   id: string;
   source: string;
   name: string;
-  propertyName: string;
+  propertyName?: string;
   description: string;
   address: string;
   city: string;

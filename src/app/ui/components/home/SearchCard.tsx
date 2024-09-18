@@ -29,7 +29,7 @@ export function SearchCard({
   const [location, setLocation] = useState(defaultLocation ?? "");
 
   const [numberOfGuests, setNumberOfGuests] = useState("1");
-  const [dates, setDates] = useState<DateRangeType>([
+  const [dates, setDates] = useState<DateRangeType | [null, null]>([
     null, null
   ]);
 

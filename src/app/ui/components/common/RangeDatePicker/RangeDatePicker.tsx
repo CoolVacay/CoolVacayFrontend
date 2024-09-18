@@ -16,16 +16,16 @@ import Loading from "~/app/(authentication)/signup/loading";
 
 const RangeDatePicker = ({
   size,
-  selectedDates,
+  dates,
   setDates,
   availableDates,
   listingInfo,
 }: {
   size: "small" | "medium" | "big";
-  selectedDates: DateRangeType;
+  dates: DateRangeType | [null, null];
   setDates:
-    | React.Dispatch<React.SetStateAction<DateRangeType | ["", ""]>>
-    | ((values: DateRangeType | ["", ""]) => void);
+    | React.Dispatch<React.SetStateAction<DateRangeType | [null, null]>>
+    | ((values: DateRangeType | [null, null]) => void);
   availableDates?: string[];
   listingInfo?: IListingData;
 }) => {
@@ -37,7 +37,7 @@ const RangeDatePicker = ({
 
   const handleDateChange = async (newValue: [Dayjs, Dayjs]) => {
     if (availableDates) {
-      if (newValue[0] !== selectedDates[0] && !newValue[1]) {
+      if (newValue[0] !== dates[0] && !newValue[1]) {
         setLoading(true);
         const availabilityPeriods = await getAvailabilityPeriods(
           listingInfo?.source ?? "",
@@ -81,7 +81,7 @@ const RangeDatePicker = ({
           },
           day: {
             // @ts-expect-error MUI doesn't recognize forwardProp
-            selectedDates: selectedDates,
+            dates: dates,
             availableDates: availableDates,
             rangeDatesAvailable: rangeDatesAvailable,
           },
@@ -105,7 +105,7 @@ const RangeDatePicker = ({
                     : "text-xs "
               } ${matches ? "font-medium" : ""}`,
               startAdornment:
-                matches && selectedDates?.[0] ? (
+                matches && dates?.[0] ? (
                   <IconGenerator
                     alt="Calendar icon"
                     src={"/calendar_icon.svg"}
@@ -125,7 +125,7 @@ const RangeDatePicker = ({
           setRangeDatesAvailable(undefined);
           setDates([null, null]);
         }}
-        value={selectedDates}
+        value={dates}
         onAccept={(newValue) => {
           !availableDates ? setDates(newValue as [Dayjs, Dayjs]) : undefined;
         }}
