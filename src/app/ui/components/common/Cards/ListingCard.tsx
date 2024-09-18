@@ -38,7 +38,7 @@ export default function ListingCard({
           href={`listing/${source}/${id}?${searchParams.toString()}`}
           className="w-min"
         >
-          <Image unoptimized
+          <Image
             src={imageUrl ?? "/listing_card.png"}
             width={350}
             height={0}

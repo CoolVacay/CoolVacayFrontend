@@ -29,7 +29,7 @@ export default function AuthenticationLayout({
                 </div>
               </div>
               <div className="relative hidden h-full lg:w-1/2 xl:block">
-                <Image unoptimized
+                <Image
                   alt="Cool Vacay Authentication Image"
                   src="/authentication_image.jpeg"
                   fill

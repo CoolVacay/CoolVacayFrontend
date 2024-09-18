@@ -9,7 +9,7 @@ export async function DiscoverSection() {
   return (
     <section className="flex grow-0 flex-col gap-12 py-14 lg:max-h-[680px] lg:shrink-0 lg:flex-row">
       <div className="hidden md:flex md:shrink-0 md:items-center md:justify-center">
-        <Image unoptimized
+        <Image
           src={`${featuredBlog?.thumbnailImageUrl ?? "/discover_photo.png"}`}
           alt="Discover more destinations"
           width={492}

@@ -38,7 +38,7 @@ const NavBarLoginButton = ({
         {userData.firstName}
         <span className="ml-2">
           <div className="h-8 w-8">
-            <Image unoptimized
+            <Image
               alt="avatar icon"
               src={
                 userData.profilePicture ??
@@ -90,7 +90,7 @@ const NavBarLoginButton = ({
         <Link href="/profile">
           <MenuItem>
             <ListItemIcon>
-              <Image unoptimized
+              <Image
                 alt="avatar icon"
                 src={`/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}
                 width={24}

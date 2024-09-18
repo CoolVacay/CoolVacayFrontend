@@ -28,7 +28,7 @@ async function AllBlogs() {
                 </div>
               </div>
               <div className="flex w-full md:w-auto">
-                <Image unoptimized
+                <Image
                   alt="Blog image"
                   src={featuredBlog?.thumbnailImageUrl}
                   className="hidden rounded-2xl object-cover md:inline-block md:h-auto md:w-auto"

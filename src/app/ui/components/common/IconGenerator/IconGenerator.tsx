@@ -18,7 +18,7 @@ export default function IconGenerator({
   ...rest
 }: IconGeneratorProps) {
   return (
-    <Image unoptimized
+    <Image
       alt={alt}
       src={src}
       width={0}

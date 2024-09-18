@@ -28,7 +28,7 @@ export default async function HomePage() {
     <main className="flex flex-col">
       <div className="relative -mt-24 flex h-[714px]">
         <div className="absolute flex h-[714px] w-full">
-          <Image unoptimized
+          <Image
             alt="Coolvacay background image"
             src="/landing_background.png"
             quality={20}

@@ -27,7 +27,7 @@ function GridMapToggle({
           }
         }}
       >
-        <Image unoptimized
+        <Image
           width={18}
           height={18}
           src="/grid_mode.svg"
@@ -46,7 +46,7 @@ function GridMapToggle({
           }
         }}
       >
-        <Image unoptimized
+        <Image
           width="18"
           height="18"
           src="/map_mode.svg"

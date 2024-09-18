@@ -14,7 +14,7 @@ export default function ReservationCard({
   return (
     <div className="flex flex-col gap-4 max-[500px]:max-w-[310px] min-[500px]:flex-row lg:gap-8">
       <div className="flex h-[180px] w-[310px] lg:h-[130px] lg:w-[180px]">
-        <Image unoptimized
+        <Image
           src={details.listingImage ?? "/cardImage.png"}
           width={0}
           height={0}

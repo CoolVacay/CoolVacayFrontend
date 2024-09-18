@@ -9,7 +9,7 @@ export default async function SignUp() {
     <div className="flex w-full flex-col gap-4 sm:gap-12">
       <div className="w-full">
         <Link href="/" className="text-left">
-          <Image unoptimized
+          <Image
             src="/cool_vacay_logo_blue.svg"
             alt="CoolVacay Logo"
             className="w-[140px] sm:w-[200px]"

@@ -85,7 +85,7 @@ const GalleryCarousel = ({ data, type }: CarouselType) => {
                     ? (data as IListingData["images"]).map((image, index) => (
                         <div className="flex w-full shrink-0" key={index + 1}>
                           {
-                            <Image unoptimized
+                            <Image
                               key={index + 1}
                               src={image.url}
                               alt={image.name}

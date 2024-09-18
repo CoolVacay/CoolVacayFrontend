@@ -6,7 +6,7 @@ export default function SetNewPassword() {
   return (
     <div className="flex flex-col gap-20">
       <Link href="/" className="w-[200px]">
-        <Image unoptimized
+        <Image
           src="/cool_vacay_logo_blue.svg"
           alt="CoolVacay Logo"
           width={200}

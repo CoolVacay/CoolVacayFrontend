@@ -27,7 +27,7 @@ export default function Page() {
     <main className="flex flex-col">
       <div className="relative -mt-24 flex h-[588px]">
         <div className="absolute flex h-[588px] w-full">
-          <Image unoptimized
+          <Image
             alt="Coolvacay about us hero image"
             src="/about_us.jpeg"
             fill
@@ -62,7 +62,7 @@ export default function Page() {
             <div className="mt-20">
               <div className="flex flex-col-reverse items-center gap-8 lg:flex-row">
                 <div className="shrink-0 lg:flex lg:h-[420px]">
-                  <Image unoptimized
+                  <Image
                     alt="Coolvacay about us, second image"
                     src="/about_us_2.png"
                     className="rounded-2xl"
@@ -135,7 +135,7 @@ export default function Page() {
               </div>
             </div>
             <div className="flex h-[320px] w-full shrink-0 sm:h-[537px] md:w-[542px]">
-              <Image unoptimized
+              <Image
                 alt="Coolvacay about us, third image"
                 src="/about_us_3.jpeg"
                 className="rounded-2xl"

@@ -17,7 +17,7 @@ export const Thumb = ({ selected, image, onClick }: PropType) => {
         type="button"
         className={`h-[110px] w-full brightness-50 hover:brightness-100 ${selected ? " brightness-100" : ""}`}
       >
-        <Image unoptimized
+        <Image
           src={image.url}
           alt={image.name}
           width={0}
