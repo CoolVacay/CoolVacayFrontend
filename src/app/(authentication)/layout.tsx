@@ -3,6 +3,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "~/theme";
 import Image from "next/image";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Inter } from "next/font/google";
 
 export const metadata = {
@@ -44,6 +45,7 @@ export default function AuthenticationLayout({
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
+      <SpeedInsights />
     </html>
   );
 }
