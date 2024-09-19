@@ -33,7 +33,7 @@ export default function NavBar({
       };
       void checkSync();
     }
-  }, [isTokenValid, userData]);
+  }, [userData, isTokenValid]);
 
   // Handle scroll event
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function NavBar({
       }
     };
 
-    if(window.scrollY > 1) {
+    if (window.scrollY > 1) {
       setScrolled(true);
     }
 
@@ -65,7 +65,7 @@ export default function NavBar({
 
   return (
     <nav
-      className={`sticky top-0 z-50 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-20 sm:py-6 ${scrolled ? `${isWhiteVariant ? "bg-black transition-all duration-700 bg-opacity-60" : "bg-white"}` : "bg-opacity-0 transition-all duration-700"}`}
+      className={`sticky top-0 z-50 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-20 sm:py-6 ${scrolled ? `${isWhiteVariant ? "bg-black bg-opacity-60 transition-all duration-700" : "bg-white"}` : "bg-opacity-0 transition-all duration-700"}`}
     >
       <div
         className={`flex w-full items-center ${isWhiteVariant || !noMaxWidth ? "sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : "sm:pl-16"} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
@@ -87,7 +87,7 @@ export default function NavBar({
             />
           </button>
         </div>
-        <div className="hidden text-md sm:flex sm:flex-grow sm:items-center sm:justify-between">
+        <div className="text-md hidden sm:flex sm:flex-grow sm:items-center sm:justify-between">
           {/* <div
             className={`flex gap-5 ${isWhiteVariant ? "text-white" : "text-black"}`}
           >

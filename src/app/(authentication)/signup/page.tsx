@@ -4,7 +4,7 @@ import Link from "next/link";
 import SignUpForm from "~/app/ui/components/authentication/SignUpForm";
 import OAuthProviders from "~/app/ui/components/authentication/OAuthProviders";
 
-export default async function SignUp() {
+export default function SignUp() {
   return (
     <div className="flex w-full flex-col gap-4 sm:gap-12">
       <div className="w-full">

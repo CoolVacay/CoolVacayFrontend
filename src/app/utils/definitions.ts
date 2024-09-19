@@ -1,9 +1,10 @@
 export class FetchError extends Error {
   constructor(
-    message: string,
+    public error?: string,
     public status?: number,
   ) {
-    super(message);
+    super(error);
+    this.status = status;
     this.name = "FetchError";
   }
 }

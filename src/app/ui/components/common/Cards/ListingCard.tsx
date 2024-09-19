@@ -27,7 +27,6 @@ export default function ListingCard({
   const startDate = searchParamsValues.fromDate?.format("MMM DD");
   const endDate = searchParamsValues.toDate?.format("MMM DD");
 
-  console.log(propertyName)
   searchParams.delete("pageNum");
   return (
     <div
@@ -67,16 +66,18 @@ export default function ListingCard({
             </div>
           ) : null}
           <div>
-            {propertyName && <Tooltip
-              disableHoverListener={propertyName.length < 39}
-              title={propertyName}
-              enterDelay={800}
-              leaveDelay={200}
-            >
-              <div className="mb-1 gap-3 text-base font-medium">
-                {truncateText(propertyName, 39)}
-              </div>
-            </Tooltip>}
+            {propertyName && (
+              <Tooltip
+                disableHoverListener={propertyName.length < 39}
+                title={propertyName}
+                enterDelay={800}
+                leaveDelay={200}
+              >
+                <div className="mb-1 gap-3 text-base font-medium">
+                  {truncateText(propertyName, 39)}
+                </div>
+              </Tooltip>
+            )}
             <Tooltip
               disableHoverListener={name.length < 39}
               title={name}

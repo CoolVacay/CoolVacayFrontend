@@ -4,14 +4,8 @@ import NavBar from "./NavBar.client";
 
 export default async function NavBarWrapper() {
   const session = await auth();
-  const isTokenValid = session?.user
-    ? await isValidToken(session.user?.accessToken)
-    : false;
-
-  const userData =
-    isTokenValid && session?.user
-      ? await getProfileInfo(session.user.email!)
-      : null;
+  const isTokenValid = session && (await isValidToken());
+  const userData = isTokenValid ? await getProfileInfo() : undefined;
 
   return <NavBar userData={userData} isTokenValid={isTokenValid!} />;
 }

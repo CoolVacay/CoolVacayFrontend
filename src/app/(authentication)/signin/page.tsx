@@ -1,15 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import SignInForm from "~/app/ui/components/authentication/SignInForm";
-import { auth } from "~/auth";
-import { redirect } from "next/navigation";
 import OAuthProviders from "~/app/ui/components/authentication/OAuthProviders";
 
 export default async function SignIn() {
-  const session = await auth();
-
-  if (session) redirect("/");
-
   return (
     <div className="flex w-full flex-col gap-4 sm:gap-20">
       <div className="w-full">

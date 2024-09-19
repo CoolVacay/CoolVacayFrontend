@@ -2,8 +2,8 @@ import type { ErrorInterface } from "./definitions";
 import { revalidatePath } from "next/cache";
 import { FetchError } from "./definitions";
 import { auth } from "~/auth";
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-const STORE_CASHE_IN_HOURS = 24;
+
+const API_BASE_URL = process.env.API_URL;
 
 //TODO:refactor headers
 export async function createHeaders(contentType: string) {
@@ -22,29 +22,34 @@ export async function createHeaders(contentType: string) {
   }
 }
 
-export async function getFetch<T>(
+export async function fetcher<T>(
   url: string,
+  errorMessage: string,
   noCache = false,
-): Promise<T | FetchError> {
+): Promise<T | undefined> {
   try {
-    const res = await fetch(`${API_BASE_URL}/api${url}`, {
+    const res = await fetch(`${API_BASE_URL}/api/${url}`, {
       cache: noCache ? "no-store" : "force-cache",
       headers: await createHeaders("application/json"),
     });
+
     if (!res.ok) {
-      const errResponse = await res.text();
-      const errorText = JSON.parse(errResponse) as ErrorInterface;
-      throw new FetchError(errorText.error ?? errorText.message);
+      const json = (await res.json()) as Record<string, any> & {
+        error?: string;
+      };
+      if (json.error || json.message) {
+        throw new FetchError(json.error ?? json.message, res.status);
+      } else {
+        throw new FetchError("An unexpected error occurred", res.status);
+      }
     }
     const data = (await res.json()) as T;
     return data;
   } catch (err) {
-    if (err instanceof FetchError) {
-      return err;
-    } else {
-      console.error(err, "err");
-      return new FetchError("An unknown error occurred");
-    }
+    console.error(
+      err,
+      `--------------------------------------------> ${errorMessage}`,
+    );
   }
 }
 
@@ -109,52 +114,6 @@ export async function postFetch<T>(
     } else {
       return new FetchError("An unknown error occurred");
     }
-  }
-}
-
-export async function revalidateFetch<T>(
-  url: string,
-  revalidateInHours: number = STORE_CASHE_IN_HOURS,
-): Promise<T | FetchError> {
-  const seconds = revalidateInHours * 3600;
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/${url}`, {
-      next: { revalidate: seconds },
-    });
-    if (!res.ok) {
-      const errResponse = await res.text();
-      const errorText = JSON.parse(errResponse) as ErrorInterface;
-      throw new FetchError(errorText.error);
-    }
-    const data = (await res.json()) as T;
-    if (!res.ok) {
-      const errResponse = await res.text();
-      const errorText = JSON.parse(errResponse) as ErrorInterface;
-      throw new FetchError(errorText.error);
-    }
-    return data;
-  } catch (err) {
-    if (err instanceof FetchError) {
-      return err;
-    } else {
-      return new FetchError("An unknown error occurred");
-    }
-  }
-}
-
-export async function getData<T>(
-  url: string,
-  errorMessage: string,
-  noCache?: boolean,
-) {
-  try {
-    const res = await getFetch<T>(url, noCache);
-    if (res instanceof FetchError) {
-      throw new Error(errorMessage);
-    }
-    return res;
-  } catch (error) {
-    console.error("Error:", error);
   }
 }
 

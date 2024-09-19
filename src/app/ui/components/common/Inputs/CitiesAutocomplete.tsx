@@ -43,7 +43,7 @@ export default function CitiesAutocomplete({
     <FormControl fullWidth={whiteVariant} className={className}>
       <Autocomplete
         id="location-select"
-        options={locationsList}
+        options={locationsList ?? []}
         autoHighlight
         popupIcon={
           <IconGenerator

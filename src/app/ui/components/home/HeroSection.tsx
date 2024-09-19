@@ -2,7 +2,7 @@ import { SearchCard } from "./SearchCard";
 import { getLocationsList } from "~/app/(application)/actions";
 
 export async function HeroSection() {
-  const locationsList = (await getLocationsList())!;
+  const locationsList = (await getLocationsList()) ?? [];
 
   return (
     <main className="absolute top-32 text-white md:top-44">
