@@ -1,5 +1,6 @@
 "use server";
 
+import { auth } from "~/auth";
 import { getHTMLFetch, postData, fetcher } from "../utils/api-helpers";
 import { FetchError } from "../utils/definitions";
 import { logOut } from "../(authentication)/actions";
@@ -21,10 +22,16 @@ import type {
   IPropertyAvailability,
   ICloseDatesListings,
   IPopularCategoriesData,
+  IReadOnlySiteConfigurationProperties,
 } from "./definitions";
-import { auth } from "~/auth";
 
 //////////////GET/////////////
+
+export const getSiteConfigurations = () =>
+  fetcher<IReadOnlySiteConfigurationProperties>(
+    `SiteConfiguration`,
+    "Failed to fetch configurations",
+  );
 
 export const getCountries = () =>
   fetcher<ICountries[]>(`countries`, "Failed to fetch countries");

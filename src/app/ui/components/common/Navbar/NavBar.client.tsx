@@ -3,11 +3,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { logOut } from "~/app/(authentication)/actions";
+
 import { IconGenerator } from "../IconGenerator";
+import NavBardDialog from "./NavBarDialog";
 import NavBarLoginButton from "./NavBarLoginButton";
 import type { TUserData } from "~/app/(application)/definitions";
-import NavBardDialog from "./NavBarDialog";
-import { logOut } from "~/app/(authentication)/actions";
+import type { Session } from "next-auth";
+// import { useSiteConfigurations } from "~/context/SiteConfigurationsContext";
 
 const whiteVariantPaths = [
   "/",
@@ -19,21 +22,22 @@ const whiteVariantPaths = [
 
 export default function NavBar({
   userData,
-  isTokenValid,
+  session,
 }: {
   userData?: TUserData["profile"] | null;
-  isTokenValid: boolean;
+  session: Session | null;
 }) {
   const [scrolled, setScrolled] = useState(false);
-
+  // const siteConfigurations = useSiteConfigurations();
+  // console.log(siteConfigurations, "siteee12123s");
   useEffect(() => {
-    if (userData && !isTokenValid) {
+    if (session && !userData) {
       const checkSync = async () => {
         await logOut();
       };
       void checkSync();
     }
-  }, [userData, isTokenValid]);
+  }, [userData, session]);
 
   // Handle scroll event
   useEffect(() => {

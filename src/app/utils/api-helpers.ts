@@ -4,6 +4,7 @@ import { FetchError } from "./definitions";
 import { auth } from "~/auth";
 
 const API_BASE_URL = process.env.API_URL;
+const DOMAIN_NAME = process.env.SITE_NAME;
 
 //TODO:refactor headers
 export async function createHeaders(contentType: string) {
@@ -12,6 +13,7 @@ export async function createHeaders(contentType: string) {
     const headers = {
       Authorization: `Bearer ${session?.user?.accessToken}`,
       "Content-Type": contentType,
+      "site-name": DOMAIN_NAME,
     };
     return headers;
   } catch (err) {
