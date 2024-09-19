@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logOut } from "~/app/(authentication)/actions";
@@ -10,7 +10,8 @@ import NavBardDialog from "./NavBarDialog";
 import NavBarLoginButton from "./NavBarLoginButton";
 import type { TUserData } from "~/app/(application)/definitions";
 import type { Session } from "next-auth";
-// import { useSiteConfigurations } from "~/context/SiteConfigurationsContext";
+import { useSiteConfigurations } from "~/context/SiteConfigurationsContext";
+import Image from "next/image";
 
 const whiteVariantPaths = [
   "/",
@@ -28,8 +29,9 @@ export default function NavBar({
   session: Session | null;
 }) {
   const [scrolled, setScrolled] = useState(false);
-  // const siteConfigurations = useSiteConfigurations();
-  // console.log(siteConfigurations, "siteee12123s");
+  const navBarConfigurations = useSiteConfigurations().navBar;
+  console.log(navBarConfigurations, "siteee12123s");
+
   useEffect(() => {
     if (session && !userData) {
       const checkSync = async () => {
@@ -58,7 +60,7 @@ export default function NavBar({
   }, []);
 
   const pathname = usePathname();
-  const isWhiteVariant = whiteVariantPaths.includes(pathname);
+  const isLogoWhite = whiteVariantPaths.includes(pathname);
   const noMaxWidth =
     pathname.startsWith("/listings") ||
     pathname.startsWith("/vacation-rental-management");
@@ -69,65 +71,56 @@ export default function NavBar({
 
   return (
     <nav
-      className={`sticky top-0 z-50 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-20 sm:py-6 ${scrolled ? `${isWhiteVariant ? "bg-black bg-opacity-60 transition-all duration-700" : "bg-white"}` : "bg-opacity-0 transition-all duration-700"}`}
+      className={`sticky top-0 z-50 flex h-12 w-full justify-center px-4 py-6 sm:h-20 sm:py-6 ${scrolled ? `${isLogoWhite ? "bg-black bg-opacity-60 transition-all duration-700" : "bg-white"}` : "bg-opacity-0 transition-all duration-700"}`}
     >
       <div
-        className={`flex w-full items-center ${isWhiteVariant || !noMaxWidth ? "sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : "sm:pl-16"} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
+        className={`flex w-full items-center ${isLogoWhite || !noMaxWidth ? "sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : "sm:pl-16"} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
       >
         <div className="flex w-full items-center justify-between sm:w-auto md:flex-grow">
           <Link href="/">
-            <IconGenerator
-              src={`/cool_vacay_logo_${isWhiteVariant ? "white" : "blue"}.svg`}
-              alt="CoolVacay Logo"
-              className="w-[118px] sm:w-[200px]"
+            <Image
+              src={`${isLogoWhite ? navBarConfigurations.logo.url : navBarConfigurations.logo.url}`}
+              alt={navBarConfigurations.logo.alt}
+              width={0}
+              height={0}
+              sizes="(max-width: 768px) 90vw, 75vw"
+              className={`w-[${navBarConfigurations.logo.width}] sm:w-[${navBarConfigurations.logo.width}]`}
               priority={true}
             />
           </Link>
           <button className="sm:hidden" onClick={toggleMenu}>
             <IconGenerator
-              src={`/menu_icon_${isWhiteVariant ? "white" : "black"}.svg`}
+              src={`/menu_icon_${isLogoWhite ? "white" : "black"}.svg`}
               alt="Menu"
-              width={isWhiteVariant ? "22px" : "16px"}
+              width={isLogoWhite ? "22px" : "16px"}
             />
           </button>
         </div>
-        <div className="text-md hidden sm:flex sm:flex-grow sm:items-center sm:justify-between">
-          {/* <div
-            className={`flex gap-5 ${isWhiteVariant ? "text-white" : "text-black"}`}
-          >
-          <Link
-            className="text-center"
-            href={`/listings?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1&pageNum=1`}
-          >
-            Snowbird Places
-          </Link>
-          </div> */}
-          <div></div>
+        <div className="text-md hidden sm:flex sm:items-center sm:justify-between">
           <div
-            className={`flex items-center gap-5  ${isWhiteVariant ? "text-white" : "text-black"}`}
+            className={`flex items-center gap-5  ${isLogoWhite ? "text-white" : "text-black"}`}
           >
-            <Link className={`text-center`} href={`/contact-us`}>
-              Contact Us
-            </Link>
-            <span className="hidden text-center lg:inline-block">•</span>{" "}
-            <Link
-              href="/about-us"
-              className={`text-center ${isWhiteVariant ? "text-white" : "text-black"}`}
-            >
-              About Us
-            </Link>
-            <span className="hidden text-center lg:inline-block">•</span>{" "}
-            <Link
-              href="/vacation-rental-management"
-              className={`text-center ${isWhiteVariant ? "text-white" : "text-black"}`}
-            >
-              Rental Management
-            </Link>
-            <span className="hidden text-center lg:inline-block">•</span>{" "}
+            {navBarConfigurations.links.map((link, index) => {
+              return (
+                <Fragment key={link.href}>
+                  <Link
+                    className={`text-center ${isLogoWhite ? "text-white" : "text-black"}`}
+                    href={link.href}
+                  >
+                    {link.name}
+                  </Link>
+                  {index < navBarConfigurations.links.length - 1 ? (
+                    <span className="hidden text-center lg:inline-block">
+                      •
+                    </span>
+                  ) : null}
+                </Fragment>
+              );
+            })}
             {userData ? (
               <Link href="/profile/reservations" className="hidden sm:block">
                 <p
-                  className={`text-center ${isWhiteVariant ? "text-white" : "text-black"}`}
+                  className={`text-center ${isLogoWhite ? "text-white" : "text-black"}`}
                 >
                   My bookings
                 </p>
@@ -136,13 +129,13 @@ export default function NavBar({
             {!userData ? (
               <Link href="/signin">
                 <button
-                  className={`flex w-[190px] items-center rounded-full px-[14px] py-[6px] text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
+                  className={`flex w-[190px] items-center rounded-full px-[14px] py-[6px] text-sm font-normal  ${isLogoWhite ? "bg-white text-black" : "bg-primary text-white"}`}
                 >
                   Log In or Sign Up
                   <span className="ml-2">
                     <IconGenerator
                       alt="avatar icon"
-                      src={`/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}
+                      src={`/avatar_${isLogoWhite ? "white" : "blue"}.svg`}
                       width="32px"
                     />
                   </span>
@@ -151,7 +144,7 @@ export default function NavBar({
             ) : (
               <NavBarLoginButton
                 userData={userData}
-                isWhiteVariant={isWhiteVariant}
+                isLogoWhite={isLogoWhite}
               />
             )}
           </div>
@@ -160,6 +153,7 @@ export default function NavBar({
       {openMenu && (
         <NavBardDialog
           openMenu={openMenu}
+          navBarConfigurations={navBarConfigurations}
           toggleMenu={toggleMenu}
           session={userData!}
         />

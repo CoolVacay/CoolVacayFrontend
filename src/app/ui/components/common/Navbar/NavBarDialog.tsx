@@ -1,5 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { forwardRef } from "react";
+import { logOut } from "~/app/(authentication)/actions";
+
 import {
   Dialog,
   ListItemText,
@@ -9,23 +12,24 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+
 import type { TransitionProps } from "@mui/material/transitions";
-import { IconGenerator } from "../IconGenerator";
-import { getCurrentDates } from "~/app/utils/helpers";
-import { logOut } from "~/app/(authentication)/actions";
-import type { TUserData } from "~/app/(application)/definitions";
+import type {
+  IReadOnlySiteConfigurationProperties,
+  TUserData,
+} from "~/app/(application)/definitions";
 
 export default function NavBardDialog({
   openMenu,
   toggleMenu,
   session,
+  navBarConfigurations,
 }: {
   openMenu: boolean;
   toggleMenu: () => void;
   session: TUserData["profile"] | null;
+  navBarConfigurations: IReadOnlySiteConfigurationProperties["navBar"];
 }) {
-  const { startDate, endDate } = getCurrentDates();
-
   const Transition = forwardRef(function Transition(
     props: TransitionProps & {
       children: React.ReactElement;
@@ -43,12 +47,16 @@ export default function NavBardDialog({
       TransitionComponent={Transition}
     >
       <div className="flex items-center justify-between border border-[#EAEAEA] bg-white px-6 py-3">
-        <IconGenerator
-          src={`/cool_vacay_logo_black.svg`}
-          alt="CoolVacay Logo"
-          width="108px"
-          priority={true}
-        />
+        <Link href="/">
+          <Image
+            src={`${navBarConfigurations.logo.url}`}
+            alt={navBarConfigurations.logo.alt}
+            width={0}
+            height={0}
+            sizes="60vw"
+            className={`w-[${navBarConfigurations.logo.width}]`}
+          />
+        </Link>
         <IconButton
           onClick={toggleMenu}
           aria-label="close"
@@ -58,18 +66,19 @@ export default function NavBardDialog({
         </IconButton>
       </div>
       <List>
-        <ListItemButton onClick={toggleMenu} sx={{ padding: "12px 36px" }}>
-          <Link
-            href={`/listings?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1&pageNum=1`}
-          >
-            <ListItemText primary="Listed Places" />
-          </Link>
-        </ListItemButton>
-        <ListItemButton onClick={toggleMenu} sx={{ padding: "12px 36px" }}>
-          <Link href="/rental-income-estimator">
-            <ListItemText primary="Vacation Rental Management" />
-          </Link>
-        </ListItemButton>
+        {navBarConfigurations.links.map((link) => {
+          return (
+            <ListItemButton
+              key={link.href}
+              onClick={toggleMenu}
+              sx={{ padding: "12px 36px" }}
+            >
+              <Link href={link.href}>
+                <ListItemText primary={link.name} />
+              </Link>
+            </ListItemButton>
+          );
+        })}
       </List>
       {!session ? (
         <Link href="/signin">
