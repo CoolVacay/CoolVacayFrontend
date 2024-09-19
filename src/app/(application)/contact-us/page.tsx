@@ -1,12 +1,12 @@
 import InquireForm from "~/app/ui/components/listing/InquireForm";
 import Image from "next/image";
 import { IconGenerator } from "~/app/ui/components/common";
-import { Divider } from "@mui/material";
 import { type Metadata } from "next";
+import ContactDetailsCard from "./ContactDetailsCard";
 
 export const metadata: Metadata = {
-  title: 'CoolVacay | Contact Us',
-  description: 'Contact Us Page',
+  title: "CoolVacay | Contact Us",
+  description: "Contact Us Page",
 };
 
 export default function Page() {
@@ -101,42 +101,7 @@ export default function Page() {
             width: "100%",
           }}
         />
-        <div className="absolute mx-4 mt-24 flex max-w-full flex-col gap-6 bg-white px-6 py-8 font-medium sm:left-16 sm:max-w-[480px] sm:px-16 sm:py-14 md:mt-16">
-          <div className="flex flex-col gap-3">
-            <p className="mb-1 text-lg sm:text-xl">Contact details</p>
-            <p className="text-primary">
-              Address:{" "}
-              <span className="text-[#676D73]">
-                7380 W Sand Lake Rd Ste 130, Orlando, FL 32819
-              </span>
-            </p>
-            <p className="text-primary">
-              Phone: <span className=" text-[#676D73]"><a href="tel:302-581-9342">(302) 581-9342</a></span>
-            </p>
-            <p className="text-primary">
-              Email:{" "}
-              <span className=" text-[#676D73]">vacay@coolvacay.com</span>
-            </p>
-          </div>
-          <div className="flex flex-col gap-3">
-            <p className="mb-1 text-lg sm:text-xl">Opening hours</p>
-            <p className="flex text-primary">
-              Monday - Friday:{" "}
-              <span className="ml-auto text-[#676D73]">
-                09.00 AM - 6.00 PM{" "}
-              </span>
-            </p>
-            <Divider />
-            <p className="flex text-primary">
-              Saturday - Sunday:{" "}
-              <span className="ml-auto text-[#676D73]">10.00 AM - 6.00 PM</span>
-            </p>
-            {/* <Divider />
-            <p className="flex text-primary">
-              Sunday: <span className="ml-auto text-[#676D73]">Closed</span>
-            </p> */}
-          </div>
-        </div>
+        <ContactDetailsCard />
       </div>
     </div>
   );

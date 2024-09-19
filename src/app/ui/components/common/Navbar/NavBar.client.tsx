@@ -100,7 +100,7 @@ export default function NavBar({
           <div
             className={`flex items-center gap-5  ${isLogoWhite ? "text-white" : "text-black"}`}
           >
-            {navBarConfigurations.links.map((link, index) => {
+            {navBarConfigurations.links.map((link) => {
               return (
                 <Fragment key={link.href}>
                   <Link
@@ -109,11 +109,7 @@ export default function NavBar({
                   >
                     {link.name}
                   </Link>
-                  {index < navBarConfigurations.links.length - 1 ? (
-                    <span className="hidden text-center lg:inline-block">
-                      •
-                    </span>
-                  ) : null}
+                  <span className="hidden text-center lg:inline-block">•</span>{" "}
                 </Fragment>
               );
             })}
