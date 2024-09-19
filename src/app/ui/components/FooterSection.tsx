@@ -1,32 +1,19 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { IconGenerator } from "./common";
-
-const popularSearchLinks = [
-  { name: "Beach Properties", href: "/listings?category=Beach&numberOfGuests=1&pageNum=1" },
-  { name: "Beachfront Properties", href: "/listings?category=Beachfront&numberOfGuests=1&pageNum=1" },
-  { name: "Mountain Properties", href: "/listings?category=Mountain&numberOfGuests=1&pageNum=1" },
-  { name: "Pool Properties", href: "/listings?category=Pool&numberOfGuests=1&pageNum=1" }
-];
-const quickLinks = [
-  { name: "About Company", href: "/about-us" },
-  { name: "Blog", href: "/blog" },
-  { name: "Policies", href: "/privacy-policy" },
-  { name: "Contact Us", href: "/contact-us" },
-];
-const staticPages = [
-  { name: "Privacy", href: "/privacy-policy" },
-  { name: "Terms", href: "/terms-and-conditions" },
-  { name: "Accessibility", href: "/accessibility-statement" },
-];
-const discoverLinks = [
-  { name: "Florida Listings", href: "/listings?numberOfGuests=1&pageNum=1&match=Florida" },
-  { name: "North Carolina Listings", href: "/listings?numberOfGuests=1&pageNum=1&match=North Carolina" },
-  { name: "Maryland Listings", href: "/listings?numberOfGuests=1&pageNum=1&match=Maryland" },
-  { name: "Virginia Listings", href: "/listings?numberOfGuests=1&pageNum=1&match=Virginia" }
-];
+import { useSiteConfigurations } from "~/context/SiteConfigurationsContext";
 
 function FooterSection() {
+  const siteConfigs = useSiteConfigurations();
+  const footerSiteConfigs = siteConfigs.footer;
+
+  const popularSearchLinks = footerSiteConfigs.popularSearchLinks;
+  const quickLinks = footerSiteConfigs.quickLinks;
+  const staticPages = footerSiteConfigs.staticPages;
+  const discoverLinks = footerSiteConfigs.discoverLinks;
+
   return (
     <footer
       className="mt-auto flex flex-col p-4 sm:px-[72px] sm:pt-14"
@@ -34,11 +21,11 @@ function FooterSection() {
     >
       <div className="flex flex-col gap-8 lg:flex-row lg:gap-28">
         <div className="flex flex-col gap-7">
-          <div className="py-3 -mt-6">
+          <div className="-mt-6 py-3">
             <IconGenerator
-              src="/cool_vacay_logo_blue.svg"
-              width="180px"
-              alt="Coolvacay logo"
+              src={siteConfigs.config.logo.url}
+              width={siteConfigs.config.logo.width}
+              alt={siteConfigs.config.logo.alt}
             />
           </div>
           <div className="flex gap-10 max-[430px]:flex-col sm:w-[430px] sm:flex-row">
@@ -47,40 +34,38 @@ function FooterSection() {
                 <h2 className="text-sm text-primary-grey400">
                   Call Customer Experience
                 </h2>
-                <p className="text-[15px] font-semibold"><a href="tel:302-581-9342">(302) 581-9342</a></p>
+                <p className="text-[15px] font-semibold">
+                  <Link href={`tel:${footerSiteConfigs.phone}`}>
+                    {footerSiteConfigs.phone}
+                  </Link>
+                </p>
               </div>
               <p className="text-[15px] font-semibold">
                 Follow Us On Social Media
               </p>
               <div className="flex items-center gap-7">
-                <Link href={'https://www.facebook.com/CoolVacay'}>
-                  <IconGenerator
-                    src="/facebook_icon.svg"
-                    width="10px"
-                    alt="CoolVacay Facebook page"
-                  />
-                </Link>
-                <Link href={'https://www.instagram.com/coolvacaynow'}>
-                  <IconGenerator
-                    src="/instagram_icon.svg"
-                    width="13px"
-                    alt="CoolVacay Instagram page"
-                  />
-                </Link>
-                {/* <Link href={'#'}>
-                  <IconGenerator
-                    src="/linkedin_icon.svg"
-                    width="13px"
-                    alt="CoolVacay Linkedin page"
-                  />
-                </Link> */}
+                {footerSiteConfigs.socials.map((social, index) => {
+                  return (
+                    <Link key={index} href={social.href}>
+                      <IconGenerator
+                        src={`/${social.name}_icon.svg`}
+                        width={social.name === "facebook" ? "10px" : "13px"}
+                        alt={`${siteConfigs.config.siteName} facebook page`}
+                      />
+                    </Link>
+                  );
+                })}
               </div>
             </div>
             <div className="flex flex-col gap-1">
               <h2 className="text-sm text-primary-grey400">
                 Email Customer Experience
               </h2>
-              <p className="text-[15px] font-semibold"><a href="mailto:vacay@coolvacay.com">vacay@coolvacay.com</a></p>
+              <p className="text-[15px] font-semibold">
+                <a href="mailto:vacay@coolvacay.com">
+                  {footerSiteConfigs.email}
+                </a>
+              </p>
             </div>
           </div>
         </div>
@@ -125,7 +110,7 @@ function FooterSection() {
       </div>
       <div className="flex flex-col items-center justify-between py-6 text-sm sm:flex-row">
         <h2>
-          © Coolvacay 2024
+          © {siteConfigs.config.siteName} 2024
           <span className="text-primary-grey400"> - All rights reserved</span>
         </h2>
         <div className="flex gap-2">

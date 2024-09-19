@@ -267,10 +267,10 @@ export type IReadOnlySiteConfigurationProperties = Readonly<{
     }[];
   };
   home: {
-    motto: string;
-    header1: string;
-    paragraph1: string;
-    paragraph2: string;
+    motto?: string;
+    header1?: string;
+    paragraph1?: string;
+    paragraph2?: string;
   };
   contact: {
     phone: string;
