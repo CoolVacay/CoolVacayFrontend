@@ -331,7 +331,7 @@ export default function PaymentForm({
               name="cardDetails.cvc"
               value={formik.values.cardDetails.cvc}
               onBlur={formik.handleBlur}
-              maxLength={3}
+              maxLength={4}
               onChange={(e) => {
                 const input = e.target.value.replace(/\D/g, "");
                 return formik.setFieldValue("cardDetails.cvc", input);
