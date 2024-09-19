@@ -7,5 +7,5 @@ export default async function NavBarWrapper() {
   const isTokenValid = session && (await isValidToken());
   const userData = isTokenValid ? await getProfileInfo() : undefined;
 
-  return <NavBar userData={userData} isTokenValid={isTokenValid!} />;
+  return <NavBar userData={userData} session={session} />;
 }

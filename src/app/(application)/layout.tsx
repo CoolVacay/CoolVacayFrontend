@@ -6,7 +6,9 @@ import FooterSection from "../ui/components/FooterSection";
 import MuiXLicense from "../MuiXLicense";
 import theme from "../../theme";
 import { ThemeProvider } from "@mui/material/styles";
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { getSiteConfigurations } from "./actions";
+import { SiteConfigurationProvider } from "~/context/SiteConfigurationsContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,23 +18,27 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const siteConfigurations = (await getSiteConfigurations())!;
+
   return (
     <html lang="en">
-      <GoogleAnalytics gaId="G-GT7N6G5LGF"/>
-      <body className={`${inter.className} w-full flex h-full flex-col`}>
-        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <ThemeProvider theme={theme}>
-            <NavBarWrapper />
-            {children}
-            <FooterSection />
-            <MuiXLicense />
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+      <GoogleAnalytics gaId="G-GT7N6G5LGF" />
+      <body className={`${inter.className} flex h-full w-full flex-col`}>
+        <SiteConfigurationProvider siteConfigurations={siteConfigurations}>
+          <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+            <ThemeProvider theme={theme}>
+              <NavBarWrapper />
+              {children}
+              <FooterSection />
+              <MuiXLicense />
+            </ThemeProvider>
+          </AppRouterCacheProvider>
+        </SiteConfigurationProvider>
       </body>
     </html>
   );

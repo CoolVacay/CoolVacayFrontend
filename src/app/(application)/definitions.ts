@@ -243,3 +243,83 @@ export interface ICloseDatesListings {
   }[];
   listing: IListingData;
 }
+
+export type IReadOnlySiteConfigurationProperties = Readonly<{
+  config: {
+    siteName: string;
+    originUrl: string;
+    logo: {
+      url: string;
+      alt: string;
+      width: string;
+    };
+  };
+  source: string;
+  navBar: {
+    logo: {
+      url: string;
+      alt: string;
+      width: string;
+    };
+    links: {
+      name: string;
+      href: string;
+    }[];
+  };
+  home: {
+    motto: string;
+    header1: string;
+    paragraph1: string;
+    paragraph2: string;
+  };
+  contact: {
+    phone: string;
+    email: string;
+    address: string;
+    hours: {
+      day: string;
+      openTime: string;
+      closeTime: string;
+    }[];
+  };
+  about: {
+    header1: string;
+    paragraph1: string;
+    header2: string;
+    paragraph2: string;
+    listedProperties: string;
+    happyCustomers: string;
+    starReviews: string;
+    dailyTransactions: string;
+    reviews: {
+      title: string;
+      description: string;
+      author: string;
+      date: string;
+    }[];
+  };
+  footer: {
+    phone: string;
+    email: string;
+    popularSearchLinks: {
+      name: string;
+      href: string;
+    }[];
+    quickLinks: {
+      name: string;
+      href: string;
+    }[];
+    staticPages: {
+      name: string;
+      href: string;
+    }[];
+    discoverLinks: {
+      name: string;
+      href: string;
+    }[];
+    socials: {
+      name: string;
+      href: string;
+    }[];
+  };
+}>;
