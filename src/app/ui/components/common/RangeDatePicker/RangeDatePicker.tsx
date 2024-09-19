@@ -16,16 +16,16 @@ import Loading from "~/app/(authentication)/signup/loading";
 
 const RangeDatePicker = ({
   size,
-  dates,
+  selectedDates,
   setDates,
   availableDates,
   listingInfo,
 }: {
   size: "small" | "medium" | "big";
-  dates: DateRangeType | [null, null];
+  selectedDates: DateRangeType | ["", ""];
   setDates:
-    | React.Dispatch<React.SetStateAction<DateRangeType | [null, null]>>
-    | ((values: DateRangeType | [null, null]) => void);
+    | React.Dispatch<React.SetStateAction<DateRangeType | ["", ""]>>
+    | ((values: DateRangeType | ["", ""]) => void);
   availableDates?: string[];
   listingInfo?: IListingData;
 }) => {
@@ -37,7 +37,7 @@ const RangeDatePicker = ({
 
   const handleDateChange = async (newValue: [Dayjs, Dayjs]) => {
     if (availableDates) {
-      if (newValue[0] !== dates[0] && !newValue[1]) {
+      if (newValue[0] !== selectedDates[0] && !newValue[1]) {
         setLoading(true);
         const availabilityPeriods = await getAvailabilityPeriods(
           listingInfo?.source ?? "",
@@ -81,7 +81,7 @@ const RangeDatePicker = ({
           },
           day: {
             // @ts-expect-error MUI doesn't recognize forwardProp
-            dates: dates,
+            selectedDates: selectedDates,
             availableDates: availableDates,
             rangeDatesAvailable: rangeDatesAvailable,
           },
@@ -105,7 +105,7 @@ const RangeDatePicker = ({
                     : "text-xs "
               } ${matches ? "font-medium" : ""}`,
               startAdornment:
-                matches && dates?.[0] ? (
+                matches && selectedDates?.[0] ? (
                   <IconGenerator
                     alt="Calendar icon"
                     src={"/calendar_icon.svg"}
@@ -125,7 +125,7 @@ const RangeDatePicker = ({
           setRangeDatesAvailable(undefined);
           setDates([null, null]);
         }}
-        value={dates}
+        value={selectedDates as DateRangeType}
         onAccept={(newValue) => {
           !availableDates ? setDates(newValue as [Dayjs, Dayjs]) : undefined;
         }}

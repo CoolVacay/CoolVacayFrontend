@@ -1,8 +1,6 @@
 "use client";
 
-import {
-  uploadProfilePicture,
-} from "~/app/(application)/actions";
+import { uploadProfilePicture } from "~/app/(application)/actions";
 import { useState, useMemo } from "react";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -36,9 +34,7 @@ export default function ProfileForm({
   const [editMode, setEditMode] = useState(false);
   const [isImageAttached, setIsImageAttached] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
-  const [errorMessage, setErrorMessage] = useState<undefined | string>(
-    undefined,
-  );
+
   const ValidationSchema = Yup.object({
     firstName: Yup.string().required("First Name is required"),
     lastName: Yup.string().required("Last Name is required"),
@@ -76,71 +72,74 @@ export default function ProfileForm({
               Object.entries(formik.values).filter(([_, v]) => v != ""),
             );
 
-            if(modifiedValues?.dateOfBirth) {
-              modifiedValues.dateOfBirth = dayjs(modifiedValues.dateOfBirth.toString())?.format('YYYY-MM-DD').toString();
-            } 
+            if (modifiedValues?.dateOfBirth) {
+              modifiedValues.dateOfBirth = dayjs(
+                modifiedValues.dateOfBirth.toString(),
+              )
+                ?.format("YYYY-MM-DD")
+                .toString();
+            }
 
             const response = await updateProfile(
               modifiedValues as IProfileDetails,
             );
-            
-            if(typeof response === "string") {
+
+            if (typeof response === "string") {
               throw Error(response);
             }
 
-            if(files) {
+            if (files) {
               const formData = new FormData();
-                files.forEach((file) => formData.append(`[${file.name}]`, file));
-                await uploadProfilePicture({
-                  userId: profileInfo.id.toString(),
-                  formData: formData,
-                });
+              files.forEach((file) => formData.append(`[${file.name}]`, file));
+              await uploadProfilePicture({
+                userId: profileInfo.id.toString(),
+                formData: formData,
+              });
             }
-            
+
             toastNotifier();
           } catch (error) {
-            console.log(error)
+            console.log(error);
             formik.resetForm();
-            toastNotifier('Something went wrong, please try again later.');
+            toastNotifier("Something went wrong, please try again later.");
           }
-            await formik.setFieldValue('isImageAttached', false);
-            setFiles([]);
-            setIsImageAttached(false);
-            setEditMode(false);
-          }
-        }
+          await formik.setFieldValue("isImageAttached", false);
+          setFiles([]);
+          setIsImageAttached(false);
+          setEditMode(false);
+        }}
       >
         <div className="flex justify-between">
-        <div className="flex gap-10">
-          {files.length > 0 ? (
-            <div className="h-20 w-20">
-              <Image
-                alt="avatar icon"
-                src={`${(files.length > 0 ? (files[0] as ModifiedFile).preview : profileInfo.profilePicture) ?? `/avatar_blue.svg`}`}
-                width={0}
-                height={0}
-                quality={10}
-                sizes="100vw"
-                style={{ objectFit: "cover" }}
-                className="h-20 w-20 rounded-full"
+          <div className="flex gap-10">
+            {files.length > 0 ? (
+              <div className="h-20 w-20">
+                <Image
+                  alt="avatar icon"
+                  src={`${(files.length > 0 ? (files[0] as ModifiedFile).preview : profileInfo.profilePicture) ?? `/avatar_blue.svg`}`}
+                  width={0}
+                  height={0}
+                  quality={10}
+                  sizes="100vw"
+                  style={{ objectFit: "cover" }}
+                  className="h-20 w-20 rounded-full"
+                />
+              </div>
+            ) : null}
+            <div className="flex flex-col gap-2 font-medium">
+              <p className="text-[20px]">
+                {profileInfo?.firstName} {profileInfo?.lastName}
+              </p>
+              <UploadButton
+                editMode={editMode}
+                setIsImageAttached={async () => {
+                  await formik.setFieldValue("isImageAttached", true);
+                  setIsImageAttached(!true);
+                }}
+                setFiles={setFiles}
               />
             </div>
-          ) : null}
-          <div className="flex flex-col gap-2 font-medium">
-            <p className="text-[20px]">
-              {profileInfo?.firstName} {profileInfo?.lastName}
-            </p>
-            <UploadButton
-              editMode={editMode}
-              setIsImageAttached={async () => {
-                await formik.setFieldValue("isImageAttached", true)
-                setIsImageAttached(!true);
-              }}
-              setFiles={setFiles}
-            />
           </div>
         </div>
-      </div>
         <div className="mb-8 flex flex-col">
           <div className="my-10 flex flex-col gap-5">
             <div className="flex flex-col gap-5 lg:w-full lg:flex-row">
@@ -266,9 +265,6 @@ export default function ProfileForm({
                 </LocalizationProvider>
               </div>
             </div>
-            {errorMessage && (
-              <p className="text-sm text-red-500">{errorMessage}</p>
-            )}
           </div>
           {editMode ? (
             <div className="flex gap-5">
@@ -276,9 +272,9 @@ export default function ProfileForm({
                 className="w-[200px] rounded-full border border-[#676D73] px-12 py-2 text-[#676D73]"
                 onClick={() => {
                   formik.resetForm();
-                  setEditMode(false)
-                  setIsImageAttached(false)
-                  setFiles([])
+                  setEditMode(false);
+                  setIsImageAttached(false);
+                  setFiles([]);
                 }}
               >
                 Cancel

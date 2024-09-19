@@ -1,14 +1,11 @@
 import Image from "next/image";
-import { auth } from "~/auth";
-import { getProfileInfo } from "~/app/(application)/actions";
-import NavLinks from "./NavLinks";
 import dayjs from "dayjs";
 
-export default async function SideNav() {
-  const session = await auth();
+import { getProfileInfo } from "~/app/(application)/actions";
+import NavLinks from "./NavLinks";
 
-  const profileInfo =
-    session?.user && (await getProfileInfo(session.user.email!));
+export default async function SideNav() {
+  const profileInfo = await getProfileInfo();
 
   return (
     <div className="flex w-full flex-col rounded-[8px] border border-[#EAEAEF] md:max-w-[280px]">

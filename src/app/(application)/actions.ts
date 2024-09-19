@@ -1,6 +1,6 @@
 "use server";
 
-import { getHTMLFetch, getData, postData } from "../utils/api-helpers";
+import { getHTMLFetch, postData, fetcher } from "../utils/api-helpers";
 import { FetchError } from "../utils/definitions";
 import { logOut } from "../(authentication)/actions";
 
@@ -22,43 +22,57 @@ import type {
   ICloseDatesListings,
   IPopularCategoriesData,
 } from "./definitions";
+import { auth } from "~/auth";
 
 //////////////GET/////////////
 
 export const getCountries = () =>
-  getData<ICountries[]>(`/countries`, "Failed to fetch countries");
+  fetcher<ICountries[]>(`countries`, "Failed to fetch countries");
 
-export const isValidToken = (accessToken: string) =>
-  getData<boolean>(
-    `/Auth/is_valid?token=${accessToken}`,
-    "Failed to check token",
+export async function isValidToken() {
+  const session = await auth();
+  if (!session?.user?.accessToken) {
+    return false;
+  }
+  return fetcher<boolean>(
+    `Auth/is_valid?token=${session?.user?.accessToken}`,
+    "Failed to check if token is valid",
+    true,
   );
+}
 
 export const getBlogs = () =>
-  getData<IBlog[]>(`/Blogs`, "Failed to fetch blogs");
+  fetcher<IBlog[]>(`Blogs`, "Failed to fetch blogs");
 
 export const getLocationsList = () =>
-  getData<ILocationsList[]>(`/Listings/Codifiers`, "Failed to fetch locations");
+  fetcher<ILocationsList[]>(`Listings/Codifiers`, "Failed to fetch locations");
 
 export const getListingData = ({ source, id }: IParams) =>
-  getData<IListingData>(
-    `/Listings/${source}/${id}`,
+  fetcher<IListingData>(
+    `Listings/${source}/${id}`,
     "Failed to fetch listing data",
   );
 
-export const getFilteredListings = (query: string) =>{
-  const PAGE_SIZE = 12
-  return getData<IAllListings>(
-    `/Listings?${query}&pageSize=${PAGE_SIZE}`,
+export const getFilteredListings = (query: string) => {
+  const PAGE_SIZE = 12;
+  return fetcher<IAllListings>(
+    `Listings?${query}&pageSize=${PAGE_SIZE}`,
     "Failed to fetch filtered listings",
-  );}
+  );
+};
 
-export const getProfileInfo = (email: string) =>
-  getData<TUserData["profile"]>(
-    `/Users/email/${email}`,
+export async function getProfileInfo() {
+  const session = await auth();
+
+  if (!session?.user?.email) {
+    return undefined;
+  }
+  return fetcher<TUserData["profile"]>(
+    `Users/email/${session.user.email}`,
     "Failed to fetch profile data",
     true,
   );
+}
 
 export const getPricingDetails = (
   source: string,
@@ -67,8 +81,8 @@ export const getPricingDetails = (
   endDate: string,
   numberOfGuests: string,
 ) =>
-  getData<IPricingDetails>(
-    `/Listings/${source}/${id}/priceDetails?startDate=${startDate}&endDate=${endDate}&numberOfGuests=${numberOfGuests}`,
+  fetcher<IPricingDetails>(
+    `Listings/${source}/${id}/priceDetails?startDate=${startDate}&endDate=${endDate}&numberOfGuests=${numberOfGuests}`,
     "Failed to fetch listing data",
   );
 
@@ -78,8 +92,8 @@ export const getAvailabilityDates = (
   startDate: string,
   endDate: string,
 ) =>
-  getData<IPropertyAvailability>(
-    `/Listings/availability?FromDate=${startDate}&ToDate=${endDate}&source=${source}&ListingId=${id}`,
+  fetcher<IPropertyAvailability>(
+    `Listings/availability?FromDate=${startDate}&ToDate=${endDate}&source=${source}&ListingId=${id}`,
     "Failed to fetch available dates",
   );
 
@@ -88,8 +102,8 @@ export const getAvailabilityPeriods = (
   id: string,
   startDate: string,
 ) =>
-  getData<string[]>(
-    `/Listings/availability_periods?FromDate=${startDate}&source=${source}&ListingId=${id}`,
+  fetcher<string[]>(
+    `Listings/availability_periods?FromDate=${startDate}&source=${source}&ListingId=${id}`,
     "Failed to fetch availablility periods",
   );
 
@@ -100,41 +114,42 @@ export const getCloseDatesListings = (
   endDate: string,
   category: string,
 ) =>
-  getData<ICloseDatesListings[]>(
-    `/Listings/close_dates?PageSize=${pageSize}&Match=${match}&FromDate=${startDate}&ToDate=${endDate}&category=${category}`,
+  fetcher<ICloseDatesListings[]>(
+    `Listings/close_dates?PageSize=${pageSize}&Match=${match}&FromDate=${startDate}&ToDate=${endDate}&category=${category}`,
     "Failed to fetch close dates listings",
   );
 
 export const getSimilarListings = ({ source, id }: IParams) =>
-  getData<IListingData[]>(
-    `/Listings/${source}/${id}/similar`,
+  fetcher<IListingData[]>(
+    `Listings/${source}/${id}/similar`,
     "Failed to fetch similar listings",
     true,
   );
 
 export const getCategories = () =>
-  getData<IPopularCategoriesData[]>(
-    `/categories`,
+  fetcher<IPopularCategoriesData[]>(
+    `categories`,
     "Failed to fetch popular categories",
   );
 
 export const getFeaturedListings = () =>
-  getData<IListingData[]>(
-    `/listings/featured`,
+  fetcher<IListingData[]>(
+    `listings/featured`,
     "Failed to fetch featured listings",
   );
 
-export const getReservationsDetails = (userId: string) =>
-  getData<IReservationsDetails[]>(
-    `/Reservations/user/${userId}`,
+export async function getReservationsDetails() {
+  const session = await auth();
+  if (!session?.user?.id) return undefined;
+
+  return fetcher<IReservationsDetails[]>(
+    `Reservations/user/${session.user.id}`,
     "Failed to fetch reservations",
   );
+}
 
-export const getBlogById = (id: string) => 
-  getData<IBlog>(
-    `/Blogs/${id}`,
-    "Failed to fetch blog by id",
-  );  
+export const getBlogById = (id: string) =>
+  fetcher<IBlog>(`Blogs/${id}`, "Failed to fetch blog by id");
 
 export async function getBlogContent(id: string) {
   try {

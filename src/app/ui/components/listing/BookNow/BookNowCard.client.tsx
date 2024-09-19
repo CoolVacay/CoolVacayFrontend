@@ -1,14 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import dayjs from "dayjs";
 import { Divider } from "@mui/material";
+import type { SelectChangeEvent } from "@mui/material";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 import { RangeDatePicker, FormDialog, SelectInput } from "../../common";
-import type { SelectChangeEvent } from "@mui/material";
 import type { DateRangeType } from "../../home/SearchCard";
-import type { IParams, IListingData } from "~/app/(application)/definitions";
-import type { IPropertyAvailability } from "~/app/(application)/definitions";
-import dayjs from "dayjs";
+import type {
+  IParams,
+  IListingData,
+  IPropertyAvailability,
+} from "~/app/(application)/definitions";
 
 export interface IPricingDetails {
   totalPrice: number;
@@ -60,8 +63,8 @@ export default function BookNowContent({
           <RangeDatePicker
             size="medium"
             availableDates={availableDates}
-            dates={selectedDates as DateRangeType}
-            setDates={(values: DateRangeType | [null, null]) =>
+            selectedDates={selectedDates as DateRangeType}
+            setDates={(values: DateRangeType | ["", ""]) =>
               updateSearchParams(["fromDate", "toDate"], values)
             }
             listingInfo={listingInfo}

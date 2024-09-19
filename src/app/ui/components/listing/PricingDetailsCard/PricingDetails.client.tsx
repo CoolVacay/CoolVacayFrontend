@@ -14,7 +14,7 @@ export default function PricingDetailsCardContent({
   params: IParams;
 }) {
   const { searchParamsValues, updateSearchParams } = useAppSearchParams();
-  const [dates, setDates] = useState<DateRangeType>([
+  const [dates, setDates] = useState<DateRangeType | ["", ""]>([
     searchParamsValues.fromDate,
     searchParamsValues.toDate,
   ]);
@@ -27,7 +27,11 @@ export default function PricingDetailsCardContent({
           className="relative px-6 py-5"
           style={{ borderBottom: "1px solid #EAEAEF" }}
         >
-          <RangeDatePicker size="medium" dates={dates} setDates={setDates} />
+          <RangeDatePicker
+            size="medium"
+            selectedDates={dates}
+            setDates={setDates}
+          />
         </div>
         <div className="px-6 py-5">
           <SelectInput

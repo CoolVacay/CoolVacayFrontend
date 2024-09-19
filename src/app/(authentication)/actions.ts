@@ -1,7 +1,7 @@
 "use server";
 
 import { AuthError } from "next-auth";
-import { getFetch, postFetch } from "~/app/utils/api-helpers";
+import { fetcher, postFetch } from "~/app/utils/api-helpers";
 import { signIn, signOut } from "~/auth";
 import { capitalize } from "../utils/helpers";
 import { redirect } from "next/navigation";
@@ -201,7 +201,7 @@ export async function resendOtp(
 export async function logOut() {
   try {
     await Promise.all([
-      getFetch("/Auth/logout", true),
+      fetcher("/Auth/logout", "Failed to logout", true),
       signOut({ redirectTo: "/" }),
     ]);
   } catch (error) {

@@ -4,8 +4,9 @@ import { CustomChip } from "../common";
 import { getBlogs } from "~/app/(application)/actions";
 
 export async function DiscoverSection() {
-  const blogs = (await getBlogs())!;
+  const blogs = (await getBlogs())! ?? [];
   const featuredBlog = blogs.find((blog) => blog.isFeatured);
+
   return (
     <section className="flex grow-0 flex-col gap-12 py-14 lg:max-h-[680px] lg:shrink-0 lg:flex-row">
       <div className="hidden md:flex md:shrink-0 md:items-center md:justify-center">
@@ -27,7 +28,7 @@ export async function DiscoverSection() {
         <h2 className="md:leading-80 desktop:text-[46px] text-center text-[32px] leading-[47px] sm:text-left sm:font-semibold">
           {featuredBlog?.title ?? `Explore vacation rentals with beach access`}
         </h2>
-        <p className="lg:text-lg font-400 text-justify text-sm leading-6 text-[#020101]/[.60]">
+        <p className="font-400 text-justify text-sm leading-6 text-[#020101]/[.60] lg:text-lg">
           {featuredBlog?.description}
         </p>
         <div className="flex justify-center lg:justify-start">
