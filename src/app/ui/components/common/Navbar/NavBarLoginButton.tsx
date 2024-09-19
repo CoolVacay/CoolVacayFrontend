@@ -11,10 +11,10 @@ import type { TUserData } from "~/app/(application)/definitions";
 
 const NavBarLoginButton = ({
   userData,
-  isWhiteVariant,
+  isLogoWhite,
 }: {
   userData: TUserData["profile"];
-  isWhiteVariant: boolean;
+  isLogoWhite: boolean;
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -29,7 +29,7 @@ const NavBarLoginButton = ({
   return (
     <>
       <button
-        className={`flex items-center rounded-full px-4 py-2 text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
+        className={`flex items-center rounded-full px-4 py-2 text-sm font-normal  ${isLogoWhite ? "bg-white text-black" : "bg-primary text-white"}`}
         onClick={handleClick}
         aria-controls={open ? "account-menu" : undefined}
         aria-haspopup="true"
@@ -42,7 +42,7 @@ const NavBarLoginButton = ({
               alt="avatar icon"
               src={
                 userData.profilePicture ??
-                `/avatar_${isWhiteVariant ? "white" : "blue"}.svg`
+                `/avatar_${isLogoWhite ? "white" : "blue"}.svg`
               }
               width={32}
               height={0}
@@ -92,7 +92,7 @@ const NavBarLoginButton = ({
             <ListItemIcon>
               <Image
                 alt="avatar icon"
-                src={`/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}
+                src={`/avatar_${isLogoWhite ? "white" : "blue"}.svg`}
                 width={24}
                 height={0}
                 className="h-6 w-6 rounded-full"
