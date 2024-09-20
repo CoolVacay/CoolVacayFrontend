@@ -13,7 +13,7 @@ export default function Page() {
   return (
     <div className="flex flex-col justify-center">
       <div className="flex justify-center px-4 sm:px-0">
-        <div className="flex min-h-[640px] max-w-[1220px] flex-col items-center justify-center">
+        <div className="custom-max-widths flex min-h-[640px] flex-col items-center justify-center">
           <div className="flex w-full flex-col lg:flex-row">
             <div className="h-full w-full bg-[#F7F7F7] px-6 py-10 sm:px-14 sm:py-14">
               <h2 className="text-2xl text-primary sm:text-3xl">

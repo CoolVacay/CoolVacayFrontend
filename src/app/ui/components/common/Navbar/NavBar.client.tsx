@@ -134,7 +134,7 @@ export default function NavBar({
                     <IconGenerator
                       alt="avatar icon"
                       src={`/avatar_${isLogoWhite ? "white" : "blue"}.svg`}
-                      className="w-7 lg:w-8"
+                      className="w-6 lg:w-7"
                     />
                   </span>
                 </button>

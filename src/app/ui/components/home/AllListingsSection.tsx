@@ -4,10 +4,15 @@ import { MainCard } from "../common";
 import { truncateText } from "../../../utils/helpers";
 import { getFilteredListings } from "~/app/(application)/actions";
 
-export async function AllListingsSection({ page }: { page: number, property?: string }) {
+export async function AllListingsSection({
+  page,
+}: {
+  page: number;
+  property?: string;
+}) {
   const listings = (await getFilteredListings(`pageSize=8&pageNum=${page}`))!;
   return listings?.items.length > 0 ? (
-    <div className="no-scrollbar my-10 flex items-center gap-5 overflow-auto sm:flex-row sm:flex-wrap sm:justify-start">
+    <div className="no-scrollbar my-10 flex items-center gap-5 overflow-auto will-change-scroll sm:flex-row sm:flex-wrap sm:justify-between">
       {listings?.items.map((listing) => {
         return (
           <Link
