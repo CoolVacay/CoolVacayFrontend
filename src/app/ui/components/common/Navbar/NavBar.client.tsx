@@ -12,6 +12,7 @@ import NavBardDialog from "./NavBarDialog";
 import NavBarLoginButton from "./NavBarLoginButton";
 import { IconGenerator } from "../IconGenerator";
 import type { TUserData } from "~/app/(application)/definitions";
+import { Logo } from "../Logo";
 
 const whiteLogoPaths = [
   "/",
@@ -78,17 +79,7 @@ export default function NavBar({
         className={`container ${isLogoWhite || !isNavBarFullWidth ? "custom-max-widths" : "sm:pl-16"} scroll-px-4 justify-between gap-10`}
       >
         <div className="container justify-between sm:w-auto md:flex-grow">
-          <Link href="/">
-            <Image
-              src={`${isLogoWhite ? siteConfigs.logo.white : siteConfigs.logo.color}`}
-              alt={siteConfigs.logo.alt}
-              width={0}
-              height={0}
-              sizes="(max-width: 768px) 90vw, 75vw"
-              className={`w-[${Number.parseInt(siteConfigs.logo.width) - 60}px] sm:w-[${siteConfigs.logo.width}]`}
-              priority={true}
-            />
-          </Link>
+          <Logo isLogoWhite={isLogoWhite} />
           <button className="sm:hidden" onClick={toggleMenu}>
             <IconGenerator
               src={`/menu_icon_${isLogoWhite ? "white" : "black"}.svg`}

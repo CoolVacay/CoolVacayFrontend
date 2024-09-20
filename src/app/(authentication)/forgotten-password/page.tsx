@@ -1,18 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
 import { ForgotPasswordForm } from "~/app/ui/components/authentication";
+import { Logo } from "~/app/ui/components/common";
 
 function ForgottenPassword() {
   return (
     <div className="flex flex-col gap-20">
-      <Link href="/" className="w-[200px]">
-        <Image
-          src="/cool_vacay_logo_blue.svg"
-          alt="CoolVacay Logo"
-          width={200}
-          height={22}
-        />
-      </Link>
+      <Logo />
       <div className="flex flex-col gap-8">
         <div>
           <h1 className="mb-4 text-3xl">Forgot password?</h1>

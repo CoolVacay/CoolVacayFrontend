@@ -32,7 +32,7 @@ const guests = Array.from({ length: 8 }, (v, i) => i + 1)
     </MenuItem>
   ));
 
-export function Filters({
+export function FiltersComponent({
   locationsList,
   categories,
 }: {

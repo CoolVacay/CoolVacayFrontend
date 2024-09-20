@@ -2,8 +2,10 @@ import { capitalizeAllWords } from "~/app/utils/helpers";
 import { ListingCard } from "../common";
 import Pagination from "./Pagination";
 import { type IAllListings } from "~/app/(application)/definitions";
+import { getFilteredListings } from "~/app/(application)/actions";
 
-export async function ListingSection({ query, listings }: { query: URLSearchParams, listings: IAllListings }) {
+export async function ListingSection({ query }: { query: URLSearchParams }) {
+  const listings = (await getFilteredListings(query.toString()))!;
 
   const title =
     query.get("category") ??
