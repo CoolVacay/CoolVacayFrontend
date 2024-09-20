@@ -1,6 +1,7 @@
 "use client";
 
 import { Divider } from "@mui/material";
+import { Fragment } from "react";
 import { useSiteConfigurations } from "~/context/SiteConfigurationsContext";
 
 export default function ContactDetailsCard() {
@@ -32,7 +33,7 @@ export default function ContactDetailsCard() {
         <p className="mb-1 text-lg sm:text-xl">Opening hours</p>
         {contactDetailsSiteConfigs.hours.map((item, index) => {
           return (
-            <>
+            <Fragment key={index}>
               <p className="flex text-primary">
                 {item.day}{" "}
                 <span className="ml-auto text-[#676D73]">
@@ -42,7 +43,7 @@ export default function ContactDetailsCard() {
               {index < contactDetailsSiteConfigs.hours.length - 1 ? (
                 <Divider />
               ) : null}
-            </>
+            </Fragment>
           );
         })}
       </div>

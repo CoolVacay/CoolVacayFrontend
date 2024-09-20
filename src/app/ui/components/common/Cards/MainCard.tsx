@@ -12,7 +12,7 @@ export default function MainCard({
 }: TMainCardProps) {
   return (
     <div
-      className={`${!isBlogCard && "shadow-cardShadow"} flex h-full w-[280px] grow-0 flex-col overflow-hidden rounded-xl`}
+      className={`${!isBlogCard && "shadow-cardShadow"} flex h-full grow-0 flex-col overflow-hidden rounded-xl max-[1280px]:w-[260px] max-[1150px]:w-[240px] max-[1070px]:w-[280px] xl:w-[280px]`}
       style={{
         border: !isBlogCard ? "1px solid rgba(173, 181, 189, 0.70)" : "",
       }}

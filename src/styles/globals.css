@@ -29,7 +29,7 @@
   }
 
   .custom-max-widths {
-    @apply max-w-[calc(100vw_-_32px)] sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px];
+    @apply max-w-[calc(100vw_-_32px)] sm:max-w-[580px] md:max-w-[880px] lg:max-w-[1110px] xl:max-w-[1220px];
   }
 
   .container {

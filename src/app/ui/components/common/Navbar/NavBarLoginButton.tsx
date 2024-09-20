@@ -29,7 +29,7 @@ const NavBarLoginButton = ({
   return (
     <>
       <button
-        className={`flex items-center rounded-full px-4 py-2 text-sm font-normal  ${isLogoWhite ? "bg-white text-black" : "bg-primary text-white"}`}
+        className={`flex items-center rounded-full px-4 py-2 text-sm  ${isLogoWhite ? "bg-white text-black" : "bg-primary text-white"}`}
         onClick={handleClick}
         aria-controls={open ? "account-menu" : undefined}
         aria-haspopup="true"
@@ -37,17 +37,17 @@ const NavBarLoginButton = ({
       >
         {userData.firstName}
         <span className="ml-2">
-          <div className="h-8 w-8">
+          <div className="h-7 w-7">
             <Image
               alt="avatar icon"
               src={
                 userData.profilePicture ??
                 `/avatar_${isLogoWhite ? "white" : "blue"}.svg`
               }
-              width={32}
+              width={28}
               height={0}
               quality={20}
-              className="h-8 w-8 rounded-full"
+              className="h-7 w-7 rounded-full"
             />
           </div>
         </span>
