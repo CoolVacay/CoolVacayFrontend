@@ -7,6 +7,7 @@ import type {
 } from "@mui/material";
 import { IconGenerator } from "../IconGenerator";
 import type { ILocationsList } from "~/app/(application)/definitions";
+import { LocationPin } from "public/LocationPin";
 
 export interface CustomHTMLAttributes
   extends React.HTMLAttributes<HTMLLIElement> {
@@ -111,11 +112,7 @@ export default function CitiesAutocomplete({
                 ? `${isSmallSize ? "text-xs" : "sm:text-xl text-base"}`
                 : `pl-3 bg-[#EAF7FD] ${isSmallSize ? "text-xs" : "text-xl"} text-[#212529] h-9 text-sm rounded-full border border-[#EAEAEF]`,
               startAdornment: (
-                <IconGenerator
-                  alt="Location Icon"
-                  src="/location-pin.svg"
-                  className={`${isSmallSize ? "right-[2px] w-4" : "left-0 top-3 w-5 sm:w-7"} mr-2`}
-                />
+                <LocationPin color="text-priority"/>
               ),
             }}
           />
