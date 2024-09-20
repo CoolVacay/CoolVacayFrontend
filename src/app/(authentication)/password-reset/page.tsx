@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import OTPForm from "~/app/ui/components/authentication/OTPForm";
+import { Logo } from "~/app/ui/components/common";
 
 export default function Page() {
   let userEmail = "";
@@ -16,14 +15,7 @@ export default function Page() {
   return (
     <div className="flex w-full flex-col gap-[170px]">
       <div className="w-full">
-        <Link href="/" className="text-left">
-          <Image
-            src="/cool_vacay_logo_blue.svg"
-            alt="CoolVacay Logo"
-            width={200}
-            height={22}
-          />
-        </Link>
+        <Logo />
       </div>
       <div className="flex flex-col gap-12">
         <div>

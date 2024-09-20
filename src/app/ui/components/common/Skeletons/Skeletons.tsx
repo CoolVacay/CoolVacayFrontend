@@ -82,6 +82,29 @@ export function MapSkeleton() {
   return <div className="sticky right-0 top-0 h-screen bg-gray-100" />;
 }
 
+export function FiltersSkeleton() {
+  return (
+    <div className="mb-5 grid animate-pulse grid-cols-4 gap-4 xl:grid-cols-4">
+      <div className="col-span-3 sm:col-span-2 xl:col-span-1">
+        <div className="flex h-8 w-60 rounded-full bg-gray-100" />
+      </div>
+      <div className="col-span-1 xl:hidden">
+        <div className="flex overflow-hidden rounded-3xl border-2 bg-white shadow-xl">
+          <div className={`flex-1 rounded-3xl bg-gray-100 p-2 pl-3`} />
+        </div>
+      </div>
+      <div className="col-span-2 sm:col-span-2 xl:col-span-1">
+        <div className="flex h-8 w-60 rounded-full bg-gray-100" />
+      </div>
+      <div className="col-span-1 sm:col-span-1 xl:col-span-1">
+        <div className="flex h-8 w-60 rounded-full bg-gray-100" />
+      </div>
+      <div className="col-span-1 sm:col-span-2 xl:col-span-1">
+        <div className="flex h-8 w-60 rounded-full bg-gray-100" />
+      </div>
+    </div>
+  );
+}
 export function PopularCategoriesSkeleton() {
   return (
     <div className="flex flex-wrap md:justify-between">

@@ -24,3 +24,4 @@ export { IconGenerator } from "./IconGenerator/index";
 export { RangeDatePicker, StyledDatePicker } from "./RangeDatePicker/index";
 export { CustomChip } from "./CustomChip";
 export { StaticPageWrapper } from "./StaticPageWrapper/index";
+export { Logo } from "./Logo";
