@@ -2,18 +2,18 @@
 
 import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { logOut } from "~/app/(authentication)/actions";
+import type { Session } from "next-auth";
 
-import { IconGenerator } from "../IconGenerator";
+import { useSiteConfigurations } from "~/context/SiteConfigurationsContext";
 import NavBardDialog from "./NavBarDialog";
 import NavBarLoginButton from "./NavBarLoginButton";
+import { IconGenerator } from "../IconGenerator";
 import type { TUserData } from "~/app/(application)/definitions";
-import type { Session } from "next-auth";
-import { useSiteConfigurations } from "~/context/SiteConfigurationsContext";
-import Image from "next/image";
 
-const whiteVariantPaths = [
+const whiteLogoPaths = [
   "/",
   "/about-us",
   "/terms-and-conditions",
@@ -29,10 +29,11 @@ export default function NavBar({
   session: Session | null;
 }) {
   const [scrolled, setScrolled] = useState(false);
-  const navBarConfigurations = useSiteConfigurations().navBar;
-  console.log(navBarConfigurations, "siteee12123s");
-
+  const siteConfigs = useSiteConfigurations();
   useEffect(() => {
+    //server session and client session are not in sync
+    //client session must follow server session,if client session is still present
+    //but server session is not, then logOut
     if (session && !userData) {
       const checkSync = async () => {
         await logOut();
@@ -60,8 +61,8 @@ export default function NavBar({
   }, []);
 
   const pathname = usePathname();
-  const isLogoWhite = whiteVariantPaths.includes(pathname);
-  const noMaxWidth =
+  const isLogoWhite = whiteLogoPaths.includes(pathname);
+  const isNavBarFullWidth =
     pathname.startsWith("/listings") ||
     pathname.startsWith("/vacation-rental-management");
 
@@ -71,20 +72,20 @@ export default function NavBar({
 
   return (
     <nav
-      className={`sticky top-0 z-50 flex h-12 w-full justify-center px-4 py-6 sm:h-20 sm:py-6 ${scrolled ? `${isLogoWhite ? "bg-black bg-opacity-60 transition-all duration-700" : "bg-white"}` : "bg-opacity-0 transition-all duration-700"}`}
+      className={`sticky top-0 z-50 flex h-12 justify-center px-4 py-6 sm:h-20 sm:py-6 ${scrolled ? `${isLogoWhite ? "bg-black bg-opacity-60 transition-all duration-700" : "bg-white"}` : "bg-opacity-0 transition-all duration-700"}`}
     >
       <div
-        className={`flex w-full items-center ${isLogoWhite || !noMaxWidth ? "sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : "sm:pl-16"} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
+        className={`container ${isLogoWhite || !isNavBarFullWidth ? "custom-max-widths" : "sm:pl-16"} scroll-px-4 justify-between gap-10`}
       >
-        <div className="flex w-full items-center justify-between sm:w-auto md:flex-grow">
+        <div className="container justify-between sm:w-auto md:flex-grow">
           <Link href="/">
             <Image
-              src={`${isLogoWhite ? navBarConfigurations.logo.url : navBarConfigurations.logo.url}`}
-              alt={navBarConfigurations.logo.alt}
+              src={`${isLogoWhite ? siteConfigs.logo.white : siteConfigs.logo.color}`}
+              alt={siteConfigs.logo.alt}
               width={0}
               height={0}
               sizes="(max-width: 768px) 90vw, 75vw"
-              className={`w-[${navBarConfigurations.logo.width}] sm:w-[${navBarConfigurations.logo.width}]`}
+              className={`w-[${Number.parseInt(siteConfigs.logo.width) - 60}px] sm:w-[${siteConfigs.logo.width}]`}
               priority={true}
             />
           </Link>
@@ -92,7 +93,7 @@ export default function NavBar({
             <IconGenerator
               src={`/menu_icon_${isLogoWhite ? "white" : "black"}.svg`}
               alt="Menu"
-              width={isLogoWhite ? "22px" : "16px"}
+              width={isLogoWhite ? "28px" : "18px"}
             />
           </button>
         </div>
@@ -100,11 +101,11 @@ export default function NavBar({
           <div
             className={`flex items-center gap-5  ${isLogoWhite ? "text-white" : "text-black"}`}
           >
-            {navBarConfigurations.links.map((link) => {
+            {siteConfigs.navBar.links.map((link) => {
               return (
                 <Fragment key={link.href}>
                   <Link
-                    className={`text-center ${isLogoWhite ? "text-white" : "text-black"}`}
+                    className={`text-center text-base sm:text-sm lg:text-base ${isLogoWhite ? "text-white" : "text-black"}`}
                     href={link.href}
                   >
                     {link.name}
@@ -116,23 +117,24 @@ export default function NavBar({
             {userData ? (
               <Link href="/profile/reservations" className="hidden sm:block">
                 <p
-                  className={`text-center ${isLogoWhite ? "text-white" : "text-black"}`}
+                  className={`text-center text-base sm:text-sm lg:text-base  ${isLogoWhite ? "text-white" : "text-black"}`}
                 >
                   My bookings
                 </p>
               </Link>
             ) : null}
             {!userData ? (
-              <Link href="/signin">
+              <Link href="/signin" className="flex shrink-0">
                 <button
-                  className={`flex w-[190px] items-center rounded-full px-[14px] py-[6px] text-sm font-normal  ${isLogoWhite ? "bg-white text-black" : "bg-primary text-white"}`}
+                  className={`flex items-center gap-1 rounded-full px-4 py-2 text-sm  ${isLogoWhite ? "bg-white text-black" : "bg-primary text-white"}`}
                 >
-                  Log In or Sign Up
-                  <span className="ml-2">
+                  <span className="flex">{`Log In `}</span>
+                  <span className="hidden lg:block lg:flex">or Sign Up</span>
+                  <span className="ml-2 w-7 lg:w-8">
                     <IconGenerator
                       alt="avatar icon"
                       src={`/avatar_${isLogoWhite ? "white" : "blue"}.svg`}
-                      width="32px"
+                      className="w-7 lg:w-8"
                     />
                   </span>
                 </button>
@@ -149,7 +151,7 @@ export default function NavBar({
       {openMenu && (
         <NavBardDialog
           openMenu={openMenu}
-          navBarConfigurations={navBarConfigurations}
+          siteConfigs={siteConfigs}
           toggleMenu={toggleMenu}
           session={userData!}
         />

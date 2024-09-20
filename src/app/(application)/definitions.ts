@@ -248,19 +248,21 @@ export type IReadOnlySiteConfigurationProperties = Readonly<{
   config: {
     siteName: string;
     originUrl: string;
-    logo: {
+    favicon: {
       url: string;
       alt: string;
       width: string;
     };
   };
-  source: string;
+  logo: {
+    color: string;
+    black: string;
+    white: string;
+    alt: string;
+    width: string;
+  };
+  source?: string;
   navBar: {
-    logo: {
-      url: string;
-      alt: string;
-      width: string;
-    };
     links: {
       name: string;
       href: string;

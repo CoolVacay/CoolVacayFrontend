@@ -1,14 +1,16 @@
-import "~/styles/globals.css";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Inter } from "next/font/google";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { ThemeProvider } from "@mui/material/styles";
+
+import { getSiteConfigurations } from "./actions";
+import { SiteConfigurationProvider } from "~/context/SiteConfigurationsContext";
+
 import NavBarWrapper from "../ui/components/common/Navbar/NavBar.server";
 import FooterSection from "../ui/components/FooterSection";
 import MuiXLicense from "../MuiXLicense";
 import theme from "../../theme";
-import { ThemeProvider } from "@mui/material/styles";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import { getSiteConfigurations } from "./actions";
-import { SiteConfigurationProvider } from "~/context/SiteConfigurationsContext";
+import "~/styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

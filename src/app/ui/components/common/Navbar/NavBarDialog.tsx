@@ -23,12 +23,12 @@ export default function NavBardDialog({
   openMenu,
   toggleMenu,
   session,
-  navBarConfigurations,
+  siteConfigs,
 }: {
   openMenu: boolean;
   toggleMenu: () => void;
   session: TUserData["profile"] | null;
-  navBarConfigurations: IReadOnlySiteConfigurationProperties["navBar"];
+  siteConfigs: IReadOnlySiteConfigurationProperties;
 }) {
   const Transition = forwardRef(function Transition(
     props: TransitionProps & {
@@ -49,12 +49,12 @@ export default function NavBardDialog({
       <div className="flex items-center justify-between border border-[#EAEAEA] bg-white px-6 py-3">
         <Link href="/">
           <Image
-            src={`${navBarConfigurations.logo.url}`}
-            alt={navBarConfigurations.logo.alt}
+            src={`${siteConfigs.logo.black}`}
+            alt={siteConfigs.logo.alt}
             width={0}
             height={0}
             sizes="60vw"
-            className={`w-[${navBarConfigurations.logo.width}]`}
+            className={`w-[${Number.parseInt(siteConfigs.logo.width) - 80}px]`}
           />
         </Link>
         <IconButton
@@ -66,7 +66,7 @@ export default function NavBardDialog({
         </IconButton>
       </div>
       <List>
-        {navBarConfigurations.links.map((link) => {
+        {siteConfigs.navBar.links.map((link) => {
           return (
             <ListItemButton
               key={link.href}

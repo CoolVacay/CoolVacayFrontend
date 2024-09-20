@@ -27,4 +27,14 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .custom-max-widths {
+    @apply max-w-[calc(100vw_-_32px)] sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px];
+  }
+
+  .container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
 }

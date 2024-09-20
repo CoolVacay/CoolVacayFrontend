@@ -25,7 +25,7 @@ export default function AboutUsClientPage() {
   return (
     <>
       <div className="flex justify-center">
-        <div className="max-w-[calc(100vw_-_32px)] items-center justify-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
+        <div className="custom-max-widths items-center justify-center">
           <div className="flex w-full items-center justify-center">
             <div className="absolute top-32 text-white md:top-44">
               <div className="flex justify-center">
@@ -87,7 +87,7 @@ export default function AboutUsClientPage() {
       </div>
       <div className="relative mt-16 sm:mt-[128px]">
         <div className="flex justify-center bg-[#FAFAFA] px-4 py-16 sm:px-0">
-          <div className="flex  flex-col items-center justify-center gap-12 sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] lg:flex-row xl:max-w-[1220px] xl:gap-24">
+          <div className="custom-max-widths flex flex-col items-center justify-center gap-12 xl:gap-24">
             <div className="flex flex-col gap-8">
               <h1 className="text-2xl font-bold leading-8 sm:text-[40px] sm:leading-10">
                 {aboutUsConfigs.header2}

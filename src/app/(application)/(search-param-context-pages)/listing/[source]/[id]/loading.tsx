@@ -8,7 +8,7 @@ import {
 export default function Loading() {
   return (
     <main className="flex flex-col items-center px-4 lg:px-0">
-      <div className="max-w-[calc(100vw_-_32px)] items-center justify-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
+      <div className="custom-max-widths items-center justify-center">
         <div className="flex max-w-[1220px] flex-col items-center">
           <div className="w-full">
             <BreadcrumbSkeleton />
