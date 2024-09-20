@@ -9,6 +9,10 @@ import {
   CustomChip,
 } from "~/app/ui/components/common";
 import { useSiteConfigurations } from "~/context/SiteConfigurationsContext";
+import { OpenFolderIcon } from "public/OpenFolderIcon";
+import { UserGroupIcon } from "public/UserGroupIcon";
+import { DownloadIcon } from "public/DownloadIcon";
+import { GlobeIcon } from "public/GlobeIcon";
 
 const partners = [
   "airbnb",
@@ -18,6 +22,24 @@ const partners = [
   "tripadvisor",
   "vrbo",
 ];
+
+const storyData = [{
+  name: 'Listed Properties',
+  icon: <OpenFolderIcon color="text-primary" />,
+  value: "1.5k"
+}, {
+  name: 'Happy Customers',
+  icon: <UserGroupIcon color="text-primary" />,
+  value: "2.5k"
+}, {
+  name: 'Star Reviews',
+  icon: <DownloadIcon color="text-primary" />,
+  value: "5 ★"
+}, {
+  name: 'Daily Transactions',
+  icon: <GlobeIcon color="text-primary" />,
+  value: "450"
+}]
 
 export default function AboutUsClientPage() {
   const siteConfigs = useSiteConfigurations();
@@ -87,7 +109,7 @@ export default function AboutUsClientPage() {
       </div>
       <div className="relative mt-16 sm:mt-[128px]">
         <div className="flex justify-center bg-[#FAFAFA] px-4 py-16 sm:px-0">
-          <div className="custom-max-widths flex flex-col items-center justify-center gap-12 xl:gap-24">
+          <div className="custom-max-widths flex items-center justify-center gap-12 xl:gap-24">
             <div className="flex flex-col gap-8">
               <h1 className="text-2xl font-bold leading-8 sm:text-[40px] sm:leading-10">
                 {aboutUsConfigs.header2}
@@ -96,26 +118,9 @@ export default function AboutUsClientPage() {
                 {aboutUsConfigs.paragraph1}
               </p>
               <div className="grid grid-cols-2 gap-4 sm:gap-8 md:gap-2 lg:gap-4">
-                <InfoCard
-                  iconSrc="/folder-open.svg"
-                  title={aboutUsConfigs.listedProperties}
-                  subtitle="Listed Properties"
-                />
-                <InfoCard
-                  iconSrc="/user-group.svg"
-                  title={aboutUsConfigs.happyCustomers}
-                  subtitle="Happy Costumers"
-                />
-                <InfoCard
-                  iconSrc="/download-icon.svg"
-                  title={aboutUsConfigs.starReviews}
-                  subtitle="Star Reviews"
-                />
-                <InfoCard
-                  iconSrc="/globe.svg"
-                  title={aboutUsConfigs.dailyTransactions}
-                  subtitle="Daily Transactions"
-                />
+                {storyData.map(data => (
+                  <InfoCard key={data.name} icon={data.icon} value={data.value} name={data.name} />
+                ))}
               </div>
             </div>
             <div className="flex h-[320px] w-full shrink-0 sm:h-[537px] md:w-[542px]">

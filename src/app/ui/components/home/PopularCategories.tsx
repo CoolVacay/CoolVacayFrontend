@@ -1,6 +1,23 @@
 import Link from "next/link";
 import { IconGenerator } from "../common";
 import { getCategories } from "~/app/(application)/actions";
+import { BeachIcon } from "public/BeachIcon";
+import { BeachfrontIcon } from "public/BeachfrontIcon";
+import { BoatDocksIcon } from "public/BoatDocksIcon";
+import { PoolIcon } from "public/PoolIcon";
+import { SkiingIcon } from "public/SkiingIcon";
+import { MountainIcon } from "public/MountainIcon"
+import { WaterfrontIcon } from "public/WaterfrontIcon";
+
+const IconMap = {
+  Beach: <BeachIcon color="text-primary"/>,
+  Beachfront: <BeachfrontIcon color="text-primary"/>,
+  "Boat Docks": <BoatDocksIcon color="text-primary"/>,
+  Pool: <PoolIcon color="text-primary"/>,
+  Skiing: <SkiingIcon color="text-primary"/>,
+  Mountain: <MountainIcon color="text-primary"/>,
+  Waterfront: <WaterfrontIcon color="text-primary"/>,
+}
 
 export async function PopularCategories() {
   const popularCategories = await getCategories();
@@ -19,11 +36,8 @@ export async function PopularCategories() {
           >
             <Link href={category.page} className="flex items-center">
               <span className="mr-2 flex lg:mr-4">
-                <IconGenerator
-                  src={category.iconUrl.startsWith('http:') ? category.iconUrl.replace("http:", "https:") : category.iconUrl}
-                  width={category.width}
-                  alt={category.alt}
-                />
+                {/* @ts-expect-error asf */}
+                {IconMap[category.name]}
               </span>
               {category.name}
             </Link>

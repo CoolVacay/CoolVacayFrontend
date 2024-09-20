@@ -14,21 +14,21 @@ export default function NavLinks() {
       name: "Personal Information",
       href: "/profile",
       icon: (isActive: boolean) => (
-        <PersonalActiveIcon color={isActive ? "#29ABE2" : "#212529"} />
+        <PersonalActiveIcon color={isActive ? "text-primary" : "#212529"} />
       ),
     },
     {
       name: "Reservation History",
       href: "/profile/reservations",
       icon: (isActive: boolean) => (
-        <BookingIcon color={isActive ? "#29ABE2" : "#212529"} />
+        <BookingIcon color={isActive ? "text-primary" : "#212529"} />
       ),
     },
     {
       name: "Security",
       href: "/profile/security",
       icon: (isActive: boolean) => (
-        <SecurityIcon color={isActive ? "#29ABE2" : "#212529"} />
+        <SecurityIcon color={isActive ? "text-primary" : "#212529"} />
       ),
     },
   ];

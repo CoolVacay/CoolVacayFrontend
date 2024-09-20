@@ -12,6 +12,7 @@ import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import InsightsIcon from "@mui/icons-material/Insights";
 import { type Metadata } from "next";
+import { CheckmarkIcon } from "public/CheckmarkIcon";
 
 export const metadata: Metadata = {
   title: "CoolVacay | Vacation Rental Management",
@@ -201,11 +202,7 @@ export default function Page() {
                     return (
                       <div key={index} className="flex gap-4">
                         <div className="h-min w-max rounded-full bg-primary/[0.10] sm:p-2">
-                          <IconGenerator
-                            src="/checkmark.svg"
-                            alt="Checkmark icon"
-                            className="h-3 w-3"
-                          />
+                          <CheckmarkIcon color={"text-primary"}/>
                         </div>
                         <p>{option}</p>
                       </div>

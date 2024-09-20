@@ -55,7 +55,7 @@ export type TMainCardProps = Pick<
 > & { isBlogCard?: boolean; subtitle: string };
 
 export type TSimilarCardProps = TMainCardProps &
-  Pick<IListingData, "bedrooms" | "bathrooms" | "numberOfGuests" | "price">;
+  Pick<IListingData, "bedrooms" | "propertyName" | "bathrooms" | "numberOfGuests" | "price">;
 
 export interface IPopularCategoriesData {
   id: number;

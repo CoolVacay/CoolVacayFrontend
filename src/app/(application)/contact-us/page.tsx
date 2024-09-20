@@ -1,8 +1,8 @@
 import InquireForm from "~/app/ui/components/listing/InquireForm";
 import Image from "next/image";
-import { IconGenerator } from "~/app/ui/components/common";
-import { type Metadata } from "next";
 import ContactDetailsCard from "./ContactDetailsCard";
+import { type Metadata } from "next";
+import { TelephoneIcon } from "public/TelephoneIcon";
 
 export const metadata: Metadata = {
   title: "CoolVacay | Contact Us",
@@ -46,14 +46,10 @@ export default function Page() {
               </div> */}
             </div>
           </div>
-          <div className="mt-10 flex w-full flex-col gap-5 px-4 sm:flex-row sm:px-0">
+          <div className="mt-10 w-full">
             <div className="flex items-center gap-5 rounded-[8px] bg-[#F7F7F7] p-6 sm:gap-10 sm:p-10">
               <div className="h-min rounded-full bg-primary/[0.10] p-5">
-                <IconGenerator
-                  src="/telephone.svg"
-                  alt="Call for assistance icon"
-                  width="36px"
-                />
+                <TelephoneIcon color={"text-primary"}/>
               </div>
               <div className="flex flex-col gap-3">
                 <p className="text-[18px] font-medium text-primary sm:text-[20px]">
@@ -65,7 +61,7 @@ export default function Page() {
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-5 rounded-[8px] bg-[#F7F7F7] p-6 sm:gap-10 sm:p-10">
+            {/* <div className="flex items-center gap-5 rounded-[8px] bg-[#F7F7F7] p-6 sm:gap-10 sm:p-10">
               <div className="h-min rounded-full bg-primary/[0.10] p-5">
                 <IconGenerator
                   src="/message_icon.svg"
@@ -82,7 +78,7 @@ export default function Page() {
                   provide technical help.
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
