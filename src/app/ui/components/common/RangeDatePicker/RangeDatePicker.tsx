@@ -94,7 +94,7 @@ const RangeDatePicker = ({
                   : mediumFont
                     ? "text-xl -top-2"
                     : "text-base -top-1"
-              } font-medium absolute`,
+              } font-medium absolute text-primary`,
             },
             InputProps: {
               className: `${

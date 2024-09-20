@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { IListingData } from "~/app/(application)/definitions";
-import { IconGenerator } from "../common";
+import { HomeIcon } from "public/HomeIcon";
 
 export default function Overview({ listing }: { listing: IListingData }) {
   const [readMore, setReadMore] = useState(false);
@@ -27,12 +27,7 @@ export default function Overview({ listing }: { listing: IListingData }) {
           return (
             (!viewMore ? index < 9 : index >= 0) && (
               <div key={index} className="flex items-center gap-2">
-                <IconGenerator
-                  key={index}
-                  src="/home-icon.svg"
-                  width="20px"
-                  alt="home icon"
-                />
+                <HomeIcon color="text-primary" />
                 <h1 className="text-sm font-medium">{amenity}</h1>
               </div>
             )

@@ -1,8 +1,7 @@
 import Link from "next/link";
-import dayjs from "dayjs";
-
-import { IconGenerator, MainCard } from "../common";
+import { CustomChip, IconGenerator, MainCard } from "../common";
 import { getBlogs } from "~/app/(application)/actions";
+import dayjs from "dayjs";
 
 export async function BlogSection() {
   const blogs = (await getBlogs())! ?? [];
@@ -10,9 +9,7 @@ export async function BlogSection() {
   return (
     <section className="flex w-full flex-col">
       <div className="flex flex-col items-center">
-        <div className="flex h-[33px] w-[62px] shrink-0 items-center justify-center rounded-[64px] bg-[#29ABE2]/[.10] p-5 text-sm text-primary">
-          Blog
-        </div>
+        <CustomChip label="Blog" width={90}/>
         <h2 className="py-4 text-center text-[56px] leading-[67px]">
           Latest Insights & Travel Tips from Our Blog
         </h2>

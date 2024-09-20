@@ -2,7 +2,6 @@
 
 import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { logOut } from "~/app/(authentication)/actions";
 import type { Session } from "next-auth";

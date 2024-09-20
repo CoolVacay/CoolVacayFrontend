@@ -1,13 +1,13 @@
 import { IconGenerator } from "../IconGenerator";
 
 export default function InfoCard({
-  iconSrc,
-  title,
-  subtitle,
+  icon,
+  name,
+  value,
 }: {
-  iconSrc: string;
-  title: string;
-  subtitle: string;
+  icon: React.ReactElement;
+  name: string;
+  value: string;
 }) {
   return (
     <div
@@ -17,14 +17,14 @@ export default function InfoCard({
       }}
     >
       <div className="h-min rounded-[6px] bg-primary/[0.10] p-2 sm:p-3">
-        <IconGenerator src={iconSrc} alt="About us folder icon" width="24px" />
+        {icon}
       </div>
       <div className="flex flex-col">
         <p className="text-center text-[24px] font-semibold leading-8 sm:text-[32px] sm:leading-10 xl:text-left">
-          {title}
+          {value}
         </p>
         <p className="text-center text-xs text-[#676D73] sm:text-sm">
-          {subtitle}
+          {name}
         </p>
       </div>
     </div>

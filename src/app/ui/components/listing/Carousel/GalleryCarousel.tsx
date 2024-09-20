@@ -64,9 +64,9 @@ const GalleryCarousel = ({ data, type }: CarouselType) => {
     >
       <div className="no-scrollbar flex h-full flex-col overflow-hidden sm:justify-between lg:items-center">
         <div className="flex shrink-0 grow-0 items-center">
-          <div className="grid grid-cols-24">
+          <div className="flex flex-nowrap items-center">
             <div
-              className={`grid ${type === "image" ? "hidden md:col-span-1 md:grid lg:col-span-2" : "hidden sm:col-span-1 sm:grid"}`}
+              className={`${type === "image" ? "hidden md:col-span-1 md:grid lg:col-span-2" : "hidden sm:block"}`}
             >
               <button aria-label="back arrow button" onClick={scrollPrev}>
                 {type === "image" ? (
@@ -77,7 +77,7 @@ const GalleryCarousel = ({ data, type }: CarouselType) => {
               </button>
             </div>
             <div
-              className={`grid ${type === "image" ? "col-span-24 md:col-span-22 lg:col-span-20" : "col-span-24 sm:col-span-22 sm:ml-1"}`}
+              className={`grid ${type === "image" ? "col-span-24 md:col-span-22 lg:col-span-20" : "col-span-22 sm:ml-1"}`}
             >
               <div className="overflow-hidden" ref={emblaMainRef}>
                 <div className="flex max-h-[600px] w-full shrink-0 touch-pan-y touch-pinch-zoom gap-5">
@@ -110,6 +110,7 @@ const GalleryCarousel = ({ data, type }: CarouselType) => {
                           >
                             <SimilarCard
                               key={index}
+                              propertyName={listing.propertyName}
                               name={listing.name}
                               subtitle={`${listing.city}, ${listing.state}`}
                               imageUrl={listing.imageUrl}
@@ -126,9 +127,9 @@ const GalleryCarousel = ({ data, type }: CarouselType) => {
               </div>
             </div>
             <div
-              className={`grid content-center justify-items-end ${type === "image" ? "hidden md:col-span-1 md:grid lg:col-span-2" : "hidden sm:col-span-1 sm:grid"}`}
+              className={`${type === "image" ? "hidden md:col-span-1 md:block lg:col-span-2" : "hidden sm:block"}`}
             >
-              <button aria-label="back arrow button" onClick={scrollNext}>
+              <button aria-label="front arrow button" onClick={scrollNext}>
                 {type === "image" ? (
                   <KeyboardArrowRightIcon className="h-[50px] w-full hover:text-primary lg:h-[70px] lg:w-[70px]" />
                 ) : (

@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
-import { IconGenerator } from "../IconGenerator";
 import type { TMainCardProps } from "~/app/(application)/definitions";
+import { CabinIcon } from "public/CabinIcon";
+import { SquareFootIcon } from "public/SquareFootIcon";
 
 export default function MainCard({
   isBlogCard,
@@ -41,20 +43,12 @@ export default function MainCard({
         {!isBlogCard && (
           <div className="flex gap-4 pb-4">
             <div className="flex gap-2">
-              <IconGenerator
-                src="/cabin_icon.svg"
-                alt="Cabin icon"
-                width="16px"
-              />
+              <CabinIcon color="text-primary"/>
               <p className="text-sm">{propertyType ?? "House"}</p>
             </div>
             {squareFeets ? (
               <div className="flex gap-2">
-                <IconGenerator
-                  src="/square_foot_icon.svg"
-                  alt="Square foot"
-                  width="16px"
-                />
+                <SquareFootIcon color="text-primary" />
                 <p className="text-sm">{`${Math.floor(squareFeets ?? 0)} sqft`}</p>
               </div>
             ) : null}

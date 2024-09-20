@@ -3,6 +3,7 @@ import type { TSimilarCardProps } from "~/app/(application)/definitions";
 
 export default function SimilarCard({
   name,
+  propertyName,
   subtitle,
   imageUrl,
   numberOfGuests,
@@ -32,7 +33,8 @@ export default function SimilarCard({
       </div>
       <div className={`flex grow flex-col justify-between gap-3 pl-2`}>
         <div className="pt-2">
-          <div className="mb-1 line-clamp-2 text-base font-medium	">{name}</div>
+          <div className="mb-1">{propertyName}</div>
+          <div className="mb-1 text-sm">{name}</div>
           <p className="text-sm text-[#676D73]">{subtitle}</p>
         </div>
         <h6 className="text-xs text-[#676D73]">
