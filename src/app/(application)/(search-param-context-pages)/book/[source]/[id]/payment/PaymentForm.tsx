@@ -109,6 +109,7 @@ export default function PaymentForm({
           cardDetails,
         } as IBookingPaymentArgs);
 
+        console.log(response)
         const errorResponse = typeof response === "string";
         toastNotifier(response);
         setErrorMessage(errorResponse ? response : undefined);
