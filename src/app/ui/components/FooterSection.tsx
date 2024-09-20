@@ -23,9 +23,9 @@ function FooterSection() {
         <div className="flex flex-col gap-7">
           <div className="-mt-6 py-3">
             <IconGenerator
-              src={siteConfigs.config.logo.url}
-              width={siteConfigs.config.logo.width}
-              alt={siteConfigs.config.logo.alt}
+              src={siteConfigs.logo.color}
+              width={siteConfigs.logo.width}
+              alt={siteConfigs.logo.alt}
             />
           </div>
           <div className="flex gap-10 max-[430px]:flex-col sm:w-[430px] sm:flex-row">

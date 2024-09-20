@@ -8,8 +8,8 @@ import PricingDetailsCard from "~/app/ui/components/listing/PricingDetailsCard/P
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'CoolVacay | Booking Process',
-  description: 'Booking Process Page',
+  title: "CoolVacay | Booking Process",
+  description: "Booking Process Page",
 };
 
 //TODO: add a loading page
@@ -26,7 +26,7 @@ export default async function Layout({
   return (
     <main className="flex flex-col px-4 sm:px-6 lg:px-8">
       <div className="flex justify-center">
-        <div className="flex w-full max-w-[calc(100vw_-_32px)] grow flex-col items-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
+        <div className="custom-max-widths flex w-full grow flex-col items-center">
           <div className="mb-12 flex w-full flex-col gap-3">
             <Breadcrumbs
               breadcrumbs={[

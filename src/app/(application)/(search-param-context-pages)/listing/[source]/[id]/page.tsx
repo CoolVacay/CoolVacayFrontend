@@ -4,7 +4,11 @@ import { capitalize } from "~/app/utils/helpers";
 import Gallery from "~/app/ui/components/listing/Gallery";
 import Overview from "~/app/ui/components/listing/OverviewSection";
 import BookNow from "~/app/ui/components/listing/BookNow/BookNowCard.server";
-import { Breadcrumbs, SimilarCardsSkeleton, MapContainer } from "~/app/ui/components/common";
+import {
+  Breadcrumbs,
+  SimilarCardsSkeleton,
+  MapContainer,
+} from "~/app/ui/components/common";
 import SimilarCards from "~/app/ui/components/listing/SimilarCards/SimilarCards";
 import PolicyAndRules from "~/app/ui/components/listing/PolicyAndRules";
 import { Divider } from "@mui/material";
@@ -12,8 +16,8 @@ import { Suspense } from "react";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'CoolVacay | Listings by ID page',
-  description: 'View details about our listings here',
+  title: "CoolVacay | Listings by ID page",
+  description: "View details about our listings here",
 };
 
 export default async function Page({
@@ -37,7 +41,7 @@ export default async function Page({
 
   return (
     <main className="flex flex-col items-center px-4 lg:px-0">
-      <div className="max-w-[calc(100vw_-_32px)] items-center justify-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
+      <div className="custom-max-widths items-center justify-center">
         <Breadcrumbs
           navigateHome={navigateHome}
           breadcrumbs={[
@@ -61,8 +65,10 @@ export default async function Page({
             {listing.name}, {listing.city}, {listing.state}
           </h1>
           <div className="mt-4 flex max-h-[50px] w-full shrink-0 items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2 md:mt-0 md:w-[240px] md:py-2">
-             Call Now:
-            <span className="ml-1 font-medium"><a href="tel:302-581-9342">(302) 581-9342</a></span>
+            Call Now:
+            <span className="ml-1 font-medium">
+              <a href="tel:302-581-9342">(302) 581-9342</a>
+            </span>
           </div>
         </div>
         <Gallery listing={listing} />
@@ -95,9 +101,9 @@ export default async function Page({
           View similar homes in this area
         </h5>
         <div className="no-scrollbar mb-10 flex snap-x gap-5 overflow-auto will-change-scroll">
-        <Suspense fallback={<SimilarCardsSkeleton />}>
+          <Suspense fallback={<SimilarCardsSkeleton />}>
             <SimilarCards pageParams={pageParams} />
-        </Suspense>
+          </Suspense>
         </div>
       </div>
     </main>

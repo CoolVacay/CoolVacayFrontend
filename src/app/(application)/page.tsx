@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { type Metadata } from 'next';
+import { type Metadata } from "next";
 
 import {
   AllListingsSkeleton,
@@ -19,8 +19,9 @@ import {
 import { Newsletter, IconGenerator } from "../ui/components/common";
 
 export const metadata: Metadata = {
-  title: 'CoolVacay | Find Your Dream Vacation Rentals & Travel Deals',
-  description: 'Discover unbeatable vacation rentals and deals with CoolVacay. Book easily with our engine, from luxury stays to budget-friendly options.',
+  title: "CoolVacay | Find Your Dream Vacation Rentals & Travel Deals",
+  description:
+    "Discover unbeatable vacation rentals and deals with CoolVacay. Book easily with our engine, from luxury stays to budget-friendly options.",
 };
 
 export default async function HomePage() {
@@ -44,7 +45,7 @@ export default async function HomePage() {
         </div>
       </div>
       <div className="flex justify-center p-4">
-        <div className="max-w-[calc(100vw_-_32px)] items-center justify-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
+        <div className="custom-max-widths items-center justify-center">
           <div className="flex w-full items-center justify-center">
             <HeroSection />
           </div>
@@ -58,7 +59,7 @@ export default async function HomePage() {
               <FeaturedListingsSection />
             </Suspense>
           </div>
-            <DiscoverSection />
+          <DiscoverSection />
           <section className="w-full">
             <div className="flex items-center justify-between">
               <h2 className="text-[28px]">All Listings</h2>
