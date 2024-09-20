@@ -1,4 +1,7 @@
 const config = {
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
