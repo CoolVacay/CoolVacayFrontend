@@ -34,7 +34,7 @@ export default {
           primary800: "#052C65",
           primary900: "#06336C",
           grey100: "#EAEAEF",
-          grey200: "F7F7F7",
+          grey200: "#F7F7F7",
           grey300: "#858C93",
           grey400: "#676D73",
         },
