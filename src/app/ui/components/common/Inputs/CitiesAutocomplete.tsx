@@ -102,7 +102,7 @@ export default function CitiesAutocomplete({
               sx: {
                 padding:
                   isSmallSize && !whiteVariant
-                    ? "0px 50px"
+                    ? "0px 25px"
                     : isSmallSize && whiteVariant
                       ? "0px"
                       : "14px 65px 14px 0px !important",
@@ -110,7 +110,7 @@ export default function CitiesAutocomplete({
               },
               className: whiteVariant
                 ? `${isSmallSize ? "text-xs" : "sm:text-xl text-base"}`
-                : `pl-3 bg-[#EAF7FD] ${isSmallSize ? "text-xs" : "text-xl"} text-[#212529] h-9 text-sm rounded-full border border-[#EAEAEF]`,
+                : `pl-3 bg-[#EAF7FD] ${isSmallSize ? "text-sm" : "text-xl"} text-[#212529] h-9 text-sm rounded-full border border-[#EAEAEF]`,
               startAdornment: (
                 <LocationPin color="text-priority"/>
               ),

@@ -3,9 +3,11 @@
 import Image from "next/image";
 import NewsletterForm from "./NewsletterForm";
 
-export default function Newsletter() {
+export default function Newsletter({ className }: { className?: string }) {
   return (
-    <div className="relative flex w-full shrink-0 flex-col rounded-xl sm:flex-row">
+    <div
+      className={`relative flex w-full shrink-0 flex-col rounded-xl sm:flex-row ${className}`}
+    >
       <div className="flex h-[250px] w-full shrink-0">
         <Image
           alt="Coolvacay newsletter image"

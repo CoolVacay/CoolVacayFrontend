@@ -1,7 +1,6 @@
 import { capitalizeAllWords } from "~/app/utils/helpers";
 import { ListingCard } from "../common";
 import Pagination from "./Pagination";
-import { type IAllListings } from "~/app/(application)/definitions";
 import { getFilteredListings } from "~/app/(application)/actions";
 
 export async function ListingSection({ query }: { query: URLSearchParams }) {
@@ -14,7 +13,7 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
   return listings?.totalItems > 0 ? (
     <>
       <div className="flex flex-col gap-2 xl:flex-row xl:place-items-baseline xl:gap-8">
-        <h1 className="text-3xl">
+        <h1 className="text-2xl font-semibold md:text-3xl md:font-normal">
           {`${title ? `${title} Available Properties` : "Available Properties"}`}{" "}
         </h1>
         <p className="text-sm text-primary-grey300">

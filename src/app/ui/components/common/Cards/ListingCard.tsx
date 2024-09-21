@@ -30,21 +30,18 @@ export default function ListingCard({
   searchParams.delete("pageNum");
   return (
     <div
-      className={`flex h-[410px] w-[350px] flex-col gap-4 overflow-hidden rounded-md p-1 sm:w-[280px] md:w-[350px]`}
+      className={`flex h-[410px] w-full flex-col gap-4 overflow-hidden rounded-md p-1 sm:w-[280px] md:w-[350px]`}
     >
       <div className="relative">
-        <Link
-          href={`listing/${source}/${id}?${searchParams.toString()}`}
-          className="w-min"
-        >
+        <Link href={`listing/${source}/${id}?${searchParams.toString()}`}>
           <Image
             src={imageUrl ?? "/listing_card.png"}
-            width={350}
-            height={0}
+            width={348}
+            height={248}
+            className="h-[210px] w-full"
             alt="CoolVacay listing image"
             style={{
-              height: 210,
-              objectFit: "fill",
+              objectFit: "cover",
               borderRadius: 6,
             }}
           />

@@ -8,7 +8,7 @@ export async function FeaturedListingsSection() {
   const featuredListings = (await getFeaturedListings())!;
 
   return (
-    <section className="no-scrollbar flex items-center gap-5 overflow-auto pb-10 will-change-scroll sm:flex-row sm:flex-wrap sm:justify-between">
+    <section className="no-scrollbar mb-8 flex items-center gap-5 overflow-auto will-change-scroll sm:flex-row sm:flex-wrap sm:justify-between">
       {featuredListings?.length > 0 ? (
         featuredListings.map((listing) => {
           return (
