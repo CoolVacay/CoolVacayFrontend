@@ -69,8 +69,8 @@ export function FiltersComponent({
   );
 
   return (
-    <div className="mb-5 grid grid-cols-4 gap-4 xl:grid-cols-4">
-      <div className="col-span-3 sm:col-span-2 xl:col-span-1">
+    <div className="mb-5 grid grid-cols-3 gap-4 sm:grid-cols-4">
+      <div className="col-span-2 sm:col-span-2 min-[1100px]:col-span-1">
         <CitiesAutocomplete
           locationsList={locationsList}
           isSmallSize={true}
@@ -85,14 +85,14 @@ export function FiltersComponent({
           }}
         />
       </div>
-      <div className="col-span-1 xl:hidden">
+      <div className="col-span-1 md:hidden">
         <GridMapToggle
           isMapMode={isMapMode}
           setIsMapMode={setIsMapMode}
           updateSearchParams={updateSearchParams}
         />
       </div>
-      <div className="col-span-2 sm:col-span-2 xl:col-span-1">
+      <div className="col-span-1 md:col-span-2 min-[1100px]:col-span-1">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateRangePicker
             slots={{
@@ -123,7 +123,7 @@ export function FiltersComponent({
                     fontWeight: 400,
                     width: "100%",
                     display: "flex",
-                    p: "15px 10px 15px",
+                    p: "12px 10px 15px",
                     backgroundColor: "#EAF7FD",
                     height: "36px",
                     borderRadius: "300px",
@@ -166,7 +166,7 @@ export function FiltersComponent({
           />
         </LocalizationProvider>
       </div>
-      <div className="col-span-1 sm:col-span-1 xl:col-span-1">
+      <div className="col-span-1 sm:col-span-2 min-[1100px]:col-span-1">
         <SimpleSelectInput
           value={
             searchParamsValues.numberOfGuests !== ""
@@ -179,12 +179,13 @@ export function FiltersComponent({
           listOptions={guests}
         />
       </div>
-      <div className="col-span-1 sm:col-span-2 xl:col-span-1">
+      <div className="col-span-1 sm:col-span-2 min-[1100px]:col-span-1">
         <CategoriesAutocomplete
           categories={categories}
           isSmallSize={true}
           iconUrl={selectedCategory?.iconUrl ?? "/pool.svg"}
           variant="blue"
+          className={`w-full`}
           inputValue={category}
           value={selectedCategory}
           setValue={setCategory}

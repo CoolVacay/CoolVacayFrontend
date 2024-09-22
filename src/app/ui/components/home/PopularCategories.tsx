@@ -6,18 +6,18 @@ import { BeachfrontIcon } from "public/BeachfrontIcon";
 import { BoatDocksIcon } from "public/BoatDocksIcon";
 import { PoolIcon } from "public/PoolIcon";
 import { SkiingIcon } from "public/SkiingIcon";
-import { MountainIcon } from "public/MountainIcon"
+import { MountainIcon } from "public/MountainIcon";
 import { WaterfrontIcon } from "public/WaterfrontIcon";
 
 const IconMap = {
-  Beach: <BeachIcon color="text-primary"/>,
-  Beachfront: <BeachfrontIcon color="text-primary"/>,
-  "Boat Docks": <BoatDocksIcon color="text-primary"/>,
-  Pool: <PoolIcon color="text-primary"/>,
-  Skiing: <SkiingIcon color="text-primary"/>,
-  Mountain: <MountainIcon color="text-primary"/>,
-  Waterfront: <WaterfrontIcon color="text-primary"/>,
-}
+  Beach: <BeachIcon color="text-primary" />,
+  Beachfront: <BeachfrontIcon color="text-primary" />,
+  "Boat Docks": <BoatDocksIcon color="text-primary" />,
+  Pool: <PoolIcon color="text-primary" />,
+  Skiing: <SkiingIcon color="text-primary" />,
+  Mountain: <MountainIcon color="text-primary" />,
+  Waterfront: <WaterfrontIcon color="text-primary" />,
+};
 
 export async function PopularCategories() {
   const popularCategories = await getCategories();
@@ -29,7 +29,10 @@ export async function PopularCategories() {
   return (
     <div className="no-scrollbar flex justify-between gap-5 overflow-auto will-change-scroll md:justify-between md:gap-0">
       {popularCategories.map((category) => (
-        <div key={category.name} className="flex flex-col items-center">
+        <div
+          key={category.name}
+          className="flex shrink-0 flex-col items-center"
+        >
           {/* Large screen view */}
           <button
             className={`hidden rounded-full bg-[#F7F7F7] p-2 text-sm lg:flex lg:p-3 lg:text-sm xl:p-4 xl:text-base`}
@@ -44,21 +47,27 @@ export async function PopularCategories() {
           </button>
 
           {/* Small screen view */}
-          <div className="mt-6 flex snap-start flex-col items-center gap-x-4 sm:mt-0 lg:hidden">
+          <div className="flex snap-start flex-col items-center gap-x-4 sm:mt-0 lg:hidden">
             <Link
               href={category.page}
-              className="flex scroll-mr-2 flex-col items-center"
+              className="flex shrink-0 scroll-mr-2 flex-col items-center"
             >
               <button className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F7F7F7] p-3">
                 <span className="flex">
                   <IconGenerator
-                    src={category.iconUrl.startsWith('http:') ? category.iconUrl.replace("http:", "https:") : category.iconUrl}
+                    src={
+                      category.iconUrl.startsWith("http:")
+                        ? category.iconUrl.replace("http:", "https:")
+                        : category.iconUrl
+                    }
                     width={category.width}
                     alt={category.alt}
                   />
                 </span>
               </button>
-              <p className="mt-2 text-center text-xs">{category.name}</p>
+              <p className="mt-2 flex shrink-0 text-center text-sm">
+                {category.name}
+              </p>
             </Link>
           </div>
         </div>

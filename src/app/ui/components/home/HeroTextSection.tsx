@@ -13,7 +13,7 @@ export default function HeroTextSection() {
         </div>
       ) : null}
       {heroTextSiteConfigs?.header1 ? (
-        <h1 className="text-center text-[36px] leading-[43px] sm:text-[56px] sm:leading-[60px] md:text-left lg:text-[80px] lg:leading-[80px]">
+        <h1 className="text-center text-[42px] leading-[42px] sm:text-[56px] sm:leading-[60px] md:text-left lg:text-[80px] lg:leading-[80px]">
           {heroTextSiteConfigs.header1}
         </h1>
       ) : null}

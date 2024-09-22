@@ -90,7 +90,7 @@ const RangeDatePicker = ({
             InputLabelProps: {
               className: `${
                 bigFont
-                  ? "sm:text-2xl text-xl sm:-top-3 -top-2"
+                  ? "sm:text-2xl text-xl sm:-top-3 -top-3"
                   : mediumFont
                     ? "text-xl -top-2"
                     : "text-base -top-1"

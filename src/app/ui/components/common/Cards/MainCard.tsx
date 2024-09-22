@@ -25,7 +25,7 @@ export default function MainCard({
           width={278}
           height={210}
           alt="CoolVacay listing image"
-          className="h-auto w-auto"
+          className="h-[210px] w-auto"
           style={{
             width: isBlogCard ? "278px" : "auto",
             objectFit: "cover",

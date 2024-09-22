@@ -11,8 +11,9 @@ export async function AllListingsSection({
   property?: string;
 }) {
   const listings = (await getFilteredListings(`pageSize=8&pageNum=${page}`))!;
+
   return listings?.items.length > 0 ? (
-    <div className="no-scrollbar my-10 flex items-center gap-5 overflow-auto will-change-scroll sm:flex-row sm:flex-wrap sm:justify-between">
+    <div className="no-scrollbar flex items-center gap-5 overflow-auto will-change-scroll sm:flex-row sm:flex-wrap sm:justify-between">
       {listings?.items.map((listing) => {
         return (
           <Link

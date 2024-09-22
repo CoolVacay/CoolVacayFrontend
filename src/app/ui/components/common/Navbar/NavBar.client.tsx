@@ -30,6 +30,7 @@ export default function NavBar({
 }) {
   const [scrolled, setScrolled] = useState(false);
   const siteConfigs = useSiteConfigurations();
+
   useEffect(() => {
     //server session and client session are not in sync
     //client session must follow server session,if client session is still present
@@ -72,18 +73,18 @@ export default function NavBar({
 
   return (
     <nav
-      className={`sticky top-0 z-50 flex h-12 justify-center px-4 py-6 sm:h-20 sm:py-6 ${scrolled ? `${isLogoWhite ? "bg-black bg-opacity-60 transition-all duration-700" : "bg-white"}` : "bg-opacity-0 transition-all duration-700"}`}
+      className={`sticky top-0 z-50 flex h-12 ${isNavBarFullWidth ? "px-4 xl:px-20" : "justify-center px-4"} py-6 sm:h-20 sm:py-6 ${scrolled ? `${isLogoWhite ? "bg-black bg-opacity-60 transition-all duration-700" : "bg-white"}` : "bg-opacity-0 transition-all duration-700"}`}
     >
       <div
-        className={`container ${isLogoWhite || !isNavBarFullWidth ? "custom-max-widths" : "sm:pl-16"} scroll-px-4 justify-between gap-10`}
+        className={`flex w-full ${isLogoWhite || !isNavBarFullWidth ? "custom-max-widths gap-10" : "justify-between"} scroll-px-4 justify-between `}
       >
         <div className="container justify-between sm:w-auto md:flex-grow">
           <Logo isLogoWhite={isLogoWhite} />
-          <button className="sm:hidden" onClick={toggleMenu}>
+          <button className="block sm:hidden" onClick={toggleMenu}>
             <IconGenerator
               src={`/menu_icon_${isLogoWhite ? "white" : "black"}.svg`}
               alt="Menu"
-              width={isLogoWhite ? "28px" : "18px"}
+              width={isLogoWhite ? "32px" : "18px"}
             />
           </button>
         </div>

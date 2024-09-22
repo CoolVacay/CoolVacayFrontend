@@ -1,4 +1,3 @@
-
 export function LocationPin({ color }: { color: string }) {
     return (
         <div className={color}>

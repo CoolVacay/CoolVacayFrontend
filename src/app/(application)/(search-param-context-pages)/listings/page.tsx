@@ -22,13 +22,14 @@ export default function Page({
   const query = new URLSearchParams(searchParams);
 
   return (
-    <main className="static w-full p-4 xl:py-0 xl:pl-20 xl:pr-0">
-      <div className="relative w-full gap-4 xl:flex">
-        <div className={`flex w-full shrink-0 flex-col pb-6 xl:max-w-[1100px]`}>
+    <main className="static w-full p-4 sm:py-0 sm:pr-0 xl:pl-20">
+      <div className="relative w-full gap-4 md:flex">
+        <div
+          className={`flex w-full shrink-0 flex-col pb-6 min-[780px]:max-w-[360px] min-[1100px]:max-w-[720px]  min-[1500px]:max-w-[1100px]`}
+        >
           <Suspense fallback={<FiltersSkeleton />} key={query.toString()}>
             <Filters />
           </Suspense>
-
           <div
             className={`${searchParams.isMapMode == "true" ? "hidden" : ""} flex flex-col justify-between gap-4`}
           >
@@ -49,7 +50,7 @@ export default function Page({
           </div>
         </div>
         <div
-          className={`${searchParams.isMapMode == "false" || !searchParams.isMapMode ? "hidden xl:block" : ""} relative right-0 top-0 h-[100vh] xl:sticky xl:h-full xl:w-full`}
+          className={`${searchParams.isMapMode == "false" || !searchParams.isMapMode ? "hidden md:block" : ""} relative right-0 top-0 h-[100vh] md:sticky md:h-full md:w-full`}
         >
           <Suspense fallback={<MapSkeleton />} key={query.toString()}>
             <MapContainer query={query} listing={[]} />

@@ -1,9 +1,10 @@
 import { Divider } from "@mui/material";
+import { Fragment } from "react";
 
 export function CardSkeleton() {
   return (
     <div
-      className={`h-[340px] w-[290px] grow-0 animate-pulse overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}
+      className={`flex h-full grow-0 animate-pulse flex-col overflow-hidden rounded-xl bg-gray-100 p-1 shadow-sm max-[1280px]:w-[260px] max-[1150px]:w-[240px] max-[1070px]:w-[280px] xl:w-[280px]`}
     >
       <div className="flex h-[210px] items-center justify-center truncate rounded-xl bg-white px-16 py-8" />
       <div className="flex flex-col">
@@ -20,10 +21,10 @@ export function CardSkeleton() {
 export function FilteredListingSkeleton() {
   return (
     <div
-      className={`flex h-[400px] w-[340px] flex-col gap-4 overflow-hidden rounded-xl sm:w-[280px] md:w-[350px]`}
+      className={`flex h-[410px] w-full flex-col gap-4 overflow-hidden rounded-md p-1 sm:w-[280px] md:w-[350px]`}
     >
       <div
-        className={`h-[330px] w-[340px] rounded-lg  bg-gray-100 p-2 shadow-sm sm:w-[270px] md:w-[350px]`}
+        className={`h-[330px] w-full rounded-lg  bg-gray-100 p-2 shadow-sm sm:w-[270px] md:w-[350px]`}
       >
         <div className="flex h-[210px] w-full items-center justify-center rounded-xl bg-white py-8" />
         <div className="flex flex-col">
@@ -41,7 +42,7 @@ export function FilteredListingSkeleton() {
 
 export function FeaturedListingsSkeleton() {
   return (
-    <section className="block pb-10">
+    <section className="no-scrollbar mb-8 flex items-center gap-5 overflow-auto will-change-scroll sm:flex-row sm:flex-wrap sm:justify-between">
       <div className="flex justify-evenly gap-4">
         {Array.from({ length: 4 }, (_, i) => i + 1).map((skeleton) => {
           return <CardSkeleton key={skeleton} />;
@@ -53,9 +54,13 @@ export function FeaturedListingsSkeleton() {
 
 export function AllListingsSkeleton() {
   return (
-    <div className="desktop:grid-cols-4 grid grid-cols-3 gap-5 py-10">
+    <div className="no-scrollbar flex grow items-center gap-5 overflow-auto will-change-scroll sm:flex-row sm:flex-wrap sm:justify-between">
       {Array.from({ length: 8 }, (_, i) => i + 1).map((skeleton) => {
-        return <CardSkeleton key={skeleton} />;
+        return (
+          <div key={skeleton} className="h-[340px]">
+            <CardSkeleton />
+          </div>
+        );
       })}
     </div>
   );
@@ -84,36 +89,40 @@ export function MapSkeleton() {
 
 export function FiltersSkeleton() {
   return (
-    <div className="mb-5 grid animate-pulse grid-cols-4 gap-4 xl:grid-cols-4">
-      <div className="col-span-3 sm:col-span-2 xl:col-span-1">
+    <div className=" mb-5 grid animate-pulse grid-cols-3 gap-4 sm:grid-cols-4">
+      <div className="col-span-2 sm:col-span-2 min-[1100px]:col-span-1">
         <div className="flex h-8 w-60 rounded-full bg-gray-100" />
       </div>
-      <div className="col-span-1 xl:hidden">
-        <div className="flex overflow-hidden rounded-3xl border-2 bg-white shadow-xl">
+      <div className="col-span-1 md:hidden">
+        <div className="border-1 flex rounded-3xl bg-white shadow-xl">
           <div className={`flex-1 rounded-3xl bg-gray-100 p-2 pl-3`} />
         </div>
       </div>
-      <div className="col-span-2 sm:col-span-2 xl:col-span-1">
-        <div className="flex h-8 w-60 rounded-full bg-gray-100" />
+      <div className="col-span-1 md:col-span-2 min-[1100px]:col-span-1">
+        <div className="flex h-8 w-full rounded-full bg-gray-100" />
       </div>
-      <div className="col-span-1 sm:col-span-1 xl:col-span-1">
-        <div className="flex h-8 w-60 rounded-full bg-gray-100" />
+      <div className="col-span-1 sm:col-span-2 min-[1100px]:col-span-1">
+        <div className="flex h-8 w-full rounded-full bg-gray-100" />
       </div>
-      <div className="col-span-1 sm:col-span-2 xl:col-span-1">
-        <div className="flex h-8 w-60 rounded-full bg-gray-100" />
+      <div className="col-span-1 sm:col-span-2 min-[1100px]:col-span-1">
+        <div className="flex h-8 w-full rounded-full bg-gray-100" />
       </div>
     </div>
   );
 }
 export function PopularCategoriesSkeleton() {
   return (
-    <div className="flex flex-wrap md:justify-between">
-      {Array.from({ length: 7 }, (_, i) => i + 1).map((skeleton, index) => {
+    <div className="no-scrollbar flex animate-pulse justify-between gap-5 overflow-auto will-change-scroll md:justify-between md:gap-0">
+      {Array.from({ length: 7 }, (_, i) => i + 1).map((skeleton) => {
         return (
-          <div
-            key={skeleton}
-            className={`${index > 0 && "ml-10"} flex w-32 shrink-0 grow-0 animate-pulse rounded-full bg-gray-100 p-6 shadow-sm`}
-          />
+          <Fragment key={skeleton}>
+            <div
+              className={`hidden rounded-full lg:flex lg:h-12 lg:w-32 lg:bg-gray-100`}
+            />
+            <div className="mb-7 flex snap-start flex-col items-center gap-x-4 lg:hidden">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 p-3" />
+            </div>
+          </Fragment>
         );
       })}
     </div>
