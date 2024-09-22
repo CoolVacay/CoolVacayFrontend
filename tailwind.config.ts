@@ -58,7 +58,27 @@ export default {
           grey200: "#F5F5E9",           // Light beige-grey
           grey300: "#A69F94",           // Muted brown-grey
           grey400: "#7D7567",           // Darker brownish-grey
-          
+        },
+      }, 
+      FloridaRent: {
+        primary: {
+          DEFAULT: "#FF7F50",           // Vibrant coral
+          background: "#FFF5E1",        // Soft sandy beige
+          border: "#FFA07A",            // Light coral-peach
+          text: "#FFEFD5",              // Light peach for text
+          primary100: "#FFF9E6",        // Very light cream
+          primary200: "#FFEBD2",        // Pale peach
+          primary300: "#FFD1B3",        // Soft sandy peach
+          primary400: "#FFB08F",        // Warm sunlit peach
+          primary500: "#FF7F50",        // Bright coral (similar to DEFAULT)
+          primary600: "#FF6347",        // Deeper tropical coral-red
+          primary700: "#E05A42",        // Rich sunset coral
+          primary800: "#C14E3B",        // Darker earthy coral
+          primary900: "#A04133",        // Deep sunset orange
+          grey100: "#FFF5DC",           // Very light sandy cream
+          grey200: "#FFE4B5",           // Light golden sand
+          grey300: "#FFD39B",           // Warm sandy tan
+          grey400: "#E3BA85",           // Muted beach tan
         },
       }
     }),
