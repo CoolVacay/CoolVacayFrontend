@@ -23,6 +23,7 @@ import type {
   ICloseDatesListings,
   IPopularCategoriesData,
   IReadOnlySiteConfigurationProperties,
+  IProperty,
 } from "./definitions";
 
 //////////////GET/////////////
@@ -35,6 +36,9 @@ export const getSiteConfigurations = () =>
 
 export const getCountries = () =>
   fetcher<ICountries[]>(`countries`, "Failed to fetch countries");
+
+export const getProperties = () =>
+  fetcher<IProperty[]>(`listings/properties`, "Failed to fetch properties");
 
 export async function isValidToken() {
   const session = await auth();

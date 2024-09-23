@@ -44,7 +44,7 @@ export default async function Layout({
             <div className="flex flex-col-reverse gap-5 lg:flex-row">
               <div className="flex w-full flex-col gap-5">
                 <div className="md:hidden lg:flex lg:flex-col lg:gap-4">
-                  <h1 className="text-xl font-bold sm:text-2xl">
+                  <h1 className="text-2xl font-bold">
                     Reservation Information
                   </h1>
                   <Suspense fallback={<BookedListingCardSkeleton />}>
