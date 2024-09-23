@@ -123,7 +123,7 @@ export const getCloseDatesListings = (
   match: string,
   startDate: string,
   endDate: string,
-  category: string,
+  category: string | null,
 ) =>
   fetcher<ICloseDatesListings[]>(
     `Listings/close_dates?PageSize=${pageSize}&Match=${match}&FromDate=${startDate}&ToDate=${endDate}&category=${category}`,

@@ -15,7 +15,7 @@ export async function CloseDatesListings({
     query.get("match") ?? "",
     query.get("fromDate") ?? "",
     query.get("toDate") ?? "",
-    query.get("category") ?? "",
+    query.get("category") ?? null
   ))!;
   const listings = (await getFilteredListings(query.toString()))!;
 
