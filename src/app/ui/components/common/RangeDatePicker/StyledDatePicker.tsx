@@ -13,8 +13,8 @@ dayjs.extend(isBetween);
 
 interface CustomDateRangePickerDayProps extends DateRangePickerDayProps<Dayjs> {
   availableDates?: string[];
-  rangeDatesAvailable?: string[];
-  selectedDates?: DateRangeType;
+  rangedatesavailable?: string[];
+  selecteddates?: DateRangeType;
 }
 const StyledDatePicker = styled(DateRangePickerDay, {
   shouldForwardProp: (prop) => prop !== "availableDates",
@@ -31,20 +31,20 @@ const StyledDatePicker = styled(DateRangePickerDay, {
     isEndOfPreviewing,
     day,
     availableDates,
-    rangeDatesAvailable,
-    selectedDates,
+    rangedatesavailable,
+    selecteddates,
   }) => {
     const findAvailableDate = () => {
-      if (rangeDatesAvailable && !selectedDates?.[1]) {
+      if (rangedatesavailable && !selecteddates?.[1]) {
         const isBetweenDay = day.isBetween(
-          selectedDates?.[0],
-          dayjs(rangeDatesAvailable.at(0)),
+          selecteddates?.[0],
+          dayjs(rangedatesavailable.at(0)),
           "day",
           "[)",
         );
         return isBetweenDay
           ? "betweenDay"
-          : rangeDatesAvailable.find((item) => dayjs(item).isSame(day, "day"))
+          : rangedatesavailable.find((item) => dayjs(item).isSame(day, "day"))
             ? true
             : false;
       }

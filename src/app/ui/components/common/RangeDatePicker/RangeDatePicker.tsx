@@ -81,9 +81,9 @@ const RangeDatePicker = ({
           },
           day: {
             // @ts-expect-error MUI doesn't recognize forwardProp
-            selectedDates: selectedDates,
+            selecteddates: selectedDates,
             availableDates: availableDates,
-            rangeDatesAvailable: rangeDatesAvailable,
+            rangedatesavailable: rangeDatesAvailable,
           },
           textField: {
             variant: "standard",

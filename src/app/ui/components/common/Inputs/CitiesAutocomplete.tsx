@@ -111,9 +111,7 @@ export default function CitiesAutocomplete({
               className: whiteVariant
                 ? `${isSmallSize ? "text-xs" : "sm:text-xl text-base"}`
                 : `pl-3 bg-[#EAF7FD] ${isSmallSize ? "text-sm" : "text-xl"} text-[#212529] h-9 text-sm rounded-full border border-[#EAEAEF]`,
-              startAdornment: (
-                <LocationPin color="text-priority"/>
-              ),
+              startAdornment: <LocationPin color="text-priority" />,
             }}
           />
         )}

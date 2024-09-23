@@ -40,7 +40,7 @@ export default async function Page({
   const navigateHome = !(query.get("match") ?? query.get("category"));
 
   return (
-    <main className="flex flex-col items-center px-4 lg:px-0">
+    <main className="flex flex-col items-center px-4 lg:px-4 xl:px-0">
       <div className="custom-max-widths items-center justify-center">
         <Breadcrumbs
           navigateHome={navigateHome}
