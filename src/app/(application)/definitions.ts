@@ -51,7 +51,7 @@ export type ListingCardProps = Pick<
 
 export type TMainCardProps = Pick<
   IListingData,
-  "name" | "imageUrl" | "propertyType" | "squareFeets"
+  "name" | "propertyName" | "imageUrl" | "propertyType" | "squareFeets"
 > & { isBlogCard?: boolean; subtitle: string };
 
 export type TSimilarCardProps = TMainCardProps &
