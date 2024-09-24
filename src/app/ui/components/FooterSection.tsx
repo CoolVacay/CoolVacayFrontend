@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { IconGenerator } from "./common";
 import { useSiteConfigurations } from "~/context/SiteConfigurationsContext";
+import Image from "next/image";
 
 function FooterSection() {
   const siteConfigs = useSiteConfigurations();
@@ -22,10 +23,14 @@ function FooterSection() {
       <div className="flex flex-col gap-8 lg:flex-row lg:gap-28">
         <div className="flex flex-col gap-7">
           <div className="-mt-6 py-3">
-            <IconGenerator
+            <Image
               src={siteConfigs.logo.color}
-              width={siteConfigs.logo.width}
               alt={siteConfigs.logo.alt}
+              width={200}
+              height={50}
+              sizes="(max-width: 768px) 90vw, 75vw"
+              className={`w-[${Number.parseInt(siteConfigs.logo.width) - 60}px] sm:w-[${siteConfigs.logo.width}]`}
+              priority={true}
             />
           </div>
           <div className="flex gap-10 max-[430px]:flex-col sm:w-[430px] sm:flex-row">

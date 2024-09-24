@@ -109,7 +109,7 @@ export default function AboutUsClientPage() {
       </div>
       <div className="relative mt-16 sm:mt-[128px]">
         <div className="flex justify-center bg-[#FAFAFA] px-4 py-16 sm:px-0">
-          <div className="custom-max-widths flex items-center justify-center gap-12 xl:gap-24">
+          <div className="custom-max-widths flex flex-col items-center justify-center gap-12 xl:flex-row xl:gap-24">
             <div className="flex flex-col gap-8">
               <h1 className="text-2xl font-bold leading-8 sm:text-[40px] sm:leading-10">
                 {aboutUsConfigs.header2}
