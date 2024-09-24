@@ -7,6 +7,7 @@ import { SquareFootIcon } from "public/SquareFootIcon";
 export default function MainCard({
   isBlogCard,
   name,
+  propertyName,
   subtitle,
   imageUrl,
   propertyType,
@@ -37,6 +38,7 @@ export default function MainCard({
         className={`${!isBlogCard && "px-2"} flex grow flex-col justify-between`}
       >
         <div className="pb-3 pt-2">
+          <div className="mb-1">{propertyName}</div>
           <div className="mb-1 text-base font-medium">{name}</div>
           <p className="text-sm text-[#676D73]">{subtitle}</p>
         </div>

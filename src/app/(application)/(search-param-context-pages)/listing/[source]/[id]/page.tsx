@@ -53,6 +53,9 @@ export default async function Page({
                   : "Listings",
               href: "/listings",
             },
+            ... listing.propertyName ? 
+              [{label:`${listing.propertyName}`, href:`/listings?numberOfGuests=1&match=${listing.propertyName}`}] 
+              : [],
             {
               label: `${listing.name}`,
               href: `/listing/${params.source}/${params.id}`,

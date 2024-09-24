@@ -23,6 +23,7 @@ export async function AllListingsSection({
           >
             <MainCard
               name={truncateText(listing.name, 50)}
+              propertyName={listing.propertyName}
               subtitle={`${listing.city}, ${listing.state}`}
               key={listing.id}
               imageUrl={listing.imageUrl}
