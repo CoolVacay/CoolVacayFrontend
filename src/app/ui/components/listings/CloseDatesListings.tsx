@@ -4,22 +4,24 @@ import Pagination from "./Pagination";
 import { getFilteredListings } from "~/app/(application)/actions";
 
 const PAGESIZE = "4";
+const MAXIMUM_LISTINGS_FOR_CLOSE_AVAILABILITY = 5
 
 export async function CloseDatesListings({
   query,
 }: {
   query: URLSearchParams;
 }) {
-  const closeAvailabilityListings = (await getCloseDatesListings(
+  const listings = (await getFilteredListings(query.toString()))!;
+
+  const closeAvailabilityListings = listings.totalItems <= MAXIMUM_LISTINGS_FOR_CLOSE_AVAILABILITY ? (await getCloseDatesListings(
     PAGESIZE,
     query.get("match") ?? "",
     query.get("fromDate") ?? "",
     query.get("toDate") ?? "",
     query.get("category") ?? null
-  ))!;
-  const listings = (await getFilteredListings(query.toString()))!;
+  ))! : [];
 
-  return closeAvailabilityListings?.length > 0 && listings.totalItems < 3 ? (
+  return closeAvailabilityListings?.length > 0 ? (
     <>
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl sm:text-3xl">
@@ -50,13 +52,6 @@ export async function CloseDatesListings({
           );
         })}
       </div>
-      {listings?.totalItems < 4 && listings.totalItems !== 0 ? (
-        <div className="my-8 flex justify-center">
-          <Pagination totalPages={listings.totalPages} />
-        </div>
-      ) : (
-        <div>No close listings found</div>
-      )}
     </>
-  ) : null;
+  ): <div>No similar listings found</div>;
 }

@@ -37,32 +37,24 @@ export default async function Page({
 
   const listing = (await getListingData(pageParams))!;
   const query = new URLSearchParams(searchParams);
-  const navigateHome = !(query.get("match") ?? query.get("category"));
 
   return (
     <main className="flex flex-col items-center px-4 lg:px-4 xl:px-0">
       <div className="custom-max-widths items-center justify-center">
-        <Breadcrumbs
-          navigateHome={navigateHome}
-          breadcrumbs={[
-            {
-              label: navigateHome
-                ? "Home"
-                : query.get("category")
-                  ? `${capitalize(query.get("category")!)} listings`
-                  : "Listings",
-              href: "/listings",
-            },
-            ... listing.propertyName ? 
-              [{label:`${listing.propertyName}`, href:`/listings?numberOfGuests=1&match=${listing.propertyName}`}] 
-              : [],
-            {
-              label: `${listing.name}`,
-              href: `/listing/${params.source}/${params.id}`,
-              active: true,
-            },
-          ]}
-        />
+        <Breadcrumbs breadcrumbs={[
+          {
+            label: "Listings",
+            href: "/listings",
+          },
+          ... listing.propertyName ? 
+            [{label:`${listing.propertyName}`, href:`/listings?numberOfGuests=1&match=${listing.propertyName}`}] 
+            : [],
+          {
+            label: `${listing.name}`,
+            href: `/listing/${params.source}/${params.id}`,
+            active: true,
+          }
+        ]} />
         <div className="flex flex-col items-start justify-between pb-6 md:flex-row">
           <h1 className="text-2xl leading-tight md:w-2/3 md:text-3xl">
             {listing.name}, {listing.city}, {listing.state}

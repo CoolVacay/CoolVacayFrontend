@@ -10,10 +10,8 @@ interface Breadcrumb {
 
 export default function Breadcrumbs({
   breadcrumbs,
-  navigateHome,
 }: {
   breadcrumbs: Breadcrumb[];
-  navigateHome?: boolean;
 }) {
   const router = useRouter();
 
@@ -28,9 +26,9 @@ export default function Breadcrumbs({
           >
             <button
               onClick={() =>
-                navigateHome ? router.replace("/") : router.back()
+                router.push(breadcrumb.href)
               }
-              disabled={index > 0}
+              disabled={breadcrumb.active}
             >
               {breadcrumb.label}
             </button>

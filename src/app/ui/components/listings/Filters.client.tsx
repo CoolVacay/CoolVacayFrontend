@@ -183,7 +183,7 @@ export function FiltersComponent({
         <CategoriesAutocomplete
           categories={categories}
           isSmallSize={true}
-          iconUrl={selectedCategory?.iconUrl ?? "/pool.svg"}
+          iconUrl={selectedCategory?.iconUrl ?? null}
           variant="blue"
           className={`w-full`}
           inputValue={category}

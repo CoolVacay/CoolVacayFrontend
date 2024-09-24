@@ -121,7 +121,7 @@ export default function ListingCard({
                       target="_blank"
                       href={`listing/${source}/${id}?fromDate=${formatDateMMM_DD_YYYY(date.startDate)}&toDate=${formatDateMMM_DD_YYYY(date.endDate)}&numberOfGuests=${searchParams.get("numberOfGuests")}`}
                     >
-                      <button className="flex w-[105px] flex-col items-center gap-2 rounded-lg border border-[#ADB5BD] p-2 hover:opacity-75">
+                      <button className="flex w-fit flex-col items-center gap-2 rounded-lg border border-[#ADB5BD] p-2 hover:opacity-75">
                         <p className="text-xs font-medium text-primary">
                           {formatDateMMMDD(date.startDate)} -{" "}
                           {formatDateMMMDD(date.endDate)}

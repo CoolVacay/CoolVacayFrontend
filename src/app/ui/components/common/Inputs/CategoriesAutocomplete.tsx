@@ -27,7 +27,7 @@ export default function CategoriesAutocomplete({
 }: {
   categories: readonly IPopularCategoriesData[];
   isSmallSize?: boolean;
-  iconUrl?: string;
+  iconUrl?: string | null;
   variant: "white" | "blue";
   inputValue: string;
   value: IPopularCategoriesData | null;
@@ -126,11 +126,11 @@ export default function CategoriesAutocomplete({
                 ? `${isSmallSize ? "text-xs" : "sm:text-xl text-base"}`
                 : `pl-3 bg-[#EAF7FD] ${isSmallSize ? "text-sm" : "text-xl"} text-[#212529] h-9 text-sm rounded-full border border-[#EAEAEF]`,
               startAdornment: (
-                <IconGenerator
+                iconUrl ? <IconGenerator
                   alt="Category Icon"
-                  src={iconUrl ?? "/pool.svg"}
+                  src={iconUrl}
                   className={`${isSmallSize ? "right-[2px] w-4" : "left-0 top-3 w-5 sm:w-7"} mr-2`}
-                />
+                /> : null
               ),
             }}
           />
