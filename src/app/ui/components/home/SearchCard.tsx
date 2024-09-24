@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import dayjs, { type Dayjs } from "dayjs";
+import type { Dayjs } from "dayjs";
 import { useRouter } from "next/navigation";
 import type { SelectChangeEvent } from "@mui/material";
 
@@ -18,20 +18,19 @@ export type DateRangeType = [Dayjs | null, Dayjs | null];
 export function SearchCard({
   size,
   locationsList,
-  defaultLocation
+  defaultLocation,
 }: {
   size: "small" | "big";
   locationsList: ILocationsList[];
   defaultLocation?: string;
 }) {
   const router = useRouter();
-  const [autocompleteValue, setAutocompleteValue] = useState<ILocationsList | null>(null);
+  const [autocompleteValue, setAutocompleteValue] =
+    useState<ILocationsList | null>(null);
   const [location, setLocation] = useState(defaultLocation ?? "");
 
   const [numberOfGuests, setNumberOfGuests] = useState("1");
-  const [dates, setDates] = useState<DateRangeType | [null, null]>([
-    null, null
-  ]);
+  const [dates, setDates] = useState<DateRangeType | ["", ""]>([null, null]);
 
   const isSmallSize = size === "small";
 
@@ -41,8 +40,8 @@ export function SearchCard({
     if (dates[1]) params.append("toDate", dates[1].format("YYYY-MM-DD"));
     params.append("numberOfGuests", numberOfGuests);
 
-    if(autocompleteValue?.type === "listing") {
-      return `${autocompleteValue.page.replace('/listings/', '/listing/')}?${params.toString()}`
+    if (autocompleteValue?.type === "listing") {
+      return `${autocompleteValue.page.replace("/listings/", "/listing/")}?${params.toString()}`;
     }
     if (autocompleteValue) params.append("match", autocompleteValue?.match);
     return `/listings?${params.toString()}`;
@@ -57,7 +56,7 @@ export function SearchCard({
     <search>
       <form onSubmit={handleSubmit}>
         <div
-          className={`grid ${isSmallSize ? "h-[250px] w-[258px]" : "h-[330px] w-[330px] sm:h-[410px] sm:w-[420px]"} shrink-0 grid-rows-4 divide-y rounded-xl border-[#EAEAEF] bg-white`}
+          className={`grid ${isSmallSize ? "h-[250px] w-[258px]" : "h-[380px] max-w-[calc(100vw_-_32px)] sm:h-[410px] sm:w-[420px]"} shrink-0 grid-rows-4 divide-y rounded-xl border-[#EAEAEF] bg-white`}
         >
           <div
             className={`border-b-4-grey flex w-full items-center ${isSmallSize ? "px-3 py-2" : "px-4 pb-4"} pt-5`}
@@ -85,7 +84,7 @@ export function SearchCard({
           >
             <RangeDatePicker
               size={isSmallSize ? "small" : "big"}
-              dates={dates}
+              selectedDates={dates}
               setDates={setDates}
             />
           </div>

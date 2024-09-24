@@ -1,15 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconGenerator } from "../IconGenerator";
-import NavBarLoginButton from "./NavBarLoginButton";
-import type { TUserData } from "~/app/(application)/definitions";
-import NavBardDialog from "./NavBarDialog";
 import { logOut } from "~/app/(authentication)/actions";
+import type { Session } from "next-auth";
 
-const whiteVariantPaths = [
+import { useSiteConfigurations } from "~/context/SiteConfigurationsContext";
+import NavBardDialog from "./NavBarDialog";
+import NavBarLoginButton from "./NavBarLoginButton";
+import { IconGenerator } from "../IconGenerator";
+import type { TUserData } from "~/app/(application)/definitions";
+import { Logo } from "../Logo";
+
+const whiteLogoPaths = [
   "/",
   "/about-us",
   "/terms-and-conditions",
@@ -19,21 +23,25 @@ const whiteVariantPaths = [
 
 export default function NavBar({
   userData,
-  isTokenValid,
+  session,
 }: {
   userData?: TUserData["profile"] | null;
-  isTokenValid: boolean;
+  session: Session | null;
 }) {
   const [scrolled, setScrolled] = useState(false);
+  const siteConfigs = useSiteConfigurations();
 
   useEffect(() => {
-    if (userData && !isTokenValid) {
+    //server session and client session are not in sync
+    //client session must follow server session,if client session is still present
+    //but server session is not, then logOut
+    if (session && !userData) {
       const checkSync = async () => {
         await logOut();
       };
       void checkSync();
     }
-  }, [isTokenValid, userData]);
+  }, [userData, session]);
 
   // Handle scroll event
   useEffect(() => {
@@ -45,7 +53,7 @@ export default function NavBar({
       }
     };
 
-    if(window.scrollY > 1) {
+    if (window.scrollY > 1) {
       setScrolled(true);
     }
 
@@ -54,8 +62,8 @@ export default function NavBar({
   }, []);
 
   const pathname = usePathname();
-  const isWhiteVariant = whiteVariantPaths.includes(pathname);
-  const noMaxWidth =
+  const isLogoWhite = whiteLogoPaths.includes(pathname);
+  const isNavBarFullWidth =
     pathname.startsWith("/listings") ||
     pathname.startsWith("/vacation-rental-management");
 
@@ -65,81 +73,59 @@ export default function NavBar({
 
   return (
     <nav
-      className={`sticky top-0 z-50 flex h-12 w-full scroll-px-4 justify-center px-4 py-6 sm:h-20 sm:py-6 ${scrolled ? `${isWhiteVariant ? "bg-black transition-all duration-700 bg-opacity-60" : "bg-white"}` : "bg-opacity-0 transition-all duration-700"}`}
+      className={`sticky top-0 z-50 flex h-12 ${isNavBarFullWidth ? "px-4 xl:px-20" : "justify-center px-4"} py-6 sm:h-20 sm:py-6 ${scrolled ? `${isLogoWhite ? "bg-black bg-opacity-60 transition-all duration-700" : "bg-white"}` : "bg-opacity-0 transition-all duration-700"}`}
     >
       <div
-        className={`flex w-full items-center ${isWhiteVariant || !noMaxWidth ? "sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]" : "sm:pl-16"} scroll-px-4 items-center justify-between gap-10 lg:gap-44`}
+        className={`flex w-full ${isLogoWhite || !isNavBarFullWidth ? "custom-max-widths gap-10" : "justify-between"} scroll-px-4 justify-between `}
       >
-        <div className="flex w-full items-center justify-between sm:w-auto md:flex-grow">
-          <Link href="/">
+        <div className="container justify-between sm:w-auto md:flex-grow">
+          <Logo isLogoWhite={isLogoWhite} />
+          <button className="block sm:hidden" onClick={toggleMenu}>
             <IconGenerator
-              src={`/cool_vacay_logo_${isWhiteVariant ? "white" : "blue"}.svg`}
-              alt="CoolVacay Logo"
-              className="w-[118px] sm:w-[200px]"
-              priority={true}
-            />
-          </Link>
-          <button className="sm:hidden" onClick={toggleMenu}>
-            <IconGenerator
-              src={`/menu_icon_${isWhiteVariant ? "white" : "black"}.svg`}
+              src={`/menu_icon_${isLogoWhite ? "white" : "black"}.svg`}
               alt="Menu"
-              width={isWhiteVariant ? "22px" : "16px"}
+              width={isLogoWhite ? "32px" : "18px"}
             />
           </button>
         </div>
-        <div className="hidden text-md sm:flex sm:flex-grow sm:items-center sm:justify-between">
-          {/* <div
-            className={`flex gap-5 ${isWhiteVariant ? "text-white" : "text-black"}`}
-          >
-          <Link
-            className="text-center"
-            href={`/listings?fromDate=${startDate}&toDate=${endDate}&numberOfGuests=1&pageNum=1`}
-          >
-            Snowbird Places
-          </Link>
-          </div> */}
-          <div></div>
+        <div className="text-md hidden sm:flex sm:items-center sm:justify-between">
           <div
-            className={`flex items-center gap-5  ${isWhiteVariant ? "text-white" : "text-black"}`}
+            className={`flex items-center gap-5  ${isLogoWhite ? "text-white" : "text-black"}`}
           >
-            <Link className={`text-center`} href={`/contact-us`}>
-              Contact Us
-            </Link>
-            <span className="hidden text-center lg:inline-block">•</span>{" "}
-            <Link
-              href="/about-us"
-              className={`text-center ${isWhiteVariant ? "text-white" : "text-black"}`}
-            >
-              About Us
-            </Link>
-            <span className="hidden text-center lg:inline-block">•</span>{" "}
-            <Link
-              href="/vacation-rental-management"
-              className={`text-center ${isWhiteVariant ? "text-white" : "text-black"}`}
-            >
-              Rental Management
-            </Link>
-            <span className="hidden text-center lg:inline-block">•</span>{" "}
+            {siteConfigs.navBar.links.map((link) => {
+              return (
+                <Fragment key={link.href}>
+                  <Link
+                    className={`text-center text-base sm:text-sm lg:text-base ${isLogoWhite ? "text-white" : "text-black"}`}
+                    href={link.href}
+                  >
+                    {link.name}
+                  </Link>
+                  <span className="hidden text-center lg:inline-block">•</span>{" "}
+                </Fragment>
+              );
+            })}
             {userData ? (
               <Link href="/profile/reservations" className="hidden sm:block">
                 <p
-                  className={`text-center ${isWhiteVariant ? "text-white" : "text-black"}`}
+                  className={`text-center text-base sm:text-sm lg:text-base  ${isLogoWhite ? "text-white" : "text-black"}`}
                 >
                   My bookings
                 </p>
               </Link>
             ) : null}
             {!userData ? (
-              <Link href="/signin">
+              <Link href="/signin" className="flex shrink-0">
                 <button
-                  className={`flex w-[190px] items-center rounded-full px-[14px] py-[6px] text-sm font-normal  ${isWhiteVariant ? "bg-white text-black" : "bg-primary text-white"}`}
+                  className={`flex items-center gap-1 rounded-full px-4 py-2 text-sm  ${isLogoWhite ? "bg-white text-black" : "bg-primary text-white"}`}
                 >
-                  Log In or Sign Up
-                  <span className="ml-2">
+                  <span className="flex">{`Log In `}</span>
+                  <span className="hidden lg:block lg:flex">or Sign Up</span>
+                  <span className="ml-2 w-7 lg:w-8">
                     <IconGenerator
                       alt="avatar icon"
-                      src={`/avatar_${isWhiteVariant ? "white" : "blue"}.svg`}
-                      width="32px"
+                      src={`/avatar_${isLogoWhite ? "white" : "blue"}.svg`}
+                      className="w-6 lg:w-7"
                     />
                   </span>
                 </button>
@@ -147,7 +133,7 @@ export default function NavBar({
             ) : (
               <NavBarLoginButton
                 userData={userData}
-                isWhiteVariant={isWhiteVariant}
+                isLogoWhite={isLogoWhite}
               />
             )}
           </div>
@@ -156,6 +142,7 @@ export default function NavBar({
       {openMenu && (
         <NavBardDialog
           openMenu={openMenu}
+          siteConfigs={siteConfigs}
           toggleMenu={toggleMenu}
           session={userData!}
         />

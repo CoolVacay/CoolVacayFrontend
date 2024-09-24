@@ -12,10 +12,12 @@ import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import InsightsIcon from "@mui/icons-material/Insights";
 import { type Metadata } from "next";
+import { CheckmarkIcon } from "public/CheckmarkIcon";
 
 export const metadata: Metadata = {
-  title: 'CoolVacay | Vacation Rental Management',
-  description: 'Welcome to CoolVacay, your trusted partner for vacation rental management. We specialize in sustainable solutions that integrate seamlessly with top third-party APIs, ensuring your property management is efficient and future-proof. Our innovative approach guarantees reliable, personalized service with a focus on accuracy and client satisfaction.',
+  title: "CoolVacay | Vacation Rental Management",
+  description:
+    "Welcome to CoolVacay, your trusted partner for vacation rental management. We specialize in sustainable solutions that integrate seamlessly with top third-party APIs, ensuring your property management is efficient and future-proof. Our innovative approach guarantees reliable, personalized service with a focus on accuracy and client satisfaction.",
 };
 
 const coolVacayFeatures = [
@@ -135,7 +137,7 @@ export default function Page() {
         </div>
       </div>
       <div className="mt-14 flex justify-center px-4 sm:px-0">
-        <div className="flex max-w-[calc(100vw_-_32px)] flex-col items-center justify-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
+        <div className="custom-max-widths flex flex-col items-center justify-center">
           <CustomChip label="Our approach" width={120} />
           <h2 className="mt-10 text-center text-3xl font-semibold sm:text-[48px] lg:max-w-[900px] lg:leading-[47px]">
             Your trusted vacation rental management partner
@@ -155,9 +157,7 @@ export default function Page() {
                   <p className="text-xl font-semibold">
                     {inspiringFeature.title}
                   </p>
-                  <p className="text-[#737373]">
-                    {inspiringFeature.subtitle}
-                  </p>
+                  <p className="text-[#737373]">{inspiringFeature.subtitle}</p>
                 </div>
               );
             })}
@@ -166,7 +166,7 @@ export default function Page() {
       </div>
       <div className="relative mt-20">
         <div className="flex justify-center bg-[#F7F7F7] px-4 py-12 sm:px-0">
-          <div className="flex max-w-[calc(100vw_-_32px)] flex-col items-center justify-center gap-12 sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
+          <div className="custom-max-widths flex flex-col items-center justify-center gap-12">
             <CustomChip label="Testimonials" width={120} />
             <div className="flex flex-col gap-8">
               <h1 className="text-center text-2xl font-semibold leading-[67px] sm:text-[54px]">
@@ -183,7 +183,7 @@ export default function Page() {
         </div>
       </div>
       <div className="mt-14 flex justify-center px-4 sm:px-0">
-        <div className="flex max-w-[calc(100vw_-_32px)] flex-col items-center justify-center sm:max-w-[580px] md:max-w-[680px] lg:max-w-[920px] xl:max-w-[1220px]">
+        <div className="custom-max-widths flex flex-col items-center justify-center">
           <CustomChip label="Experience" width={120} />
           <h2 className="mt-10 text-center text-3xl font-semibold sm:text-[48px] lg:max-w-[900px] lg:leading-[47px]">
             What you get with Coolvacay?
@@ -202,11 +202,7 @@ export default function Page() {
                     return (
                       <div key={index} className="flex gap-4">
                         <div className="h-min w-max rounded-full bg-primary/[0.10] sm:p-2">
-                          <IconGenerator
-                            src="/checkmark.svg"
-                            alt="Checkmark icon"
-                            className="h-3 w-3"
-                          />
+                          <CheckmarkIcon color={"text-primary"}/>
                         </div>
                         <p>{option}</p>
                       </div>

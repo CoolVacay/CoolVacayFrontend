@@ -1,13 +1,8 @@
-import type { Session } from "next-auth";
 import ProfileForm from "./ProfileForm";
 import { getCountries, getProfileInfo } from "~/app/(application)/actions";
 
-export default async function PersonalInformation({
-  session,
-}: {
-  session: Session["user"];
-}) {
-  const profileInfo = session && (await getProfileInfo(session.email!))!;
+export default async function PersonalInformation() {
+  const profileInfo = await getProfileInfo();
   const countries = (await getCountries())!;
 
   return (

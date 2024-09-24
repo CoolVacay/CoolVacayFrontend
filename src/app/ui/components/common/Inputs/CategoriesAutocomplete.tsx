@@ -23,6 +23,7 @@ export default function CategoriesAutocomplete({
   iconUrl,
   setValue,
   variant,
+  className,
 }: {
   categories: readonly IPopularCategoriesData[];
   isSmallSize?: boolean;
@@ -37,11 +38,12 @@ export default function CategoriesAutocomplete({
     reason: AutocompleteChangeReason,
     details?: AutocompleteChangeDetails<IPopularCategoriesData> | undefined,
   ) => void | undefined;
+  className?: string;
 }) {
   const whiteVariant = variant === "white";
 
   return (
-    <FormControl fullWidth={whiteVariant}>
+    <FormControl fullWidth={whiteVariant} className={className}>
       <Autocomplete
         id="category-select"
         options={categories}
@@ -114,7 +116,7 @@ export default function CategoriesAutocomplete({
               sx: {
                 padding:
                   isSmallSize && !whiteVariant
-                    ? "0px 50px"
+                    ? "0px 30px"
                     : isSmallSize && whiteVariant
                       ? "0px"
                       : "14px 65px 14px 0px !important",
@@ -122,7 +124,7 @@ export default function CategoriesAutocomplete({
               },
               className: whiteVariant
                 ? `${isSmallSize ? "text-xs" : "sm:text-xl text-base"}`
-                : `pl-3 bg-[#EAF7FD] ${isSmallSize ? "text-xs" : "text-xl"} text-[#212529] h-9 text-sm rounded-full border border-[#EAEAEF]`,
+                : `pl-3 bg-[#EAF7FD] ${isSmallSize ? "text-sm" : "text-xl"} text-[#212529] h-9 text-sm rounded-full border border-[#EAEAEF]`,
               startAdornment: (
                 <IconGenerator
                   alt="Category Icon"

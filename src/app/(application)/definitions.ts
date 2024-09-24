@@ -55,7 +55,10 @@ export type TMainCardProps = Pick<
 > & { isBlogCard?: boolean; subtitle: string };
 
 export type TSimilarCardProps = TMainCardProps &
-  Pick<IListingData, "bedrooms" | "bathrooms" | "numberOfGuests" | "price">;
+  Pick<
+    IListingData,
+    "bedrooms" | "propertyName" | "bathrooms" | "numberOfGuests" | "price"
+  >;
 
 export interface IPopularCategoriesData {
   id: number;
@@ -174,6 +177,14 @@ export interface ICountries {
     | [];
 }
 
+export interface IProperty {
+  sourceId: string;
+  source: string;
+  name: string;
+  clientGrid: number;
+  sourceUrl: string;
+}
+
 export interface ILocationsList {
   id: number;
   icon: string;
@@ -243,3 +254,85 @@ export interface ICloseDatesListings {
   }[];
   listing: IListingData;
 }
+
+export type IReadOnlySiteConfigurationProperties = Readonly<{
+  config: {
+    siteName: string;
+    originUrl: string;
+    favicon: {
+      url: string;
+      alt: string;
+      width: string;
+    };
+  };
+  logo: {
+    color: string;
+    black: string;
+    white: string;
+    alt: string;
+    width: string;
+  };
+  source?: string;
+  navBar: {
+    links: {
+      name: string;
+      href: string;
+    }[];
+  };
+  home: {
+    motto?: string;
+    header1?: string;
+    paragraph1?: string;
+    paragraph2?: string;
+  };
+  contact: {
+    phone: string;
+    email: string;
+    address: string;
+    hours: {
+      day: string;
+      openTime: string;
+      closeTime: string;
+    }[];
+  };
+  about: {
+    header1: string;
+    paragraph1: string;
+    header2: string;
+    paragraph2: string;
+    listedProperties: string;
+    happyCustomers: string;
+    starReviews: string;
+    dailyTransactions: string;
+    reviews: {
+      title: string;
+      description: string;
+      author: string;
+      date: string;
+    }[];
+  };
+  footer: {
+    phone: string;
+    email: string;
+    popularSearchLinks: {
+      name: string;
+      href: string;
+    }[];
+    quickLinks: {
+      name: string;
+      href: string;
+    }[];
+    staticPages: {
+      name: string;
+      href: string;
+    }[];
+    discoverLinks: {
+      name: string;
+      href: string;
+    }[];
+    socials: {
+      name: string;
+      href: string;
+    }[];
+  };
+}>;

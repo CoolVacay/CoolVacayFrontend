@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
-import { IconGenerator } from "../IconGenerator";
 import type { TMainCardProps } from "~/app/(application)/definitions";
+import { CabinIcon } from "public/CabinIcon";
+import { SquareFootIcon } from "public/SquareFootIcon";
 
 export default function MainCard({
   isBlogCard,
@@ -12,7 +14,7 @@ export default function MainCard({
 }: TMainCardProps) {
   return (
     <div
-      className={`${!isBlogCard && "shadow-cardShadow"} flex h-full w-[280px] grow-0 flex-col overflow-hidden rounded-xl`}
+      className={`${!isBlogCard && "shadow-cardShadow"} flex h-full grow-0 flex-col overflow-hidden rounded-xl max-[1280px]:w-[260px] max-[1150px]:w-[240px] max-[1070px]:w-[280px] xl:w-[280px]`}
       style={{
         border: !isBlogCard ? "1px solid rgba(173, 181, 189, 0.70)" : "",
       }}
@@ -23,7 +25,7 @@ export default function MainCard({
           width={278}
           height={210}
           alt="CoolVacay listing image"
-          className="h-auto w-auto"
+          className="h-[210px] w-auto"
           style={{
             width: isBlogCard ? "278px" : "auto",
             objectFit: "cover",
@@ -41,20 +43,12 @@ export default function MainCard({
         {!isBlogCard && (
           <div className="flex gap-4 pb-4">
             <div className="flex gap-2">
-              <IconGenerator
-                src="/cabin_icon.svg"
-                alt="Cabin icon"
-                width="16px"
-              />
+              <CabinIcon color="text-primary"/>
               <p className="text-sm">{propertyType ?? "House"}</p>
             </div>
             {squareFeets ? (
               <div className="flex gap-2">
-                <IconGenerator
-                  src="/square_foot_icon.svg"
-                  alt="Square foot"
-                  width="16px"
-                />
+                <SquareFootIcon color="text-primary" />
                 <p className="text-sm">{`${Math.floor(squareFeets ?? 0)} sqft`}</p>
               </div>
             ) : null}

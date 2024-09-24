@@ -1,20 +1,50 @@
 import { capitalizeAllWords } from "~/app/utils/helpers";
 import { ListingCard } from "../common";
 import Pagination from "./Pagination";
-import { type IAllListings } from "~/app/(application)/definitions";
+import {
+  getFilteredListings,
+  getProperties,
+} from "~/app/(application)/actions";
 
-export async function ListingSection({ query, listings }: { query: URLSearchParams, listings: IAllListings }) {
+export async function ListingSection({ query }: { query: URLSearchParams }) {
+  const listings = (await getFilteredListings(query.toString()))!;
+  const properties = await getProperties();
 
   const title =
-    query.get("category") ??
-    (query.get("match") && capitalizeAllWords(query.get("match")!));
+    (query.get("match") && capitalizeAllWords(query.get("match")!)) ??
+    query.get("category");
+  const titleClassName = "text-2xl font-semibold md:text-3xl md:font-normal";
+  const headingText = title
+    ? `${title} Available Properties`
+    : "Available Properties";
+
+  //we are checking if the selected match value is a property and also if
+  //this property has a valid URL which we can navigate to
+  const property = properties?.find((property) => {
+    if (property.name === query.get("match")) {
+      try {
+        new URL(property.sourceUrl);
+        return property;
+      } catch {
+        return undefined;
+      }
+    }
+  });
 
   return listings?.totalItems > 0 ? (
     <>
       <div className="flex flex-col gap-2 xl:flex-row xl:place-items-baseline xl:gap-8">
-        <h1 className="text-3xl">
-          {`${title ? `${title} Available Properties` : "Available Properties"}`}{" "}
-        </h1>
+        {property?.sourceUrl ? (
+          <a
+            href={property.sourceUrl}
+            target="_blank"
+            className={titleClassName}
+          >
+            <span className="underline">{title}</span> Available Properties
+          </a>
+        ) : (
+          <h1 className={titleClassName}>{headingText}</h1>
+        )}
         <p className="text-sm text-primary-grey300">
           {listings?.totalItems} Properties
         </p>

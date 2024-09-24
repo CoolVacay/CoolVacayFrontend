@@ -27,4 +27,22 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .custom-max-widths {
+    @apply max-w-[calc(100vw_-_32px)] sm:max-w-[580px] md:max-w-[880px] lg:max-w-[1110px] xl:max-w-[1220px];
+  }
+
+  .container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+
+  .main-title{
+    @apply mb-6 mt-8 text-2xl font-semibold sm:mt-10 sm:mb-8 sm:text-[28px] sm:font-normal
+  }
+
+  .section-title{
+    @apply text-2xl font-semibold mb-6 mt-8 sm:text-[56px] sm:leading-[67px] sm:text-center lg:text-left text-left
+  }
 }

@@ -1,21 +1,25 @@
-import {
-  getCloseDatesListings,
-} from "~/app/(application)/actions";
+import { getCloseDatesListings } from "~/app/(application)/actions";
 import { ListingCard } from "../common";
 import Pagination from "./Pagination";
-import type { IAllListings } from "~/app/(application)/definitions";
+import { getFilteredListings } from "~/app/(application)/actions";
+
 const PAGESIZE = "4";
 
-export async function CloseDatesListings({ query, listings }: { query: URLSearchParams, listings: IAllListings }) {
+export async function CloseDatesListings({
+  query,
+}: {
+  query: URLSearchParams;
+}) {
   const closeAvailabilityListings = (await getCloseDatesListings(
     PAGESIZE,
     query.get("match") ?? "",
     query.get("fromDate") ?? "",
     query.get("toDate") ?? "",
-    query.get("category") ?? ""
-  ))!
+    query.get("category") ?? null
+  ))!;
+  const listings = (await getFilteredListings(query.toString()))!;
 
-  return closeAvailabilityListings?.length > 0 ? (
+  return closeAvailabilityListings?.length > 0 && listings.totalItems < 3 ? (
     <>
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl sm:text-3xl">
@@ -36,7 +40,11 @@ export async function CloseDatesListings({ query, listings }: { query: URLSearch
               subtitle={`${item.listing.city}, ${item.listing.state}`}
               imageUrl={item.listing.imageUrl}
               price={item.listing.price}
-              closeDates={item.availableDates.length !== 0 ? item.availableDates : undefined}
+              closeDates={
+                item.availableDates.length !== 0
+                  ? item.availableDates
+                  : undefined
+              }
               starRating={item.listing.starRating}
             />
           );
@@ -46,9 +54,9 @@ export async function CloseDatesListings({ query, listings }: { query: URLSearch
         <div className="my-8 flex justify-center">
           <Pagination totalPages={listings.totalPages} />
         </div>
-      ) : <div>
-          No close listings found
-        </div>}
+      ) : (
+        <div>No close listings found</div>
+      )}
     </>
   ) : null;
 }

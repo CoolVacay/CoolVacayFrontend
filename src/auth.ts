@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import { z } from "zod";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
-import facebook from "next-auth/providers/facebook";
+// import facebook from "next-auth/providers/facebook";
 import { postFetch } from "./app/utils/api-helpers";
 import type { User, NextAuthConfig, Session } from "next-auth";
 import type { Provider } from "next-auth/providers";
@@ -117,21 +117,27 @@ export const providerMap = providers.map((provider) => {
 
 const authOptions: NextAuthConfig = {
   //TODO: add when needed
-  debug: process.env.NODE_ENV !== "production" ? true : false,
+  // debug: process.env.NODE_ENV !== "production" ? true : false,
   providers,
   pages: {
     signIn: "/signin",
+    newUser: "/signup",
     error: "/access-denied",
   },
   callbacks: {
     async authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnProfile = nextUrl.pathname.startsWith("/profile");
-      if (isOnProfile) {
-        if (isLoggedIn) return true;
-        return false;
+      const isOnProfilePage = nextUrl.pathname.startsWith("/profile");
+      const isOnLoginPage = nextUrl.pathname.startsWith("/signin");
+      const isOnSignupPage = nextUrl.pathname.startsWith("/signup");
+
+      if (isOnProfilePage) {
+        if (isLoggedIn) return true; // Authenticated users can access profilePage
+        return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
-        return Response.redirect(new URL("/", nextUrl));
+        if (isOnLoginPage || isOnSignupPage) {
+          return Response.redirect(new URL("/", nextUrl));
+        }
       }
       return true;
     },

@@ -1,27 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
 import SignInForm from "~/app/ui/components/authentication/SignInForm";
-import { auth } from "~/auth";
-import { redirect } from "next/navigation";
 import OAuthProviders from "~/app/ui/components/authentication/OAuthProviders";
+import { Logo } from "~/app/ui/components/common";
 
 export default async function SignIn() {
-  const session = await auth();
-
-  if (session) redirect("/");
-
   return (
     <div className="flex w-full flex-col gap-4 sm:gap-20">
       <div className="w-full">
-        <Link href="/" className="text-left">
-          <Image
-            src="/cool_vacay_logo_blue.svg"
-            alt="CoolVacay Logo"
-            className="w-[140px] sm:w-[200px]"
-            width={0}
-            height={0}
-          />
-        </Link>
+        <Logo />
       </div>
       <div className="flex flex-col gap-4 sm:gap-8">
         <div>
