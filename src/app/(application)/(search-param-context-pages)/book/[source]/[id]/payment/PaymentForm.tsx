@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import { Toaster } from "react-hot-toast";
 
-import { ActionButton } from "~/app/ui/components/authentication";
+import { ActionButton, FormikCheckBox } from "~/app/ui/components/authentication";
 import { SimpleInput, IconGenerator } from "~/app/ui/components/common";
 import BookingCompleted from "./BookingCompleted";
 import { removeEmptyValues, toastNotifier } from "~/app/utils/helpers";
@@ -50,6 +50,7 @@ export default function PaymentForm({
             cvc: "",
             cardHolderName: "",
           },
+          areConditionsAccepted: false,
         }
       : {
           userId: "",
@@ -77,6 +78,7 @@ export default function PaymentForm({
             cvc: "",
             cardHolderName: "",
           },
+          areConditionsAccepted: false,
         },
     validationSchema: userId ? userIdSchema : missingUserIdSchema,
     onSubmit: () => console.log("Submitting"),
@@ -379,6 +381,21 @@ export default function PaymentForm({
                   formik.errors.cardDetails?.cardHolderName}
               </p>
             )}
+        </div>
+        <div>
+          <FormikCheckBox
+            error={
+              formik.touched.areConditionsAccepted &&
+              Boolean(formik.errors.areConditionsAccepted)
+            }
+            name="areConditionsAccepted"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            noreferrerLink = {false}
+            checked={formik.values.areConditionsAccepted}
+            label="I agree to the the Cancellation Policies and Resort Rules"
+            helperText="You have to agree to the Canellation Policies & Resort Rules before continuing"
+          />
         </div>
         {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
       </div>

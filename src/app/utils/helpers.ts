@@ -31,7 +31,7 @@ export const getCurrentDates = () => {
 };
 
 export const removeEmptyValues = (
-  obj: Record<string, string | number | null | undefined>,
+  obj: Record<string, string | number | null | boolean | undefined>,
 ) => {
   return Object.fromEntries(
     Object.entries(obj).filter(([_, v]) => v !== "" && v !== null),

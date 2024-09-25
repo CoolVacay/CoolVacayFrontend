@@ -29,6 +29,10 @@ const cardDetailsSchema = Yup.object().shape({
 
 export const userIdSchema = Yup.object().shape({
   cardDetails: cardDetailsSchema,
+  areConditionsAccepted: Yup.boolean().oneOf(
+    [true],
+    "This field must be checked",
+  ),
 });
 
 export const missingUserIdSchema = Yup.object().shape({
@@ -41,4 +45,8 @@ export const missingUserIdSchema = Yup.object().shape({
     .email("Enter a valid email")
     .required("This field is required"),
   cardDetails: cardDetailsSchema,
+  areConditionsAccepted: Yup.boolean().oneOf(
+    [true],
+    "This field must be checked",
+  ),
 });

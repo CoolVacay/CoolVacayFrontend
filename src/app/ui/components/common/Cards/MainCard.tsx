@@ -39,7 +39,7 @@ export default function MainCard({
       >
         <div className="pb-3 pt-2">
           <div className="mb-1 text-base font-medium">{propertyName}</div>
-          <div className="mb-1 text-sm">{name}</div>
+          <div className="mb-1 text-sm font-medium">{name}</div>
           <p className="text-sm text-[#676D73]">{subtitle}</p>
         </div>
         {!isBlogCard && (
