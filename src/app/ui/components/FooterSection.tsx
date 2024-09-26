@@ -26,7 +26,7 @@ function FooterSection() {
             <Image
               src={siteConfigs.logo.color}
               alt={siteConfigs.logo.alt}
-              width={200}
+              width={250}
               height={50}
               sizes="(max-width: 768px) 90vw, 75vw"
               className={`w-[${Number.parseInt(siteConfigs.logo.width) - 60}px] sm:w-[${siteConfigs.logo.width}]`}
@@ -45,22 +45,24 @@ function FooterSection() {
                   </Link>
                 </p>
               </div>
-              <p className="text-[15px] font-semibold">
-                Follow Us On Social Media
-              </p>
-              <div className="flex items-center gap-7">
-                {footerSiteConfigs.socials.map((social, index) => {
-                  return (
-                    <Link key={index} href={social.href}>
-                      <IconGenerator
-                        src={`/${social.name}_icon.svg`}
-                        width={social.name === "facebook" ? "10px" : "13px"}
-                        alt={`${siteConfigs.config.siteName} facebook page`}
-                      />
-                    </Link>
-                  );
-                })}
-              </div>
+              {footerSiteConfigs.socials.length > 0 && <div>
+                <p className="text-[15px] font-semibold">
+                  Follow Us On Social Media
+                </p>
+                <div className="flex items-center gap-7">
+                  {footerSiteConfigs.socials.map((social, index) => {
+                    return (
+                      <Link key={index} href={social.href}>
+                        <IconGenerator
+                          src={`/${social.name}_icon.svg`}
+                          width={social.name === "facebook" ? "10px" : "13px"}
+                          alt={`${siteConfigs.config.siteName} facebook page`}
+                        />
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>}
             </div>
             <div className="flex flex-col gap-1">
               <h2 className="text-sm text-primary-grey400">

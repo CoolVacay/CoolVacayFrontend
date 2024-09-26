@@ -27,7 +27,7 @@ export async function PopularCategories() {
   }
 
   return (
-    <div className="no-scrollbar flex justify-between gap-5 overflow-auto will-change-scroll md:justify-between md:gap-0">
+    <div className={`no-scrollbar flex gap-5 ${popularCategories.length < 5 ? 'justify-start !gap-20' : 'justify-between md:gap-0'} overflow-auto will-change-scroll `}>
       {popularCategories.map((category) => (
         <div
           key={category.name}
@@ -54,15 +54,8 @@ export async function PopularCategories() {
             >
               <button className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F7F7F7] p-3">
                 <span className="flex">
-                  <IconGenerator
-                    src={
-                      category.iconUrl.startsWith("http:")
-                        ? category.iconUrl.replace("http:", "https:")
-                        : category.iconUrl
-                    }
-                    width={category.width}
-                    alt={category.alt}
-                  />
+                  {/* @ts-expect-error asf */}
+                  {IconMap[category.name]}
                 </span>
               </button>
               <p className="mt-2 flex shrink-0 text-center text-sm">

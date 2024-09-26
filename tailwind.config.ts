@@ -80,6 +80,27 @@ export default {
           grey300: "#FFD39B",           // Warm sandy tan
           grey400: "#E3BA85",           // Muted beach tan
         },
+      }, 
+      BeechGetaway: {
+        primary: {
+          DEFAULT: "#8B4513",           // Saddle Brown (earthy and natural)
+          background: "#F5F5DC",        // Light beige (natural and neutral)
+          border: "#D2B48C",            // Tan (soft natural tan for borders)
+          text: "#EEE8CD",              // Pale brown (light wood for text)
+          primary100: "#F5F0E1",        // Very light cream (soft, airy tone)
+          primary200: "#E6DFCC",        // Light oatmeal (soft neutral beige)
+          primary300: "#C8B697",        // Light brown (warm wood)
+          primary400: "#A67B5B",        // Chestnut brown (natural wood tone)
+          primary500: "#8B4513",        // Saddle brown (similar to DEFAULT)
+          primary600: "#7B3B12",        // Deep earthy brown (richer tone)
+          primary700: "#6A3310",        // Dark walnut brown (deep forest tone)
+          primary800: "#5A2B0D",        // Dark chocolate brown (earthy dark brown)
+          primary900: "#4A230B",        // Deep mahogany (intense, grounding brown)
+          grey100: "#F5F2E7",           // Very light beige (natural soft sand)
+          grey200: "#E2D6C1",           // Light stone (muted tan)
+          grey300: "#D3BFA3",           // Light wood brown (warm, natural)
+          grey400: "#B59D79",           // Muted khaki (earthy, sandy brown)
+        },
       }
     }),
   ],
