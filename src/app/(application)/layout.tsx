@@ -10,12 +10,16 @@ import MuiXLicense from "../MuiXLicense";
 import theme from "../../theme";
 import "~/styles/globals.css";
 import { getSiteConfigurations } from "./actions";
+import { type Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "CoolVacay",
-  description: "Cool Vacay Booking Platform",
+export const metadata: Metadata = {
+  title: {
+    template: `${process.env.SITE_NAME ?? 'CoolVacay'} | %s`,
+    default: `${process.env.SITE_NAME ?? 'CoolVacay'}`
+  },
+  description: `${process.env.SITE_NAME ?? 'CoolVacay'} Booking Platform`,
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

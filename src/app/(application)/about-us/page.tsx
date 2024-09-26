@@ -3,7 +3,7 @@ import { type Metadata } from "next";
 import AboutUsClientPage from "./AboutUsPage.client";
 
 export const metadata: Metadata = {
-  title: "CoolVacay | About Us",
+  title: "About Us",
   description: "About Us Page",
 };
 

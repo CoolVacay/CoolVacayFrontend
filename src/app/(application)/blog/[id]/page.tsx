@@ -10,7 +10,7 @@ import { BlogContentSkeleton, BlogSidebarSkeleton } from "~/app/ui/components/co
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'CoolVacay | Blog by ID page',
+  title: 'Blog by ID page',
   description: 'Read our Blogs here',
 };
 

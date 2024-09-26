@@ -16,7 +16,7 @@ import { Suspense } from "react";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "CoolVacay | Listings by ID page",
+  title: "Listings by ID page",
   description: "View details about our listings here",
 };
 

@@ -4,7 +4,7 @@ import parse from "html-react-parser";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'CoolVacay | Terms and Conditions',
+  title: 'Terms and Conditions',
   description: 'Terms and Conditions page',
 };
 export default async function Page() {

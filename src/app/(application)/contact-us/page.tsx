@@ -5,7 +5,7 @@ import { type Metadata } from "next";
 import { TelephoneIcon } from "public/TelephoneIcon";
 
 export const metadata: Metadata = {
-  title: "CoolVacay | Contact Us",
+  title: "Contact Us",
   description: "Contact Us Page",
 };
 

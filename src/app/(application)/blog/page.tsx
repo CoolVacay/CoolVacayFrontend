@@ -4,7 +4,7 @@ import { AllBlogsSkeleton } from "~/app/ui/components/common";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'CoolVacay | All Blogs',
+  title: 'All Blogs',
   description: 'All Blogs Page',
 };
 

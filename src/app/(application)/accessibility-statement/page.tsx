@@ -4,7 +4,7 @@ import parse from "html-react-parser";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'CoolVacay | Accessibility Statement',
+  title: 'Accessibility Statement',
   description: 'Accessibility Statement Page',
 };
 

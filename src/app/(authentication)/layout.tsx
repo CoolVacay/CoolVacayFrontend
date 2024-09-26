@@ -9,8 +9,8 @@ import { SiteConfigurationProvider } from "~/context/SiteConfigurationsContext";
 import { getSiteConfigurations } from "../(application)/actions";
 
 export const metadata = {
-  title: "CoolVacay | Authentication",
-  description: "Cool Vacay Booking Platform Authentication Page",
+  title: `${process.env.SITE_NAME ?? 'CoolVacay'} | Authentication`,
+  description: "Booking Platform Authentication Page",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 const inter = Inter({ subsets: ["latin"] });

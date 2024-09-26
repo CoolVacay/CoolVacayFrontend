@@ -4,7 +4,7 @@ import PersonalInformation from "~/app/ui/components/profile/PersonalInformation
 import { PersonalInformationSkeleton } from "~/app/ui/components/common";
 
 export const metadata: Metadata = {
-  title: "CoolVacay | Profile",
+  title: "Profile",
   description: "Profile for logged in users",
 };
 export default async function Page() {

@@ -4,7 +4,7 @@ import { getStaticPage } from "../actions";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'CoolVacay | Privacy Policy',
+  title: 'Privacy Policy',
   description: 'Privacy Policy Page',
 };
 export default async function Page() {

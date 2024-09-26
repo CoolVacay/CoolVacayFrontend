@@ -8,7 +8,7 @@ import PricingDetailsCard from "~/app/ui/components/listing/PricingDetailsCard/P
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "CoolVacay | Booking Process",
+  title: "Booking Process",
   description: "Booking Process Page",
 };
 

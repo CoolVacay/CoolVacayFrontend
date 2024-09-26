@@ -19,7 +19,7 @@ import {
 import { Newsletter, IconGenerator } from "../ui/components/common";
 
 export const metadata: Metadata = {
-  title: "CoolVacay | Find Your Dream Vacation Rentals & Travel Deals",
+  title: `${process.env.SITE_NAME ?? 'CoolVacay'} | Find Your Dream Vacation Rentals & Travel Deals`,
   description:
     "Discover unbeatable vacation rentals and deals with CoolVacay. Book easily with our engine, from luxury stays to budget-friendly options.",
 };

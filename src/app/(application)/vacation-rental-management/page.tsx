@@ -15,7 +15,7 @@ import { type Metadata } from "next";
 import { CheckmarkIcon } from "public/CheckmarkIcon";
 
 export const metadata: Metadata = {
-  title: "CoolVacay | Vacation Rental Management",
+  title: "Vacation Rental Management",
   description:
     "Welcome to CoolVacay, your trusted partner for vacation rental management. We specialize in sustainable solutions that integrate seamlessly with top third-party APIs, ensuring your property management is efficient and future-proof. Our innovative approach guarantees reliable, personalized service with a focus on accuracy and client satisfaction.",
 };

@@ -11,7 +11,7 @@ import { CloseDatesListings } from "~/app/ui/components/listings/CloseDatesListi
 import Filters from "~/app/ui/components/listings/Filters.server";
 
 export const metadata: Metadata = {
-  title: "CoolVacay | Listings Page",
+  title: "Listings Page",
   description: "View all our listings here",
 };
 export default function Page({
