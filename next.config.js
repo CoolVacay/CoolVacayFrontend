@@ -4,6 +4,7 @@ const config = {
   },
   images: {
     dangerouslyAllowSVG: true,
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
