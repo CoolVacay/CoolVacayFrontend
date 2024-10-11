@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
@@ -33,6 +33,13 @@ export default function BillingAddressForm({
   const { formData, setFormData } = useFormContext();
   const { searchParams } = useAppSearchParams();
   const router = useRouter();
+  useEffect(() => {
+    if (params.source === "Guesty") {
+      router.push(
+        `/book/${params.source}/${params.id}/payment?${searchParams.toString()}`
+      );
+    }
+  }, []);
 
   const countries = useMemo(() => {
     return allCountries.map((country) => (
@@ -56,7 +63,7 @@ export default function BillingAddressForm({
     validationSchema: ValidationSchema,
     onSubmit: (values) => {
       setFormData(values);
-      router.push(
+      router.replace(
         `/book/${params.source}/${params.id}/payment?${searchParams.toString()}`,
       );
     },

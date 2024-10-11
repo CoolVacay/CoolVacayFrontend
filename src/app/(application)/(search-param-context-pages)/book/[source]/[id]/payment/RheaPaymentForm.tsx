@@ -1,28 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useFormik } from "formik";
 import { Toaster } from "react-hot-toast";
 
 import { ActionButton, FormikCheckBox } from "~/app/ui/components/authentication";
 import { SimpleInput, IconGenerator } from "~/app/ui/components/common";
-import BookingCompleted from "./BookingCompleted";
+import BookingCompleted from "../reservation-successful/page";
 import { removeEmptyValues, toastNotifier } from "~/app/utils/helpers";
 import { bookingPayment } from "~/app/(application)/actions";
 import type { IBookingPaymentArgs } from "~/app/(application)/definitions";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
 import { useFormContext } from "../FormContext";
 import { userIdSchema, missingUserIdSchema } from "./validationSchemas";
+import { useRouter } from "next/navigation";
 
-export default function PaymentForm({
+export default function RheaPaymentForm({
   userId,
   params,
+  searchParams
 }: {
   userId?: string;
   params: {
     source: string;
     id: string;
+  };
+  searchParams: {
+    numberOfGuests: string;
+    fromDate: string;
+    toDate: string;
   };
 }) {
   const { searchParamsValues } = useAppSearchParams();
@@ -30,6 +37,7 @@ export default function PaymentForm({
   const [errorMessage, setErrorMessage] = useState<undefined | string>(
     undefined,
   );
+  const router = useRouter();
   const { formData } = useFormContext();
 
   const formik = useFormik({
@@ -84,10 +92,12 @@ export default function PaymentForm({
     onSubmit: () => console.log("Submitting"),
   });
 
+    useEffect(() => {
+      if(paymentCompleted && router) router.push( `/book/${params.source}/${params.id}/payment?${searchParams.toString()}`)
+    }, [paymentCompleted]);
+
   //TODO: refactor
-  return paymentCompleted ? (
-    <BookingCompleted />
-  ) : (
+  return (
     <form
       action={async () => {
         const allValues = {
