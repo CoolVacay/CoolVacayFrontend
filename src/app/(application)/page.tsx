@@ -17,6 +17,7 @@ import {
   DiscoverSection,
 } from "../ui/components/home/index";
 import { Newsletter, IconGenerator } from "../ui/components/common";
+import { getSiteConfigurations } from "./actions";
 
 export const metadata: Metadata = {
   title: `${process.env.SITE_NAME ?? 'CoolVacay'} | Find Your Dream Vacation Rentals & Travel Deals`,
@@ -24,14 +25,16 @@ export const metadata: Metadata = {
     "Discover unbeatable vacation rentals and deals with CoolVacay. Book easily with our engine, from luxury stays to budget-friendly options.",
 };
 
+const siteConfigurations = (await getSiteConfigurations())!;
+
 export default async function HomePage() {
   return (
     <main className="flex flex-col">
       <div className="relative -mt-24 flex h-lvh sm:h-[714px]">
         <div className="absolute flex h-lvh w-full sm:h-[714px]">
           <Image
-            alt="Coolvacay background image"
-            src="/landing_background.png"
+            alt="Main background image"
+            src={siteConfigurations.config.main_image ?? ""}
             quality={70}
             fill
             priority={true}

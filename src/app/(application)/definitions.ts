@@ -258,6 +258,7 @@ export interface ICloseDatesListings {
 export type IReadOnlySiteConfigurationProperties = Readonly<{
   config: {
     siteName: string;
+    main_image: string;
     originUrl: string;
     favicon: {
       url: string;
@@ -289,6 +290,7 @@ export type IReadOnlySiteConfigurationProperties = Readonly<{
     phone: string;
     email: string;
     address: string;
+    contact_us_image: string;
     hours: {
       day: string;
       openTime: string;

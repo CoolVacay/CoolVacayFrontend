@@ -20,7 +20,6 @@ export const metadata: Metadata = {
     default: `${process.env.SITE_NAME ?? 'CoolVacay'}`
   },
   description: `${process.env.SITE_NAME ?? 'CoolVacay'} Booking Platform`,
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 export default async function RootLayout({
@@ -32,6 +31,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={process.env.SITE_NAME}> 
+    <head>
+      <link rel="icon" href={siteConfigurations.config.favicon.url} sizes={siteConfigurations.config.favicon.width} />
+    </head>
     {/* Change the className above to switch color palette. The classname above must be predefined in the tailwindconfig file */}
       <GoogleAnalytics gaId="G-GT7N6G5LGF"/>
       <body className={`${inter.className} w-full flex h-full flex-col`}>
