@@ -50,7 +50,9 @@ export function PricingDetails({
     <PricingDetailsSkeleton />
   ) : (
     <div className="flex flex-col gap-4 font-medium">
-      <h6 className="flex justify-between text-lg text-[#858C93]">
+      {pricingDetails !== undefined ? 
+      <div>
+        <h6 className="flex justify-between text-lg text-[#858C93]">
         {pricingDetails?.pricePerNightStr} x {pricingDetails?.numberOfNights}{" "}
         nights
         <span className="text-black">
@@ -58,7 +60,7 @@ export function PricingDetails({
         </span>
       </h6>
 
-      {pricingDetails?.components.map((fee, index) => {
+      {pricingDetails.components.map((fee, index) => {
         if (index > 0) {
           return (
             <p
@@ -81,6 +83,7 @@ export function PricingDetails({
         Due Now
         <span>{pricingDetails?.confirmationAmountStr}</span>
       </h4>
+      </div> : <div>There was an issue with this request. Please try other dates or another listing.</div>}
     </div>
   );
 }

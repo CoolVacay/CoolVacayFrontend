@@ -1,5 +1,3 @@
-import { IconGenerator } from "../IconGenerator";
-
 export default function InfoCard({
   icon,
   name,

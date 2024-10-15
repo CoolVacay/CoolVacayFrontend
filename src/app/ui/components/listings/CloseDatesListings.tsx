@@ -1,6 +1,5 @@
 import { getCloseDatesListings } from "~/app/(application)/actions";
 import { ListingCard } from "../common";
-import Pagination from "./Pagination";
 import { getFilteredListings } from "~/app/(application)/actions";
 
 const PAGESIZE = "4";

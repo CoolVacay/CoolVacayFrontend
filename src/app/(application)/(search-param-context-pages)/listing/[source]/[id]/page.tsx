@@ -1,6 +1,4 @@
 import { getListingData } from "~/app/(application)/actions";
-import { capitalize } from "~/app/utils/helpers";
-
 import Gallery from "~/app/ui/components/listing/Gallery";
 import Overview from "~/app/ui/components/listing/OverviewSection";
 import BookNow from "~/app/ui/components/listing/BookNow/BookNowCard.server";

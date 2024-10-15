@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { IconGenerator } from "../common";
 import { getCategories } from "~/app/(application)/actions";
 import { BeachIcon } from "public/BeachIcon";
 import { BeachfrontIcon } from "public/BeachfrontIcon";

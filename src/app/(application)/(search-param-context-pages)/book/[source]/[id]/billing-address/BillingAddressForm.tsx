@@ -34,12 +34,12 @@ export default function BillingAddressForm({
   const { searchParams } = useAppSearchParams();
   const router = useRouter();
   useEffect(() => {
-    if (params.source === "Guesty") {
+    if (params.source === "Rhea") {
       router.push(
         `/book/${params.source}/${params.id}/payment?${searchParams.toString()}`
       );
     }
-  }, []);
+  }, [params.id, params.source, router, searchParams]);
 
   const countries = useMemo(() => {
     return allCountries.map((country) => (

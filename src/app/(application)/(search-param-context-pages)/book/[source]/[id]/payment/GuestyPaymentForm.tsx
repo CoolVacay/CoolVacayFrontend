@@ -1,14 +1,45 @@
 "use client";
+
 import React, { useEffect, useState } from 'react';
 import {
   EmbeddedCheckoutProvider,
-  EmbeddedCheckout
+  EmbeddedCheckout,
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { getPricingDetails } from '~/app/(application)/actions';
-import { IListingData } from '~/app/(application)/definitions';
+import { type IListingData } from '~/app/(application)/definitions';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? ''
+);
+
+interface GuestyPaymentFormProps {
+  fromDate: string;
+  toDate: string;
+  source: string;
+  numberOfGuests: string;
+  listingInfo: IListingData;
+}
+
+interface PricingResponse {
+  clientSecret: string;
+}
+
+const LoadingSkeleton = () => (
+    <div className="animate-pulse h-[60vh]">
+        <div className='w-full flex flex-col justify-center items-center gap-2'>
+            <div className="bg-gray-300 h-6 w-1/3 mb-4 rounded"></div>
+            <div className="bg-gray-300 h-6 w-1/3 mb-4 rounded"></div>
+            <div className="bg-gray-300 h-6 w-1/3 mb-4 rounded"></div>
+            <div className="bg-gray-300 h-6 w-1/2 mb-4 rounded"></div>
+            <div className="bg-gray-300 h-6 w-1/4 mb-4 rounded"></div>
+            <div className="bg-gray-300 h-6 w-1/3 mb-4 rounded"></div>
+            <div className="bg-gray-300 h-6 w-1/3 mb-4 rounded"></div>
+            <div className="bg-gray-300 h-6 w-1/2 mb-4 rounded"></div>
+            <div className="bg-gray-300 h-6 w-1/4 mb-4 rounded"></div>
+        </div>
+    </div>
+  );
 
 function GuestyPaymentForm({
   fromDate,
@@ -16,24 +47,21 @@ function GuestyPaymentForm({
   source,
   numberOfGuests,
   listingInfo,
-}: {
-  fromDate: string;
-  toDate: string;
-  source: string;
-  numberOfGuests: string;
-  listingInfo: IListingData;
-}) {
-  const [options, setOptions] = useState<{ clientSecret: string } | undefined>(undefined);
+}: GuestyPaymentFormProps) {
+  const [options, setOptions] = useState<{ clientSecret: string } | undefined>(
+    undefined
+  );
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchPricingDetails() {
+    const fetchPricingDetails = async () => {
       try {
         const details = await getPricingDetails(
           source,
-          listingInfo.id!,
+          listingInfo.id,
           fromDate,
           toDate,
-          numberOfGuests,
+          numberOfGuests
         );
 
         // Fetch client secret from the server
@@ -48,22 +76,25 @@ function GuestyPaymentForm({
           }),
         });
 
-        const res = await resp.json();
+        const res = await resp.json() as PricingResponse;
         setOptions({ clientSecret: res.clientSecret });
       } catch (err) {
-        console.error(err);
+        console.error('Error fetching pricing details:', err);
+      } finally {
+        setLoading(false);
       }
-    }
+    };
 
     void fetchPricingDetails();
   }, [source, listingInfo.id, fromDate, toDate, numberOfGuests]);
 
+  if(loading) return <LoadingSkeleton />;
   // If the clientSecret is not available yet, render nothing
   if (!options) return null;
 
   return (
     <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
-      <EmbeddedCheckout />
+        <EmbeddedCheckout />
     </EmbeddedCheckoutProvider>
   );
 }

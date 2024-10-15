@@ -1,10 +1,17 @@
-import { type NextApiRequest, type NextApiResponse } from 'next';
 import Stripe from 'stripe';
+import { type IPricingDetails } from '~/app/ui/components/listing/BookNow/BookNowCard.client';
 // Initialize Stripe with the secret key
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
+interface CheckoutRequest {
+  successRedirectUrl: string;
+  pricingDetails: IPricingDetails;
+}
+
 export async function POST(req: Request) {
-  const { successRedirectUrl, pricingDetails } = await req.json();
+  const body: CheckoutRequest = await req.json() as CheckoutRequest;
+
+  const { successRedirectUrl, pricingDetails } = body;
 
   try {
     // Create Checkout Session from body params
@@ -40,6 +47,11 @@ export async function POST(req: Request) {
       //     quantity: 1, // Assuming 1 quantity for the session
       // })),
       mode: 'payment',
+      payment_method_options: {
+        card: {
+          setup_future_usage: "off_session"
+        }
+      },
       return_url: `${successRedirectUrl}&session_id={CHECKOUT_SESSION_ID}`,
       automatic_tax: { enabled: false },
     });
@@ -64,7 +76,7 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: Request) {
   const urlObj = new URL(req.url ?? "");
   const sessionId = urlObj.searchParams.get('session_id');
 

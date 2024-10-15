@@ -44,6 +44,7 @@ const RangeDatePicker = ({
           listingInfo?.id ?? "",
           dayjs(newValue[0]).format("YYYY-MM-DD"),
         );
+        console.log(availabilityPeriods)
         setRangeDatesAvailable(availabilityPeriods);
         setLoading(false);
       }
