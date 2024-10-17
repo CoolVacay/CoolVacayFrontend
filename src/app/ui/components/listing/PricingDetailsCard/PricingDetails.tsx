@@ -49,10 +49,10 @@ export function PricingDetails({
   return loading ? (
     <PricingDetailsSkeleton />
   ) : (
+      pricingDetails !== undefined ? 
+        
     <div className="flex flex-col gap-4 font-medium">
-      {pricingDetails !== undefined ? 
-      <div>
-        <h6 className="flex justify-between text-lg text-[#858C93]">
+      <h6 className="flex justify-between text-lg text-[#858C93]">
         {pricingDetails?.pricePerNightStr} x {pricingDetails?.numberOfNights}{" "}
         nights
         <span className="text-black">
@@ -79,11 +79,11 @@ export function PricingDetails({
         Total
         <span>{pricingDetails?.totalPriceStr}</span>
       </h5>
-      <h4 className="flex justify-between text-xl">
+      {pricingDetails.confirmationAmountStr && <h4 className="flex justify-between text-xl">
         Due Now
         <span>{pricingDetails?.confirmationAmountStr}</span>
-      </h4>
-      </div> : <div>There was an issue with this request. Please try other dates or another listing.</div>}
-    </div>
+      </h4>}
+      </div> : 
+      <div>There was an issue with this request. Please try other dates or another listing.</div>
   );
 }

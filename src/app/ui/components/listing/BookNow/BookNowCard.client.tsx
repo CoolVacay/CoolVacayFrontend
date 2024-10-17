@@ -14,6 +14,7 @@ import type {
 } from "~/app/(application)/definitions";
 
 export interface IPricingDetails {
+  quoteId?: string;
   totalPrice: number;
   totalPriceStr: string;
   numberOfNights: number;
@@ -37,7 +38,6 @@ export default function BookNowContent({
   params: IParams;
   availabilityData?: IPropertyAvailability | undefined;
 }) {
-  console.log(availabilityData)
   const { searchParams, searchParamsValues, updateSearchParams } =
     useAppSearchParams();
 

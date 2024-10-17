@@ -1,7 +1,4 @@
-"use client";
-
 import { IconGenerator } from "~/app/ui/components/common";
-import { useEffect } from "react";
 import { bookingPayment } from "~/app/(application)/actions";
 
 interface PageProps {
@@ -14,6 +11,7 @@ interface PageProps {
     fromDate: string;
     toDate: string;
     session_id: string;
+    quote_id: string;
   };
 }
 
@@ -33,18 +31,24 @@ interface CustomerDetails {
 
 interface SessionResponse {
   session: {
+    payment_intent: string;
     customer_details: CustomerDetails;
   };
 }
 
-export default function Page({ params, searchParams }: PageProps) {
-  useEffect(() => {
-    if (params.source === "Rhea") {
-      async function placeGuestyReservation() {
+interface PaymentIntentResponse {
+  paymentIntent: {
+    client_secret: string;
+    payment_method: string;
+  }
+}
+
+export default async function Page({ params, searchParams }: PageProps) {
+    if (params.source === "Guesty") {
         try {
           // Fetch session details from the server
-          const resp = await fetch(
-            `/api/create-checkout-session?session_id=${searchParams.session_id}`,
+          const sessionResponse = await fetch(
+            `http://localhost:3000/api/create-checkout-session?session_id=${searchParams.session_id}`,
             {
               method: "GET",
               headers: {
@@ -53,10 +57,23 @@ export default function Page({ params, searchParams }: PageProps) {
             }
           );
 
-          const { session } = await resp.json() as SessionResponse;
+          const { session } = await sessionResponse.json() as SessionResponse;
 
-          console.log(session)
+          const paymentIntentResponse = await fetch(
+            `http://localhost:3000/api/retrieve-payment-intent?payment_intent_id=${session.payment_intent}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          const { paymentIntent } = await paymentIntentResponse.json() as PaymentIntentResponse
+
           const obj = {
+            quoteId: searchParams.quote_id ?? null,
+            ccToken: paymentIntent.payment_method ?? null,
             firstName: session.customer_details?.name?.split(" ")[0] ?? "",
             lastName: session.customer_details?.name?.split(" ")[1] ?? "",
             email: session.customer_details.email,
@@ -76,16 +93,12 @@ export default function Page({ params, searchParams }: PageProps) {
           console.log({ obj });
 
           const bookingResp = await bookingPayment(obj);
+
           console.log({ bookingResp });
         } catch (err) {
           console.error("Error placing Guesty reservation:", err);
         }
       }
-
-      void placeGuestyReservation();
-    }
-  }, [params.source, searchParams.session_id, searchParams.fromDate, searchParams.toDate]);
-
   return (
     <div className="m-4 flex w-full flex-col items-center justify-center">
       <IconGenerator

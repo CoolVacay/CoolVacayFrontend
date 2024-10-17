@@ -34,7 +34,7 @@ export default function BillingAddressForm({
   const { searchParams } = useAppSearchParams();
   const router = useRouter();
   useEffect(() => {
-    if (params.source === "Rhea") {
+    if (params.source === "Guesty") {
       router.push(
         `/book/${params.source}/${params.id}/payment?${searchParams.toString()}`
       );

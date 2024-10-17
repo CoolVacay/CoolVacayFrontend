@@ -6,12 +6,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 interface CheckoutRequest {
   successRedirectUrl: string;
   pricingDetails: IPricingDetails;
+  quoteId?: string;
 }
 
 export async function POST(req: Request) {
   const body: CheckoutRequest = await req.json() as CheckoutRequest;
 
-  const { successRedirectUrl, pricingDetails } = body;
+  const { successRedirectUrl, pricingDetails, quoteId } = body;
 
   try {
     // Create Checkout Session from body params
@@ -26,13 +27,16 @@ export async function POST(req: Request) {
           position: 'auto'
         }
       },
+      payment_intent_data: {
+        setup_future_usage: 'off_session'
+      },
       line_items: [{
         price_data: {
           currency: 'usd',
           product_data: {
             name: 'Total Due Now', // Can be any description you prefer
           },
-          unit_amount: Math.round(Number(pricingDetails.confirmationAmount)* 100), // Total amount in cents ($50.00)
+          unit_amount: Math.round(Number(pricingDetails?.confirmationAmount ? pricingDetails.confirmationAmount : pricingDetails.totalPrice)* 100), // Total amount in cents ($50.00)
         },
         quantity: 1,
       }],
@@ -52,7 +56,7 @@ export async function POST(req: Request) {
           setup_future_usage: "off_session"
         }
       },
-      return_url: `${successRedirectUrl}&session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${successRedirectUrl}&quote_id=${quoteId}&session_id={CHECKOUT_SESSION_ID}`,
       automatic_tax: { enabled: false },
     });
 
@@ -83,7 +87,6 @@ export async function GET(req: Request) {
   try {
     const session =
       await stripe.checkout.sessions.retrieve(sessionId ?? "");
-    console.log(session);
     return new Response(
       JSON.stringify({
         session

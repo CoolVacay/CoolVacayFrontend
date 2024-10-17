@@ -126,6 +126,8 @@ export interface IProfileDetails {
 
 export interface IBookingPaymentArgs {
   userId?: number;
+  qouteId?: number;
+  ccToken?: string;
   firstName?: string;
   lastName?: string;
   email?: string;
@@ -144,12 +146,6 @@ export interface IBookingPaymentArgs {
   children?: number;
   infants?: number;
   pets?: number;
-  cardDetails?: {
-    cardNumber: string;
-    expiryDate: string;
-    cvc: string;
-    cardHolderName: string;
-  };
 }
 
 export interface IPassArgs {

@@ -63,6 +63,7 @@ function GuestyPaymentForm({
           toDate,
           numberOfGuests
         );
+        console.log(details)
 
         // Fetch client secret from the server
         const resp = await fetch('/api/create-checkout-session', {
@@ -73,6 +74,7 @@ function GuestyPaymentForm({
           body: JSON.stringify({
             successRedirectUrl: `${window.location.origin}/book/${source}/${listingInfo.id}/reservation-successful?numberOfGuests=${numberOfGuests}&fromDate=${fromDate}&toDate=${toDate}`,
             pricingDetails: details,
+            quoteId: details?.quoteId
           }),
         });
 
