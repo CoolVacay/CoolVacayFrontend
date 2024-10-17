@@ -2,7 +2,7 @@ import { getListingData } from "~/app/(application)/actions";
 import RheaPaymentForm from "./RheaPaymentForm";
 import { auth } from "~/auth";
 import PolicyAndRules from "~/app/ui/components/listing/PolicyAndRules";
-import GuestyPaymentForm from "./GuestyPaymentForm";
+import GuestyPayment from "./GuestyPaymentForm";
 
 export default async function Page({
   params,
@@ -25,8 +25,21 @@ export default async function Page({
     <div className="flex w-full flex-col gap-6">
       <h1 className="text-2xl font-bold">Payment</h1>
       <div className="rounded-xl border border-[#EAEAEF] p-6">
-        {params.source === 'Rhea' ? <GuestyPaymentForm source={params.source} listingInfo={listing} fromDate={searchParams.fromDate} toDate={searchParams.toDate} numberOfGuests={searchParams.numberOfGuests} /> : 
-          <RheaPaymentForm searchParams={searchParams} params={params} userId={session?.user!.id} />}
+        {params.source === "Rhea" ? (
+          <GuestyPayment
+            source={params.source}
+            listingInfo={listing}
+            fromDate={searchParams.fromDate}
+            toDate={searchParams.toDate}
+            numberOfGuests={searchParams.numberOfGuests}
+          />
+        ) : (
+          <RheaPaymentForm
+            searchParams={searchParams}
+            params={params}
+            userId={session?.user!.id}
+          />
+        )}
         <div className="pt-10">
           <PolicyAndRules listing={listing} />
         </div>

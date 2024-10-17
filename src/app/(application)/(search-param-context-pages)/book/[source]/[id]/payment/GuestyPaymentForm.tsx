@@ -1,16 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
 import {
-  EmbeddedCheckoutProvider,
-  EmbeddedCheckout,
-} from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import { getPricingDetails } from '~/app/(application)/actions';
-import { type IListingData } from '~/app/(application)/definitions';
+  // EmbeddedCheckoutProvider,
+  // EmbeddedCheckout,
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { getPricingDetails } from "~/app/(application)/actions";
+import { type IListingData } from "~/app/(application)/definitions";
+import { useRouter } from "next/navigation"; // For navigation
+import "./styles.css";
 
 const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? ''
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? "",
 );
 
 interface GuestyPaymentFormProps {
@@ -21,25 +26,28 @@ interface GuestyPaymentFormProps {
   listingInfo: IListingData;
 }
 
-interface PricingResponse {
+interface PaymentIntentResponse {
+  paymentIntentId: string;
+  paymentMethodId: string;
   clientSecret: string;
+  error: any;
 }
 
-const LoadingSkeleton = () => (
-    <div className="animate-pulse h-[60vh]">
-        <div className='w-full flex flex-col justify-center items-center gap-2'>
-            <div className="bg-gray-300 h-6 w-1/3 mb-4 rounded"></div>
-            <div className="bg-gray-300 h-6 w-1/3 mb-4 rounded"></div>
-            <div className="bg-gray-300 h-6 w-1/3 mb-4 rounded"></div>
-            <div className="bg-gray-300 h-6 w-1/2 mb-4 rounded"></div>
-            <div className="bg-gray-300 h-6 w-1/4 mb-4 rounded"></div>
-            <div className="bg-gray-300 h-6 w-1/3 mb-4 rounded"></div>
-            <div className="bg-gray-300 h-6 w-1/3 mb-4 rounded"></div>
-            <div className="bg-gray-300 h-6 w-1/2 mb-4 rounded"></div>
-            <div className="bg-gray-300 h-6 w-1/4 mb-4 rounded"></div>
-        </div>
-    </div>
-  );
+// const LoadingSkeleton = () => (
+//   <div className="h-[60vh] animate-pulse">
+//     <div className="flex w-full flex-col items-center justify-center gap-2">
+//       <div className="mb-4 h-6 w-1/3 rounded bg-gray-300"></div>
+//       <div className="mb-4 h-6 w-1/3 rounded bg-gray-300"></div>
+//       <div className="mb-4 h-6 w-1/3 rounded bg-gray-300"></div>
+//       <div className="mb-4 h-6 w-1/2 rounded bg-gray-300"></div>
+//       <div className="mb-4 h-6 w-1/4 rounded bg-gray-300"></div>
+//       <div className="mb-4 h-6 w-1/3 rounded bg-gray-300"></div>
+//       <div className="mb-4 h-6 w-1/3 rounded bg-gray-300"></div>
+//       <div className="mb-4 h-6 w-1/2 rounded bg-gray-300"></div>
+//       <div className="mb-4 h-6 w-1/4 rounded bg-gray-300"></div>
+//     </div>
+//   </div>
+// );
 
 function GuestyPaymentForm({
   fromDate,
@@ -48,55 +56,105 @@ function GuestyPaymentForm({
   numberOfGuests,
   listingInfo,
 }: GuestyPaymentFormProps) {
-  const [options, setOptions] = useState<{ clientSecret: string } | undefined>(
-    undefined
-  );
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
+  const stripe = useStripe();
+  const elements = useElements();
 
-  useEffect(() => {
-    const fetchPricingDetails = async () => {
-      try {
-        const details = await getPricingDetails(
-          source,
-          listingInfo.id,
-          fromDate,
-          toDate,
-          numberOfGuests
-        );
+  // const router = useRouter();
+  const handlePayment = async () => {
+    try {
+      const details = await getPricingDetails(
+        source,
+        listingInfo.id,
+        fromDate,
+        toDate,
+        numberOfGuests,
+      );
+      if (!stripe || !elements) return;
 
-        // Fetch client secret from the server
-        const resp = await fetch('/api/create-checkout-session', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            successRedirectUrl: `${window.location.origin}/book/${source}/${listingInfo.id}/reservation-successful?numberOfGuests=${numberOfGuests}&fromDate=${fromDate}&toDate=${toDate}`,
-            pricingDetails: details,
-          }),
-        });
-
-        const res = await resp.json() as PricingResponse;
-        setOptions({ clientSecret: res.clientSecret });
-      } catch (err) {
-        console.error('Error fetching pricing details:', err);
-      } finally {
-        setLoading(false);
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: "card",
+        card: elements.getElement(CardElement)!,
+      });
+      if (error) {
+        console.error(error.message);
+        // setLoading(false);
+        return;
       }
-    };
 
-    void fetchPricingDetails();
-  }, [source, listingInfo.id, fromDate, toDate, numberOfGuests]);
+      // Fetch client secret from the server
+      const resp = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currency: "USD",
+          pricingDetails: details,
+          paymentMethodId: paymentMethod.id,
+          successRedirectUrl: `${window.location.origin}/book/${source}/${listingInfo.id}/reservation-successful?numberOfGuests=${numberOfGuests}&fromDate=${fromDate}&toDate=${toDate}`,
+        }),
+      });
 
-  if(loading) return <LoadingSkeleton />;
-  // If the clientSecret is not available yet, render nothing
-  if (!options) return null;
+      const data = (await resp.json()) as PaymentIntentResponse;
+      console.log(data, "data");
+      if (data.error) {
+        console.error(data.error);
+        // setLoading(false);
+        return;
+      }
+
+      const { clientSecret } = data;
+
+      const { error: confirmError } =
+        await stripe.confirmCardPayment(clientSecret);
+      if (confirmError) {
+        console.error(confirmError.message);
+        // setLoading(false);
+        return;
+      }
+
+      // Payment successful
+      console.log(
+        "Payment successful! Payment Method ID:",
+        data.paymentMethodId,
+      );
+      // router.replace(
+      //   `/book/${source}/${listingInfo.id}/reservation-successful?numberOfGuests=${numberOfGuests}&fromDate=${fromDate}&toDate=${toDate}`,
+      // );
+      // setLoading(false);
+      // setOptions({ clientSecret: res.clientSecret });
+    } catch (err) {
+      console.error("Error fetching pricing details:", err);
+    } finally {
+      // setLoading(false);
+    }
+  };
 
   return (
-    <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
-        <EmbeddedCheckout />
-    </EmbeddedCheckoutProvider>
+    <div>
+      <CardElement />
+      <button onClick={handlePayment}>Pay</button>
+    </div>
   );
 }
 
-export default GuestyPaymentForm;
+export default function GuestyPayment({
+  fromDate,
+  toDate,
+  source,
+  numberOfGuests,
+  listingInfo,
+}: GuestyPaymentFormProps) {
+  return (
+    <Elements stripe={stripePromise}>
+      <GuestyPaymentForm
+        fromDate={fromDate}
+        toDate={toDate}
+        source={source}
+        numberOfGuests={numberOfGuests}
+        listingInfo={listingInfo}
+      />
+    </Elements>
+  );
+}

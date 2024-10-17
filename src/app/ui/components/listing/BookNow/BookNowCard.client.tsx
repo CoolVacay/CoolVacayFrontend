@@ -37,7 +37,6 @@ export default function BookNowContent({
   params: IParams;
   availabilityData?: IPropertyAvailability | undefined;
 }) {
-  console.log(availabilityData)
   const { searchParams, searchParamsValues, updateSearchParams } =
     useAppSearchParams();
 
@@ -87,7 +86,11 @@ export default function BookNowContent({
       >
         <Link
           className={`flex w-full justify-center rounded-full bg-primary py-4 text-white ${!bookButtonDisabled ? "hover:border hover:border-primary hover:bg-white hover:text-primary" : "pointer-events-none"} disabled:opacity-50`}
-          href={`/book/${params.source}/${params.id}/billing-address?${searchParams.toString()}`}
+          href={
+            params.source === "Rhea"
+              ? `/book/${params.source}/${params.id}/payment?${searchParams.toString()}`
+              : `/book/${params.source}/${params.id}/billing-address?${searchParams.toString()}`
+          }
         >
           Book now
         </Link>
