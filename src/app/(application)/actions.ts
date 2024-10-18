@@ -95,6 +95,7 @@ export const getPricingDetails = (
   fetcher<IPricingDetails>(
     `Listings/${source}/${id}/priceDetails?startDate=${startDate}&endDate=${endDate}&numberOfGuests=${numberOfGuests}`,
     "Failed to fetch listing data",
+    true,
   );
 
 export const getAvailabilityDates = (
@@ -106,6 +107,7 @@ export const getAvailabilityDates = (
   fetcher<IPropertyAvailability>(
     `Listings/availability?FromDate=${startDate}&ToDate=${endDate}&source=${source}&ListingId=${id}`,
     "Failed to fetch available dates",
+    true,
   );
 
 export const getAvailabilityPeriods = (

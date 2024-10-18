@@ -3,6 +3,7 @@ import RheaPaymentForm from "./RheaPaymentForm";
 import { auth } from "~/auth";
 import PolicyAndRules from "~/app/ui/components/listing/PolicyAndRules";
 import GuestyPaymentForm from "./GuestyPaymentForm";
+import { getPricingDetails } from "~/app/(application)/actions";
 
 export default async function Page({
   params,
@@ -20,13 +21,31 @@ export default async function Page({
 }) {
   const session = (await auth())!;
   const listing = (await getListingData(params))!;
-
+  const bookingDetails = (await getPricingDetails(
+    params.source,
+    listing.id,
+    searchParams.fromDate,
+    searchParams.toDate,
+    searchParams.numberOfGuests,
+  ))!;
   return (
     <div className="flex w-full flex-col gap-6">
       <h1 className="text-2xl font-bold">Payment</h1>
       <div className="rounded-xl border border-[#EAEAEF] p-6">
-        {params.source === 'Guesty' ? <GuestyPaymentForm source={params.source} listingInfo={listing} fromDate={searchParams.fromDate} toDate={searchParams.toDate} numberOfGuests={searchParams.numberOfGuests} /> : 
-          <RheaPaymentForm searchParams={searchParams} params={params} userId={session?.user!.id} />}
+        {params.source === "Guesty" ? (
+          <GuestyPaymentForm
+            source={params.source}
+            listingInfo={listing}
+            bookingDetails={bookingDetails}
+            successRedirectUrl={`book/${params.source}/${listing.id}/reservation-successful?numberOfGuests=${searchParams.numberOfGuests}&fromDate=${searchParams.fromDate}&toDate=${searchParams.toDate}`}
+          />
+        ) : (
+          <RheaPaymentForm
+            searchParams={searchParams}
+            params={params}
+            userId={session?.user!.id}
+          />
+        )}
         <div className="pt-10">
           <PolicyAndRules listing={listing} />
         </div>

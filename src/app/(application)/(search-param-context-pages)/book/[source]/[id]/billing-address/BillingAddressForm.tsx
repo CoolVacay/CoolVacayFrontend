@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
@@ -33,13 +33,6 @@ export default function BillingAddressForm({
   const { formData, setFormData } = useFormContext();
   const { searchParams } = useAppSearchParams();
   const router = useRouter();
-  useEffect(() => {
-    if (params.source === "Guesty") {
-      router.push(
-        `/book/${params.source}/${params.id}/payment?${searchParams.toString()}`
-      );
-    }
-  }, [params.id, params.source, router, searchParams]);
 
   const countries = useMemo(() => {
     return allCountries.map((country) => (
@@ -70,10 +63,16 @@ export default function BillingAddressForm({
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="flex flex-col gap-6 sm:gap-8">
+    <form
+      onSubmit={formik.handleSubmit}
+      className="flex flex-col gap-6 sm:gap-8"
+    >
       <div className="flex flex-col gap-6">
         <div className="relative">
-          <label htmlFor="street" className="mb-1 block text-lg font-medium sm:text-base">
+          <label
+            htmlFor="street"
+            className="mb-1 block text-lg font-medium sm:text-base"
+          >
             Street Address<span className="absolute">*</span>
           </label>
           <SimpleInput
@@ -92,9 +91,12 @@ export default function BillingAddressForm({
             </p>
           )}
         </div>
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row">
           <div className="w-full">
-            <label htmlFor="aptNr" className="mb-1 block text-lg font-medium sm:text-base">
+            <label
+              htmlFor="aptNr"
+              className="mb-1 block text-lg font-medium sm:text-base"
+            >
               Apt or Suite Number
             </label>
             <SimpleInput
@@ -106,7 +108,10 @@ export default function BillingAddressForm({
             />
           </div>
           <div className="w-full">
-            <label htmlFor="city" className="mb-1 block text-lg font-medium sm:text-base">
+            <label
+              htmlFor="city"
+              className="mb-1 block text-lg font-medium sm:text-base"
+            >
               City<span className="absolute">*</span>
             </label>
             <SimpleInput
@@ -125,9 +130,12 @@ export default function BillingAddressForm({
             )}
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row">
           <div className="w-full">
-            <label htmlFor="country" className="mb-1 block text-lg font-medium sm:text-base">
+            <label
+              htmlFor="country"
+              className="mb-1 block text-lg font-medium sm:text-base"
+            >
               Country<span className="absolute">*</span>
             </label>
             <SimpleSelectInput
@@ -146,7 +154,10 @@ export default function BillingAddressForm({
             )}
           </div>
           <div className="w-full">
-            <label htmlFor="zip" className="mb-1 block text-lg font-medium sm:text-base">
+            <label
+              htmlFor="zip"
+              className="mb-1 block text-lg font-medium sm:text-base"
+            >
               ZIP Code<span className="absolute">*</span>
             </label>
             <SimpleInput
@@ -167,7 +178,10 @@ export default function BillingAddressForm({
         </div>
         {formik.values.country === "USA" && (
           <div className="w-full">
-            <label htmlFor="state" className="mb-1 block text-lg font-medium sm:text-base">
+            <label
+              htmlFor="state"
+              className="mb-1 block text-lg font-medium sm:text-base"
+            >
               State<span className="absolute">*</span>
             </label>
             <SimpleSelectInput

@@ -1,6 +1,6 @@
 import { IconGenerator } from "~/app/ui/components/common";
 import { bookingPayment } from "~/app/(application)/actions";
-
+import Stripe from "stripe";
 interface PageProps {
   params: {
     source: string;
@@ -30,75 +30,65 @@ interface CustomerDetails {
 }
 
 interface SessionResponse {
-  session: {
-    payment_intent: string;
-    customer_details: CustomerDetails;
-  };
+  payment_intent: string;
+  customer_details: CustomerDetails;
 }
 
 interface PaymentIntentResponse {
-  paymentIntent: {
-    client_secret: string;
-    payment_method: string;
-  }
+  client_secret: string;
+  payment_method: string;
+}
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+async function getStripeSession(sessionId: string) {
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+  return session;
+}
+
+async function getPaymentIntent(paymentIntentId: string) {
+  const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+  return paymentIntent;
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
-    if (params.source === "Guesty") {
-        try {
-          // Fetch session details from the server
-          const sessionResponse = await fetch(
-            `http://localhost:3000/api/create-checkout-session?session_id=${searchParams.session_id}`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
+  if (params.source === "Guesty") {
+    try {
+      const sessionId = searchParams.session_id;
+      const session = (await getStripeSession(sessionId)) as SessionResponse;
+      const paymentIntent = (await getPaymentIntent(
+        session.payment_intent,
+      )) as PaymentIntentResponse;
 
-          const { session } = await sessionResponse.json() as SessionResponse;
+      console.log(paymentIntent, "payment");
 
-          const paymentIntentResponse = await fetch(
-            `http://localhost:3000/api/retrieve-payment-intent?payment_intent_id=${session.payment_intent}`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
+      const obj = {
+        quoteId: searchParams.quote_id ?? null,
+        ccToken: paymentIntent.payment_method ?? null,
+        firstName: session.customer_details?.name?.split(" ")[0] ?? "",
+        lastName: session.customer_details?.name?.split(" ")[1] ?? "",
+        email: session.customer_details.email,
+        phone: session.customer_details.phone ?? "",
+        address1: session.customer_details.address.line1,
+        address2: session.customer_details.address.line2 ?? "",
+        city: session.customer_details.address.city,
+        state: session.customer_details.address.state,
+        zip: session.customer_details.address.postal_code,
+        country: session.customer_details.address.country,
+        listingId: params.id,
+        source: params.source,
+        fromDate: searchParams.fromDate,
+        toDate: searchParams.toDate,
+      };
 
-          const { paymentIntent } = await paymentIntentResponse.json() as PaymentIntentResponse
+      console.log({ obj });
 
-          const obj = {
-            quoteId: searchParams.quote_id ?? null,
-            ccToken: paymentIntent.payment_method ?? null,
-            firstName: session.customer_details?.name?.split(" ")[0] ?? "",
-            lastName: session.customer_details?.name?.split(" ")[1] ?? "",
-            email: session.customer_details.email,
-            phone: session.customer_details.phone ?? "",
-            address1: session.customer_details.address.line1,
-            address2: session.customer_details.address.line2 ?? "",
-            city: session.customer_details.address.city,
-            state: session.customer_details.address.state,
-            zip: session.customer_details.address.postal_code,
-            country: session.customer_details.address.country,
-            listingId: "66ed627147c2b300137e5887", // Hardcoded, assuming this will be replaced
-            source: "Guesty", // params.source,
-            fromDate: searchParams.fromDate,
-            toDate: searchParams.toDate,
-          };
+      const bookingResp = await bookingPayment(obj);
 
-          console.log({ obj });
-
-          const bookingResp = await bookingPayment(obj);
-
-          console.log({ bookingResp });
-        } catch (err) {
-          console.error("Error placing Guesty reservation:", err);
-        }
-      }
+      console.log({ bookingResp });
+    } catch (err) {
+      console.error("Error placing Guesty reservation:", err);
+    }
+  }
   return (
     <div className="m-4 flex w-full flex-col items-center justify-center">
       <IconGenerator
@@ -109,7 +99,9 @@ export default async function Page({ params, searchParams }: PageProps) {
       />
       <div className="flex flex-col items-center gap-3 text-[#676D73]">
         <h1 className="text-2xl font-bold text-black">Thank you!</h1>
-        <h2 className="text-[16px]">Your booking details have been sent to your email.</h2>
+        <h2 className="text-[16px]">
+          Your booking details have been sent to your email.
+        </h2>
         <h3 className="text-[16px]">
           You can download the booking as PDF below, or check it on the
           dashboard.
