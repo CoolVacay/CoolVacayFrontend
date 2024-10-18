@@ -25,22 +25,6 @@ interface PricingResponse {
   clientSecret: string;
 }
 
-// const LoadingSkeleton = () => (
-//   <div className="h-[60vh] animate-pulse">
-//     <div className="flex w-full flex-col items-center justify-center gap-2">
-//       <div className="mb-4 h-6 w-1/3 rounded bg-gray-300"></div>
-//       <div className="mb-4 h-6 w-1/3 rounded bg-gray-300"></div>
-//       <div className="mb-4 h-6 w-1/3 rounded bg-gray-300"></div>
-//       <div className="mb-4 h-6 w-1/2 rounded bg-gray-300"></div>
-//       <div className="mb-4 h-6 w-1/4 rounded bg-gray-300"></div>
-//       <div className="mb-4 h-6 w-1/3 rounded bg-gray-300"></div>
-//       <div className="mb-4 h-6 w-1/3 rounded bg-gray-300"></div>
-//       <div className="mb-4 h-6 w-1/2 rounded bg-gray-300"></div>
-//       <div className="mb-4 h-6 w-1/4 rounded bg-gray-300"></div>
-//     </div>
-//   </div>
-// );
-
 function GuestyPaymentForm({
   bookingDetails,
   source,
@@ -67,7 +51,6 @@ function GuestyPaymentForm({
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [source, listingInfo.id, bookingDetails, successRedirectUrl]);
-  console.log(!clientSecret, "cie");
 
   if (loading || !clientSecret)
     return (

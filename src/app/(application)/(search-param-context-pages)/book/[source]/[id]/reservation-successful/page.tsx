@@ -55,6 +55,7 @@ export default async function Page({ params, searchParams }: PageProps) {
     try {
       const sessionId = searchParams.session_id;
       const session = (await getStripeSession(sessionId)) as SessionResponse;
+      console.log(session, "session");
       const paymentIntent = (await getPaymentIntent(
         session.payment_intent,
       )) as PaymentIntentResponse;
