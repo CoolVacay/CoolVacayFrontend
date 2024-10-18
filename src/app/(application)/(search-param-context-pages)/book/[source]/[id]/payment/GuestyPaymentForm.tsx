@@ -52,7 +52,7 @@ function GuestyPaymentForm({
       .finally(() => setLoading(false));
   }, [source, listingInfo.id, bookingDetails, successRedirectUrl]);
 
-  if (loading || !clientSecret)
+  if (loading)
     return (
       <div className="flex h-[600px] w-full items-center items-center justify-center">
         <CircularProgress />

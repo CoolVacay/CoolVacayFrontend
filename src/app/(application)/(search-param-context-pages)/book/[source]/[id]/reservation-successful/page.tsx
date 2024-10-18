@@ -1,6 +1,7 @@
 import { IconGenerator } from "~/app/ui/components/common";
 import { bookingPayment } from "~/app/(application)/actions";
 import Stripe from "stripe";
+
 interface PageProps {
   params: {
     source: string;
