@@ -2,17 +2,19 @@
 
 import { useState } from "react";
 import { useAppSearchParams } from "~/context/SearchParamsContext";
-import { Divider, type SelectChangeEvent } from "@mui/material";
+import type { SelectChangeEvent } from "@mui/material";
 import { PricingDetails } from "./PricingDetails";
 import { RangeDatePicker, SelectInput } from "../../common";
 import type { IParams } from "~/app/(application)/definitions";
 import type { DateRangeType } from "../../home/SearchCard";
+import { usePathname } from "next/navigation";
 
 export default function PricingDetailsCardContent({
   params,
 }: {
   params: IParams;
 }) {
+  const pathName = usePathname();
   const { searchParamsValues, updateSearchParams } = useAppSearchParams();
   const [dates, setDates] = useState<DateRangeType | ["", ""]>([
     searchParamsValues.fromDate,
@@ -44,8 +46,12 @@ export default function PricingDetailsCardContent({
           />
         </div>
       </div>
-      <Divider />
-      <PricingDetails params={params} searchParamsValues={searchParamsValues} />
+      {!pathName.includes("/reservation-successful") ? (
+        <PricingDetails
+          params={params}
+          searchParamsValues={searchParamsValues}
+        />
+      ) : null}
     </div>
   );
 }

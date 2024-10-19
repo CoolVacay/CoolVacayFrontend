@@ -1,5 +1,5 @@
 import type { IParams } from "~/app/(application)/definitions";
-import PricingDetailsCardContent from "./PricingDetails.client";
+import PricingDetailsCardContent from "./PricingDetailsCard.client";
 
 export default async function PricingDetailsCard({
   params,

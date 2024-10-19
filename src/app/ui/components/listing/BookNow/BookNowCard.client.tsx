@@ -50,7 +50,9 @@ export default function BookNowContent({
     searchParamsValues.toDate,
   ];
   const bookButtonDisabled =
-    selectedDates[0] === null || selectedDates[1] === null;
+    !selectedDates[0] ||
+    !selectedDates[1] ||
+    !searchParamsValues.numberOfGuests;
 
   return (
     <div
