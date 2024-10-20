@@ -16,12 +16,14 @@ export default function Overview({ listing }: { listing: IListingData }) {
       >
         {listing.description}
       </article>
-      <button
-        onClick={() => setReadMore(!readMore)}
-        className="select-none text-center align-middle text-sm font-bold text-primary transition-all hover:text-sky-700"
-      >
-        {readMore ? "Read less" : "Read more"}
-      </button>
+      {listing.description.length > 600 ? (
+        <button
+          onClick={() => setReadMore(!readMore)}
+          className="select-none text-center align-middle text-sm font-bold text-primary transition-all hover:text-sky-700"
+        >
+          {readMore ? "Read less" : "Read more"}
+        </button>
+      ) : null}
       <article className="grid grid-cols-2 pt-10 lg:grid-cols-3">
         {listing.amenities.map((amenity, index) => {
           return (
@@ -34,12 +36,14 @@ export default function Overview({ listing }: { listing: IListingData }) {
           );
         })}
       </article>
-      <button
-        onClick={() => setViewMore(!viewMore)}
-        className="mb-10 mt-1 flex select-none text-sm font-bold text-primary transition-all hover:text-sky-700"
-      >
-        {viewMore ? "View less" : "View more"}
-      </button>
+      {listing.amenities.length > 8 ? (
+        <button
+          onClick={() => setViewMore(!viewMore)}
+          className="mb-10 mt-1 flex select-none text-sm font-bold text-primary transition-all hover:text-sky-700"
+        >
+          {viewMore ? "View less" : "View more"}
+        </button>
+      ) : null}
     </div>
   );
 }
