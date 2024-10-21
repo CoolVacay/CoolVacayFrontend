@@ -118,6 +118,7 @@ export const getAvailabilityPeriods = (
   fetcher<string[]>(
     `Listings/availability_periods?FromDate=${startDate}&source=${source}&ListingId=${id}`,
     "Failed to fetch availablility periods",
+    true,
   );
 
 export const getCloseDatesListings = (
