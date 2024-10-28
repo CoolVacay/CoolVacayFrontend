@@ -13,14 +13,10 @@ export default function Newsletter({ className }: { className?: string }) {
           alt="Coolvacay newsletter image"
           src="/newsletter_img.jpeg"
           className="rounded-xl"
-          quality={20}
-          width={0}
-          height={0}
-          sizes="100vw"
-          priority={true}
+          width={1024}
+          height={683}
           style={{
             objectFit: "cover",
-            height: "100%",
             width: "100%",
             filter: "brightness(60%)",
           }}

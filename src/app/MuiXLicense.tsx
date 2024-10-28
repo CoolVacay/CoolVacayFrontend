@@ -1,6 +1,5 @@
-//TODO: set licence key for mui date range picker
-
 "use client";
+
 import { LicenseInfo } from "@mui/x-license";
 
 LicenseInfo.setLicenseKey(

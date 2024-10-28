@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { useFormState } from "react-dom";
+import React, { useActionState, useRef, useState } from "react";
 
 import { Input as BaseInput } from "@mui/base/Input";
 import { styled } from "@mui/material/styles";
@@ -186,8 +185,8 @@ function OTP({
 export default function OTPForm({ type }: { type: "verify" | "reset" }) {
   const [otp, setOtp] = useState("");
   const verifyType = type === "verify" ? verifyAccount : resetPassOTP;
-  const [errorOtp, dispatchOTP] = useFormState(verifyType, undefined);
-  const [resendError, dispatchResendOTP] = useFormState(resendOtp, undefined);
+  const [errorOtp, dispatchOTP] = useActionState(verifyType, undefined);
+  const [resendError, dispatchResendOTP] = useActionState(resendOtp, undefined);
   const [canResendOTP, setCanResendOTP] = useState(true);
 
   const resetTimer = () => {

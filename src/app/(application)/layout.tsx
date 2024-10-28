@@ -16,10 +16,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: `${process.env.SITE_NAME ?? 'CoolVacay'} | %s`,
-    default: `${process.env.SITE_NAME ?? 'CoolVacay'}`
+    template: `${process.env.SITE_NAME ?? "CoolVacay"} | %s`,
+    default: `${process.env.SITE_NAME ?? "CoolVacay"}`,
   },
-  description: `${process.env.SITE_NAME ?? 'CoolVacay'} Booking Platform`,
+  description: `${process.env.SITE_NAME ?? "CoolVacay"} Booking Platform`,
 };
 
 export default async function RootLayout({
@@ -30,13 +30,17 @@ export default async function RootLayout({
   const siteConfigurations = (await getSiteConfigurations())!;
 
   return (
-    <html lang="en" className={process.env.SITE_NAME}> 
-    <head>
-      <link rel="icon" href={siteConfigurations.config.favicon.url} sizes={siteConfigurations.config.favicon.width} />
-    </head>
-    {/* Change the className above to switch color palette. The classname above must be predefined in the tailwindconfig file */}
-      <GoogleAnalytics gaId="G-GT7N6G5LGF"/>
-      <body className={`${inter.className} w-full flex h-full flex-col`}>
+    <html lang="en" className={process.env.SITE_NAME}>
+      <head>
+        <link
+          rel="icon"
+          href={siteConfigurations.config.favicon.url}
+          sizes={siteConfigurations.config.favicon.width}
+        />
+      </head>
+      {/* Change the className above to switch color palette. The classname above must be predefined in the tailwindconfig file */}
+      <GoogleAnalytics gaId="G-GT7N6G5LGF" />
+      <body className={`${inter.className} flex h-full w-full flex-col`}>
         <SiteConfigurationProvider siteConfigurations={siteConfigurations}>
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
             <ThemeProvider theme={theme}>

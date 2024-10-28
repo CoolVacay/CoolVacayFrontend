@@ -3,7 +3,7 @@ import { ListingCard } from "../common";
 import { getFilteredListings } from "~/app/(application)/actions";
 
 const PAGESIZE = "4";
-const MAXIMUM_LISTINGS_FOR_CLOSE_AVAILABILITY = 5
+const MAXIMUM_LISTINGS_FOR_CLOSE_AVAILABILITY = 5;
 
 export async function CloseDatesListings({
   query,
@@ -12,13 +12,16 @@ export async function CloseDatesListings({
 }) {
   const listings = (await getFilteredListings(query.toString()))!;
 
-  const closeAvailabilityListings = listings.totalItems <= MAXIMUM_LISTINGS_FOR_CLOSE_AVAILABILITY ? (await getCloseDatesListings(
-    PAGESIZE,
-    query.get("match") ?? "",
-    query.get("fromDate") ?? "",
-    query.get("toDate") ?? "",
-    query.get("category") ?? null
-  ))! : [];
+  const closeAvailabilityListings =
+    listings?.totalItems <= MAXIMUM_LISTINGS_FOR_CLOSE_AVAILABILITY
+      ? (await getCloseDatesListings(
+          PAGESIZE,
+          query.get("match") ?? "",
+          query.get("fromDate") ?? "",
+          query.get("toDate") ?? "",
+          query.get("category") ?? null,
+        ))!
+      : [];
 
   return closeAvailabilityListings?.length > 0 ? (
     <>
@@ -52,5 +55,7 @@ export async function CloseDatesListings({
         })}
       </div>
     </>
-  ): <div>No similar listings found</div>;
+  ) : (
+    <div>No similar listings found</div>
+  );
 }

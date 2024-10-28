@@ -8,17 +8,18 @@ import {
 import isBetween from "dayjs/plugin/isBetween";
 import dayjs, { type Dayjs } from "dayjs";
 import type { DateRangeType } from "../../home/SearchCard";
-
+import type { Theme } from "@mui/material";
 dayjs.extend(isBetween);
 
 interface CustomDateRangePickerDayProps extends DateRangePickerDayProps<Dayjs> {
   availableDates?: string[];
   rangedatesavailable?: string[];
   selecteddates?: DateRangeType;
+  theme?: Theme;
 }
 const StyledDatePicker = styled(DateRangePickerDay, {
   shouldForwardProp: (prop) => prop !== "availableDates",
-})<CustomDateRangePickerDayProps>(
+})(
   ({
     theme,
     isHighlighting,
@@ -33,7 +34,7 @@ const StyledDatePicker = styled(DateRangePickerDay, {
     availableDates,
     rangedatesavailable,
     selecteddates,
-  }) => {
+  }: CustomDateRangePickerDayProps) => {
     const findAvailableDate = () => {
       if (rangedatesavailable && !selecteddates?.[1]) {
         const isBetweenDay = day.isBetween(
@@ -64,17 +65,17 @@ const StyledDatePicker = styled(DateRangePickerDay, {
           }
         : {
             "&:hover, &:focus": {
-              backgroundColor: theme.palette.action.hover,
+              backgroundColor: theme?.palette.action.hover,
             },
             ...(isHighlighting || isPreviewing
               ? {
                   borderRadius: 0,
                   backgroundColor: isHighlighting
-                    ? theme.palette.primary.main
-                    : theme.palette.primary.light,
-                  color: theme.palette.common.white,
+                    ? theme?.palette.primary.main
+                    : theme?.palette.primary.light,
+                  color: theme?.palette.common.white,
                   "&:hover, &:focus": {
-                    backgroundColor: theme.palette.primary.dark,
+                    backgroundColor: theme?.palette.primary.dark,
                   },
                 }
               : {}),
@@ -82,20 +83,20 @@ const StyledDatePicker = styled(DateRangePickerDay, {
               ? {
                   borderTopLeftRadius: "50%",
                   borderBottomLeftRadius: "50%",
-                  backgroundColor: theme.palette.primary.dark,
+                  backgroundColor: theme?.palette.primary.dark,
                 }
               : {}),
             ...(isEndOfHighlighting || isEndOfPreviewing
               ? {
                   borderTopRightRadius: "50%",
                   borderBottomRightRadius: "50%",
-                  backgroundColor: theme.palette.primary.dark,
+                  backgroundColor: theme?.palette.primary.dark,
                 }
               : {}),
             ...(isAvailable === "betweenDay"
               ? {
                   position: "relative",
-                  color: theme.palette.text.disabled,
+                  color: theme?.palette.text.disabled,
                   pointerEvents: "none",
                 }
               : {}),
@@ -104,7 +105,7 @@ const StyledDatePicker = styled(DateRangePickerDay, {
               // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
               (disabled || !isAvailable) && {
                 position: "relative",
-                color: theme.palette.text.disabled,
+                color: theme?.palette.text.disabled,
                 pointerEvents: "none",
                 "&::before": {
                   content: '""',
@@ -113,7 +114,7 @@ const StyledDatePicker = styled(DateRangePickerDay, {
                   left: "50%",
                   width: "70%",
                   height: "2px",
-                  backgroundColor: theme.palette.text.disabled,
+                  backgroundColor: theme?.palette.text.disabled,
                   transform: "translate(-50%, -50%) rotate(-45deg)",
                 },
               }),

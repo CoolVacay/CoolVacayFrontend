@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 
@@ -34,7 +34,7 @@ const ValidationSchema = Yup.object().shape({
 });
 
 export default function SignUpForm() {
-  const [errorMessage, dispatch] = useFormState(register, undefined);
+  const [errorMessage, dispatch] = useActionState(register, undefined);
 
   const formik = useFormik({
     initialValues: {
