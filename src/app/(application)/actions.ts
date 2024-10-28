@@ -28,16 +28,16 @@ import type {
 
 //////////////GET/////////////
 
-export const getSiteConfigurations = () =>
+export const getSiteConfigurations = async () =>
   fetcher<IReadOnlySiteConfigurationProperties>(
     `SiteConfiguration`,
     "Failed to fetch configurations",
   );
 
-export const getCountries = () =>
+export const getCountries = async () =>
   fetcher<ICountries[]>(`countries`, "Failed to fetch countries");
 
-export const getProperties = () =>
+export const getProperties = async () =>
   fetcher<IProperty[]>(`listings/properties`, "Failed to fetch properties");
 
 export async function isValidToken() {
@@ -52,19 +52,19 @@ export async function isValidToken() {
   );
 }
 
-export const getBlogs = () =>
+export const getBlogs = async () =>
   fetcher<IBlog[]>(`Blogs`, "Failed to fetch blogs");
 
-export const getLocationsList = () =>
+export const getLocationsList = async () =>
   fetcher<ILocationsList[]>(`Listings/Codifiers`, "Failed to fetch locations");
 
-export const getListingData = ({ source, id }: IParams) =>
+export const getListingData = async ({ source, id }: IParams) =>
   fetcher<IListingData>(
     `Listings/${source}/${id}`,
     "Failed to fetch listing data",
   );
 
-export const getFilteredListings = (query: string) => {
+export const getFilteredListings = async (query: string) => {
   const PAGE_SIZE = 12;
   return fetcher<IAllListings>(
     `Listings?${query}&pageSize=${PAGE_SIZE}`,
@@ -85,7 +85,7 @@ export async function getProfileInfo() {
   );
 }
 
-export const getPricingDetails = (
+export const getPricingDetails = async (
   source: string,
   id: string,
   startDate: string,
@@ -98,7 +98,7 @@ export const getPricingDetails = (
     true,
   );
 
-export const getAvailabilityDates = (
+export const getAvailabilityDates = async (
   source: string,
   id: string,
   startDate: string,
@@ -110,7 +110,7 @@ export const getAvailabilityDates = (
     true,
   );
 
-export const getAvailabilityPeriods = (
+export const getAvailabilityPeriods = async (
   source: string,
   id: string,
   startDate: string,
@@ -121,7 +121,7 @@ export const getAvailabilityPeriods = (
     true,
   );
 
-export const getCloseDatesListings = (
+export const getCloseDatesListings = async (
   pageSize: string,
   match: string,
   startDate: string,
@@ -133,20 +133,20 @@ export const getCloseDatesListings = (
     "Failed to fetch close dates listings",
   );
 
-export const getSimilarListings = ({ source, id }: IParams) =>
+export const getSimilarListings = async ({ source, id }: IParams) =>
   fetcher<IListingData[]>(
     `Listings/${source}/${id}/similar`,
     "Failed to fetch similar listings",
     true,
   );
 
-export const getCategories = () =>
+export const getCategories = async () =>
   fetcher<IPopularCategoriesData[]>(
     `categories`,
     "Failed to fetch popular categories",
   );
 
-export const getFeaturedListings = () =>
+export const getFeaturedListings = async () =>
   fetcher<IListingData[]>(
     `listings/featured`,
     "Failed to fetch featured listings",
@@ -162,7 +162,7 @@ export async function getReservationsDetails() {
   );
 }
 
-export const getBlogById = (id: string) =>
+export const getBlogById = async (id: string) =>
   fetcher<IBlog>(`Blogs/${id}`, "Failed to fetch blog by id");
 
 export async function getBlogContent(id: string) {
@@ -192,10 +192,10 @@ export async function getStaticPage(type: string) {
 
 /////////////POST-PUT-PATCH-DELETE/////////////
 
-export const inquire = (values: IInquireArgs) =>
+export const inquire = async (values: IInquireArgs) =>
   postData(`/inquire`, values, "Failed to send the inquiry");
 
-export const updateProfile = (values: IProfileDetails) =>
+export const updateProfile = async (values: IProfileDetails) =>
   postData(
     `/users`,
     values,
@@ -204,7 +204,7 @@ export const updateProfile = (values: IProfileDetails) =>
     "/profile",
   );
 
-export const bookingPayment = (values: IBookingPaymentArgs) =>
+export const bookingPayment = async (values: IBookingPaymentArgs) =>
   postData(
     `/Reservations`,
     values,
@@ -213,7 +213,7 @@ export const bookingPayment = (values: IBookingPaymentArgs) =>
     "/profile/reservations",
   );
 
-export const updatePassword = ({ userId, ...rest }: IPassArgs) =>
+export const updatePassword = async ({ userId, ...rest }: IPassArgs) =>
   postData(
     `/Users/${userId}/change-password`,
     rest,
@@ -222,7 +222,7 @@ export const updatePassword = ({ userId, ...rest }: IPassArgs) =>
     "/profile",
   );
 
-export const uploadProfilePicture = ({
+export const uploadProfilePicture = async ({
   userId,
   formData,
 }: {
@@ -237,7 +237,7 @@ export const uploadProfilePicture = ({
     "/profile",
   );
 
-export const deleteProfilePicture = (userId: string) =>
+export const deleteProfilePicture = async (userId: string) =>
   postData(
     `/Users/${userId}/profile-picture`,
     userId,
@@ -245,7 +245,7 @@ export const deleteProfilePicture = (userId: string) =>
     "DELETE",
   );
 
-export const registerFollower = ({ email }: { email: string }) =>
+export const registerFollower = async ({ email }: { email: string }) =>
   postData(`/Followers/Register`, email, "Failed to subscribe");
 
 export const deactivateAccount = async (
