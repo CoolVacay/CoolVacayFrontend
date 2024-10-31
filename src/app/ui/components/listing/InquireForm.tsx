@@ -39,9 +39,8 @@ export default function InquireForm({
   const formik = useFormik({
     initialValues: listing
       ? {
-          propertyId: listing.id,
-          propertySource: listing.source,
-          propertyName: listing.name,
+          listingId: listing.id,
+          listingSource: listing.source,
           name: "",
           email: "",
           phone: "",
