@@ -69,6 +69,7 @@ export const getFilteredListings = async (query: string) => {
   return fetcher<IAllListings>(
     `Listings?${query}&pageSize=${PAGE_SIZE}`,
     "Failed to fetch filtered listings",
+    true,
   );
 };
 
@@ -131,6 +132,7 @@ export const getCloseDatesListings = async (
   fetcher<ICloseDatesListings[]>(
     `Listings/close_dates?PageSize=${pageSize}&Match=${match}&FromDate=${startDate}&ToDate=${endDate}&category=${category}`,
     "Failed to fetch close dates listings",
+    true,
   );
 
 export const getSimilarListings = async ({ source, id }: IParams) =>
