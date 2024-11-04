@@ -1,9 +1,10 @@
 import { getCloseDatesListings } from "~/app/(application)/actions";
 import { ListingCard } from "../common";
 import { getFilteredListings } from "~/app/(application)/actions";
+import type { ICloseDatesListings } from "~/app/(application)/definitions";
 
 const PAGESIZE = "4";
-const MAXIMUM_LISTINGS_FOR_CLOSE_AVAILABILITY = 5
+const MAXIMUM_LISTINGS_FOR_CLOSE_AVAILABILITY = 5;
 
 export async function CloseDatesListings({
   query,
@@ -11,15 +12,21 @@ export async function CloseDatesListings({
   query: URLSearchParams;
 }) {
   const listings = (await getFilteredListings(query.toString()))!;
+  let closeAvailabilityListings: ICloseDatesListings[] | null = null;
 
-  const closeAvailabilityListings = listings.totalItems <= MAXIMUM_LISTINGS_FOR_CLOSE_AVAILABILITY ? (await getCloseDatesListings(
-    PAGESIZE,
-    query.get("match") ?? "",
-    query.get("fromDate") ?? "",
-    query.get("toDate") ?? "",
-    query.get("category") ?? null
-  ))! : [];
+  if (listings.totalItems <= MAXIMUM_LISTINGS_FOR_CLOSE_AVAILABILITY) {
+    closeAvailabilityListings = (await getCloseDatesListings(
+      PAGESIZE,
+      query.get("match") ?? "",
+      query.get("fromDate") ?? "",
+      query.get("toDate") ?? "",
+      query.get("category") ?? null,
+    ))!;
+  }
 
+  if (!closeAvailabilityListings) {
+    return null;
+  }
   return closeAvailabilityListings?.length > 0 ? (
     <>
       <div className="flex flex-col gap-2">
@@ -52,5 +59,7 @@ export async function CloseDatesListings({
         })}
       </div>
     </>
-  ): <div>No similar listings found</div>;
+  ) : (
+    <div>No similar listings found</div>
+  );
 }

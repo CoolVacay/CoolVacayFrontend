@@ -84,7 +84,7 @@ export const SearchParamsProvider = ({
           ...prevParams,
           [param]: values[index],
         }));
-        router.push(`${pathname}?${searchParams.toString()}`, {
+        router.replace(`${pathname}?${searchParams.toString()}`, {
           scroll: false,
         });
       });

@@ -56,12 +56,9 @@ export default async function Page({ params, searchParams }: PageProps) {
     try {
       const sessionId = searchParams.session_id;
       const session = (await getStripeSession(sessionId)) as SessionResponse;
-      console.log(session, "session");
       const paymentIntent = (await getPaymentIntent(
         session.payment_intent,
       )) as PaymentIntentResponse;
-
-      console.log(paymentIntent, "payment");
 
       const obj = {
         quoteId: searchParams.quote_id ?? null,
@@ -82,11 +79,7 @@ export default async function Page({ params, searchParams }: PageProps) {
         toDate: searchParams.toDate,
       };
 
-      console.log({ obj });
-
-      const bookingResp = await bookingPayment(obj);
-
-      console.log({ bookingResp });
+      await bookingPayment(obj);
     } catch (err) {
       console.error("Error placing Guesty reservation:", err);
     }
