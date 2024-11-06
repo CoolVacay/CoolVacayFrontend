@@ -128,9 +128,10 @@ export const getCloseDatesListings = async (
   startDate: string,
   endDate: string,
   category: string | null,
+  numberOfGuests: string,
 ) =>
   fetcher<ICloseDatesListings[]>(
-    `Listings/close_dates?PageSize=${pageSize}&Match=${match}&FromDate=${startDate}&ToDate=${endDate}&category=${category}`,
+    `Listings/close_dates?PageSize=${pageSize}&Match=${match}&FromDate=${startDate}&ToDate=${endDate}&category=${category}&numberOfGuests=${numberOfGuests}`,
     "Failed to fetch close dates listings",
     true,
   );

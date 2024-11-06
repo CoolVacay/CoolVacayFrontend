@@ -1,5 +1,11 @@
 import BillingAddressForm from "./BillingAddressForm";
 import { getCountries } from "~/app/(application)/actions";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Billing Address Step | Payment Process",
+  description: "Billing Address Step | Payment Process",
+};
 
 export default async function Page({
   params,

@@ -4,7 +4,12 @@ import { auth } from "~/auth";
 import PolicyAndRules from "~/app/ui/components/listing/PolicyAndRules";
 import GuestyPaymentForm from "./GuestyPaymentForm";
 import { getPricingDetails } from "~/app/(application)/actions";
+import { type Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Payment Collection Step | Payment Process",
+  description: "Payment Collection Step | Payment Process",
+};
 export default async function Page({
   params,
   searchParams,

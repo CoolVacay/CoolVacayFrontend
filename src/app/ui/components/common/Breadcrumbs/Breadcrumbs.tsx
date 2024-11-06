@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { attachSearchParamsAsStringWithoutMatch } from "~/app/utils/searchParamsHelper";
 
 interface Breadcrumb {
   label: string;
@@ -14,6 +15,7 @@ export default function Breadcrumbs({
   breadcrumbs: Breadcrumb[];
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   return (
     <nav aria-label="Breadcrumb" className="mb-1 block">
@@ -25,9 +27,20 @@ export default function Breadcrumbs({
             className={`flex items-center ${breadcrumb.active ? "text-gray-900" : "text-gray-500"}`}
           >
             <button
-              onClick={() =>
-                router.push(breadcrumb.href)
-              }
+              onClick={() => {
+                const newRoute =
+                  breadcrumb.label === "Booking"
+                    ? attachSearchParamsAsStringWithoutMatch(breadcrumb.href, {
+                        category: searchParams.get("category") ?? "",
+                        fromDate: searchParams.get("fromDate") ?? "",
+                        toDate: searchParams.get("toDate") ?? "",
+                        numberOfGuests:
+                          searchParams.get("numberOfGuests") ?? "1",
+                      })
+                    : breadcrumb.href;
+
+                router.push(newRoute);
+              }}
               disabled={breadcrumb.active}
             >
               {breadcrumb.label}
