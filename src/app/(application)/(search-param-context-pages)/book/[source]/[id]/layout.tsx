@@ -5,12 +5,6 @@ import { Suspense } from "react";
 import { BookedListingCardSkeleton } from "~/app/ui/components/common";
 import { PricingDetailsCardSkeleton } from "~/app/ui/components/common/Skeletons/ListingSkeletons";
 import PricingDetailsCard from "~/app/ui/components/listing/PricingDetailsCard/PricingDetailsCard.server";
-import { type Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Booking Process",
-  description: "Booking Process Page",
-};
 
 export default async function Layout({
   children,

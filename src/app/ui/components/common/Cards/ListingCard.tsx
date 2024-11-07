@@ -11,6 +11,7 @@ import {
   formatDateMMM_DD_YYYY,
 } from "../../../../utils/helpers";
 import { Tooltip } from "@mui/material";
+import { attachSearchParamsAsStringWithoutMatch } from "~/app/utils/searchParamsHelper";
 
 export default function ListingCard({
   id,
@@ -33,7 +34,21 @@ export default function ListingCard({
       className={`flex h-[410px] w-full flex-col gap-4 overflow-hidden rounded-md p-1 sm:w-[280px] md:w-[350px]`}
     >
       <div className="relative">
-        <Link href={`listing/${source}/${id}?${searchParams.toString()}`}>
+        {!closeDates ? (
+          <Link href={`listing/${source}/${id}?${searchParams.toString()}`}>
+            <Image
+              src={imageUrl ?? "/listing_card.png"}
+              width={348}
+              height={248}
+              className="h-[210px] w-full"
+              alt="CoolVacay listing image"
+              style={{
+                objectFit: "cover",
+                borderRadius: 6,
+              }}
+            />
+          </Link>
+        ) : (
           <Image
             src={imageUrl ?? "/listing_card.png"}
             width={348}
@@ -45,7 +60,7 @@ export default function ListingCard({
               borderRadius: 6,
             }}
           />
-        </Link>
+        )}
       </div>
       <div className="grow-1 flex h-full flex-col justify-between">
         <div className="flex flex-col gap-1">
@@ -119,7 +134,16 @@ export default function ListingCard({
                       key={index}
                       rel="noopener noreferrer"
                       target="_blank"
-                      href={`listing/${source}/${id}?fromDate=${formatDateMMM_DD_YYYY(date.startDate)}&toDate=${formatDateMMM_DD_YYYY(date.endDate)}&numberOfGuests=${searchParams.get("numberOfGuests")}`}
+                      href={attachSearchParamsAsStringWithoutMatch(
+                        `listing/${source}/${id}`,
+                        {
+                          category: searchParams.get("category") ?? "",
+                          fromDate: formatDateMMM_DD_YYYY(date.startDate),
+                          toDate: formatDateMMM_DD_YYYY(date.endDate),
+                          numberOfGuests:
+                            searchParams.get("numberOfGuests") ?? "1",
+                        },
+                      )}
                     >
                       <button className="flex w-fit flex-col items-center gap-2 rounded-lg border border-[#ADB5BD] p-2 hover:opacity-75">
                         <p className="text-xs font-medium text-primary">

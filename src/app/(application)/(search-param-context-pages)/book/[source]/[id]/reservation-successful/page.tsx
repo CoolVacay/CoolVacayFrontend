@@ -1,7 +1,12 @@
 import { IconGenerator } from "~/app/ui/components/common";
 import { bookingPayment } from "~/app/(application)/actions";
 import Stripe from "stripe";
+import { type Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Reservation Complete | Payment Process Finished",
+  description: "Payment Collection Step | Payment Process Finished",
+};
 interface PageProps {
   params: {
     source: string;

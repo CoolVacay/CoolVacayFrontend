@@ -21,6 +21,7 @@ export async function CloseDatesListings({
       query.get("fromDate") ?? "",
       query.get("toDate") ?? "",
       query.get("category") ?? null,
+      query.get("numberOfGuests") ?? "1",
     ))!;
   }
 

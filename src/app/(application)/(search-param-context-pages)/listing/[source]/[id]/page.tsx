@@ -12,6 +12,7 @@ import PolicyAndRules from "~/app/ui/components/listing/PolicyAndRules";
 import { Divider } from "@mui/material";
 import { Suspense } from "react";
 import { type Metadata } from "next";
+import { attachSearchParamsAsStringWithoutMatch } from "~/app/utils/searchParamsHelper";
 
 export const metadata: Metadata = {
   title: "Listings by ID page",
@@ -27,8 +28,11 @@ export default async function Page({
     id: string;
   };
   searchParams: {
-    category: string;
-    match: string;
+    category?: string;
+    match?: string;
+    numberOfGuests?: string;
+    toDate?: string;
+    fromDate?: string;
   };
 }) {
   const pageParams = params ?? "";
@@ -39,20 +43,40 @@ export default async function Page({
   return (
     <main className="flex flex-col items-center px-4 lg:px-4 xl:px-0">
       <div className="custom-max-widths items-center justify-center">
-        <Breadcrumbs breadcrumbs={[
-          {
-            label: "Listings",
-            href: "/listings",
-          },
-          ... listing.propertyName ? 
-            [{label:`${listing.propertyName}`, href:`/listings?numberOfGuests=1&match=${listing.propertyName}`}] 
-            : [],
-          {
-            label: `${listing.name}`,
-            href: `/listing/${params.source}/${params.id}`,
-            active: true,
-          }
-        ]} />
+        <Breadcrumbs
+          breadcrumbs={[
+            {
+              label: "Listings",
+              href: attachSearchParamsAsStringWithoutMatch(
+                "/listings?",
+                searchParams,
+              ),
+            },
+            {
+              label: listing.city,
+              href: attachSearchParamsAsStringWithoutMatch(
+                `/listings?match=${listing.city}`,
+                searchParams,
+              ),
+            },
+            ...(listing.propertyName
+              ? [
+                  {
+                    label: `${listing.propertyName}`,
+                    href: attachSearchParamsAsStringWithoutMatch(
+                      `/listings?match=${listing.propertyName}`,
+                      searchParams,
+                    ),
+                  },
+                ]
+              : []),
+            {
+              label: `${listing.name}`,
+              href: `/listing/${params.source}/${params.id}`,
+              active: true,
+            },
+          ]}
+        />
         <div className="flex flex-col items-start justify-between pb-6 md:flex-row">
           <h1 className="text-2xl leading-tight md:w-2/3 md:text-3xl">
             {listing.name}, {listing.city}, {listing.state}
