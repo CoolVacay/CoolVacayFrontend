@@ -32,6 +32,7 @@ export const getSiteConfigurations = async () =>
   fetcher<IReadOnlySiteConfigurationProperties>(
     `SiteConfiguration`,
     "Failed to fetch configurations",
+    true,
   );
 
 export const getCountries = async () =>
