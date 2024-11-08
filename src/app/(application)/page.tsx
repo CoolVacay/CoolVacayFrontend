@@ -27,6 +27,8 @@ export const metadata: Metadata = {
 
 const siteConfigurations = (await getSiteConfigurations())!;
 
+console.log(siteConfigurations);
+
 export default async function HomePage() {
   return (
     <main className="flex flex-col">
