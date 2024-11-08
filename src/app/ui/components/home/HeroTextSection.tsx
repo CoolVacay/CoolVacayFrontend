@@ -22,9 +22,7 @@ export default function HeroTextSection() {
           <p className="text-[16px]">{heroTextSiteConfigs.paragraph1}</p>
         ) : null}
         {heroTextSiteConfigs.paragraph2 ? (
-          <p className="text-[16px]">
-            Explore, compare, and uncover your dream location effortlessly.
-          </p>
+          <p className="text-[16px]">{heroTextSiteConfigs.paragraph2}</p>
         ) : null}
       </div>
     </div>
