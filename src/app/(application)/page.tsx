@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { type Metadata } from "next";
 
@@ -17,7 +16,7 @@ import {
   DiscoverSection,
 } from "../ui/components/home/index";
 import { Newsletter, IconGenerator } from "../ui/components/common";
-import { getSiteConfigurations } from "./actions";
+import MainImage from "../ui/components/home/MainImage";
 
 export const metadata: Metadata = {
   title: `${process.env.SITE_NAME ?? "CoolVacay"} | Find Your Dream Vacation Rentals & Travel Deals`,
@@ -25,29 +24,11 @@ export const metadata: Metadata = {
     "Discover unbeatable vacation rentals and deals with CoolVacay. Book easily with our engine, from luxury stays to budget-friendly options.",
 };
 
-const siteConfigurations = (await getSiteConfigurations())!;
-
-console.log(siteConfigurations);
-
 export default async function HomePage() {
   return (
     <main className="flex flex-col">
       <div className="relative -mt-24 flex h-lvh sm:h-[714px]">
-        <div className="absolute flex h-lvh w-full sm:h-[714px]">
-          <Image
-            alt="Main background image"
-            src={siteConfigurations.config.main_image ?? ""}
-            quality={70}
-            fill
-            priority={true}
-            style={{
-              position: "absolute",
-              objectFit: "cover",
-              filter: "brightness(50%)",
-              zIndex: -1,
-            }}
-          />
-        </div>
+        <MainImage />
       </div>
       <div className="flex justify-center px-4">
         <div className="custom-max-widths items-center justify-center">
