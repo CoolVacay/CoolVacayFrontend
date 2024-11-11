@@ -129,18 +129,23 @@ export default function MapContent({
         onLoad={() => {
           const map = mapRef.current;
           if (map && !map.hasImage("custom-marker")) {
-            map.loadImage("/marker_icon.png", (error, image) => {
-              if (error) {
-                console.error("Error loading image:", error);
-                return;
-              }
-              if (!image) {
-                console.error("Image not found");
-                return;
-              }
-              if (map.hasImage("custom-marker")) return;
-              map.addImage("custom-marker", image);
-            });
+            map.loadImage(
+              process.env.NEXT_PUBLIC_SITE_NAME
+                ? `/${process.env.NEXT_PUBLIC_SITE_NAME}_marker_icon.png`
+                : "CoolVacay_marker_icon.png",
+              (error, image) => {
+                if (error) {
+                  console.error("Error loading image:", error);
+                  return;
+                }
+                if (!image) {
+                  console.error("Image not found");
+                  return;
+                }
+                if (map.hasImage("custom-marker")) return;
+                map.addImage("custom-marker", image);
+              },
+            );
           }
         }}
         onClick={handleClick}
