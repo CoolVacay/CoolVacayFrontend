@@ -45,24 +45,26 @@ function FooterSection() {
                   </Link>
                 </p>
               </div>
-              {footerSiteConfigs.socials.length > 0 && <div>
-                <p className="text-[15px] font-semibold">
-                  Follow Us On Social Media
-                </p>
-                <div className="flex items-center gap-7">
-                  {footerSiteConfigs.socials.map((social, index) => {
-                    return (
-                      <Link key={index} href={social.href}>
-                        <IconGenerator
-                          src={`/${social.name}_icon.svg`}
-                          width={social.name === "facebook" ? "10px" : "13px"}
-                          alt={`${siteConfigs.config.siteName} facebook page`}
-                        />
-                      </Link>
-                    );
-                  })}
+              {footerSiteConfigs.socials.length > 0 && (
+                <div>
+                  <p className="text-[15px] font-semibold">
+                    Follow Us On Social Media
+                  </p>
+                  <div className="flex items-center gap-7">
+                    {footerSiteConfigs.socials.map((social, index) => {
+                      return (
+                        <Link key={index} href={social.href}>
+                          <IconGenerator
+                            src={`/${social.name}_icon.svg`}
+                            width={social.name === "facebook" ? "10px" : "13px"}
+                            alt={`${siteConfigs.config.siteName} facebook page`}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>}
+              )}
             </div>
             <div className="flex flex-col gap-1">
               <h2 className="text-sm text-primary-grey400">
@@ -78,47 +80,68 @@ function FooterSection() {
         </div>
         <div className="grid grid-cols-2 gap-8 sm:w-full sm:grid-cols-3 sm:justify-between">
           <div className="flex flex-col gap-5 lg:ml-auto">
-            <h2 className="text-[15px] font-semibold">Popular Search</h2>
-            {popularSearchLinks.map((link) => (
-              <Link
-                href={link.href}
-                key={link.name}
-                className="text-sm text-primary-grey400"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {popularSearchLinks.length > 0 && (
+              <>
+                <h2 className="text-[15px] font-semibold">Popular Search</h2>
+                {popularSearchLinks.map((link) => (
+                  <Link
+                    href={link.href}
+                    key={link.name}
+                    className="text-sm text-primary-grey400"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </>
+            )}
           </div>
           <div className="flex flex-col gap-5 lg:ml-auto">
-            <h2 className="text-[15px] font-semibold">Quick Links</h2>
-            {quickLinks.map((link) => (
-              <Link
-                href={link.href}
-                key={link.name}
-                className="text-sm text-primary-grey400"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {quickLinks.length > 0 && (
+              <>
+                <h2 className="text-[15px] font-semibold">Quick Links</h2>
+                {quickLinks.map((link) => (
+                  <Link
+                    href={link.href}
+                    key={link.name}
+                    className="text-sm text-primary-grey400"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </>
+            )}
           </div>
           <div className="flex flex-col gap-5 lg:ml-auto">
-            <h2 className="text-[15px] font-semibold">Discover</h2>
-            {discoverLinks.map((link) => (
-              <Link
-                href={link.href}
-                key={link.name}
-                className="text-sm text-primary-grey400"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {discoverLinks.length > 0 && (
+              <>
+                <h2 className="text-[15px] font-semibold">Discover</h2>
+                {discoverLinks.map((link) => (
+                  <Link
+                    href={link.href}
+                    key={link.name}
+                    className="text-sm text-primary-grey400"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
       <div className="flex flex-col items-center justify-between py-6 text-sm sm:flex-row">
         <h2>
           © {siteConfigs.config.siteName} 2024
-          <span className="text-primary-grey400"> - All rights reserved</span>
+          <span className="text-primary-grey400"> - All rights reserved</span> |
+          Site Designed & Managed by{" "}
+          <Link
+            rel="noopener noreferrer"
+            target="_blank"
+            className="text-blue-500 underline"
+            href={"https://www.coolvacay.com/"}
+          >
+            CoolVacay
+          </Link>
         </h2>
         <div className="flex gap-2">
           {staticPages.map((page, index) => (

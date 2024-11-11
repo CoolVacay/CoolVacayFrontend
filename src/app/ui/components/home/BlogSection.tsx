@@ -17,28 +17,30 @@ export async function BlogSection() {
       {blogs.length > 0 ? (
         <>
           <div className="no-scrollbar flex items-center gap-5 overflow-auto sm:flex-row sm:flex-wrap sm:justify-between">
-            {blogs.slice(blogs.length - 4, blogs.length).map((blog) => {
+            {blogs.map((blog, i) => {
               return (
-                <Link
-                  href={`/blog/${blog.id}`}
-                  key={blog.id}
-                  className="h-[340px]"
-                >
-                  <MainCard
-                    imageUrl={
-                      blog.thumbnailImageUrl.length > 0
-                        ? blog.thumbnailImageUrl
-                        : "/blog_photo.jpeg"
-                    }
-                    name={
-                      blog.title ??
-                      "How to get more bookings with Coolvacay in 2024"
-                    }
-                    subtitle={`${dayjs(blog.createdOn).format("MMMM D, YYYY")}  •  ${blog.readTime} read `}
+                i < 4 && (
+                  <Link
+                    href={`/blog/${blog.id}`}
                     key={blog.id}
-                    isBlogCard
-                  />
-                </Link>
+                    className="h-[340px]"
+                  >
+                    <MainCard
+                      imageUrl={
+                        blog.thumbnailImageUrl.length > 0
+                          ? blog.thumbnailImageUrl
+                          : "/blog_photo.jpeg"
+                      }
+                      name={
+                        blog.title ??
+                        "How to get more bookings with Coolvacay in 2024"
+                      }
+                      subtitle={`${dayjs(blog.createdOn).format("MMMM D, YYYY")}  •  ${blog.readTime} read `}
+                      key={blog.id}
+                      isBlogCard
+                    />
+                  </Link>
+                )
               );
             })}
           </div>
