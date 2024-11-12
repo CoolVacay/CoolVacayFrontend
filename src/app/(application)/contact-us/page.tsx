@@ -10,8 +10,9 @@ export const metadata: Metadata = {
   description: "Contact Us Page",
 };
 
-const siteConfigurations = (await getSiteConfigurations())!;
-export default function Page() {
+export default async function Page() {
+  const siteConfigurations = (await getSiteConfigurations())!;
+
   return (
     <div className="flex flex-col justify-center">
       <div className="flex justify-center px-4 sm:px-0">
