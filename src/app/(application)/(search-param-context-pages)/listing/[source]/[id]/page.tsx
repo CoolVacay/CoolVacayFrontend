@@ -1,4 +1,7 @@
-import { getListingData } from "~/app/(application)/actions";
+import {
+  getListingData,
+  getSiteConfigurations,
+} from "~/app/(application)/actions";
 import Gallery from "~/app/ui/components/listing/Gallery";
 import Overview from "~/app/ui/components/listing/OverviewSection";
 import BookNow from "~/app/ui/components/listing/BookNow/BookNowCard.server";
@@ -37,6 +40,7 @@ export default async function Page({
 }) {
   const pageParams = params ?? "";
 
+  const siteConfigurations = (await getSiteConfigurations())!;
   const listing = (await getListingData(pageParams))!;
   const query = new URLSearchParams(searchParams);
 
@@ -84,7 +88,9 @@ export default async function Page({
           <div className="mt-4 flex max-h-[50px] w-full shrink-0 items-center justify-center rounded-[11px] border border-[#EAEAEF] py-2 md:mt-0 md:w-[240px] md:py-2">
             Call Now:
             <span className="ml-1 font-medium">
-              <a href="tel:302-581-9342">(302) 581-9342</a>
+              <a href={`tel:${siteConfigurations.contact.phone}`}>
+                {siteConfigurations.contact.phone}
+              </a>
             </span>
           </div>
         </div>

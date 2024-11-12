@@ -3,12 +3,14 @@ import Image from "next/image";
 import ContactDetailsCard from "./ContactDetailsCard";
 import { type Metadata } from "next";
 import { TelephoneIcon } from "public/TelephoneIcon";
+import { getSiteConfigurations } from "../actions";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description: "Contact Us Page",
 };
 
+const siteConfigurations = (await getSiteConfigurations())!;
 export default function Page() {
   return (
     <div className="flex flex-col justify-center">
@@ -49,7 +51,7 @@ export default function Page() {
           <div className="mt-10 w-full">
             <div className="flex items-center gap-5 rounded-[8px] bg-[#F7F7F7] p-6 sm:gap-10 sm:p-10">
               <div className="h-min rounded-full bg-primary/[0.10] p-5">
-                <TelephoneIcon color={"text-primary"}/>
+                <TelephoneIcon color={"text-primary"} />
               </div>
               <div className="flex flex-col gap-3">
                 <p className="text-[18px] font-medium text-primary sm:text-[20px]">
@@ -85,7 +87,11 @@ export default function Page() {
       <div className="relative mt-10 flex w-full sm:mt-16">
         <Image
           alt="Coolvacay about us, second image"
-          src="/location.png"
+          src={
+            siteConfigurations?.contact?.contact_us_image
+              ? siteConfigurations.contact.contact_us_image
+              : "/location.png"
+          }
           quality={100}
           width={0}
           height={0}

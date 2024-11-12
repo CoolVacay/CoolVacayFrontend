@@ -37,17 +37,12 @@ export default function FormikCheckBox({
           sx={{ width: noreferrerLink ? "40px" : "auto", m: 0 }}
           control={
             <Checkbox
+              className="!text-primary"
               name={name}
               onChange={onChange}
               onBlur={onBlur}
               checked={checked}
               size="small"
-              sx={{
-                color: "#EAEAEF",
-                "&.Mui-checked": {
-                  color: "#29ABE2",
-                },
-              }}
             />
           }
           label={
