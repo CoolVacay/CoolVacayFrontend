@@ -41,7 +41,7 @@ export default function Gallery({ listing }: { listing: IListingData }) {
               />
             </div>
             <button
-              className="absolute bottom-4 right-3 rounded-full bg-white px-[14px] py-[11px] text-sm font-medium text-[#29ABE2] hover:bg-primary hover:text-white"
+              className="absolute bottom-4 right-3 rounded-full bg-white px-[14px] py-[11px] text-sm font-medium text-primary hover:bg-primary hover:text-white"
               style={{ boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.12)" }}
               onClick={(e) => {
                 e.stopPropagation();
@@ -81,7 +81,7 @@ export default function Gallery({ listing }: { listing: IListingData }) {
               </div>
             ))}
             <button
-              className="absolute bottom-4 right-3 rounded-full bg-white px-[14px] py-[11px] text-sm font-medium text-[#29ABE2] hover:bg-primary hover:text-white"
+              className="absolute bottom-4 right-3 rounded-full bg-white px-[14px] py-[11px] text-sm font-medium text-primary hover:bg-primary hover:text-white"
               style={{ boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.12)" }}
               onClick={(e) => {
                 e.stopPropagation();

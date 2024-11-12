@@ -46,6 +46,7 @@ export async function CloseDatesListings({
               source={item.listing.source}
               key={item.listing.id}
               name={item.listing.name}
+              propertyName={item.listing.propertyName}
               subtitle={`${item.listing.city}, ${item.listing.state}`}
               imageUrl={item.listing.imageUrl}
               price={item.listing.price}

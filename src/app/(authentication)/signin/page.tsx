@@ -3,7 +3,7 @@ import SignInForm from "~/app/ui/components/authentication/SignInForm";
 import OAuthProviders from "~/app/ui/components/authentication/OAuthProviders";
 import { Logo } from "~/app/ui/components/common";
 
-export default async function SignIn() {
+export default function SignIn() {
   return (
     <div className="flex w-full flex-col gap-4 sm:gap-20">
       <div className="w-full">
@@ -22,7 +22,7 @@ export default async function SignIn() {
         </div>
         <div className="flex w-full justify-center text-[#9FA4AA]">
           Don’t have an account?
-          <Link className="ml-2 text-primary" href="/signup">
+          <Link className="ml-2 text-primary-primary600" href="/signup">
             Create Account
           </Link>
         </div>
