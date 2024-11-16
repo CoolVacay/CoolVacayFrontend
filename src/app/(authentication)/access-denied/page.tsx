@@ -1,6 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `Access Denied`,
+  description: "Booking Platform Authentication Access Denied Page",
+};
 
 const AccessDenied = () => {
   const router = useRouter();
@@ -13,7 +19,9 @@ const AccessDenied = () => {
       <div className="my-10 text-center text-xl font-medium">
         Your account has been deactivated, please contact customer support at
         this number to reactivate it:{" "}
-        <span className="underline"><a href="tel:302-581-9342">(302) 581-9342</a></span>
+        <span className="underline">
+          <a href="tel:302-581-9342">(302) 581-9342</a>
+        </span>
       </div>
       <p className="py-3 text-center text-xl font-medium">
         Try to sign in with a different account.

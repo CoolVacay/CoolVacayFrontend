@@ -1,11 +1,5 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import Image from "next/image";
-
-export const metadata = {
-  title: `${process.env.SITE_NAME ?? "CoolVacay"} | Authentication`,
-  description: "Booking Platform Authentication Page",
-};
-
 export default async function AuthenticationLayout({
   children,
 }: {

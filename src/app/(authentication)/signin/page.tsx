@@ -2,6 +2,12 @@ import Link from "next/link";
 import SignInForm from "~/app/ui/components/authentication/SignInForm";
 import OAuthProviders from "~/app/ui/components/authentication/OAuthProviders";
 import { Logo } from "~/app/ui/components/common";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `Sign Up`,
+  description: "Booking Platform Authentication Sign Up Page",
+};
 
 export default function SignIn() {
   return (

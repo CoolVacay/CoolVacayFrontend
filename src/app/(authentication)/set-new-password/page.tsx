@@ -1,5 +1,11 @@
 import SetNewPasswordForm from "~/app/ui/components/profile/SetNewPasswordForm";
 import { Logo } from "~/app/ui/components/common";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `Set New Password`,
+  description: "Booking Platform Authentication Set New Password Page",
+};
 
 export default function SetNewPassword() {
   return (

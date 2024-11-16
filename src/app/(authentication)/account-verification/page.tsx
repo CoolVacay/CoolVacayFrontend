@@ -1,5 +1,11 @@
 import OTPForm from "~/app/ui/components/authentication/OTPForm";
 import { Logo } from "~/app/ui/components/common";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `Code Verification`,
+  description: "Booking Platform Authentication Code Verification Page",
+};
 
 export default function AccountCreationCode() {
   return (

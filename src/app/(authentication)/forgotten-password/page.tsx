@@ -1,5 +1,11 @@
 import { ForgotPasswordForm } from "~/app/ui/components/authentication";
 import { Logo } from "~/app/ui/components/common";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `Forgotten Password`,
+  description: "Booking Platform Authentication Forgotten Password Page",
+};
 
 function ForgottenPassword() {
   return (
