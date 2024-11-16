@@ -1,12 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { type Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: `Access Denied`,
-  description: "Booking Platform Authentication Access Denied Page",
-};
 
 const AccessDenied = () => {
   const router = useRouter();

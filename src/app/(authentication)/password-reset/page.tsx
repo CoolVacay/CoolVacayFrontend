@@ -3,12 +3,6 @@
 import { redirect } from "next/navigation";
 import OTPForm from "~/app/ui/components/authentication/OTPForm";
 import { Logo } from "~/app/ui/components/common";
-import { type Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: `Password Reset`,
-  description: "Booking Platform Authentication Password Reset Page",
-};
 
 export default function Page() {
   let userEmail = "";
