@@ -9,6 +9,7 @@ import {
   Breadcrumbs,
   SimilarCardsSkeleton,
   MapContainer,
+  BookNowSkeleton,
 } from "~/app/ui/components/common";
 import SimilarCards from "~/app/ui/components/listing/SimilarCards/SimilarCards";
 import PolicyAndRules from "~/app/ui/components/listing/PolicyAndRules";
@@ -115,7 +116,9 @@ export default async function Page({
             </div>
           </div>
           <div className="flex shrink-0 sm:w-[420px]">
-            <BookNow params={params} />
+            <Suspense fallback={<BookNowSkeleton />}>
+              <BookNow params={params} />
+            </Suspense>
           </div>
         </div>
         <Divider className="mb-10" />

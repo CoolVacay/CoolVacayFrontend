@@ -435,3 +435,34 @@ export function SimilarCardsSkeleton() {
     </div>
   );
 }
+
+export function BookNowSkeleton() {
+  return (
+    <div className="flex w-full animate-pulse flex-col">
+      <div className="mb-4 h-8 w-[200px] bg-gray-100" />{" "}
+      {/* Title placeholder */}
+      <div className="flex flex-col gap-6 rounded-[11px] border border-[#EAEAEF] px-6 py-5">
+        <div className="flex flex-col rounded-[11px] border border-[#EAEAEF]">
+          <div
+            className="relative px-6 py-5"
+            style={{ borderBottom: "1px solid #EAEAEF" }}
+          >
+            <div className="h-12 w-full bg-gray-100" />{" "}
+            {/* Date picker placeholder */}
+          </div>
+          <div className="px-6 py-5">
+            <div className="h-12 w-full bg-gray-100" />{" "}
+            {/* Select input placeholder */}
+          </div>
+        </div>
+        <div className="h-[58px] w-full rounded-full bg-gray-100" />{" "}
+        {/* Button placeholder */}
+        <Divider />
+        <div className="w-full rounded-full border border-gray-100 bg-gray-50 py-4">
+          <div className="mx-auto h-6 w-[150px] bg-gray-300" />{" "}
+          {/* Inquire button text */}
+        </div>
+      </div>
+    </div>
+  );
+}
