@@ -14,7 +14,7 @@ export default function SimilarCard({
 }: TSimilarCardProps & { className?: string }) {
   return (
     <div
-      className={`flex h-[360px] grow-0  flex-col rounded-xl p-2 shadow-cardShadow md:h-[185px] md:w-[470px] md:flex-row ${className}`}
+      className={`shadow-cardShadow flex h-[360px]  grow-0 flex-col rounded-xl p-2 md:h-[185px] md:w-[470px] md:flex-row ${className}`}
       style={{ border: "1px solid rgba(173, 181, 189, 0.70)" }}
     >
       <div className="h-[195px] w-[250px] shrink-0 md:flex md:h-[165px] md:w-[169px]">
@@ -24,7 +24,7 @@ export default function SimilarCard({
           height={0}
           sizes="20vw"
           alt="CoolVacay listing image"
-          className="h-[195px] w-auto md:h-[165px]"
+          className="h-[195px] w-full md:h-[165px]"
           style={{
             objectFit: "cover",
             borderRadius: 20,
