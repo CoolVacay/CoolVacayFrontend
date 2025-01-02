@@ -6,23 +6,46 @@ import NewsletterForm from "~/app/ui/components/common/Newsletter/NewsletterForm
 import { getBlogById, getBlogContent, getLocationsList } from "../../actions";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import { BlogContentSkeleton, BlogSidebarSkeleton } from "~/app/ui/components/common";
-import { type Metadata } from "next";
+import {
+  BlogContentSkeleton,
+  BlogSidebarSkeleton,
+} from "~/app/ui/components/common";
+import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: 'Blog by ID page',
-  description: 'Read our Blogs here',
+type Props = {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-const BlogSidebar = async ({id}: {id: string}) => {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const id = (await params).id;
+
+  // fetch data
+  const product = await getBlogById(id);
+
+  return {
+    title: product?.title,
+    description: product?.description,
+    openGraph: {
+      images: [product?.thumbnailImageUrl ?? ""],
+    },
+  };
+}
+
+const BlogSidebar = async ({ id }: { id: string }) => {
   const locationsList = (await getLocationsList())!;
   const currBlog = await getBlogById(id);
 
   return (
-    <div className="-m-3 flex-col gap-5 md:mt-24 sticky top-24 h-fit">
+    <div className="sticky top-24 -m-3 h-fit flex-col gap-5 md:mt-24">
       <div className="flex h-min flex-col items-center justify-center gap-5 rounded-[10px] bg-[#F7F7F7] p-6">
         <h5 className="text-2xl font-medium">Find your perfect place</h5>
-        <SearchCard size="small" locationsList={locationsList} defaultLocation={currBlog?.relatedLocation} />
+        <SearchCard
+          size="small"
+          locationsList={locationsList}
+          defaultLocation={currBlog?.relatedLocation}
+        />
       </div>
       <div className="mt-5 flex h-min flex-col gap-5 rounded-[10px] bg-[#F7F7F7] p-6">
         <NewsletterForm isTextBlack={true} />
@@ -43,35 +66,31 @@ const BlogSidebar = async ({id}: {id: string}) => {
   );
 };
 
-const BlogContent = async ({ params }: { params: { id: string } }) => {  
-  
+const BlogContent = async ({ params }: { params: { id: string } }) => {
   const currentBlogsHTML = await getBlogContent(params.id);
 
   if (!currentBlogsHTML) {
     return redirect("/404");
   }
 
-  return <>
-  {parse(currentBlogsHTML)}
-  </>
-}
+  return <>{parse(currentBlogsHTML)}</>;
+};
 
 export default async function Blogpage({ params }: { params: { id: string } }) {
-
   return (
     <main className="flex flex-col">
       <div className="flex justify-center">
         <div className="flex max-w-[1220px] flex-col items-center justify-center">
           <div className="flex-col gap-10 p-10 md:flex lg:grid lg:grid-cols-7">
-              <div className="w-full col-span-5">
-            <Suspense fallback={<BlogContentSkeleton/>}>
+            <div className="col-span-5 w-full">
+              <Suspense fallback={<BlogContentSkeleton />}>
                 <BlogContent params={params} />
-            </Suspense>
+              </Suspense>
             </div>
             <div className="col-span-2">
-            <Suspense fallback={<BlogSidebarSkeleton/>}>
-                <BlogSidebar id={params.id}/>
-            </Suspense>
+              <Suspense fallback={<BlogSidebarSkeleton />}>
+                <BlogSidebar id={params.id} />
+              </Suspense>
             </div>
           </div>
         </div>
