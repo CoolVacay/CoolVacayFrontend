@@ -8,7 +8,7 @@ export async function HeroSection() {
   return (
     <main className="absolute top-24 flex w-full justify-center p-4 text-white md:top-44">
       <div className="custom-max-widths justify-between md:flex">
-        <div className="flex items-end justify-end font-medium">
+        <div className="flex items-center justify-end font-medium">
           <HeroTextSection />
         </div>
         <div className="mt-6 flex justify-center md:mt-0">
