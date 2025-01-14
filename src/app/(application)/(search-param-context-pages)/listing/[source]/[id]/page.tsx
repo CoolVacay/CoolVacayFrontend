@@ -17,10 +17,28 @@ import { Suspense } from "react";
 import { type Metadata } from "next";
 import { attachSearchParamsAsStringWithoutMatch } from "~/app/utils/searchParamsHelper";
 
-export const metadata: Metadata = {
-  title: "Listings by ID page",
-  description: "View details about our listings here",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    source: string;
+    id: string;
+  };
+}): Promise<Metadata> {
+  // fetch data
+  const product = await getListingData({
+    source: params.source,
+    id: params.id,
+  });
+
+  return {
+    title: product?.name,
+    description: product?.description,
+    openGraph: {
+      images: [product?.imageUrl ?? ""],
+    },
+  };
+}
 
 export default async function Page({
   params,
