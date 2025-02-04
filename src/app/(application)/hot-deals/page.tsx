@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import { HotDealsCard } from "~/app/ui/components/common";
 import { AllListingsSection } from "~/app/ui/components/home";
+import { getHotDeals } from "../actions";
 import {
   AllListingsSkeleton,
   Newsletter,
@@ -11,7 +11,7 @@ import {
 } from "~/app/ui/components/common";
 
 export default async function Page({}) {
-  //   const hotDeals = (await getHotDeals())!;
+  const hotDeals = (await getHotDeals())!;
 
   return (
     <main className="flex flex-col">
@@ -46,9 +46,9 @@ export default async function Page({}) {
             </div>
           </div>
           <div className="flex flex-col gap-4 p-3 text-justify sm:gap-8 sm:p-0">
-            <HotDealsCard />
-            <HotDealsCard />
-            <HotDealsCard />
+            {hotDeals.map((deal) => (
+              <HotDealsCard key={deal.id} listing={deal} />
+            ))}
             <section className="w-full">
               <div className="flex items-center justify-between">
                 <h2 className="main-title">All Listings</h2>

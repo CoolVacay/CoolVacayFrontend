@@ -24,6 +24,7 @@ import type {
   IPopularCategoriesData,
   IReadOnlySiteConfigurationProperties,
   IProperty,
+  IHotDealData,
 } from "./definitions";
 
 //////////////GET/////////////
@@ -192,6 +193,9 @@ export async function getStaticPage(type: string) {
     return null;
   }
 }
+
+export const getHotDeals = async () =>
+  fetcher<IHotDealData[]>(`HotDeals`, "Failed to fetch hot deals");
 
 /////////////POST-PUT-PATCH-DELETE/////////////
 
