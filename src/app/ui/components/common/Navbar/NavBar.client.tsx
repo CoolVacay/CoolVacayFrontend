@@ -19,6 +19,7 @@ const whiteLogoPaths = [
   "/terms-and-conditions",
   "/privacy-policy",
   "/accessibility-statement",
+  "/hot-deals",
 ];
 
 export default function NavBar({
@@ -65,7 +66,8 @@ export default function NavBar({
   const isLogoWhite = whiteLogoPaths.includes(pathname);
   const isNavBarFullWidth =
     pathname.startsWith("/listings") ||
-    pathname.startsWith("/vacation-rental-management");
+    pathname.startsWith("/vacation-rental-management") ||
+    pathname.startsWith("/hot-deals");
 
   const [openMenu, setOpenMenu] = useState(false);
 

@@ -6,3 +6,4 @@ export { default as ReviewCard } from "./ReviewCard";
 export { default as BookedListingCard } from "./BookedListingCard/BookedListingCard.server";
 export { default as ReservationCard } from "./ReservationCard";
 export { default as TestimonialCard } from "./TestimonialCard";
+export { default as HotDealsCard } from "./HotDealsCard";

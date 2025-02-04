@@ -6,6 +6,7 @@ export {
   ReviewCard,
   ReservationCard,
   TestimonialCard,
+  HotDealsCard,
 } from "./Cards/index";
 export { FormDialog, FullScreenDialog } from "./Dialogs/index";
 export {
