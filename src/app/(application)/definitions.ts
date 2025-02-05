@@ -270,6 +270,17 @@ export type IReadOnlySiteConfigurationProperties = Readonly<{
     width: string;
   };
   source?: string;
+  banner: {
+    isBannerActive: boolean;
+    shouldOverrideBanner: boolean;
+    overrideBanner: {
+      text: string;
+      ctaButton?: {
+        href: string;
+        label: string;
+      };
+    };
+  };
   navBar: {
     links: {
       name: string;
