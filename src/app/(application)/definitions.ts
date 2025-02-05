@@ -28,6 +28,19 @@ export interface IListingData {
   houseRules: string;
 }
 
+export interface IHotDealData {
+  address: string;
+  listingDescription: string;
+  imageUrl: string;
+  id: number;
+  price: number;
+  discountPercentage: number;
+  fromDate: string;
+  toDate: string;
+  listingSourceId: string;
+  source: string;
+}
+
 export interface IAllListings {
   page: number;
   pageSize: number;
