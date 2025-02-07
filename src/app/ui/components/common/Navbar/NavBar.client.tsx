@@ -66,8 +66,7 @@ export default function NavBar({
   const isLogoWhite = whiteLogoPaths.includes(pathname);
   const isNavBarFullWidth =
     pathname.startsWith("/listings") ||
-    pathname.startsWith("/vacation-rental-management") ||
-    pathname.startsWith("/hot-deals");
+    pathname.startsWith("/vacation-rental-management");
 
   const [openMenu, setOpenMenu] = useState(false);
 

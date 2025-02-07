@@ -15,7 +15,7 @@ export const DefaultBanner = () => {
       <p className="mt-2 text-xl text-black">{DEFAULT_BANNER.text}</p>
       {DEFAULT_BANNER?.ctaButton && (
         <Link href={DEFAULT_BANNER.ctaButton.href}>
-          <button className="rounded-xl bg-white px-2 py-1 font-bold text-black">
+          <button className="transform rounded-xl bg-white px-2 py-1 font-bold text-black transition duration-100 hover:bg-blue-500 hover:text-white">
             {DEFAULT_BANNER.ctaButton.label}
           </button>
         </Link>

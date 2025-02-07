@@ -29,6 +29,8 @@ export interface IListingData {
 }
 
 export interface IHotDealData {
+  propertyName: string;
+  listingName: string;
   address: string;
   listingDescription: string;
   imageUrl: string;
