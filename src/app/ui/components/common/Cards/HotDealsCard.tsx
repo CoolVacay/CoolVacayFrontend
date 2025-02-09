@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -59,6 +60,10 @@ function HotDealsCard({ listing }: { listing: IHotDealData }) {
           <p className="mt-2 line-clamp-5 text-sm md:max-w-[400px]">
             {listing?.listingDescription}
           </p>
+        </div>
+        <div className="mt-3 opacity-50">
+          {dayjs(listing.fromDate).format("DD MMMM YYYY")} -{" "}
+          {dayjs(listing.toDate).format("DD MMMM YYYY")}
         </div>
         <div>
           <Link
