@@ -35,8 +35,8 @@ export default function BillingAddressForm({
   const router = useRouter();
 
   const countries = useMemo(() => {
-    return allCountries.map((country) => (
-      <MenuItem key={country.name} value={country.name} dense>
+    return allCountries.map((country, i) => (
+      <MenuItem key={i} value={country.name} dense>
         {country.name}
       </MenuItem>
     ));

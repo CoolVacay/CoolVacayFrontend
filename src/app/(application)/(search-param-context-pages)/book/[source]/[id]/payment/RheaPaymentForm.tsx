@@ -52,6 +52,12 @@ export default function RheaPaymentForm({
           fromDate: searchParamsValues.fromDate?.format("YYYY-MM-DD"),
           toDate: searchParamsValues.toDate?.format("YYYY-MM-DD"),
           adults: Number(searchParamsValues.numberOfGuests),
+          phone: "",
+          address1: formData.street,
+          city: formData.city,
+          state: formData.state,
+          zip: formData.zip,
+          country: formData.country,
           children: 0,
           infants: 0,
           pets: 0,
@@ -216,32 +222,29 @@ export default function RheaPaymentForm({
                   </p>
                 )}
               </div>
-              <div className="relative w-full">
-                <label
-                  htmlFor="phone"
-                  className="mb-1 block text-lg font-medium"
-                >
-                  Phone<span className="absolute">*</span>
-                </label>
-                <SimpleInput
-                  placeholder="Phone"
-                  name="phone"
-                  required={true}
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.phone}
-                  error={formik.touched.phone && Boolean(formik.errors.phone)}
-                  variant="rounded"
-                />
-                {formik.touched.phone && Boolean(formik.errors.phone) && (
-                  <p className="mt-1 text-sm text-red-500">
-                    {formik.touched.phone && formik.errors.phone}
-                  </p>
-                )}
-              </div>
             </div>
           </>
         ) : null}
+        <div className="relative w-full">
+          <label htmlFor="phone" className="mb-1 block text-lg font-medium">
+            Phone<span className="absolute">*</span>
+          </label>
+          <SimpleInput
+            placeholder="Phone"
+            name="phone"
+            required={true}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.phone}
+            error={formik.touched.phone && Boolean(formik.errors.phone)}
+            variant="rounded"
+          />
+          {formik.touched.phone && Boolean(formik.errors.phone) && (
+            <p className="mt-1 text-sm text-red-500">
+              {formik.touched.phone && formik.errors.phone}
+            </p>
+          )}
+        </div>
         <div className="relative">
           <label
             htmlFor="cardDetails.cardNumber"
