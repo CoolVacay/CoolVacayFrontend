@@ -9,6 +9,12 @@ import {
   Newsletter,
   IconGenerator,
 } from "~/app/ui/components/common";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Hot Deals!",
+  description: "Hot Deals Page",
+};
 
 export default async function Page({}) {
   const hotDeals = (await getHotDeals())!;
