@@ -103,7 +103,7 @@ export default function ListingCard({
             </Tooltip>
             <p className="text-sm text-[#676D73]">{subtitle}</p>
           </div>
-          {starRating ? (
+          {/* {starRating ? (
             <div className="flex items-center gap-1">
               <IconGenerator
                 src="/rating_star.svg"
@@ -119,7 +119,7 @@ export default function ListingCard({
                 </span>
               </h2>
             </div>
-          ) : null}
+          ) : null} */}
         </div>
         {closeDates ? (
           <div className="flex flex-col gap-4">
