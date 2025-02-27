@@ -9,9 +9,8 @@ import {
 export async function ListingSection({ query }: { query: URLSearchParams }) {
   const listings = (await getFilteredListings(query.toString()))!;
   const properties = await getProperties();
-
   const title =
-    (query.get("match") && capitalizeAllWords(query.get("match")!)) ??
+    (query.get("property") && capitalizeAllWords(query.get("property")!)) ??
     query.get("category");
   const titleClassName = "text-2xl font-semibold md:text-3xl md:font-normal";
   const headingText = title
@@ -21,7 +20,7 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
   //we are checking if the selected match value is a property and also if
   //this property has a valid URL which we can navigate to
   const property = properties?.find((property) => {
-    if (property.name === query.get("match")) {
+    if (property.name === query.get("property")) {
       try {
         new URL(property.sourceUrl);
         return property;
@@ -30,7 +29,6 @@ export async function ListingSection({ query }: { query: URLSearchParams }) {
       }
     }
   });
-
   return listings?.totalItems > 0 ? (
     <>
       <div className="flex flex-col gap-2 xl:flex-row xl:place-items-baseline xl:gap-8">

@@ -87,18 +87,10 @@ export function FiltersComponent({
           value={selectedLocation}
           setValue={setLocation}
           onChange={(event, newValue) => {
-            if (!newValue) {
-              searchParams.delete("city");
-              searchParams.delete("state");
-              searchParams.delete("property");
-              return;
-            }
             if (newValue?.type) {
-              searchParams.delete("city");
-              searchParams.delete("state");
-              searchParams.delete("property");
               updateSearchParams([newValue.type], [newValue.match]);
-            }
+            } else
+              updateSearchParams(["city", "state", "property"], ["", "", ""]);
           }}
         />
       </div>
