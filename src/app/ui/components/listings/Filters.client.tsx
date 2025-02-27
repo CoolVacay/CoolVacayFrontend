@@ -22,6 +22,7 @@ import type {
   ILocationsList,
   IPopularCategoriesData,
 } from "~/app/(application)/definitions";
+import { useRouter } from "next/navigation";
 import CategoriesAutocomplete from "../common/Inputs/CategoriesAutocomplete";
 
 const guests = Array.from({ length: 8 }, (v, i) => i + 1)
@@ -41,6 +42,7 @@ export function FiltersComponent({
 }) {
   const { searchParams, searchParamsValues, updateSearchParams } =
     useAppSearchParams();
+  const router = useRouter();
 
   const dates = [
     searchParamsValues.fromDate,
@@ -68,6 +70,10 @@ export function FiltersComponent({
         return searchParams?.get("state");
       } else if (item.match === searchParams?.get("property")) {
         return searchParams?.get("property");
+      } else if (item.match === searchParams?.get("listing")) {
+        router.push(
+          `${item.page}?numberOfGuests=${searchParams?.get("numberOfGuests")}`,
+        );
       }
     }) ?? null;
 
@@ -87,10 +93,10 @@ export function FiltersComponent({
           value={selectedLocation}
           setValue={setLocation}
           onChange={(event, newValue) => {
+            updateSearchParams(["city", "state", "property"], ["", "", ""]);
             if (newValue?.type) {
               updateSearchParams([newValue.type], [newValue.match]);
-            } else
-              updateSearchParams(["city", "state", "property"], ["", "", ""]);
+            }
           }}
         />
       </div>

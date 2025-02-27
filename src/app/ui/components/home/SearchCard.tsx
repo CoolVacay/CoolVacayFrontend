@@ -38,7 +38,10 @@ export function SearchCard({
     const params = new URLSearchParams();
     if (dates[0]) params.append("fromDate", dates[0].format("YYYY-MM-DD"));
     if (dates[1]) params.append("toDate", dates[1].format("YYYY-MM-DD"));
-    // params.append("numberOfGuests", numberOfGuests);
+    params.append("numberOfGuests", numberOfGuests);
+    if (!autocompleteValue) return `/listings?${params.toString()}`;
+    if (autocompleteValue.type === "listing")
+      return `${autocompleteValue.page}?numberOfGuests=${numberOfGuests}`;
     return `${autocompleteValue?.page}${params.size ? `&${params.toString()}` : ""}`;
   };
 
