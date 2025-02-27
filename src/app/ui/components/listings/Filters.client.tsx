@@ -61,8 +61,15 @@ export function FiltersComponent({
   );
 
   const selectedLocation =
-    locationsList.find((item) => item.match === searchParams?.get("match")) ??
-    null;
+    locationsList.find((item) => {
+      if (item.match === searchParams?.get("city")) {
+        return searchParams?.get("city");
+      } else if (item.match === searchParams?.get("state")) {
+        return searchParams?.get("state");
+      } else if (item.match === searchParams?.get("property")) {
+        return searchParams?.get("property");
+      }
+    }) ?? null;
 
   const [location, setLocation] = useState<string>(
     selectedLocation?.displayName ?? "",
@@ -80,8 +87,18 @@ export function FiltersComponent({
           value={selectedLocation}
           setValue={setLocation}
           onChange={(event, newValue) => {
-            if (!newValue) searchParams.delete("match");
-            updateSearchParams(["match"], [newValue?.match ?? ""]);
+            if (!newValue) {
+              searchParams.delete("city");
+              searchParams.delete("state");
+              searchParams.delete("property");
+              return;
+            }
+            if (newValue?.type) {
+              searchParams.delete("city");
+              searchParams.delete("state");
+              searchParams.delete("property");
+              updateSearchParams([newValue.type], [newValue.match]);
+            }
           }}
         />
       </div>

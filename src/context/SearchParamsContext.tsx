@@ -14,7 +14,9 @@ export interface ISearchParams {
   toDate: dayjs.Dayjs | null;
   numberOfGuests: string;
   category: string;
-  match: string;
+  property?: string;
+  state?: string;
+  city?: string;
   modal: string;
   pageNum: string;
   isMapMode: string;
@@ -54,7 +56,9 @@ export const SearchParamsProvider = ({
       : null,
     toDate: searchParams.get("toDate") ? toDate : null,
     numberOfGuests: searchParams.get("numberOfGuests") ?? "",
-    match: searchParams.get("match") ?? "",
+    city: searchParams.get("city") ?? "",
+    state: searchParams.get("state") ?? "",
+    property: searchParams.get("property") ?? "",
     category: searchParams.get("category") ?? "",
     modal: searchParams.get("modal") ?? "",
     pageNum: searchParams.get("pageNum") ?? "",

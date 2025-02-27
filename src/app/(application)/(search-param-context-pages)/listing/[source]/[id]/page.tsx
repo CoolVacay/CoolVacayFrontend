@@ -50,7 +50,9 @@ export default async function Page({
   };
   searchParams: {
     category?: string;
-    match?: string;
+    city?: string;
+    state?: string;
+    property?: string;
     numberOfGuests?: string;
     toDate?: string;
     fromDate?: string;
@@ -77,7 +79,7 @@ export default async function Page({
             {
               label: listing.city,
               href: attachSearchParamsAsStringWithoutMatch(
-                `/listings?match=${listing.city}`,
+                `/listings?city=${listing.city}`,
                 searchParams,
               ),
             },
@@ -86,7 +88,7 @@ export default async function Page({
                   {
                     label: `${listing.propertyName}`,
                     href: attachSearchParamsAsStringWithoutMatch(
-                      `/listings?match=${listing.propertyName}`,
+                      `/listings?property=${listing.propertyName}`,
                       searchParams,
                     ),
                   },

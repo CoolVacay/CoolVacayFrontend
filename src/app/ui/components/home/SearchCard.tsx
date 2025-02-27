@@ -38,13 +38,8 @@ export function SearchCard({
     const params = new URLSearchParams();
     if (dates[0]) params.append("fromDate", dates[0].format("YYYY-MM-DD"));
     if (dates[1]) params.append("toDate", dates[1].format("YYYY-MM-DD"));
-    params.append("numberOfGuests", numberOfGuests);
-
-    if (autocompleteValue?.type === "listing") {
-      return `${autocompleteValue.page.replace("/listings/", "/listing/")}?${params.toString()}`;
-    }
-    if (autocompleteValue) params.append("match", autocompleteValue?.match);
-    return `/listings?${params.toString()}`;
+    // params.append("numberOfGuests", numberOfGuests);
+    return `${autocompleteValue?.page}${params.size ? `&${params.toString()}` : ""}`;
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
