@@ -59,10 +59,10 @@ function HotDealsCard({ listing }: { listing: IHotDealData }) {
           ) : (
             <div>
               <p className="font-semibold italic text-primary">
-                Hot Deal Price:
+                Hot Deal Price From:
               </p>
               <div className="flex items-center gap-2">
-                <span className="line-through">
+                <span className="text-lg line-through">
                   $
                   {Math.round(
                     (listing.price * 100) / (100 - listing.discountPercentage),
