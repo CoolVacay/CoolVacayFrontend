@@ -11,7 +11,7 @@ export async function DiscoverSection() {
     <section className="flex grow-0 flex-col sm:py-8 lg:max-h-[680px] lg:shrink-0 lg:flex-row lg:gap-12">
       <div className="hidden h-[530px] w-full overflow-hidden rounded-[30px] md:relative md:block md:shrink-0 lg:flex lg:h-auto lg:w-[492px]">
         <Image
-          src={`${featuredBlog?.thumbnailImageUrl ?? "/discover_photo.png"}`}
+          src={`${featuredBlog?.thumbnailImageUrl ?? "/discover_photo.webp"}`}
           alt="Discover more destinations"
           width={0}
           height={0}

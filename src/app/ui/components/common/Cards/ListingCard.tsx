@@ -37,7 +37,7 @@ export default function ListingCard({
         {!closeDates ? (
           <Link href={`listing/${source}/${id}?${searchParams.toString()}`}>
             <Image
-              src={imageUrl ?? "/listing_card.png"}
+              src={imageUrl ?? "/listing_card.webp"}
               width={348}
               height={248}
               className="h-[210px] w-full"
@@ -50,7 +50,7 @@ export default function ListingCard({
           </Link>
         ) : (
           <Image
-            src={imageUrl ?? "/listing_card.png"}
+            src={imageUrl ?? "/listing_card.webp"}
             width={348}
             height={248}
             className="h-[210px] w-full"

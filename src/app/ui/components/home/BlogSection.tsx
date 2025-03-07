@@ -29,7 +29,7 @@ export async function BlogSection() {
                       imageUrl={
                         blog.thumbnailImageUrl.length > 0
                           ? blog.thumbnailImageUrl
-                          : "/blog_photo.jpeg"
+                          : "/blog_photo.webp"
                       }
                       name={
                         blog.title ??

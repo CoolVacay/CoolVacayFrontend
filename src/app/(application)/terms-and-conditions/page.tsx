@@ -4,8 +4,8 @@ import parse from "html-react-parser";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Terms and Conditions',
-  description: 'Terms and Conditions page',
+  title: "Terms and Conditions",
+  description: "Terms and Conditions page",
 };
 export default async function Page() {
   const termsAndConditionsHTML = await getStaticPage("terms_and_conditions");
@@ -14,7 +14,7 @@ export default async function Page() {
     <StaticPageWrapper
       img={{
         alt: "Terms and conditions picture",
-        src: "/terms-conditions.jpeg",
+        src: "/terms-conditions.webp",
       }}
       title="Terms and Conditions"
       subtitle="Last modified: May 15, 2024"

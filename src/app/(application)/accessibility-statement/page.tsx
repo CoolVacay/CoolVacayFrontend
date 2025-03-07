@@ -4,8 +4,8 @@ import parse from "html-react-parser";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Accessibility Statement',
-  description: 'Accessibility Statement Page',
+  title: "Accessibility Statement",
+  description: "Accessibility Statement Page",
 };
 
 export default async function Page() {
@@ -15,7 +15,7 @@ export default async function Page() {
     <StaticPageWrapper
       img={{
         alt: "Accessibility statement picture",
-        src: "/accessibility-statement.jpeg",
+        src: "/accessibility-statement.webp",
       }}
       title="Accessibility Statement"
       subtitle="Last modified: May 15, 2024"

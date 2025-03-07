@@ -23,23 +23,28 @@ const partners = [
   "vrbo",
 ];
 
-const storyData = [{
-  name: 'Listed Properties',
-  icon: <OpenFolderIcon color="text-primary" />,
-  value: "1.5k"
-}, {
-  name: 'Happy Customers',
-  icon: <UserGroupIcon color="text-primary" />,
-  value: "2.5k"
-}, {
-  name: 'Star Reviews',
-  icon: <DownloadIcon color="text-primary" />,
-  value: "5 ★"
-}, {
-  name: 'Daily Transactions',
-  icon: <GlobeIcon color="text-primary" />,
-  value: "450"
-}]
+const storyData = [
+  {
+    name: "Listed Properties",
+    icon: <OpenFolderIcon color="text-primary" />,
+    value: "1.5k",
+  },
+  {
+    name: "Happy Customers",
+    icon: <UserGroupIcon color="text-primary" />,
+    value: "2.5k",
+  },
+  {
+    name: "Star Reviews",
+    icon: <DownloadIcon color="text-primary" />,
+    value: "5 ★",
+  },
+  {
+    name: "Daily Transactions",
+    icon: <GlobeIcon color="text-primary" />,
+    value: "450",
+  },
+];
 
 export default function AboutUsClientPage() {
   const siteConfigs = useSiteConfigurations();
@@ -70,7 +75,7 @@ export default function AboutUsClientPage() {
                 <div className="shrink-0 lg:flex lg:h-[420px]">
                   <Image
                     alt="Coolvacay about us, second image"
-                    src="/about_us_2.png"
+                    src="/about_us_2.webp"
                     className="rounded-2xl"
                     quality={80}
                     width={452}
@@ -118,15 +123,20 @@ export default function AboutUsClientPage() {
                 {aboutUsConfigs.paragraph1}
               </p>
               <div className="grid grid-cols-2 gap-4 sm:gap-8 md:gap-2 lg:gap-4">
-                {storyData.map(data => (
-                  <InfoCard key={data.name} icon={data.icon} value={data.value} name={data.name} />
+                {storyData.map((data) => (
+                  <InfoCard
+                    key={data.name}
+                    icon={data.icon}
+                    value={data.value}
+                    name={data.name}
+                  />
                 ))}
               </div>
             </div>
             <div className="flex h-[320px] w-full shrink-0 sm:h-[537px] md:w-[542px]">
               <Image
                 alt="Coolvacay about us, third image"
-                src="/about_us_3.jpeg"
+                src="/about_us_3.webp"
                 className="rounded-2xl"
                 width={542}
                 height={537}

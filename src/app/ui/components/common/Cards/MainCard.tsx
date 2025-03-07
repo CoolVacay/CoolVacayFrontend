@@ -22,7 +22,7 @@ export default function MainCard({
     >
       <div className="flex h-[210px] w-[278px]">
         <Image
-          src={imageUrl ?? "/cardImage.png"}
+          src={imageUrl ?? "/cardImage.webp"}
           width={278}
           height={210}
           alt="CoolVacay listing image"
@@ -45,7 +45,7 @@ export default function MainCard({
         {!isBlogCard && (
           <div className="flex gap-4 pb-4">
             <div className="flex gap-2">
-              <CabinIcon color="text-primary"/>
+              <CabinIcon color="text-primary" />
               <p className="text-sm">{propertyType ?? "House"}</p>
             </div>
             {squareFeets ? (

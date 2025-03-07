@@ -123,7 +123,7 @@ export default function Page() {
             <div className="flex h-[320px] w-full shrink-0 justify-center sm:h-[610px] lg:w-[530px] xl:w-[730px]">
               <Image
                 alt="Coolvacay about us, third image"
-                src="/vacation-rental-management.jpeg"
+                src="/vacation-rental-management.webp"
                 className="md:rounded-tl-[40px]"
                 width={730}
                 height={610}
@@ -202,7 +202,7 @@ export default function Page() {
                     return (
                       <div key={index} className="flex gap-4">
                         <div className="h-min w-max rounded-full bg-primary/[0.10] sm:p-2">
-                          <CheckmarkIcon color={"text-primary"}/>
+                          <CheckmarkIcon color={"text-primary"} />
                         </div>
                         <p>{option}</p>
                       </div>

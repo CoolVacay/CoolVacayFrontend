@@ -12,7 +12,7 @@ function MainImage() {
       <Image
         alt="Main background image"
         src={homeConfigs.main_image ?? ""}
-        quality={70}
+        quality={0}
         fill
         priority={true}
         style={{

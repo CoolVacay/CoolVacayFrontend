@@ -14,7 +14,7 @@ export default function Page() {
         <div className="absolute flex h-[588px] w-full">
           <Image
             alt="Coolvacay about us hero image"
-            src="/about_us.jpeg"
+            src="/about_us.webp"
             fill
             priority={true}
             style={{

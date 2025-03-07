@@ -24,7 +24,7 @@ export default function TestimonialCard({
           />
           <Image
             alt="Testimonials sample photo"
-            src={imgSrc ? imgSrc : "/testimonials_photo.jpeg"}
+            src={imgSrc ? imgSrc : "/testimonials_photo.webp"}
             className="h-[320px] w-full rounded-lg sm:h-[480px] sm:w-auto"
             width={0}
             height={0}
@@ -34,7 +34,7 @@ export default function TestimonialCard({
               objectFit: "cover",
             }}
           />
-          <p className="font-base absolute left-4 bottom-4 text-xl text-white sm:text-2xl">
+          <p className="font-base absolute bottom-4 left-4 text-xl text-white sm:text-2xl">
             {guest}
           </p>
         </div>

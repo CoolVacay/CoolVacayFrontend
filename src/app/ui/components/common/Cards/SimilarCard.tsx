@@ -19,7 +19,7 @@ export default function SimilarCard({
     >
       <div className="h-[195px] w-[250px] shrink-0 md:flex md:h-[165px] md:w-[169px]">
         <Image
-          src={imageUrl ?? "/cardImage.png"}
+          src={imageUrl ?? "/cardImage.webp"}
           width={0}
           height={0}
           sizes="20vw"

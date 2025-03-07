@@ -25,7 +25,7 @@ export default async function Page({}) {
         <div className={`absolute flex h-[400px] w-full`}>
           <Image
             alt="Hot deals picture"
-            src="/accessibility-statement.jpeg"
+            src="/accessibility-statement.webp"
             quality={90}
             fill
             priority={true}

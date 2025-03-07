@@ -52,7 +52,7 @@ const BlogSidebar = async ({ id }: { id: string }) => {
         <div className="flex h-[190px] w-full shrink-0 lg:hidden">
           <Image
             alt="Blog image"
-            src="/newsletter_img.jpeg"
+            src="/newsletter_img.webp"
             className="rounded-sm"
             width={460}
             height={190}

@@ -18,7 +18,7 @@ export default async function BookedListingCard({
     >
       <div className="flex h-[186px] w-full lg:h-[112px] lg:w-[138px]">
         <Image
-          src={listing?.imageUrl ?? "/cardImage.png"}
+          src={listing?.imageUrl ?? "/cardImage.webp"}
           width={0}
           height={0}
           sizes="100vw"

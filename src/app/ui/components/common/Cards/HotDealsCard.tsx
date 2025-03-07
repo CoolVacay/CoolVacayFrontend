@@ -11,7 +11,7 @@ function HotDealsCard({ listing }: { listing: IHotDealData }) {
       {/* Image Container */}
       <div className="relative h-[200px] w-full overflow-hidden rounded-[30px] sm:h-[280px] md:h-[380px] md:w-[460px] lg:w-[492px]">
         <Image
-          src={listing?.imageUrl ?? "/cardImage.png"}
+          src={listing?.imageUrl ?? "/cardImage.webp"}
           alt="Hot Deal Image"
           fill
           sizes="(max-width: 768px) 100vw, 460px"

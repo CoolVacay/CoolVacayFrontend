@@ -11,7 +11,7 @@ export default function Newsletter({ className }: { className?: string }) {
       <div className="flex h-[250px] w-full shrink-0">
         <Image
           alt="Coolvacay newsletter image"
-          src="/newsletter_img.jpeg"
+          src="/newsletter_img.webp"
           className="rounded-xl"
           quality={20}
           width={0}

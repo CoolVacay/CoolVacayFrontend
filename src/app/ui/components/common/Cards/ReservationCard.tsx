@@ -15,7 +15,7 @@ export default function ReservationCard({
     <div className="flex flex-col gap-4 max-[500px]:max-w-[310px] min-[500px]:flex-row lg:gap-8">
       <div className="flex h-[180px] w-[310px] lg:h-[130px] lg:w-[180px]">
         <Image
-          src={details.listingImage ?? "/cardImage.png"}
+          src={details.listingImage ?? "/cardImage.webp"}
           width={0}
           height={0}
           sizes="100vw"
@@ -62,7 +62,7 @@ export default function ReservationCard({
           </div>
           <div className="hidden w-[1px] bg-[#EAEAEF] lg:mx-5 lg:block lg:h-full" />
           <div className="my-3 block h-[1px] w-full bg-[#EAEAEF] lg:hidden" />
-          <div className="flex flex-row justify-between text-sm lg:flex-col lg:gap-2 lg:text-base lg:mr-5">
+          <div className="flex flex-row justify-between text-sm lg:mr-5 lg:flex-col lg:gap-2 lg:text-base">
             <p className="text-[#676D73]">Dates Booked:</p>
             <p className="text-sm font-medium">
               {`${dayjs(details.fromDate).format("MMM DD")} -

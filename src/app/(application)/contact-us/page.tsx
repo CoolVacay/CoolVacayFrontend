@@ -30,7 +30,7 @@ export default async function Page() {
             <div className="relative mt-6 hidden h-full w-full shrink-0 md:flex lg:mt-0 lg:w-[592px]">
               <Image
                 alt="Coolvacay about us, second image"
-                src="/contact-us.png"
+                src="/contact-us.webp"
                 width={592}
                 height={792}
                 className="h-auto w-auto"
@@ -91,7 +91,7 @@ export default async function Page() {
           src={
             siteConfigurations?.contact?.contact_us_image
               ? siteConfigurations.contact.contact_us_image
-              : "/location.png"
+              : "/location.webp"
           }
           quality={100}
           width={0}

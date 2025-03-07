@@ -16,7 +16,7 @@ export default async function AuthenticationLayout({
         <div className="relative hidden h-full lg:w-1/2 xl:block">
           <Image
             alt="Cool Vacay Authentication Image"
-            src={`/${process.env.NEXT_PUBLIC_SITE_NAME ? process.env.NEXT_PUBLIC_SITE_NAME : "CoolVacay"}_authentication_image.jpeg`}
+            src={`/${process.env.NEXT_PUBLIC_SITE_NAME ? process.env.NEXT_PUBLIC_SITE_NAME : "CoolVacay"}_authentication_image.webp`}
             fill
             priority={true}
             quality={90}

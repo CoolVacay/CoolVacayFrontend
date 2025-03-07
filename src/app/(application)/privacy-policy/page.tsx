@@ -4,8 +4,8 @@ import { getStaticPage } from "../actions";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: 'Privacy Policy Page',
+  title: "Privacy Policy",
+  description: "Privacy Policy Page",
 };
 export default async function Page() {
   const privacyPolicyHTML = await getStaticPage("privacy_policy");
@@ -14,7 +14,7 @@ export default async function Page() {
     <StaticPageWrapper
       img={{
         alt: "Privacy policy picture",
-        src: "/privacy-policy.jpeg",
+        src: "/privacy-policy.webp",
       }}
       title="Privacy Policy"
       subtitle="Last modified: May 15, 2024"
